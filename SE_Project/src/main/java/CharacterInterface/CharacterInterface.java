@@ -10,5 +10,10 @@ package CharacterInterface;
  * @author Francesco
  */
 public interface CharacterInterface {
-    
+    void moveLeft();
+    void moveRight();
+    void jump();
+    void attack();
+    void takeDamage();
+    void grab();
 }
