@@ -2,7 +2,7 @@ package unisadventures.se_project;
 
 import unisadventures.se_project.util.Pair;
 
-public interface WorldObject {
+public interface WorldObjectInterface {
     
     public Pair<Integer, Integer> getPosition();
     public Pair<Integer, Integer> getDimension();
