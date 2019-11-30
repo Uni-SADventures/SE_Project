@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CharacterInterface;
+package testing2;
 
 /**
  *
  * @author Francesco
  */
 public interface CharacterInterface {
-    
+    void moveLeft(double dx);
+    void moveRight(double dx);
+    void jump();
+    void attack();
+    void takeDamage();
+    void grab();
 }
