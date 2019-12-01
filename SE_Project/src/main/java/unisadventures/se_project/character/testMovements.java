@@ -1,4 +1,4 @@
-package testing2;
+package unisadventures.se_project.character;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -17,24 +17,25 @@ import javafx.stage.Stage;
 public class testMovements extends Application {
 
     private static final double W = 600, H = 400;
-
+    private static final String SCENARIO_IMAGE = "https://i.imgur.com/pj38qGl.jpg";
     private static final String HERO_IMAGE_LOC =
             "https://i.imgur.com/2NEzBZJ.png";
 
     private Image heroImage;
     private Character hero;
-
-    boolean  goEast, goWest;
+    private EnemyCharacter enemy;
+    boolean  goEast, goWest, jumping, falling = true;
 
     @Override
     public void start(Stage stage) throws Exception {
         heroImage = new Image(HERO_IMAGE_LOC);
-        hero = new Character(heroImage,"test",3,3,3);
+        Image scenarioImage = new Image(SCENARIO_IMAGE);
+        hero = new UserCharacter(heroImage,"test",3,3,3,200,"UserName");
+        enemy = new EnemyCharacter(heroImage,"Test",3,3,3,200);
+        Group dungeon = new Group(new ImageView(scenarioImage),hero,enemy);
         
-        Group dungeon = new Group(hero);
-
         moveHeroTo(W / 2, H / 2);
-
+        moveEnemyTo(W / 2,H / 2);
         Scene scene = new Scene(dungeon, W, H, Color.FORESTGREEN);
         
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -44,6 +45,10 @@ public class testMovements extends Application {
                   
                     case LEFT:  goWest  = true; break;
                     case RIGHT: goEast  = true; break;
+                    case A:  goWest  = true; break;
+                    case D: goEast  = true; break;
+                    case SPACE: if(!falling)
+                        jumping = true; break;
                 }
             }
         });
@@ -52,28 +57,64 @@ public class testMovements extends Application {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-               
-                    case LEFT:  goWest  = false; break;
-                    case RIGHT: goEast  = false; break;
-               
+
+                    case LEFT:
+                        goWest = false;
+                        break;
+                    case RIGHT:
+                        goEast = false;
+                        break;
+                    case A:
+                        goWest = false;
+                        break;
+                    case D:
+                        goEast = false;
+                        break;
+                    case SPACE: {
+                        jumping = false;
+                        falling = true;
+                        break;
+                    }
                 }
             }
         });
 
         stage.setScene(scene);
         stage.show();
+        AnimationTimer enemyTimer= enemy.animationPattern(W);
+        
 
         AnimationTimer timer = new AnimationTimer() {
+            
             @Override
             public void handle(long now) {
+                if (goEast) {
+                    hero.moveRight(W);
+                }
+                if (goWest) {
+                    hero.moveLeft(W);
+                }
+                if (jumping) {
+                    jumping = hero.jump(H);
+                    if (!jumping) {
+                        falling = true;
+                    }
+                }
+                if (falling) {
+                    falling = hero.fall(H);
+                }
+            checkInteractiveObject() ;
+            }
 
-                if (goEast)  hero.moveRight(W);
-                if (goWest)  hero.moveLeft(W);
-         
+            private void checkInteractiveObject() {
+                 //controlla che nella posizione ci sia oggetto
+                //lui capisce se è grab o potenziamento e se potenziamente gestisce
+                //il decorator e rida tutto in hero
             }
         };
         timer.start();
-    }
+        enemyTimer.start(); 
+   }
 /*
     private void moveHeroBy(int dx, int dy) {
         if (dx == 0 && dy == 0) return;
@@ -98,6 +139,17 @@ public class testMovements extends Application {
             hero.relocate(x - cx, y - cy);
         }
     }
+    private void moveEnemyTo(double x, double y) {
+        final double cx = enemy.getBoundsInLocal().getWidth()  / 2;
+        final double cy = enemy.getBoundsInLocal().getHeight() / 2;
 
+        if (x - cx >= 0 &&
+            x + cx <= W &&
+            y - cy >= 0 &&
+            y + cy <= H) {
+            enemy.relocate(x - cx, y - cy);
+        }
+    }
+    
     public static void main(String[] args) { launch(args); }
 }
