@@ -9,8 +9,16 @@ public class Pair<A,B> {
         return new Pair<P, Q>(p, q);
     }
 
-    public final A _a;
-    public final B _b;
+    private final A _a;
+    private final B _b;
+    
+    public A getFirstElement() {
+        return _a;
+    }
+    
+    public B getSecondElement() {
+        return _b;
+    }
 
     public Pair(A a, B b) {
         _a = a;
