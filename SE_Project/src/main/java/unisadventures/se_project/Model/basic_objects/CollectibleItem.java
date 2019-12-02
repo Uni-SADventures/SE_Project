@@ -11,7 +11,7 @@ public class CollectibleItem extends WorldObject implements CollectibleItemInter
     private final int _listSize;
     private int _counter;
     
-    public CollectibleItem(int xPosition, int yPosition, int height, int width, ArrayList<String> imageFileNameList, CollectibleType type) {
+    public CollectibleItem(double xPosition, double yPosition, double height, double width, ArrayList<String> imageFileNameList, CollectibleType type) {
         super(xPosition, yPosition, height, width);
         _imageFileNameList = imageFileNameList;
         _type = type;

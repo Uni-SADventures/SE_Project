@@ -6,7 +6,7 @@
 package unisadventures.se_project.Model.character.decorator;
 
 
-import unisadventures.se_project.character.CharacterInterface;
+import unisadventures.se_project.Model.character.CharacterInterface;
 
 /**
  *

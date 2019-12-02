@@ -4,25 +4,25 @@ import unisadventures.se_project.util.Pair;
 
 public abstract class WorldObject {
     
-    protected int _xPosition;  // Because position may vary in some objects
-    protected int _yPosition;  // (may not be the cleanest option, refactor?)
-    private final int _height;
-    private final int _width;
+    protected double _xPosition;  // Because position may vary in some objects
+    protected double _yPosition;  // (may not be the cleanest option, refactor?)
+    private final double _height;
+    private final double _width;
     
-    public WorldObject(int xPosition, int yPosition, int height, int width){
+    public WorldObject(double xPosition, double yPosition, double height, double width){
         _xPosition = xPosition;
         _yPosition = yPosition;
         _height = height;
         _width = width;
     }
     
-    public Pair<Integer, Integer> getPosition() {
-        Pair<Integer, Integer> positionPair = new Pair<>(_xPosition, _yPosition);
+    public Pair<Double, Double> getPosition() {
+        Pair<Double, Double> positionPair = new Pair<>(_xPosition, _yPosition);
         return positionPair;
     }
     
-    public Pair<Integer, Integer> getDimension() {
-         Pair<Integer, Integer> dimensionPair = new Pair<>(_width, _height);
+    public Pair<Double, Double> getDimension() {
+         Pair<Double, Double> dimensionPair = new Pair<>(_width, _height);
         return dimensionPair;
     }
     

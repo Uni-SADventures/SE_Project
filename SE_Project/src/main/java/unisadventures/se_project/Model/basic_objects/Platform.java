@@ -6,7 +6,7 @@ public class Platform extends WorldObject implements FixedImageObjectInterface {
     
     private final String _imageFileName;
     
-    public Platform(int xPosition, int yPosition, int height, int width, String imageFileName) {
+    public Platform(double xPosition, double yPosition, double height, double width, String imageFileName) {
         super(xPosition, yPosition, height, width);
         _imageFileName = imageFileName;
     }
