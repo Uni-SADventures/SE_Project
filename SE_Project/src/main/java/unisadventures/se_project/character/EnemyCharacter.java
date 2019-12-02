@@ -15,22 +15,40 @@ import javafx.event.EventHandler;
  *
  * @author Francesco
  */
-public class EnemyCharacter extends Character {
+public class EnemyCharacter extends BasicCharacter {
     
     public EnemyCharacter(Image sprite, String name, int healthBar, int strenght, int maxHealth, double maxJump) {
         super(sprite, name, healthBar, strenght, maxHealth, maxJump);
     }
     
-    public AnimationTimer animationPattern(double R){
+    public AnimationTimer animationPattern(double R,double L){
        AnimationTimer enemyTimer = new AnimationTimer() {
-
+            private int start = -1 ;
                     @Override
                     public void handle(long now) {
+                      start++;
+                      if(start <= 20)
                       moveRight(R);
+                      if(start>20 && start<40)
+                         moveLeft(L);
+                      if(start>60)
+                          start=-1;
                     }
        };    
         return enemyTimer;
-            
+         
+        
+       
+    }
+
+    @Override
+    public void attack() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void grab() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
  

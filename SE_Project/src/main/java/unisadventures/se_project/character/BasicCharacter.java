@@ -20,20 +20,21 @@ import javafx.scene.image.*;
  *
  * @author Francesco
  */
-public class Character extends ImageView implements CharacterInterface  {
+public abstract class BasicCharacter extends ImageView implements CharacterInterface  {
     private String name;
     private int healthBar;
     private int strenght;
     private int maxHealth;
     private double maxJump ;
-    private double initJump = -1;
-    public Character(Image sprite,String name, int healthBar, int strenght, int maxHealth, double maxJump) {
+    private double initJump ;
+    public BasicCharacter(Image sprite,String name, int healthBar, int strenght, int maxHealth, double maxJump) {
         super(sprite);
         this.name = name;
         this.healthBar = healthBar;
         this.strenght = strenght;
         this.maxHealth = maxHealth;
         this.maxJump = maxJump;
+        initJump = -1 ;
     }
 
     public String getName() {
@@ -124,20 +125,17 @@ public class Character extends ImageView implements CharacterInterface  {
     }
 
     @Override
-    public void attack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void takeDamage(int dam) {
+        if(this.healthBar > dam)
+            this.healthBar -= dam;
+        else
+            die() ;
     }
-
-    @Override
-    public void takeDamage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void die() {
+    //when health goes to 0 we have to manage how to put away a life when we have a menu
     }
-
-    @Override
-    public void grab() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  
     @Override
     public boolean fall(double H) {
 
@@ -148,7 +146,7 @@ public class Character extends ImageView implements CharacterInterface  {
         double y = cy + getLayoutY() + 10;
 
         if (y + cy <= H-100) {
-            System.out.println("h: "+H+ " y:"+y+ " cy:"+cy+" y-cy:"+(y-cy));
+           
             relocate(x - cx, y - cy);
             return true;
         } else {

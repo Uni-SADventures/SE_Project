@@ -15,6 +15,6 @@ public interface CharacterInterface {
     boolean jump(double H);
     boolean fall(double H) ;
     void attack();
-    void takeDamage();
+    void takeDamage(int damage);
     void grab();
 }

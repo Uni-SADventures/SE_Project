@@ -22,17 +22,20 @@ public class testMovements extends Application {
             "https://i.imgur.com/2NEzBZJ.png";
 
     private Image heroImage;
-    private Character hero;
+    private BasicCharacter hero;
     private EnemyCharacter enemy;
-    boolean  goEast, goWest, jumping, falling = true;
+    boolean  goEast, goWest, jumping, hitting, falling = true;
 
     @Override
     public void start(Stage stage) throws Exception {
         heroImage = new Image(HERO_IMAGE_LOC);
         Image scenarioImage = new Image(SCENARIO_IMAGE);
-        hero = new UserCharacter(heroImage,"test",3,3,3,200,"UserName");
+        hero = new UserCharacter(heroImage,"test",3,3,3,120,"UserName");
         enemy = new EnemyCharacter(heroImage,"Test",3,3,3,200);
         Group dungeon = new Group(new ImageView(scenarioImage),hero,enemy);
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setTitle("Uni-Sadventures");
         
         moveHeroTo(W / 2, H / 2);
         moveEnemyTo(W / 2,H / 2);
@@ -47,6 +50,7 @@ public class testMovements extends Application {
                     case RIGHT: goEast  = true; break;
                     case A:  goWest  = true; break;
                     case D: goEast  = true; break;
+                    case F: hitting  = true; break;
                     case SPACE: if(!falling)
                         jumping = true; break;
                 }
@@ -70,6 +74,7 @@ public class testMovements extends Application {
                     case D:
                         goEast = false;
                         break;
+                    case F: hitting  = false; break;
                     case SPACE: {
                         jumping = false;
                         falling = true;
@@ -81,7 +86,7 @@ public class testMovements extends Application {
 
         stage.setScene(scene);
         stage.show();
-        AnimationTimer enemyTimer= enemy.animationPattern(W);
+        AnimationTimer enemyTimer= enemy.animationPattern(W,W);
         
 
         AnimationTimer timer = new AnimationTimer() {
@@ -100,9 +105,18 @@ public class testMovements extends Application {
                         falling = true;
                     }
                 }
-                if (falling) {
+                
+                double y = hero.getLayoutY()+ hero.getBoundsInLocal().getHeight() / 2;
+
+     
+
+                 if (!jumping && y <= H-100) {
                     falling = hero.fall(H);
                 }
+                if(hitting){
+                    hero.attack();
+                }
+                
             checkInteractiveObject() ;
             }
 

@@ -5,13 +5,14 @@
  */
 package unisadventures.se_project.character;
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 
 /**
  *
  * @author Emilio
  */
-public class UserCharacter extends Character {
+public class UserCharacter extends BasicCharacter {
     private int cfu = 0 ;
     //mettere tutti i collezionabili qui
     private String username ;
@@ -34,6 +35,42 @@ public class UserCharacter extends Character {
 
     private void getPowered() {
       
+    }
+
+    @Override
+    public void attack() {
+        AnimationTimer punch = new AnimationTimer(){
+            private int start = -1 ;
+
+            @Override
+            public void handle(long now) {
+                start++ ;
+                if(start == 0)
+                    setImage(new Image("https://imgur.com/gallery/XFdGg")) ;
+                if(start == 3)
+                    setImage(new Image("https://i.imgur.com/j2K6SvP.png")) ;
+                if(start == 6)
+                    setImage(new Image("https://i.imgur.com/I3IeSSm.jpg")) ;
+                
+                if(start == 9){
+                    setImage(new Image("https://i.imgur.com/I3IeSSm.jpg")) ;
+                    
+                    //I have to see who or what I'm trying to punch, even to get if 
+                    //there's one and,then, deal the damage
+                }
+                if(start == 12){
+                    setImage(new Image("https://i.imgur.com/2NEzBZJ.png")) ;
+                    this.stop() ;
+                }
+            }
+        };
+        
+        punch.start();
+    }
+
+    @Override
+    public void grab() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
