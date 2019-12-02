@@ -7,14 +7,14 @@ public class DestructibleObject extends WorldObject implements DestructibleObjec
     
     private final ArrayList<String> _imageFileNameList;
     private final int _listSizeMinusOne;
-    private int _nextImageImage;
+    private int _nextImageIndex;
     private static final int INTACT_OBJECT_IMAGE_FILE_NAME_INDEX = 0;
     
     public DestructibleObject(int xPosition, int yPosition, int height, int width, ArrayList<String> imageFileNameList) {
         super(xPosition, yPosition, height, width);
         _imageFileNameList = imageFileNameList;
         _listSizeMinusOne = _imageFileNameList.size() - 1;
-        _nextImageImage = 0;
+        _nextImageIndex = 0;
     }
     
     @Override
@@ -24,11 +24,11 @@ public class DestructibleObject extends WorldObject implements DestructibleObjec
     
     @Override
     public String getNextDestructionImageFileName() {
-        if (_nextImageImage == _listSizeMinusOne) {
+        if (_nextImageIndex == _listSizeMinusOne) {
             return null;
         }
-        _nextImageImage++;
-        return _imageFileNameList.get(_nextImageImage);
+        _nextImageIndex++;
+        return _imageFileNameList.get(_nextImageIndex);
     }
     
 }
