@@ -102,20 +102,20 @@ public abstract class BasicCharacter extends ImageView implements CharacterInter
     
     @Override
     public void move(double W,DirectionType d) {
-       final double charCenterX = this.getBoundsInLocal().getWidth()  / 2;
-        final double charCenterY = this.getBoundsInLocal().getHeight() / 2;
+       final double cx = this.getBoundsInLocal().getWidth()  / 2;
+        final double cy = this.getBoundsInLocal().getHeight() / 2;
 
-        double absoluteX = charCenterX + this.getLayoutX();
-        double absoluteY = charCenterY + this.getLayoutY();
+        double x = cx + this.getLayoutX();
+        double y = cy + this.getLayoutY();
         
         if(d == DirectionType.LEFT)
-            absoluteX -= speed ;
+            x -= speed ;
         else if (d == DirectionType.RIGHT)
-            absoluteX += speed ;
+            x += speed ;
         
-        if (absoluteX - charCenterX >= 0 &&
-            absoluteX + charCenterX <= W ) {
-            this.relocate(absoluteX - charCenterX, absoluteY - charCenterY);
+        if (x - cx >= 0 &&
+            x + cx <= W ) {
+            this.relocate(x - cx, y - cy);
         }
     }
 
@@ -123,20 +123,20 @@ public abstract class BasicCharacter extends ImageView implements CharacterInter
     @Override
     public boolean jump(double H) {
 
-        final double charCenterX = getBoundsInLocal().getWidth() / 2;
-        final double charCenterY = getBoundsInLocal().getHeight() / 2;
+        final double cx = getBoundsInLocal().getWidth() / 2;
+        final double cy = getBoundsInLocal().getHeight() / 2;
 
-        double absoluteX = charCenterX + getLayoutX();
-        double absoluteY = charCenterY + getLayoutY() - 10;
+        double x = cx + getLayoutX();
+        double y = cy + getLayoutY() - 10;
         if (this.initJump == -1) {
-            this.initJump = H - absoluteY;
+            this.initJump = H - y;
         }
 
-        if (absoluteY - charCenterY >= 0
-                && absoluteY + charCenterY <= H
-                && (H-absoluteY)-initJump < maxJump ) {
+        if (y - cy >= 0
+                && y + cy <= H
+                && (H-y)-initJump < maxJump ) {
             
-            relocate(absoluteX - charCenterX, absoluteY - charCenterY);
+            relocate(x - cx, y - cy);
             return true;
         }
         
@@ -159,15 +159,15 @@ public abstract class BasicCharacter extends ImageView implements CharacterInter
     @Override
     public boolean fall(double H) {
 
-        double charCenterX = getBoundsInLocal().getWidth() / 2;
-        double charCenterY = getBoundsInLocal().getHeight() / 2;
+        double cx = getBoundsInLocal().getWidth() / 2;
+        double cy = getBoundsInLocal().getHeight() / 2;
 
-        double absoluteX = charCenterX + getLayoutX();
-        double absoluteY = charCenterY + getLayoutY() + 10;
+        double x = cx + getLayoutX();
+        double y = cy + getLayoutY() + 10;
 
-        if (absoluteY + charCenterY <= H-100) {
+        if (y + cy <= H-100) {
            
-            relocate(absoluteX - charCenterX, absoluteY - charCenterY);
+            relocate(x - cx, y - cy);
             return true;
         } else {
             initJump = -1;
