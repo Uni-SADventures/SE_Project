@@ -11,6 +11,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.EventHandler;
+import unisadventures.se_project.util.* ;
 /**
  *
  * @author Francesco
@@ -28,9 +29,9 @@ public class EnemyCharacter extends BasicCharacter {
                     public void handle(long now) {
                       start++;
                       if(start <= 20)
-                      moveRight(R);
+                      move(R,DirectionType.RIGHT);
                       if(start>20 && start<40)
-                         moveLeft(L);
+                         move(L,DirectionType.LEFT);
                       if(start>60)
                           start=-1;
                     }

@@ -5,13 +5,14 @@
  */
 package unisadventures.se_project.Model.character;
 
+import unisadventures.se_project.util.DirectionType;
+
 /**
  *
  * @author Francesco
  */
 public interface CharacterInterface {
-    void moveLeft(double W);
-    void moveRight(double W);
+    void move(double W, DirectionType D);
     boolean jump(double H);
     boolean fall(double H) ;
     void attack();

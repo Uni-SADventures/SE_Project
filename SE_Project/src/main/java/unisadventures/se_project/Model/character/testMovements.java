@@ -9,6 +9,7 @@ import javafx.scene.image.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import unisadventures.se_project.util.DirectionType;
 
 /**
  * Hold down an arrow key to have your hero move around the screen.
@@ -94,10 +95,10 @@ public class testMovements extends Application {
             @Override
             public void handle(long now) {
                 if (goEast) {
-                    hero.moveRight(W);
+                    hero.move(W,DirectionType.RIGHT);
                 }
                 if (goWest) {
-                    hero.moveLeft(W);
+                    hero.move(W,DirectionType.LEFT);
                 }
                 if (jumping) {
                     jumping = hero.jump(H);

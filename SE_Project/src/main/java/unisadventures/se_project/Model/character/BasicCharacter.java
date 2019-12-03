@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.*;
 import javafx.scene.image.*;
+import unisadventures.se_project.util.DirectionType;
 
 
 /**
@@ -27,6 +28,7 @@ public abstract class BasicCharacter extends ImageView implements CharacterInter
     private int maxHealth;
     private double maxJump ;
     private double initJump ;
+    private double speed ;
     public BasicCharacter(Image sprite,String name, int healthBar, int strenght, int maxHealth, double maxJump) {
         super(sprite);
         this.name = name;
@@ -35,8 +37,35 @@ public abstract class BasicCharacter extends ImageView implements CharacterInter
         this.maxHealth = maxHealth;
         this.maxJump = maxJump;
         initJump = -1 ;
+        speed = 5 ;
     }
 
+    public double getMaxJump() {
+        return maxJump;
+    }
+
+    public void setMaxJump(double maxJump) {
+        this.maxJump = maxJump;
+    }
+
+    public double getInitJump() {
+        return initJump;
+    }
+
+    public void setInitJump(double initJump) {
+        this.initJump = initJump;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+    
+    
+    
     public String getName() {
         return name;
     }
@@ -72,33 +101,24 @@ public abstract class BasicCharacter extends ImageView implements CharacterInter
  
     
     @Override
-    public void moveLeft(double W) {
+    public void move(double W,DirectionType d) {
        final double cx = this.getBoundsInLocal().getWidth()  / 2;
         final double cy = this.getBoundsInLocal().getHeight() / 2;
 
-        double x = cx + this.getLayoutX() - 5;
+        double x = cx + this.getLayoutX();
         double y = cy + this.getLayoutY();
-
+        
+        if(d == DirectionType.LEFT)
+            x -= speed ;
+        else if (d == DirectionType.RIGHT)
+            x += speed ;
+        
         if (x - cx >= 0 &&
             x + cx <= W ) {
             this.relocate(x - cx, y - cy);
         }
     }
 
-    @Override
-    public void moveRight(double W) {
-      
-        final double cx = this.getBoundsInLocal().getWidth()  / 2;
-        final double cy = this.getBoundsInLocal().getHeight() / 2;
-
-        double x = cx + this.getLayoutX() + 5;
-        double y = cy + this.getLayoutY();
-
-        if (x - cx >= 0 &&
-            x + cx <= W ) {
-            this.relocate(x - cx, y - cy);
-        }
-    }
 
     @Override
     public boolean jump(double H) {

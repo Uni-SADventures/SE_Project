@@ -6,6 +6,7 @@
 package unisadventures.se_project.Model.character.decorator;
 
 import unisadventures.se_project.Model.character.CharacterInterface;
+import unisadventures.se_project.util.DirectionType;
 
 
 /**
@@ -22,15 +23,11 @@ public abstract class WeaponPowerup implements CharacterInterface{
     
     
     @Override
-    public void moveLeft(double W) {
-        ch.moveLeft(W) ;
+    public void move(double W, DirectionType d) {
+        ch.move(W,d) ;
     }
 
-    @Override
-    public void moveRight(double W) {
-        ch.moveRight(W);
-    }
-
+ 
     @Override
     public boolean jump(double H) {
         return ch.jump(H) ;
