@@ -5,17 +5,10 @@
  */
 package unisadventures.se_project.Model.character;
 
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.jmx.MXNodeAlgorithm;
-import com.sun.javafx.jmx.MXNodeAlgorithmContext;
-import com.sun.javafx.sg.prism.NGNode;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.*;
 import javafx.scene.image.*;
 import unisadventures.se_project.util.DirectionType;
-
+import java.util.* ;
+import unisadventures.se_project.util.Pair;
 
 /**
  *
@@ -29,6 +22,17 @@ public abstract class BasicCharacter extends ImageView implements CharacterInter
     private double maxJump ;
     private double initJump ;
     private double speed ;
+    
+    
+    //all the sets of sprites
+    private Pair <List<String>,List<String>> walk ;
+    private Pair <List<String>,List<String>> jump ;
+    private Pair <List<String>,List<String>> fall ;
+    private Pair <List<String>,List<String>> idle ;
+    private Pair <List<String>,List<String>> punch ;
+    private Pair <List<String>,List<String>> beDamaged ;
+    
+    
     public BasicCharacter(Image sprite,String name, int healthBar, int strenght, int maxHealth, double maxJump) {
         super(sprite);
         this.name = name;
@@ -38,8 +42,81 @@ public abstract class BasicCharacter extends ImageView implements CharacterInter
         this.maxJump = maxJump;
         initJump = -1 ;
         speed = 5 ;
+       
+        
     }
 
+    public void setBeDamaged(List<String> left, List<String> right ) {
+        this.beDamaged = new Pair(left,right) ;
+    }
+    
+    public void setWalk(List<String> left, List<String> right ) {
+        this.walk = new Pair(left,right) ;
+    }
+    public void setIdle(List<String> left, List<String> right ) {
+        this.idle = new Pair(left,right) ;
+    }
+    public void setPunch(List<String> left, List<String> right ) {
+        this.punch = new Pair(left,right) ;
+    }
+    public void setJump(List<String> left, List<String> right ) {
+        this.jump = new Pair(left,right) ;
+    }
+    public void setFall(List<String> left, List<String> right ) {
+        this.fall = new Pair(left,right) ;
+    }
+    
+    public List<String> getBeDamagedSprites(DirectionType d){
+        if(d == DirectionType.LEFT )
+            return beDamaged.getFirstElement() ;
+        else if (d == DirectionType.RIGHT)
+            return beDamaged.getSecondElement() ;
+        else 
+            return null ;
+    }
+    
+    public List<String> getIdleSprites(DirectionType d){
+        if(d == DirectionType.LEFT )
+            return idle.getFirstElement() ;
+        else if (d == DirectionType.RIGHT)
+            return idle.getSecondElement() ;
+        else 
+            return null ;
+    }
+    public List<String> getJumpSprites(DirectionType d){
+        if(d == DirectionType.LEFT )
+            return jump.getFirstElement() ;
+        else if (d == DirectionType.RIGHT)
+            return jump.getSecondElement() ;
+        else 
+            return null ;
+    }
+    public List<String> getFallSprites(DirectionType d){
+        if(d == DirectionType.LEFT )
+            return fall.getFirstElement() ;
+        else if (d == DirectionType.RIGHT)
+            return fall.getSecondElement() ;
+        else 
+            return null ;
+    }
+    public List<String> getPunchSprites(DirectionType d){
+        if(d == DirectionType.LEFT )
+            return punch.getFirstElement() ;
+        else if (d == DirectionType.RIGHT)
+            return punch.getSecondElement() ;
+        else 
+            return null ;
+    }
+    public List<String> getWalkSprites(DirectionType d){
+        if(d == DirectionType.LEFT )
+            return walk.getFirstElement() ;
+        else if (d == DirectionType.RIGHT)
+            return walk.getSecondElement() ;
+        else 
+            return null ;
+    }
+    
+    
     public double getMaxJump() {
         return maxJump;
     }
