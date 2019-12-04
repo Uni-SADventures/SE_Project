@@ -1,6 +1,8 @@
-package unisadventures.se_project.Model.basic_objects;
+package model.basicObjects;
 
-import unisadventures.se_project.Model.WorldObject;
+
+import model.WorldObject;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class DestructibleObject extends WorldObject implements DestructibleObjectInterface {
@@ -29,6 +31,16 @@ public class DestructibleObject extends WorldObject implements DestructibleObjec
         }
         _nextImageIndex++;
         return _imageFileNameList.get(_nextImageIndex);
+    }
+
+    @Override
+    public void tick() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void render(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

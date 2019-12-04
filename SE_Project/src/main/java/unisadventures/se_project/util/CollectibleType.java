@@ -1,4 +1,4 @@
-package unisadventures.se_project.util;
+package util;
 
 public enum CollectibleType {
     PEN, PENCIL, CREDIT;

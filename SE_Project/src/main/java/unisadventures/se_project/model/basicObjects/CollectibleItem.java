@@ -1,8 +1,10 @@
-package unisadventures.se_project.Model.basic_objects;
+package model.basicObjects;
 
-import unisadventures.se_project.Model.WorldObject;
+
+import model.WorldObject;
+import java.awt.Graphics;
 import java.util.ArrayList;
-import unisadventures.se_project.util.CollectibleType;
+import util.CollectibleType;
 
 public class CollectibleItem extends WorldObject implements CollectibleItemInterface {
     
@@ -32,6 +34,16 @@ public class CollectibleItem extends WorldObject implements CollectibleItemInter
     @Override
     public CollectibleType getCollectibleType() {
         return _type;
+    }
+
+    @Override
+    public void tick() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void render(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
