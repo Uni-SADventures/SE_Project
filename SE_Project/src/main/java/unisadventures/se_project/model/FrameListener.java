@@ -9,10 +9,10 @@ package model;
  *
  * @author Emilio
  */
-public abstract class FrameObserver {
+public abstract class FrameListener {
     private long frames ;
 
-    public FrameObserver() {
+    public FrameListener() {
         frames = 0 ;
     }
     

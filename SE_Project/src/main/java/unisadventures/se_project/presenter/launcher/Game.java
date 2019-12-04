@@ -5,14 +5,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import view.display.Display;
-import model.FrameObserver;
+import model.FrameListener;
 import view.gfx.Assets;
 import presenter.input.KeyManager;
 import presenter.states.GameState;
 import presenter.states.MenuState;
 import presenter.states.State;
 
-public class Game extends FrameObserver {
+public class Game extends FrameListener {
 
 	private Display display;
 	public int width, height;

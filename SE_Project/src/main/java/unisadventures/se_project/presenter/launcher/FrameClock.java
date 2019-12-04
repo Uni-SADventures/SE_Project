@@ -5,7 +5,7 @@
  */
 package presenter.launcher;
 
-import model.FrameObserver;
+import model.FrameListener;
 import java.util.*;
 
 /**
@@ -13,7 +13,7 @@ import java.util.*;
  * @author Emilio
  */
 public class FrameClock extends Thread{
-    List<FrameObserver> observerList; 
+    List<FrameListener> observerList; 
 
     public FrameClock() {
         
@@ -59,20 +59,20 @@ public class FrameClock extends Thread{
 
     }
     
-    public void registerObserver(FrameObserver o) { 
+    public void registerObserver(FrameListener o) { 
         observerList.add(o); 
     } 
   
-    public void unregisterObserver(FrameObserver o) { 
+    public void unregisterObserver(FrameListener o) { 
         observerList.remove(observerList.indexOf(o)); 
     } 
   
     public void notifyObservers() 
     { 
-        for (Iterator<FrameObserver> it = 
+        for (Iterator<FrameListener> it = 
               observerList.iterator(); it.hasNext();) 
         { 
-            FrameObserver o = it.next(); 
+            FrameListener o = it.next(); 
             o.update(); 
         } 
     } 
