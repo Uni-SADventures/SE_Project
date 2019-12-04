@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unisadventures.se_project.Model.character;
+package unisadventures.se_project.model.character;
 
 import unisadventures.se_project.util.DirectionType;
+
+
 
 /**
  *

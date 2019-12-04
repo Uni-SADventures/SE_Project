@@ -1,4 +1,4 @@
-package presenter.input;
+package unisadventures.se_project.presenter.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

@@ -1,6 +1,6 @@
-package model.basicObjects;
+package unisadventures.se_project.model.basicObjects;
 
-import util.CollectibleType;
+import unisadventures.se_project.util.CollectibleType;
 
 
 

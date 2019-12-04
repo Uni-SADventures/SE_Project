@@ -1,42 +1,36 @@
-package unisadventures.se_project.Model;
 
+package unisadventures.se_project.model;
+
+import java.awt.Graphics;
 import unisadventures.se_project.util.Pair;
 
 public abstract class WorldObject {
-    
-    /* Little convention reminder:
-     * x and y refer to the position of the upper left corner of the object.
-     * The x axis goes left-right, and the y axis goes top-down.
-     * height/width correspond to the hitbox of the character.
-     */
-    
-    
+
     protected double _xPosition;  // Because position may vary in some objects
     protected double _yPosition;  // (may not be the cleanest option, refactor?)
-    
-    private final double _width;
     private final double _height;
-    
-    public WorldObject(double xPosition, double yPosition, double width, double height){
-        _xPosition = xPosition;
-        _yPosition = yPosition;
-        _width = width;
-        _height = height;
+    private final double _width;
 
+    public WorldObject(double x, double y, double height, double width) {
+        _xPosition = x;
+        _yPosition = y;
+        _height = height;
+        _width = width;;
     }
-    
-    // Output as (xPosition, yPosition)
+
     public Pair<Double, Double> getPosition() {
         Pair<Double, Double> positionPair = new Pair<>(_xPosition, _yPosition);
         return positionPair;
     }
-    
-    // Output as (width, height)
+
     public Pair<Double, Double> getDimension() {
-         Pair<Double, Double> dimensionPair = new Pair<>(_width, _height);
+        Pair<Double, Double> dimensionPair = new Pair<>(_width, _height);
         return dimensionPair;
     }
-    
-    // No need to put a setPosition method at this level
-    
+
+    public abstract void tick();
+
+    public abstract void render(Graphics g);
+
 }
+

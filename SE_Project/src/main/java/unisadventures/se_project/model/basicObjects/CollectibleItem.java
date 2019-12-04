@@ -1,10 +1,10 @@
-package model.basicObjects;
+package unisadventures.se_project.model.basicObjects;
 
 
-import model.WorldObject;
+import unisadventures.se_project.model.WorldObject;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import util.CollectibleType;
+import unisadventures.se_project.util.CollectibleType;
 
 public class CollectibleItem extends WorldObject implements CollectibleItemInterface {
     

@@ -1,4 +1,4 @@
-package model.basicObjects;
+package unisadventures.se_project.model.basicObjects;
 
 public interface DestructibleObjectInterface {
     

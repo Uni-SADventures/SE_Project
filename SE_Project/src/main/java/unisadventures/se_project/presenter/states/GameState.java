@@ -1,9 +1,9 @@
-package presenter.states;
+package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
 
-import presenter.launcher.Game;
-import model.character.UserCharacter;
+import unisadventures.se_project.presenter.launcher.Game;
+import unisadventures.se_project.model.character.UserCharacter;
 
 public class GameState extends State {
 	

@@ -1,8 +1,8 @@
-package presenter.states;
+package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
 
-import presenter.launcher.Game;
+import unisadventures.se_project.presenter.launcher.Game;
 
 public class MenuState extends State {
 

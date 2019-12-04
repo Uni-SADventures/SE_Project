@@ -1,4 +1,4 @@
-package view.display;
+package unisadventures.se_project.view.display;
 
 import java.awt.Canvas;
 import java.awt.Dimension;

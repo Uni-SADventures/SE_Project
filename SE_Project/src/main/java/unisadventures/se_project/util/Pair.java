@@ -1,4 +1,4 @@
-package util;
+package unisadventures.se_project.util;
 
 // Code taken from https://stackoverflow.com/questions/457629/how-to-return-multiple-objects-from-a-java-method
 // and adapted

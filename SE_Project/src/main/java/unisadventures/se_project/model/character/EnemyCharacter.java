@@ -3,25 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unisadventures.se_project.Model.character;
+package unisadventures.se_project.model.character;
 
-import javafx.animation.AnimationTimer;
-import javafx.scene.image.Image;
-import javafx.animation.AnimationTimer;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
-import javafx.event.EventHandler;
-import unisadventures.se_project.util.* ;
+import java.awt.Graphics;
+import unisadventures.se_project.util.DirectionType;
+
 /**
  *
  * @author Francesco
  */
 public class EnemyCharacter extends BasicCharacter {
     
-    public EnemyCharacter(Image sprite, String name, int healthBar, int strenght, int maxHealth, double maxJump) {
-        super(sprite, name, healthBar, strenght, maxHealth, maxJump);
+    public EnemyCharacter(double x, double y, double h, double w, String name, int healthBar, int strenght, int maxHealth, double maxJump) {
+        super(x,y,h,w,name, healthBar, strenght, maxHealth, maxJump);
     }
-    
+  /*  
     public AnimationTimer animationPattern(double R,double L){
        AnimationTimer enemyTimer = new AnimationTimer() {
             private int start = -1 ;
@@ -41,7 +37,7 @@ public class EnemyCharacter extends BasicCharacter {
         
        
     }
-
+*/
     @Override
     public void attack() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -49,6 +45,16 @@ public class EnemyCharacter extends BasicCharacter {
 
     @Override
     public void grab() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void tick() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void render(Graphics g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

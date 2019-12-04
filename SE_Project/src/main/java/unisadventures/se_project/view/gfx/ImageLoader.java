@@ -1,4 +1,4 @@
-package view.gfx;
+package unisadventures.se_project.view.gfx;
 
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;

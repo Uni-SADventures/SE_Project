@@ -1,4 +1,4 @@
-package presenter.launcher;
+package unisadventures.se_project.presenter.launcher;
 
 public class Launcher {
 

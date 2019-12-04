@@ -1,18 +1,17 @@
-package presenter.launcher;
+package unisadventures.se_project.presenter.launcher;
 
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import view.display.Display;
-import model.FrameObserver;
-import view.gfx.Assets;
-import presenter.input.KeyManager;
-import presenter.states.GameState;
-import presenter.states.MenuState;
-import presenter.states.State;
+import unisadventures.se_project.view.display.Display;
+import unisadventures.se_project.model.FrameListener;
+import unisadventures.se_project.view.gfx.Assets;
+import unisadventures.se_project.presenter.input.KeyManager;
+import unisadventures.se_project.presenter.states.*;
 
-public class Game extends FrameObserver {
+
+public class Game extends FrameListener {
 
 	private Display display;
 	public int width, height;
