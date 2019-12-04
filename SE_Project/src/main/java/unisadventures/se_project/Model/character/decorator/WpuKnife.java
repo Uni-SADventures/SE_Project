@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unisadventures.se_project.Model.character.decorator;
+package model.character.decorator;
 
+import model.character.CharacterInterface;
 
-import unisadventures.se_project.Model.character.CharacterInterface;
 
 /**
  *
