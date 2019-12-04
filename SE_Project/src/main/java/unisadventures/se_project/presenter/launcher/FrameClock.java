@@ -46,7 +46,7 @@ public class FrameClock extends Thread{
                 notifyObservers() ;
                 ticks++;
                 delta--;
-                System.out.println("Frames: " + ticks);
+                //System.out.println("Frames: " + ticks);
             }
 /*
             if (timer >= 1000000000) {

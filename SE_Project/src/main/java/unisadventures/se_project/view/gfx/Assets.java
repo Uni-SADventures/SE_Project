@@ -17,5 +17,10 @@ public class Assets {
 		stone = sheet.crop(width * 3, 0, width, height);
 		tree = sheet.crop(0, height, width, height);
 	}
-	
+	public static void changeImage(String path){
+                SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage(path));
+		
+		player = sheet.crop(0, 0, width, height);
+        
+        }
 }

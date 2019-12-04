@@ -16,10 +16,10 @@ public abstract class FrameListener {
         frames = 0 ;
     }
     
-    public void update() {
+    public String update() {
         
         frames++ ;
-        doSmthGiveSprite() ;
+        return doSmthGiveSprite() ;
         
     }
     
