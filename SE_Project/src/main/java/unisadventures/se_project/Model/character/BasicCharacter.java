@@ -1,9 +1,11 @@
 package unisadventures.se_project.model.character;
 
+import java.awt.Graphics;
 import unisadventures.se_project.model.WorldObject;
 import java.util.*;
 import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.util.Pair;
+import unisadventures.se_project.view.gfx.Assets;
 
 public abstract class BasicCharacter extends WorldObject implements CharacterInterface {
 
@@ -14,7 +16,16 @@ public abstract class BasicCharacter extends WorldObject implements CharacterInt
     private double maxJump;
     private double initJump;
     private double speed;
+    private DirectionType facing ;
 
+    
+    private Pair<Boolean, Integer> walking;
+    private Pair<Boolean, Integer> jumping;
+    private Pair<Boolean, Integer> falling;
+    private Pair<Boolean, Integer> idling;
+    private Pair<Boolean, Integer> punching;
+    private Pair<Boolean, Integer> beingDamaged;
+    
     //all the sets of sprites
     private Pair<List<String>, List<String>> walk;
     private Pair<List<String>, List<String>> jump;
@@ -32,8 +43,73 @@ public abstract class BasicCharacter extends WorldObject implements CharacterInt
         this.maxJump = maxJump;
         this.initJump = -1;
         this.speed = 5;
+        this.facing = DirectionType.RIGHT ;
+        
+        walking = new Pair(false,0) ;
+        jumping = new Pair(false,0) ;
+        falling = new Pair(false,0) ;
+        idling = new Pair(false,0) ;
+        punching = new Pair(false,0) ;
+        beingDamaged = new Pair(false,0) ;
+        
+        
     }
 
+    public DirectionType getFacing() {
+        return facing;
+    }
+
+    public void setFacing(DirectionType facing) {
+        this.facing = facing;
+    }
+
+    public Pair<Boolean, Integer> getWalking() {
+        return walking;
+    }
+
+    public void setWalking(Pair<Boolean, Integer> walking) {
+        this.walking = walking;
+    }
+
+    public Pair<Boolean, Integer> getJumping() {
+        return jumping;
+    }
+
+    public void setJumping(Pair<Boolean, Integer> jumping) {
+        this.jumping = jumping;
+    }
+
+    public Pair<Boolean, Integer> getFalling() {
+        return falling;
+    }
+
+    public void setFalling(Pair<Boolean, Integer> falling) {
+        this.falling = falling;
+    }
+
+    public Pair<Boolean, Integer> getIdling() {
+        return idling;
+    }
+
+    public void setIdling(Pair<Boolean, Integer> idling) {
+        this.idling = idling;
+    }
+
+    public Pair<Boolean, Integer> getPunching() {
+        return punching;
+    }
+
+    public void setPunching(Pair<Boolean, Integer> punching) {
+        this.punching = punching;
+    }
+
+    public Pair<Boolean, Integer> getBeingDamaged() {
+        return beingDamaged;
+    }
+
+    public void setBeingDamaged(Pair<Boolean, Integer> beingDamaged) {
+        this.beingDamaged = beingDamaged;
+    }
     public void setBeDamaged(List<String> left, List<String> right) {
         this.beDamaged = new Pair(left, right);
     }
@@ -250,5 +326,8 @@ public abstract class BasicCharacter extends WorldObject implements CharacterInt
 */
     return false ;
     }
-
+    @Override
+    public void render(Graphics g) {
+        g.drawImage(Assets.player, (int) _xPosition, (int) _yPosition, null);
+    }
 }

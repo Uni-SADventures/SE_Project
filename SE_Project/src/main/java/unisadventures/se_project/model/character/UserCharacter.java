@@ -3,6 +3,7 @@ package unisadventures.se_project.model.character;
 import java.awt.Graphics;
 import java.util.Timer;
 import unisadventures.se_project.presenter.launcher.Game;
+import unisadventures.se_project.util.Pair;
 import unisadventures.se_project.view.gfx.Assets;
 
 public class UserCharacter extends BasicCharacter {
@@ -17,10 +18,61 @@ public class UserCharacter extends BasicCharacter {
     int i = 0;
 
     @Override
-    public void tick() {
+     public void tick() {
         game.start();
-
-        if (game.getKeyManager().up && fall == 0) {
+        if(!game.getKeyManager().up && getJumping().getFirstElement() ){
+            if(getJumping().getSecondElement() < 16)
+               
+                setFalling(new Pair(true,16-getJumping().getSecondElement()));
+           
+            setJumping(new Pair(false,0));
+           // setFalling(new Pair(true,16-getJumping().getSecondElement()));
+        //    if(getFalling().getSecondElement() == 16)
+          //      setFalling(new Pair(false,0));
+        }
+         if (game.getKeyManager().up && !this.getJumping().getFirstElement()) {
+            int timeElapsed = getJumping().getSecondElement() ;
+            setJumping(new Pair(true,timeElapsed + 1));
+            _yPosition -= this.getSpeed() + timeElapsed;
+            System.out.println("time elapsed " + getJumping().getSecondElement() + " postion " + _yPosition);
+       
+           // System.out.println("speed " + this.getSpeed() - timeElapsed + " postion " + _yPosition);
+        }
+        if (this.getJumping().getFirstElement() && !this.getFalling().getFirstElement() ) {
+            int timeElapsed = getJumping().getSecondElement() ;
+            setJumping(new Pair(true,timeElapsed + 1));
+            
+            if (timeElapsed == 15) {
+                _yPosition -= this.getSpeed();
+                
+               //setJumping(new Pair(false,0));
+                setFalling(new Pair(true,0));
+                return;
+            } else if (timeElapsed < 15)
+                 _yPosition -= this.getSpeed();
+           // speed -= 1;
+            System.out.println("time elapsed " + getJumping().getSecondElement()+ " postion " + _yPosition);
+        }
+        
+        
+        if (this.getFalling().getFirstElement()) {
+            int timeElapsed = getFalling().getSecondElement() ;
+            setFalling(new Pair(true,timeElapsed + 1));
+            
+            if (timeElapsed == 15) {
+                _yPosition += this.getSpeed();
+                
+                
+                setFalling(new Pair(false,16));
+                //setJumping(new Pair(false,0));
+                return;
+            } else if(timeElapsed < 15)
+                _yPosition += this.getSpeed();
+            
+           // speed -= 1;
+            System.out.println("time elapsed " + getFalling().getSecondElement()+ " postion " + _yPosition);
+        }
+       /* if (game.getKeyManager().up && fall == 0) {
             double current = _yPosition;
             _yPosition -= 30;
             fall = (current - _yPosition);
@@ -32,7 +84,7 @@ public class UserCharacter extends BasicCharacter {
             }
 
             fall = 0;
-        }
+        }*/
         if (game.getKeyManager().left) {
             _xPosition -= 3;
         }
@@ -40,11 +92,8 @@ public class UserCharacter extends BasicCharacter {
             _xPosition += 3;
         }
     }
-
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.player, (int) _xPosition, (int) _yPosition, null);
-    }
+     
+    
 
     /*public void grab(InteractiveElement e) {
         //da fare quando avremo oggetto
