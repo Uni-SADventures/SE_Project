@@ -13,7 +13,7 @@ public class GameState extends State {
 	
 	public GameState(Game game){
 		super(game);
-		player = new PlayerCharacter(game, 100, 100,100,100,CharacterType.USER,6,1,6,10,"me");
+		player = new PlayerCharacter(game, 180, 120,100,100,CharacterType.USER,6,1,6,10,"me");
 	}
 	
 	@Override
