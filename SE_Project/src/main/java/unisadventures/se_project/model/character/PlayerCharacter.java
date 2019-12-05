@@ -10,10 +10,12 @@ import unisadventures.se_project.view.gfx.Assets;
 public class PlayerCharacter extends BasicCharacter {
 
     private Game _game;
+    private String _username;
 
-    public PlayerCharacter(Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
+    public PlayerCharacter(Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump, String username) {
         super(xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
         _game = game;
+        _username = username ;
     }
     double fall = 0;
     int i = 0;
