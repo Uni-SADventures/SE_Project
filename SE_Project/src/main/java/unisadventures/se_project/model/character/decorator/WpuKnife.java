@@ -5,7 +5,7 @@
  */
 package unisadventures.se_project.model.character.decorator;
 
-import unisadventures.se_project.model.character.CharacterInterface;
+import unisadventures.se_project.model.character.MovementsInterface;
 
 
 /**
@@ -14,7 +14,7 @@ import unisadventures.se_project.model.character.CharacterInterface;
  */
 public class WpuKnife extends WeaponPowerup {
 
-    public WpuKnife(CharacterInterface ch) {
+    public WpuKnife(MovementsInterface ch) {
         super(ch) ;
     }
     

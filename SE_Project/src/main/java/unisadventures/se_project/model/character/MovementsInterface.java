@@ -13,7 +13,7 @@ import unisadventures.se_project.util.DirectionType;
  *
  * @author Francesco
  */
-public interface CharacterInterface {
+public interface MovementsInterface {
     void move(double W, DirectionType D);
     boolean jump(double H);
     boolean fall(double H) ;

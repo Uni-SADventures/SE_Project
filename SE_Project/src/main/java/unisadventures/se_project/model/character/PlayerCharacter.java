@@ -3,24 +3,25 @@ package unisadventures.se_project.model.character;
 import java.awt.Graphics;
 import java.util.Timer;
 import unisadventures.se_project.presenter.launcher.Game;
+import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.Pair;
 import unisadventures.se_project.view.gfx.Assets;
 
-public class UserCharacter extends BasicCharacter {
+public class PlayerCharacter extends BasicCharacter {
 
-    private Game game;
+    private Game _game;
 
-    public UserCharacter(Game game, double x, double y, double h, double w, String name, int healthBar, int strenght, int maxHealth, double maxJump) {
-        super(x, y, h, w, name, healthBar, strenght, maxHealth, maxJump);
-        this.game = game;
+    public PlayerCharacter(Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
+        super(xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
+        _game = game;
     }
     double fall = 0;
     int i = 0;
 
     @Override
      public void tick() {
-        game.start();
-        if(!game.getKeyManager().up && getJumping().getFirstElement() ){
+        _game.start();
+        if(!_game.getKeyManager().up && getJumping().getFirstElement() ){
             if(getJumping().getSecondElement() < 16)
                
                 setFalling(new Pair(true,16-getJumping().getSecondElement()));
@@ -30,44 +31,44 @@ public class UserCharacter extends BasicCharacter {
         //    if(getFalling().getSecondElement() == 16)
           //      setFalling(new Pair(false,0));
         }
-         if (game.getKeyManager().up && !this.getJumping().getFirstElement()) {
+         if (_game.getKeyManager().up && !getJumping().getFirstElement()) {
             int timeElapsed = getJumping().getSecondElement() ;
             setJumping(new Pair(true,timeElapsed + 1));
-            _yPosition -= this.getSpeed() + timeElapsed;
+            _yPosition -= getSpeed() + timeElapsed;
             System.out.println("time elapsed " + getJumping().getSecondElement() + " postion " + _yPosition);
        
-           // System.out.println("speed " + this.getSpeed() - timeElapsed + " postion " + _yPosition);
+           // System.out.println("speed " + getSpeed() - timeElapsed + " postion " + _yPosition);
         }
-        if (this.getJumping().getFirstElement() && !this.getFalling().getFirstElement() ) {
+        if (getJumping().getFirstElement() && !getFalling().getFirstElement() ) {
             int timeElapsed = getJumping().getSecondElement() ;
             setJumping(new Pair(true,timeElapsed + 1));
             
             if (timeElapsed == 15) {
-                _yPosition -= this.getSpeed();
+                _yPosition -= getSpeed();
                 
                //setJumping(new Pair(false,0));
                 setFalling(new Pair(true,0));
                 return;
             } else if (timeElapsed < 15)
-                 _yPosition -= this.getSpeed();
+                 _yPosition -= getSpeed();
            // speed -= 1;
             System.out.println("time elapsed " + getJumping().getSecondElement()+ " postion " + _yPosition);
         }
         
         
-        if (this.getFalling().getFirstElement()) {
+        if (getFalling().getFirstElement()) {
             int timeElapsed = getFalling().getSecondElement() ;
             setFalling(new Pair(true,timeElapsed + 1));
             
             if (timeElapsed == 15) {
-                _yPosition += this.getSpeed();
+                _yPosition += getSpeed();
                 
                 
                 setFalling(new Pair(false,16));
                 //setJumping(new Pair(false,0));
                 return;
             } else if(timeElapsed < 15)
-                _yPosition += this.getSpeed();
+                _yPosition += getSpeed();
             
            // speed -= 1;
             System.out.println("time elapsed " + getFalling().getSecondElement()+ " postion " + _yPosition);
@@ -85,10 +86,10 @@ public class UserCharacter extends BasicCharacter {
 
             fall = 0;
         }*/
-        if (game.getKeyManager().left) {
+        if (_game.getKeyManager().left) {
             _xPosition -= 3;
         }
-        if (game.getKeyManager().right) {
+        if (_game.getKeyManager().right) {
             _xPosition += 3;
         }
     }

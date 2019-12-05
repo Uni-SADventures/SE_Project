@@ -28,6 +28,10 @@ public abstract class WorldObject {
         return dimensionPair;
     }
 
+    // Are you SURE this is common to all elements that extend WorldObject?
+    // Will a platform really need a tick method?
+    // If not, put them in an interface!
+    
     public abstract void tick();
 
     public abstract void render(Graphics g);

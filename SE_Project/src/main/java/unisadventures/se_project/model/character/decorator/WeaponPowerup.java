@@ -5,8 +5,8 @@
  */
 package unisadventures.se_project.model.character.decorator;
 
-import unisadventures.se_project.model.character.CharacterInterface;
 import unisadventures.se_project.util.DirectionType;
+import unisadventures.se_project.model.character.MovementsInterface;
 
 
 
@@ -14,44 +14,44 @@ import unisadventures.se_project.util.DirectionType;
  *
  * @author Emilio
  */
-public abstract class WeaponPowerup implements CharacterInterface{
-    private CharacterInterface ch ;
+public abstract class WeaponPowerup implements MovementsInterface {
+    private MovementsInterface _playerCharacter ;
 
-    public WeaponPowerup(CharacterInterface ch) {
-        this.ch = ch;
+    public WeaponPowerup(MovementsInterface ch) {
+        this._playerCharacter = ch;
     }
     
     
     
     @Override
     public void move(double W, DirectionType d) {
-        ch.move(W,d) ;
+        _playerCharacter.move(W,d) ;
     }
 
  
     @Override
     public boolean jump(double H) {
-        return ch.jump(H) ;
+        return _playerCharacter.jump(H) ;
     }
 
     @Override
     public boolean fall(double H) {
-        return ch.fall(H) ;
+        return _playerCharacter.fall(H) ;
     }
 
     @Override
     public void attack() {
-        ch.attack();
+        _playerCharacter.attack();
     }
 
     @Override
     public void takeDamage(int damage) {
-        ch.takeDamage(damage);
+        _playerCharacter.takeDamage(damage);
     }
 
     @Override
     public void grab() {
-        ch.grab();
+        _playerCharacter.grab();
     }
    
     

@@ -4,141 +4,150 @@ import java.awt.Graphics;
 import unisadventures.se_project.model.WorldObject;
 import java.util.*;
 import unisadventures.se_project.util.DirectionType;
+import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.Pair;
 import unisadventures.se_project.view.gfx.Assets;
 
-public abstract class BasicCharacter extends WorldObject implements CharacterInterface {
+public abstract class BasicCharacter extends WorldObject implements MovementsInterface {
+    
+    // I put underscores in front of all attribute to avoid this.randomAttribute = randomAttribute
 
-    private String name;
-    private int healthBar;
-    private int strenght;
-    private int maxHealth;
-    private double maxJump;
-    private double initJump;
-    private double speed;
-    private DirectionType facing ;
+    private CharacterType _typeOfCharacter; // changed from name to typeOfCharacter
+    private int _healthBar;
+    private int _strength;  // For future reference, "strength" is spelled with "th", not "ht"
+    private int _maxHealth;
+    private double _maxJump;
+    private double _initJump;
+    private double _speed;
+    private DirectionType _facing ;
 
     
-    private Pair<Boolean, Integer> walking;
-    private Pair<Boolean, Integer> jumping;
-    private Pair<Boolean, Integer> falling;
-    private Pair<Boolean, Integer> idling;
-    private Pair<Boolean, Integer> punching;
-    private Pair<Boolean, Integer> beingDamaged;
+    private Pair<Boolean, Integer> _walking;
+    private Pair<Boolean, Integer> _jumping;
+    private Pair<Boolean, Integer> _falling;
+    private Pair<Boolean, Integer> _idling;
+    private Pair<Boolean, Integer> _punching;
+    private Pair<Boolean, Integer> _beingDamaged;
     
     //all the sets of sprites
-    private Pair<List<String>, List<String>> walk;
-    private Pair<List<String>, List<String>> jump;
-    private Pair<List<String>, List<String>> fall;
-    private Pair<List<String>, List<String>> idle;
-    private Pair<List<String>, List<String>> punch;
-    private Pair<List<String>, List<String>> beDamaged;
+    private Pair<List<String>, List<String>> _walk;
+    private Pair<List<String>, List<String>> _jump;
+    private Pair<List<String>, List<String>> _fall;
+    private Pair<List<String>, List<String>> _idle;
+    private Pair<List<String>, List<String>> _punch;
+    private Pair<List<String>, List<String>> _beDamaged;
 
-    public BasicCharacter(double x, double y, double h, double w, String name, int healthBar, int strenght, int maxHealth, double maxJump) {
-        super(x, y, h, w);
-        this.name = name;
-        this.healthBar = healthBar;
-        this.strenght = strenght;
-        this.maxHealth = maxHealth;
-        this.maxJump = maxJump;
-        this.initJump = -1;
-        this.speed = 5;
-        this.facing = DirectionType.RIGHT ;
+    public BasicCharacter(double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
+        super(xPosition, yPosition, height, width);
+        _typeOfCharacter = type;
+        _healthBar = healthBar;
+        _strength = strength;
+        _maxHealth = maxHealth;
+        _maxJump = maxJump;
+        _initJump = -1;
+        _speed = 5;
+        _facing = DirectionType.RIGHT ;
         
-        walking = new Pair(false,0) ;
-        jumping = new Pair(false,0) ;
-        falling = new Pair(false,0) ;
-        idling = new Pair(false,0) ;
-        punching = new Pair(false,0) ;
-        beingDamaged = new Pair(false,0) ;
+        _walking = new Pair(false,0) ;
+        _jumping = new Pair(false,0) ;
+        _falling = new Pair(false,0) ;
+        _idling = new Pair(false,0) ;
+        _punching = new Pair(false,0) ;
+        _beingDamaged = new Pair(false,0) ;
         
         
     }
+    
+    // READ THIS COMMENT!!!
+    // The following implementation completely ruins the single responsibility principle.
+    // https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f
+    
+    // All below is a classic example of the State pattern. To refactor.
 
     public DirectionType getFacing() {
-        return facing;
+        return _facing;
     }
 
     public void setFacing(DirectionType facing) {
-        this.facing = facing;
+        _facing = facing;
     }
 
     public Pair<Boolean, Integer> getWalking() {
-        return walking;
+        return _walking;
     }
 
     public void setWalking(Pair<Boolean, Integer> walking) {
-        this.walking = walking;
+        _walking = walking;
     }
 
     public Pair<Boolean, Integer> getJumping() {
-        return jumping;
+        return _jumping;
     }
 
     public void setJumping(Pair<Boolean, Integer> jumping) {
-        this.jumping = jumping;
+        _jumping = jumping;
     }
 
     public Pair<Boolean, Integer> getFalling() {
-        return falling;
+        return _falling;
     }
 
     public void setFalling(Pair<Boolean, Integer> falling) {
-        this.falling = falling;
+        _falling = falling;
     }
 
     public Pair<Boolean, Integer> getIdling() {
-        return idling;
+        return _idling;
     }
 
     public void setIdling(Pair<Boolean, Integer> idling) {
-        this.idling = idling;
+        _idling = idling;
     }
 
     public Pair<Boolean, Integer> getPunching() {
-        return punching;
+        return _punching;
     }
 
     public void setPunching(Pair<Boolean, Integer> punching) {
-        this.punching = punching;
+        _punching = punching;
     }
 
     public Pair<Boolean, Integer> getBeingDamaged() {
-        return beingDamaged;
+        return _beingDamaged;
     }
 
     public void setBeingDamaged(Pair<Boolean, Integer> beingDamaged) {
-        this.beingDamaged = beingDamaged;
+        _beingDamaged = beingDamaged;
     }
     public void setBeDamaged(List<String> left, List<String> right) {
-        this.beDamaged = new Pair(left, right);
+        _beDamaged = new Pair(left, right);
     }
 
     public void setWalk(List<String> left, List<String> right) {
-        this.walk = new Pair(left, right);
+        _walk = new Pair(left, right);
     }
 
     public void setIdle(List<String> left, List<String> right) {
-        this.idle = new Pair(left, right);
+        _idle = new Pair(left, right);
     }
 
     public void setPunch(List<String> left, List<String> right) {
-        this.punch = new Pair(left, right);
+        _punch = new Pair(left, right);
     }
 
     public void setJump(List<String> left, List<String> right) {
-        this.jump = new Pair(left, right);
+        _jump = new Pair(left, right);
     }
 
     public void setFall(List<String> left, List<String> right) {
-        this.fall = new Pair(left, right);
+        _fall = new Pair(left, right);
     }
 
     public List<String> getBeDamagedSprites(DirectionType d) {
         if (d == DirectionType.LEFT) {
-            return beDamaged.getFirstElement();
+            return _beDamaged.getFirstElement();
         } else if (d == DirectionType.RIGHT) {
-            return beDamaged.getSecondElement();
+            return _beDamaged.getSecondElement();
         } else {
             return null;
         }
@@ -146,9 +155,9 @@ public abstract class BasicCharacter extends WorldObject implements CharacterInt
 
     public List<String> getIdleSprites(DirectionType d) {
         if (d == DirectionType.LEFT) {
-            return idle.getFirstElement();
+            return _idle.getFirstElement();
         } else if (d == DirectionType.RIGHT) {
-            return idle.getSecondElement();
+            return _idle.getSecondElement();
         } else {
             return null;
         }
@@ -156,9 +165,9 @@ public abstract class BasicCharacter extends WorldObject implements CharacterInt
 
     public List<String> getJumpSprites(DirectionType d) {
         if (d == DirectionType.LEFT) {
-            return jump.getFirstElement();
+            return _jump.getFirstElement();
         } else if (d == DirectionType.RIGHT) {
-            return jump.getSecondElement();
+            return _jump.getSecondElement();
         } else {
             return null;
         }
@@ -166,9 +175,9 @@ public abstract class BasicCharacter extends WorldObject implements CharacterInt
 
     public List<String> getFallSprites(DirectionType d) {
         if (d == DirectionType.LEFT) {
-            return fall.getFirstElement();
+            return _fall.getFirstElement();
         } else if (d == DirectionType.RIGHT) {
-            return fall.getSecondElement();
+            return _fall.getSecondElement();
         } else {
             return null;
         }
@@ -176,9 +185,9 @@ public abstract class BasicCharacter extends WorldObject implements CharacterInt
 
     public List<String> getPunchSprites(DirectionType d) {
         if (d == DirectionType.LEFT) {
-            return punch.getFirstElement();
+            return _punch.getFirstElement();
         } else if (d == DirectionType.RIGHT) {
-            return punch.getSecondElement();
+            return _punch.getSecondElement();
         } else {
             return null;
         }
@@ -186,69 +195,71 @@ public abstract class BasicCharacter extends WorldObject implements CharacterInt
 
     public List<String> getWalkSprites(DirectionType d) {
         if (d == DirectionType.LEFT) {
-            return walk.getFirstElement();
+            return _walk.getFirstElement();
         } else if (d == DirectionType.RIGHT) {
-            return walk.getSecondElement();
+            return _walk.getSecondElement();
         } else {
             return null;
         }
     }
+    
+    // Some of the things below really should be implemented with the Command pattern...
+    // E.g. not all emenies can jump! The Jump command should be separated!
+    // To refactor.
 
     public double getMaxJump() {
-        return maxJump;
+        return _maxJump;
     }
 
     public void setMaxJump(double maxJump) {
-        this.maxJump = maxJump;
+        this._maxJump = maxJump;
     }
 
     public double getInitJump() {
-        return initJump;
+        return _initJump;
     }
 
     public void setInitJump(double initJump) {
-        this.initJump = initJump;
+        this._initJump = initJump;
     }
 
     public double getSpeed() {
-        return speed;
+        return _speed;
     }
 
     public void setSpeed(double speed) {
-        this.speed = speed;
+        this._speed = speed;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public CharacterType getCharacterType() {  // Removed the corresponding set method.
+        return _typeOfCharacter;
     }
 
     public int getHealthBar() {
-        return healthBar;
+        return _healthBar;
     }
 
     public void setHealthBar(int healthBar) {
-        this.healthBar = healthBar;
+        this._healthBar = healthBar;
     }
 
-    public int getStrenght() {
-        return strenght;
+    public int getStrength() {
+        return _strength;
     }
 
-    public void setStrenght(int strenght) {
-        this.strenght = strenght;
+    public void setStrength(int strength) {
+        _strength = strength;
     }
 
     public int getMaxHealth() {
-        return maxHealth;
+        return _maxHealth;
     }
 
     public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
+        _maxHealth = maxHealth;
     }
+    
+    
 
     @Override
     public void move(double W, DirectionType d) {
@@ -295,8 +306,8 @@ public abstract class BasicCharacter extends WorldObject implements CharacterInt
 
     @Override
     public void takeDamage(int dam) {
-        if (this.healthBar > dam) {
-            this.healthBar -= dam;
+        if (_healthBar > dam) {
+            _healthBar -= dam;
         } else {
             die();
         }

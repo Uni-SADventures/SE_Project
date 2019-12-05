@@ -6,7 +6,7 @@
 package unisadventures.se_project.model.character;
 
 import java.awt.Graphics;
-import unisadventures.se_project.util.DirectionType;
+import unisadventures.se_project.util.CharacterType;
 
 /**
  *
@@ -14,8 +14,8 @@ import unisadventures.se_project.util.DirectionType;
  */
 public class EnemyCharacter extends BasicCharacter {
     
-    public EnemyCharacter(double x, double y, double h, double w, String name, int healthBar, int strenght, int maxHealth, double maxJump) {
-        super(x,y,h,w,name, healthBar, strenght, maxHealth, maxJump);
+    public EnemyCharacter(double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
+        super(xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
     }
   /*  
     public AnimationTimer animationPattern(double R,double L){
