@@ -9,20 +9,22 @@ import unisadventures.se_project.view.gfx.Assets;
 
 public class PlayerCharacter extends BasicCharacter {
 
-    private Game _game;
+
     private String _username;
 
     public PlayerCharacter(Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump, String username) {
-        super(xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
-        _game = game;
+        super(game,xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
+ 
         _username = username ;
+        
     }
     double fall = 0;
     int i = 0;
 
     @Override
      public void tick() {
-        _game.start();
+        
+         _game.start();
         if(!_game.getKeyManager().up && getJumping().getFirstElement() ){
             if(getJumping().getSecondElement() < 16)
                
@@ -89,11 +91,25 @@ public class PlayerCharacter extends BasicCharacter {
             fall = 0;
         }*/
         if (_game.getKeyManager().left) {
-            _xPosition -= 3;
+            _xPosition -= getSpeed();
+            int oldX = _game.getDisplay().getCanvas().getX() ;
+                int oldY = _game.getDisplay().getCanvas().getY() ;
+            //_game.g.drawImage(Assets.scenario, 0, 0, _game.getWidth(),_game.getHeight(), null);
+         //  _game.getDisplay().getCanvas().setLocation(oldX+  (int)getSpeed(), oldY);
+            
+
         }
         if (_game.getKeyManager().right) {
-            _xPosition += 3;
+            _xPosition += getSpeed();
+            int oldX = _game.getDisplay().getCanvas().getX() ;
+                int oldY = _game.getDisplay().getCanvas().getY() ;
+                
+         //  _game.g.drawImage(Assets.scenario, (int) -getSpeed(),0,_game.getWidth(),_game.getHeight(), null);
+        //  _game.getDisplay().getCanvas().setLocation(oldX-(int)getSpeed(), oldY);
+            
         }
+        
+     _game.getCam().centerOnEntity(this);
     }
      
     

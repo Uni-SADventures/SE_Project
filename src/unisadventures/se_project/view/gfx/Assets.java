@@ -9,7 +9,9 @@ public class Assets {
 	public static BufferedImage player, scenario, dirt, grass, stone, tree;
 
 	public static void init(){
-                player = ImageLoader.loadImage("resources/images/char.png") ;
+                player = ImageLoader.loadImage("resources/images/char.png");
+       
+                
                 scenario = ImageLoader.loadImage("resources/images/scenario.jpg") ; 
 		//SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/char.png"));
             

@@ -3,6 +3,7 @@ package unisadventures.se_project.model.character;
 import java.awt.Graphics;
 import unisadventures.se_project.model.WorldObject;
 import java.util.*;
+import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.Pair;
@@ -36,8 +37,10 @@ public abstract class BasicCharacter extends WorldObject implements MovementsInt
     private Pair<List<String>, List<String>> _idle;
     private Pair<List<String>, List<String>> _punch;
     private Pair<List<String>, List<String>> _beDamaged;
+    
+    protected Game _game ;
 
-    public BasicCharacter(double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
+    public BasicCharacter(  Game game,double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
         super(xPosition, yPosition, height, width);
         _typeOfCharacter = type;
         _healthBar = healthBar;
@@ -47,7 +50,7 @@ public abstract class BasicCharacter extends WorldObject implements MovementsInt
         _initJump = -1;
         _speed = 5;
         _facing = DirectionType.RIGHT ;
-        
+        _game = game;
         _walking = new Pair(false,0) ;
         _jumping = new Pair(false,0) ;
         _falling = new Pair(false,0) ;
@@ -339,6 +342,6 @@ public abstract class BasicCharacter extends WorldObject implements MovementsInt
     }
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player, (int) _xPosition, (int) _yPosition, null);
+        g.drawImage(Assets.player, (int) (_xPosition- _game.getCam().getxOffset()), (int) (_yPosition-_game.getCam().getyOffset()), null);
     }
 }
