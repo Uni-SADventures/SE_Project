@@ -33,6 +33,7 @@ public class GameState extends State {
                  
 	}
         
+        @Override
         public void render(Graphics g,int x, int y) {
                 g.drawImage(Assets.scenario, (int) -game.getCam().getxOffset(), (int) -game.getCam().getyOffset(), null);
 		player.render(g);

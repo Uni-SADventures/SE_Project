@@ -6,6 +6,7 @@
 package unisadventures.se_project.model.character.decorator;
 
 import unisadventures.se_project.model.character.MovementsInterface;
+import unisadventures.se_project.model.character.PlayerCharacter;
 
 
 /**
@@ -18,10 +19,43 @@ public class WpuKnife extends WeaponPowerup {
         super(ch) ;
     }
     
+    //TODO
+    
+    
     @Override
     public void attack() {
         //I can override every method but now i totally need to change only
         //this one because I'm working on a Knife
+    }
+
+    @Override
+    public void moveLeft() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void jump() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void fall() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PlayerCharacter getPowered(PlayerCharacter p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void grab() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -18,6 +18,14 @@ public abstract class WorldObject {
         _width = width;;
     }
 
+    public void setxPosition(double _xPosition) {
+        this._xPosition = _xPosition;
+    }
+
+    public void setyPosition(double _yPosition) {
+        this._yPosition = _yPosition;
+    }
+
     public Pair<Double, Double> getPosition() {
         Pair<Double, Double> positionPair = new Pair<>(_xPosition, _yPosition);
         return positionPair;

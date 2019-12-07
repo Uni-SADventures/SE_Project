@@ -3,13 +3,15 @@ package unisadventures.se_project.model.character;
 import java.awt.Graphics;
 import unisadventures.se_project.model.WorldObject;
 import java.util.*;
+import unisadventures.se_project.model.character.actionCommands.ActionManager;
+import unisadventures.se_project.model.character.actionCommands.MoveCommand;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.Pair;
 import unisadventures.se_project.view.gfx.Assets;
 
-public abstract class BasicCharacter extends WorldObject implements MovementsInterface {
+public abstract class BasicCharacter extends WorldObject  {
     
     // I put underscores in front of all attribute to avoid this.randomAttribute = randomAttribute
 
@@ -22,13 +24,7 @@ public abstract class BasicCharacter extends WorldObject implements MovementsInt
     private double _speed;
     private DirectionType _facing ;
 
-    
-    private Pair<Boolean, Integer> _walking;
-    private Pair<Boolean, Integer> _jumping;
-    private Pair<Boolean, Integer> _falling;
-    private Pair<Boolean, Integer> _idling;
-    private Pair<Boolean, Integer> _punching;
-    private Pair<Boolean, Integer> _beingDamaged;
+
     
     //all the sets of sprites
     private Pair<List<String>, List<String>> _walk;
@@ -38,7 +34,8 @@ public abstract class BasicCharacter extends WorldObject implements MovementsInt
     private Pair<List<String>, List<String>> _punch;
     private Pair<List<String>, List<String>> _beDamaged;
     
-    protected Game _game ;
+    private Game _game ;
+    private ActionManager _actions ;
 
     public BasicCharacter(  Game game,double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
         super(xPosition, yPosition, height, width);
@@ -51,13 +48,7 @@ public abstract class BasicCharacter extends WorldObject implements MovementsInt
         _speed = 5;
         _facing = DirectionType.RIGHT ;
         _game = game;
-        _walking = new Pair(false,0) ;
-        _jumping = new Pair(false,0) ;
-        _falling = new Pair(false,0) ;
-        _idling = new Pair(false,0) ;
-        _punching = new Pair(false,0) ;
-        _beingDamaged = new Pair(false,0) ;
-        
+        _actions = new ActionManager(_game,this) ;
         
     }
     
@@ -75,53 +66,6 @@ public abstract class BasicCharacter extends WorldObject implements MovementsInt
         _facing = facing;
     }
 
-    public Pair<Boolean, Integer> getWalking() {
-        return _walking;
-    }
-
-    public void setWalking(Pair<Boolean, Integer> walking) {
-        _walking = walking;
-    }
-
-    public Pair<Boolean, Integer> getJumping() {
-        return _jumping;
-    }
-
-    public void setJumping(Pair<Boolean, Integer> jumping) {
-        _jumping = jumping;
-    }
-
-    public Pair<Boolean, Integer> getFalling() {
-        return _falling;
-    }
-
-    public void setFalling(Pair<Boolean, Integer> falling) {
-        _falling = falling;
-    }
-
-    public Pair<Boolean, Integer> getIdling() {
-        return _idling;
-    }
-
-    public void setIdling(Pair<Boolean, Integer> idling) {
-        _idling = idling;
-    }
-
-    public Pair<Boolean, Integer> getPunching() {
-        return _punching;
-    }
-
-    public void setPunching(Pair<Boolean, Integer> punching) {
-        _punching = punching;
-    }
-
-    public Pair<Boolean, Integer> getBeingDamaged() {
-        return _beingDamaged;
-    }
-
-    public void setBeingDamaged(Pair<Boolean, Integer> beingDamaged) {
-        _beingDamaged = beingDamaged;
-    }
     public void setBeDamaged(List<String> left, List<String> right) {
         _beDamaged = new Pair(left, right);
     }
@@ -264,50 +208,9 @@ public abstract class BasicCharacter extends WorldObject implements MovementsInt
     
     
 
-    @Override
-    public void move(double W, DirectionType d) {
-    /*    final double charCenterX = this.getBoundsInLocal().getWidth() / 2;
-        final double charCenterY = this.getBoundsInLocal().getHeight() / 2;
+    
 
-        double absolX = charCenterX + this.getLayoutX();
-        double absolY = charCenterY + this.getLayoutY();
-
-        if (d == DirectionType.LEFT) {
-            absolX -= speed;
-        } else if (d == DirectionType.RIGHT) {
-            absolX += speed;
-        }
-
-        if (absolX - charCenterX >= 0
-                && absolX + charCenterX <= W) {
-            this.relocate(absolX - charCenterX, absolY - charCenterY);
-        }*/
-    }
-
-    @Override
-    public boolean jump(double H) {
-/*
-        final double charCenterX = getBoundsInLocal().getWidth() / 2;
-        final double charCenterY = getBoundsInLocal().getHeight() / 2;
-
-        double absolX = charCenterX + getLayoutX();
-        double absolY = charCenterY + getLayoutY() - 10;
-        if (this.initJump == -1) {
-            this.initJump = H - absolY;
-        }
-
-        if (absolY - charCenterY >= 0
-                && absolY + charCenterY <= H
-                && (H - absolY) - initJump < maxJump) {
-
-            relocate(absolX - charCenterX, absolY - charCenterY);
-            return true;
-        }
-*/
-        return false;
-    }
-
-    @Override
+   
     public void takeDamage(int dam) {
         if (_healthBar > dam) {
             _healthBar -= dam;
@@ -321,25 +224,73 @@ public abstract class BasicCharacter extends WorldObject implements MovementsInt
     }
 
     @Override
-    public boolean fall(double H) {
-/*
-        double charCenterX = getBoundsInLocal().getWidth() / 2;
-        double charCenterY = getBoundsInLocal().getHeight() / 2;
-
-        double absolX = charCenterX + getLayoutX();
-        double absolY = charCenterY + getLayoutY() + 10;
-
-        if (absolY + charCenterY <= H - 100) {
-
-            relocate(absolX - charCenterX, absolY - charCenterY);
-            return true;
-        } else {
-            initJump = -1;
-            return false;
+     public void tick() {
+        
+         _game.start();
+      /*  if(!_game.getKeyManager().up && getJumping().getFirstElement() ){
+            if(getJumping().getSecondElement() < 16)
+               
+                setFalling(new Pair(true,16-getJumping().getSecondElement()));
+           
+            setJumping(new Pair(false,0));
+           // setFalling(new Pair(true,16-getJumping().getSecondElement()));
+        //    if(getFalling().getSecondElement() == 16)
+          //      setFalling(new Pair(false,0));
         }
-*/
-    return false ;
+         if (_game.getKeyManager().up && !getJumping().getFirstElement()) {
+            int timeElapsed = getJumping().getSecondElement() ;
+            setJumping(new Pair(true,timeElapsed + 1));
+            _yPosition -= getSpeed() + timeElapsed;
+            System.out.println("time elapsed " + getJumping().getSecondElement() + " postion " + _yPosition);
+       
+           // System.out.println("speed " + getSpeed() - timeElapsed + " postion " + _yPosition);
+        }
+        if (getJumping().getFirstElement() && !getFalling().getFirstElement() ) {
+            int timeElapsed = getJumping().getSecondElement() ;
+            setJumping(new Pair(true,timeElapsed + 1));
+            
+            if (timeElapsed == 15) {
+                _yPosition -= getSpeed();
+                
+               //setJumping(new Pair(false,0));
+                setFalling(new Pair(true,0));
+                return;
+            } else if (timeElapsed < 15)
+                 _yPosition -= getSpeed();
+           // speed -= 1;
+            System.out.println("time elapsed " + getJumping().getSecondElement()+ " postion " + _yPosition);
+        }
+        
+        
+        if (getFalling().getFirstElement()) {
+            int timeElapsed = getFalling().getSecondElement() ;
+            setFalling(new Pair(true,timeElapsed + 1));
+            
+            if (timeElapsed == 15) {
+                _yPosition += getSpeed();
+                
+                
+                setFalling(new Pair(false,16));
+                //setJumping(new Pair(false,0));
+                return;
+            } else if(timeElapsed < 15)
+                _yPosition += getSpeed();
+            
+           // speed -= 1;
+            System.out.println("time elapsed " + getFalling().getSecondElement()+ " postion " + _yPosition);
+        }
+    */
+       _actions.execute();
+    /*   
+        MoveCommand move = new MoveCommand(_game, this) ;
+        if (_game.getKeyManager().left)
+            move.moveLeft();
+        if (_game.getKeyManager().right)
+            move.moveRight();
+     */
     }
+     
+   
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.player, (int) (_xPosition- _game.getCam().getxOffset()), (int) (_yPosition-_game.getCam().getyOffset()), null);
