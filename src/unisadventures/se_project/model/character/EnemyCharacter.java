@@ -10,7 +10,8 @@ import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.CharacterType;
 
 /**
- *
+ *Extension of BasicCharacter class to represent a character which is the enemy to overcome
+ * the player
  * @author Francesco
  */
 public class EnemyCharacter extends BasicCharacter {

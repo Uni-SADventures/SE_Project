@@ -8,6 +8,12 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import unisadventures.se_project.presenter.states.State;
 
+
+/**
+ * This class is used to create canvas and frame to visualize all elements in a window.
+ * It is intended to be used to firstly createc the window and then to manage it
+ * @author Panzuti
+ */
 public class Display {
 
 	private JFrame frame;
@@ -23,7 +29,9 @@ public class Display {
 		
 		createDisplay();
 	}
-	
+	/**
+         * After being initialized first window creation is triggered
+         */
 	private void createDisplay(){
 		frame = new JFrame(title);
 		frame.setSize(width, height);
@@ -49,7 +57,9 @@ public class Display {
 	public JFrame getFrame(){
 		return frame;
 	}
-        
+        /**
+         * This method renders on screen what it's needed to render
+         */
         public void render(){
 		bs = getCanvas().getBufferStrategy();
 		if(bs == null){

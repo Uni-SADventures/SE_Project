@@ -10,7 +10,8 @@ import java.util.*;
 
 
 /**
- *
+ *This class implements a clock that ticks 60 times per second at regular intervals
+ * It is an observed object so it does keep track of the observers to update
  * @author Emilio
  */
 public class FrameClock extends Thread{
@@ -24,7 +25,10 @@ public class FrameClock extends Thread{
     
     
     
-    
+    /***
+     * This method is the actual clock, it counts and every ticks it does every observer
+     * is advised
+     */
     @Override
     public void run() {
        
@@ -47,27 +51,32 @@ public class FrameClock extends Thread{
                 notifyObservers() ;
                 ticks++;
                 delta--;
-                //System.out.println("Frames: " + ticks);
+    
             }
-/*
-            if (timer >= 1000000000) {
-                //System.out.println("Ticks and Frames: " + ticks);
-                ticks = 0;
-                timer = 0;
-            }
-*/
+
         }
 
     }
     
+    /**
+     * This method adds a new observer to this object
+     * @param o 
+     */
     public void registerObserver(FrameListener o) { 
         observerList.add(o); 
     } 
-  
+    /**
+     * This method removeds an observer to this object
+     * @param o 
+     */
     public void unregisterObserver(FrameListener o) { 
         observerList.remove(observerList.indexOf(o)); 
     } 
-  
+    
+    /**
+     * This method calls update method of every framelistener.
+     * Useful to be called every time the clock ticks
+     */
     public void notifyObservers() 
     { 
         for (Iterator<FrameListener> it = 

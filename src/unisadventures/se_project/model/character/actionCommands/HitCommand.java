@@ -9,7 +9,8 @@ import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 
 /**
- *
+ *This action command implements everything it is necessary for a hit
+ * action
  * @author Emilio
  */
 public class HitCommand extends ActionCommand {
@@ -18,6 +19,11 @@ public class HitCommand extends ActionCommand {
         super(game, ch);
     }
     
+    /**
+     * It does actually start or continue hit action and in a certain fixed frame
+     * called "pivot" it actually checks if there'is some enemy or destructable object to 
+     * be damaged
+     */
     public void hit(){
         //enemy = _game.getCollision(_ch.getPosition()) ;
         

@@ -1,7 +1,9 @@
 package unisadventures.se_project.view.gfx;
 
 import java.awt.image.BufferedImage;
-
+/*
+Unused class, we need to evaluate if we can delete it
+*/
 public class SpriteSheet {
 
 	private BufferedImage sheet;

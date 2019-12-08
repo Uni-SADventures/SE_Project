@@ -6,8 +6,15 @@ import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.character.PlayerCharacter;
 
 import unisadventures.se_project.util.CharacterType;
-import unisadventures.se_project.view.gfx.Assets;
-import unisadventures.se_project.view.gfx.StateGraphics;
+
+
+
+/**
+ * This class extends state and implements gamestate, the actual state were the game is
+ * playable ad frametime can go on.
+ * It has every instance to be updated each frame as parameter
+ * @author Emilio
+ */
 
 public class GameState extends State {
 
@@ -25,6 +32,8 @@ public class GameState extends State {
                 
 	}
 	
+        
+       
 	@Override
 	public void tick() {
 		player.tick();
@@ -35,7 +44,7 @@ public class GameState extends State {
 	}
 
 	
-        
+       
         @Override
         public void displayView(Graphics g) {
                 view.render(g, player.getPosition().getFirstElement(), player.getPosition().getSecondElement());

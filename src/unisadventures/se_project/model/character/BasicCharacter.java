@@ -1,32 +1,36 @@
 package unisadventures.se_project.model.character;
 
-import java.awt.Graphics;
 import unisadventures.se_project.model.WorldObject;
 import java.util.*;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
-import unisadventures.se_project.model.character.actionCommands.MoveCommand;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.Pair;
-import unisadventures.se_project.view.gfx.Assets;
 
+
+/**
+ * This class represents the basilar character class needed for both
+ * enemy and player
+ * It keeps a final CharacterType, to tell which type it is,
+ * actual and max character health , its strenght and max jump height as maxjump,
+ * its speed and even witch direction (left or right) is actually facing
+ * In the end there are a lot of pairs of image paths in strings pair for
+ * every sprite needed for every animation in both left and right directions
+ * @author Emilio
+ */
 public abstract class BasicCharacter extends WorldObject  {
-    
-    // I put underscores in front of all attribute to avoid this.randomAttribute = randomAttribute
-
-    private CharacterType _typeOfCharacter; // changed from name to typeOfCharacter
+ 
+    private final CharacterType _typeOfCharacter; 
     private int _healthBar;
-    private int _strength;  // For future reference, "strength" is spelled with "th", not "ht"
+    private int _strength; 
     private int _maxHealth;
     private double _maxJump;
-    private double _initJump;
     private double _speed;
     private DirectionType _facing ;
 
-
     
-    //all the sets of sprites
+    //all the sets of sprites for actions, with left and right versions
     private Pair<List<String>, List<String>> _walk;
     private Pair<List<String>, List<String>> _jump;
     private Pair<List<String>, List<String>> _fall;
@@ -34,8 +38,8 @@ public abstract class BasicCharacter extends WorldObject  {
     private Pair<List<String>, List<String>> _punch;
     private Pair<List<String>, List<String>> _beDamaged;
     
-    private Game _game ;
-    private ActionManager _actions ;
+    private final Game _game ;
+    private final ActionManager _actions ;
 
     public BasicCharacter(  Game game,double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
         super(xPosition, yPosition, height, width);
@@ -44,7 +48,6 @@ public abstract class BasicCharacter extends WorldObject  {
         _strength = strength;
         _maxHealth = maxHealth;
         _maxJump = maxJump;
-        _initJump = -1;
         _speed = 5;
         _facing = DirectionType.RIGHT ;
         _game = game;
@@ -57,6 +60,9 @@ public abstract class BasicCharacter extends WorldObject  {
     // https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f
     
     // All below is a classic example of the State pattern. To refactor.
+    
+    //Emilio: I don't know what do you mean, for now all actions movements and states and other similiar fanfares have been moved to different
+    //classes. If needed we can refractor of course
 
     public DirectionType getFacing() {
         return _facing;
@@ -91,68 +97,82 @@ public abstract class BasicCharacter extends WorldObject  {
     }
 
     public List<String> getBeDamagedSprites(DirectionType d) {
-        if (d == DirectionType.LEFT) {
-            return _beDamaged.getFirstElement();
-        } else if (d == DirectionType.RIGHT) {
-            return _beDamaged.getSecondElement();
-        } else {
+        if (null == d) {
             return null;
+        } else switch (d) {
+            case LEFT:
+                return _beDamaged.getFirstElement();
+            case RIGHT:
+                return _beDamaged.getSecondElement();
+            default:
+                return null;
         }
     }
 
     public List<String> getIdleSprites(DirectionType d) {
-        if (d == DirectionType.LEFT) {
-            return _idle.getFirstElement();
-        } else if (d == DirectionType.RIGHT) {
-            return _idle.getSecondElement();
-        } else {
+        if (null == d) {
             return null;
+        } else switch (d) {
+            case LEFT:
+                return _idle.getFirstElement();
+            case RIGHT:
+                return _idle.getSecondElement();
+            default:
+                return null;
         }
     }
 
     public List<String> getJumpSprites(DirectionType d) {
-        if (d == DirectionType.LEFT) {
-            return _jump.getFirstElement();
-        } else if (d == DirectionType.RIGHT) {
-            return _jump.getSecondElement();
-        } else {
+        if (null == d) {
             return null;
+        } else switch (d) {
+            case LEFT:
+                return _jump.getFirstElement();
+            case RIGHT:
+                return _jump.getSecondElement();
+            default:
+                return null;
         }
     }
 
     public List<String> getFallSprites(DirectionType d) {
-        if (d == DirectionType.LEFT) {
-            return _fall.getFirstElement();
-        } else if (d == DirectionType.RIGHT) {
-            return _fall.getSecondElement();
-        } else {
+        if (null == d) {
             return null;
+        } else switch (d) {
+            case LEFT:
+                return _fall.getFirstElement();
+            case RIGHT:
+                return _fall.getSecondElement();
+            default:
+                return null;
         }
     }
 
     public List<String> getPunchSprites(DirectionType d) {
-        if (d == DirectionType.LEFT) {
-            return _punch.getFirstElement();
-        } else if (d == DirectionType.RIGHT) {
-            return _punch.getSecondElement();
-        } else {
+        if (null == d) {
             return null;
+        } else switch (d) {
+            case LEFT:
+                return _punch.getFirstElement();
+            case RIGHT:
+                return _punch.getSecondElement();
+            default:
+                return null;
         }
     }
 
     public List<String> getWalkSprites(DirectionType d) {
-        if (d == DirectionType.LEFT) {
-            return _walk.getFirstElement();
-        } else if (d == DirectionType.RIGHT) {
-            return _walk.getSecondElement();
-        } else {
+        if (null == d) {
             return null;
+        } else switch (d) {
+            case LEFT:
+                return _walk.getFirstElement();
+            case RIGHT:
+                return _walk.getSecondElement();
+            default:
+                return null;
         }
     }
-    
-    // Some of the things below really should be implemented with the Command pattern...
-    // E.g. not all emenies can jump! The Jump command should be separated!
-    // To refactor.
 
     public double getMaxJump() {
         return _maxJump;
@@ -162,13 +182,7 @@ public abstract class BasicCharacter extends WorldObject  {
         this._maxJump = maxJump;
     }
 
-    public double getInitJump() {
-        return _initJump;
-    }
 
-    public void setInitJump(double initJump) {
-        this._initJump = initJump;
-    }
 
     public double getSpeed() {
         return _speed;
@@ -178,7 +192,7 @@ public abstract class BasicCharacter extends WorldObject  {
         this._speed = speed;
     }
 
-    public CharacterType getCharacterType() {  // Removed the corresponding set method.
+    public CharacterType getCharacterType() {  
         return _typeOfCharacter;
     }
 
@@ -206,11 +220,12 @@ public abstract class BasicCharacter extends WorldObject  {
         _maxHealth = maxHealth;
     }
     
-    
-
-    
-
-   
+   /**
+    * 
+    * @param dam represent the amount of damage to be taken away from current health
+    * in healthbar. If the damage being dealed is equal or higher than current health
+    * a method called die() is called
+    */
     public void takeDamage(int dam) {
         if (_healthBar > dam) {
             _healthBar -= dam;
@@ -219,75 +234,24 @@ public abstract class BasicCharacter extends WorldObject  {
         }
     }
 
+    /**
+     * It substracts one life from the character and, if the character is a player and
+     * ther is no any other life present, it brings to game over
+     */
     public void die() {
         //when health goes to 0 we have to manage how to put away a life when we have a menu
     }
 
+    
+    /**
+     * Method called every time it is the moment to update all actions. 
+     */
     @Override
      public void tick() {
         
-         _game.start();
-      /*  if(!_game.getKeyManager().up && getJumping().getFirstElement() ){
-            if(getJumping().getSecondElement() < 16)
-               
-                setFalling(new Pair(true,16-getJumping().getSecondElement()));
-           
-            setJumping(new Pair(false,0));
-           // setFalling(new Pair(true,16-getJumping().getSecondElement()));
-        //    if(getFalling().getSecondElement() == 16)
-          //      setFalling(new Pair(false,0));
-        }
-         if (_game.getKeyManager().up && !getJumping().getFirstElement()) {
-            int timeElapsed = getJumping().getSecondElement() ;
-            setJumping(new Pair(true,timeElapsed + 1));
-            _yPosition -= getSpeed() + timeElapsed;
-            System.out.println("time elapsed " + getJumping().getSecondElement() + " postion " + _yPosition);
-       
-           // System.out.println("speed " + getSpeed() - timeElapsed + " postion " + _yPosition);
-        }
-        if (getJumping().getFirstElement() && !getFalling().getFirstElement() ) {
-            int timeElapsed = getJumping().getSecondElement() ;
-            setJumping(new Pair(true,timeElapsed + 1));
-            
-            if (timeElapsed == 15) {
-                _yPosition -= getSpeed();
-                
-               //setJumping(new Pair(false,0));
-                setFalling(new Pair(true,0));
-                return;
-            } else if (timeElapsed < 15)
-                 _yPosition -= getSpeed();
-           // speed -= 1;
-            System.out.println("time elapsed " + getJumping().getSecondElement()+ " postion " + _yPosition);
-        }
-        
-        
-        if (getFalling().getFirstElement()) {
-            int timeElapsed = getFalling().getSecondElement() ;
-            setFalling(new Pair(true,timeElapsed + 1));
-            
-            if (timeElapsed == 15) {
-                _yPosition += getSpeed();
-                
-                
-                setFalling(new Pair(false,16));
-                //setJumping(new Pair(false,0));
-                return;
-            } else if(timeElapsed < 15)
-                _yPosition += getSpeed();
-            
-           // speed -= 1;
-            System.out.println("time elapsed " + getFalling().getSecondElement()+ " postion " + _yPosition);
-        }
-    */
+       //  _game.start();
        _actions.execute();
-    /*   
-        MoveCommand move = new MoveCommand(_game, this) ;
-        if (_game.getKeyManager().left)
-            move.moveLeft();
-        if (_game.getKeyManager().right)
-            move.moveRight();
-     */
+  
     }
      
   

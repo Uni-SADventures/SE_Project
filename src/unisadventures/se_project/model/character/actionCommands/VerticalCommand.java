@@ -10,7 +10,9 @@ import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 
 /**
- *
+ *This class does implement all vertical movements, may they be jumping or falling.
+ * Those two are put togheter thanks to their strong dependency
+ * Init jump has to be used to keep track of initial jump height
  * @author Emilio
  */
 public class VerticalCommand extends ActionCommand {
@@ -20,6 +22,11 @@ public class VerticalCommand extends ActionCommand {
         _initJump = -1;
     }
     
+    /**
+     * It makes a character move a step higher
+     * @return true if that character may be able to go even higher
+     * false if jump's reached maximal jumo height
+     */
     public boolean jump() {
         if(_initJump == -1){
             this.resetCounter();
@@ -44,7 +51,10 @@ public class VerticalCommand extends ActionCommand {
         
         
     }
-    
+    /**
+     * It starts or reiterates a fall action by one step below, it doesn't let a
+     * character going down another time if there's a platform below
+     */
     public void fall(){
         boolean fall = true ;
         double newPos = _ch.getPosition().getSecondElement() + _ch.getSpeed() ;

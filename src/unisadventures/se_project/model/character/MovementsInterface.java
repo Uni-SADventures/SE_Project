@@ -10,11 +10,12 @@ import unisadventures.se_project.util.DirectionType;
 
 
 /**
- *
+ *This interface represent all basic movement methods to implement for every type of character
  * @author Francesco
  */
 public interface MovementsInterface {
     void moveLeft();
+    void moveRight();
     void jump();
     void fall() ;
     void attack();

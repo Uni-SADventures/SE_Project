@@ -11,7 +11,9 @@ import unisadventures.se_project.model.character.MovementsInterface;
 
 
 /**
- *
+ *USED PATTERN: DECORATOR
+ * It decorates a character with a new powerup or weapon.
+ * It keeeps track its relative playercharacter
  * @author Emilio
  */
 public abstract class WeaponPowerup implements MovementsInterface {
