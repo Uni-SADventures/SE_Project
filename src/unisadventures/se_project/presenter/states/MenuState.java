@@ -15,14 +15,11 @@ public class MenuState extends State {
 		
 	}
 
-	@Override
-	public void render(Graphics g) {
-		
-	}
-
     @Override
-    public void render(Graphics g, int x, int y) {
+    public void displayView(Graphics g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+	
 	
 }

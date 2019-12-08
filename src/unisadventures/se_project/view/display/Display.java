@@ -2,17 +2,20 @@ package unisadventures.se_project.view.display;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
+import unisadventures.se_project.presenter.states.State;
 
 public class Display {
 
 	private JFrame frame;
 	private Canvas canvas;
-	
+	private BufferStrategy bs;
 	private String title;
 	private int width, height;
-	
+	private Graphics g;
 	public Display(String title, int width, int height){
 		this.title = title;
 		this.width = width;
@@ -46,5 +49,27 @@ public class Display {
 	public JFrame getFrame(){
 		return frame;
 	}
+        
+        public void render(){
+		bs = getCanvas().getBufferStrategy();
+		if(bs == null){
+			getCanvas().createBufferStrategy(3);
+			return;
+		}
+		g = bs.getDrawGraphics();
+               
+		//Clear Screen
+		g.clearRect(0, 0, width, height);
+                
+		//Draw Here!
+		
+		if(State.getState() != null)
+			State.getState().displayView(g);
+		
+		//End Drawing!
+		bs.show();
+		g.dispose();
+	}
+	
 	
 }

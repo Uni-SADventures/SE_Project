@@ -23,8 +23,8 @@ public class Game extends FrameListener {
 	private boolean running = false;
 	private FrameClock thread;
 	
-	private BufferStrategy bs;
-	private Graphics g;
+	
+	
 	
 	//States
 	private State gameState;
@@ -64,26 +64,7 @@ public class Game extends FrameListener {
 			State.getState().tick();
 	}
 	
-	private void render(){
-		bs = display.getCanvas().getBufferStrategy();
-		if(bs == null){
-			display.getCanvas().createBufferStrategy(3);
-			return;
-		}
-		g = bs.getDrawGraphics();
-               
-		//Clear Screen
-		g.clearRect(0, 0, width, height);
-                
-		//Draw Here!
-		
-		if(State.getState() != null)
-			State.getState().render(g,5,5);
-		
-		//End Drawing!
-		bs.show();
-		g.dispose();
-	}
+	
 	
 	public KeyManager getKeyManager(){
 		return keyManager;
@@ -123,7 +104,7 @@ public class Game extends FrameListener {
     @Override
     public String doSmthGiveSprite() {
             tick() ;
-            render() ;
+            display.render() ;
             return null ;
     }
     

@@ -290,9 +290,5 @@ public abstract class BasicCharacter extends WorldObject  {
      */
     }
      
-   
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.player, (int) (_xPosition- _game.getCam().getxOffset()), (int) (_yPosition-_game.getCam().getyOffset()), null);
-    }
+  
 }
