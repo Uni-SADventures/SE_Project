@@ -1,34 +1,30 @@
 package unisadventures.se_project.model.basicObjects;
 
 import unisadventures.se_project.model.WorldObject;
-import java.awt.Graphics;
-
+import unisadventures.se_project.model.LevelManager;
 
 
 public class Platform extends WorldObject implements FixedImageObjectInterface {
     
-    private final String _imageFileName;
+    private final String _imageFile;
     
-    public Platform(double xPosition, double yPosition, double height, double width, String imageFileName) {
-        super(xPosition, yPosition, height, width);
-        _imageFileName = imageFileName;
-    }
-    
-    @Override
-    public String getImageFileName(){
-        return _imageFileName;
+    public Platform(LevelManager manager, double xPosition, double yPosition, double height, double width, String imageFile) {
+        super(manager, xPosition, yPosition, height, width);
+        _imageFile = imageFile;
     }
 
     @Override
     public void tick() {
     }
 
-<<<<<<< HEAD
     @Override
-    public void render(Graphics g) {
-        
+    public void takeDamage(int damage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-=======
-   
->>>>>>> master
+
+    @Override
+    public String getCurrentFrame() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

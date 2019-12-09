@@ -5,7 +5,6 @@
  */
 package unisadventures.se_project.model.character;
 
-import java.awt.Graphics;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.CharacterType;
 

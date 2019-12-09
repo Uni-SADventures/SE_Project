@@ -2,7 +2,6 @@ package unisadventures.se_project.model.basicObjects;
 
 
 import unisadventures.se_project.model.WorldObject;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import unisadventures.se_project.util.CollectibleType;
 

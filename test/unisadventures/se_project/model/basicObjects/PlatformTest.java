@@ -1,5 +1,6 @@
 package unisadventures.se_project.model.basicObjects;
 
+import java.awt.Graphics;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,6 +54,31 @@ public class PlatformTest {
         String expResult = "test";
         String result = _instance.getImageFileName();
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of tick method, of class Platform.
+     */
+    @Test
+    public void testTick() {
+        System.out.println("tick");
+        Platform instance = null;
+        instance.tick();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of render method, of class Platform.
+     */
+    @Test
+    public void testRender() {
+        System.out.println("render");
+        Graphics g = null;
+        Platform instance = null;
+        instance.render(g);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
 }

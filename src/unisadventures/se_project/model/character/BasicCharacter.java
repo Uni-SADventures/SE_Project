@@ -55,14 +55,23 @@ public abstract class BasicCharacter extends WorldObject  {
         
     }
     
-    // READ THIS COMMENT!!!
-    // The following implementation completely ruins the single responsibility principle.
-    // https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f
+    /**
+     * Set the X coordinate of the character (left of the hitbox)
+     * @param xPosition the left coordinate of the hitbox
+     */
+    public void setxPosition(double xPosition) {
+        _xPosition = xPosition;
+    }
+
+    /**
+     * Set the Y coordinate of the character (top of the hitbox)
+     * @param yPosition the top coordinate of the hitbox
+     */
+    public void setyPosition(double yPosition) {
+        _yPosition = yPosition;
+    }
     
-    // All below is a classic example of the State pattern. To refactor.
-    
-    //Emilio: I don't know what do you mean, for now all actions movements and states and other similiar fanfares have been moved to different
-    //classes. If needed we can refractor of course
+
 
     public DirectionType getFacing() {
         return _facing;
@@ -222,13 +231,13 @@ public abstract class BasicCharacter extends WorldObject  {
     
    /**
     * 
-    * @param dam represent the amount of damage to be taken away from current health
+    * @param damage represent the amount of damage to be taken away from current health
     * in healthbar. If the damage being dealed is equal or higher than current health
     * a method called die() is called
     */
-    public void takeDamage(int dam) {
-        if (_healthBar > dam) {
-            _healthBar -= dam;
+    public void takeDamage(int damage) {
+        if (_healthBar > damage) {
+            _healthBar -= damage;
         } else {
             die();
         }
