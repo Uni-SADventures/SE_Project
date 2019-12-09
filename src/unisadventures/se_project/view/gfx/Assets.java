@@ -9,13 +9,18 @@ public class Assets {
 	
 	private static final int width = 32, height = 32;
 	
-	public static BufferedImage player, scenario;
+	public static BufferedImage player, scenario,rock,dirt,grass;
 
 	public static void init(){
                 player = ImageLoader.loadImage("resources/images/char.png");
        
                 
                 scenario = ImageLoader.loadImage("resources/images/scenario.jpg") ; 
+                SpriteSheet sheet1 = new SpriteSheet(ImageLoader.loadImage("resources/images/grass.png"));
+                SpriteSheet sheet2 = new SpriteSheet(ImageLoader.loadImage("resources/images/whiteTile.jpg"));
+                rock = sheet1.crop(0, 0, 60, 60);
+                grass = sheet2.crop(0,0,60,60);
+                dirt = sheet1.crop(0,60, 60, 60);
 		//SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/char.png"));
             
 		//SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/sheet.png"));
