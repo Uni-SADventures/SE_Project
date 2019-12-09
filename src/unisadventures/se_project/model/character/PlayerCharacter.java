@@ -1,5 +1,6 @@
 package unisadventures.se_project.model.character;
 
+import unisadventures.se_project.model.LevelManager;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.CharacterType;
 
@@ -15,8 +16,8 @@ public class PlayerCharacter extends BasicCharacter {
     private int _cfu ;
     private int _lives ;
 
-    public PlayerCharacter(Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump, String username) {
-        super(game,xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
+    public PlayerCharacter(LevelManager manager, Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump, String username) {
+        super(manager, game, xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
  
         _username = username ;
         _cfu = 0 ;

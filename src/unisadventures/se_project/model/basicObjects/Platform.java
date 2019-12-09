@@ -4,7 +4,7 @@ import unisadventures.se_project.model.WorldObject;
 import unisadventures.se_project.model.LevelManager;
 
 
-public class Platform extends WorldObject implements FixedImageObjectInterface {
+public class Platform extends WorldObject {
     
     private final String _imageFile;
     

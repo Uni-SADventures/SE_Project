@@ -5,6 +5,7 @@
  */
 package unisadventures.se_project.model.character;
 
+import unisadventures.se_project.model.LevelManager;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.CharacterType;
 
@@ -15,8 +16,8 @@ import unisadventures.se_project.util.CharacterType;
  */
 public class EnemyCharacter extends BasicCharacter {
     
-    public EnemyCharacter(Game game,double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
-        super(game,xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
+    public EnemyCharacter(LevelManager manager, Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
+        super(manager, game, xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
     }
  
 

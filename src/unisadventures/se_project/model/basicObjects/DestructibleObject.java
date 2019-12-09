@@ -5,7 +5,7 @@ import unisadventures.se_project.model.WorldObject;
 import unisadventures.se_project.model.LevelManager;
 import java.util.ArrayList;
 
-public class DestructibleObject extends WorldObject implements DestructibleObjectInterface {
+public class DestructibleObject extends WorldObject {
     
     private final ArrayList<String> _imageFileNameList;
     private final int _listSizeMinusOne;
@@ -19,7 +19,7 @@ public class DestructibleObject extends WorldObject implements DestructibleObjec
         _nextImageIndex = 0;
     }
     
-    @Override
+    // Temporary function, to update
     public String getIntactImageFileName() {
         return _imageFileNameList.get(INTACT_OBJECT_IMAGE_FILE_NAME_INDEX);
     }
