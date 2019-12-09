@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Data storage class
  */
 public class LevelStateMessenger {
+    
    public Pair<Double, Double> levelDimensions;
    public String backgroundImageFile;
    public ArrayList<ObjectData> objectsData;

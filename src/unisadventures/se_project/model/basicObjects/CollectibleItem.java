@@ -47,7 +47,7 @@ public class CollectibleItem extends WorldObject{
     }
 
     @Override
-    public String getCurrentFrame() {
+    public String getCurrentSprite() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

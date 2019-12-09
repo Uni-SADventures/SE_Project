@@ -57,7 +57,8 @@ public abstract class WorldObject {
      */
     public abstract void takeDamage(int damage);
     
-    public abstract String getCurrentFrame();
+    
+    public abstract String getCurrentSprite();
 
     
 
