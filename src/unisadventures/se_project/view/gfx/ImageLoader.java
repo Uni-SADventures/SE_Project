@@ -6,8 +6,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class ImageLoader {
 
+/**
+ * This class is mainly used as static class to buffer images from a path string
+ * @author Panzuti
+ */
+public class ImageLoader {
+        /**
+         *
+         * @param path is the string where the file should be
+         * @return the initialized image
+         */
 	public static BufferedImage loadImage(String path){
 		try {
 			return ImageIO.read(new FileInputStream(path));

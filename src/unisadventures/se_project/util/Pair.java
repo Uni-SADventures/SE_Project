@@ -3,6 +3,14 @@ package unisadventures.se_project.util;
 // Code taken from https://stackoverflow.com/questions/457629/how-to-return-multiple-objects-from-a-java-method
 // and adapted
 
+
+
+/**
+ * 
+ * @author Mathieu
+ * @param <A> is the first type of element to be stored
+ * @param <B> is the second type of element to be stored
+ */
 public class Pair<A,B> {
 
     public static <P, Q> Pair<P, Q> makePair(P p, Q q) {

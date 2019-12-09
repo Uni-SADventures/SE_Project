@@ -1,9 +1,16 @@
 
 package unisadventures.se_project.model;
 
-import java.awt.Graphics;
 import unisadventures.se_project.util.Pair;
 
+
+
+/**
+ * This class represents every element present in a world level, may it be
+ * a character ora a static/dynamic object
+ * It keeps track of its position and its dimension
+ * @author Emilio
+ */
 public abstract class WorldObject {
 
     protected double _xPosition;  // Because position may vary in some objects
@@ -26,11 +33,19 @@ public abstract class WorldObject {
         this._yPosition = _yPosition;
     }
 
+    /**
+     * 
+     * @return position x and y as a pair
+     */
     public Pair<Double, Double> getPosition() {
         Pair<Double, Double> positionPair = new Pair<>(_xPosition, _yPosition);
         return positionPair;
     }
 
+    /**
+     * 
+     * @return width and heigth as a pair
+     */
     public Pair<Double, Double> getDimension() {
         Pair<Double, Double> dimensionPair = new Pair<>(_width, _height);
         return dimensionPair;
@@ -40,9 +55,12 @@ public abstract class WorldObject {
     // Will a platform really need a tick method?
     // If not, put them in an interface!
     
+    //EMILIO: I dunno, lets see if we may use it with moving platforms or interactive
+    //objects, if useless we can delete it and put it when necessary
+    
     public abstract void tick();
 
-    public abstract void render(Graphics g);
+    
 
 }
 

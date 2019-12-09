@@ -10,7 +10,8 @@ import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.CharacterType;
 
 /**
- *
+ *Extension of BasicCharacter class to represent a character which is the enemy to overcome
+ * the player
  * @author Francesco
  */
 public class EnemyCharacter extends BasicCharacter {
@@ -22,11 +23,6 @@ public class EnemyCharacter extends BasicCharacter {
 
     @Override
     public void tick() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void render(Graphics g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

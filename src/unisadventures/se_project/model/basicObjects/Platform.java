@@ -23,8 +23,12 @@ public class Platform extends WorldObject implements FixedImageObjectInterface {
     public void tick() {
     }
 
+<<<<<<< HEAD
     @Override
     public void render(Graphics g) {
         
     }
+=======
+   
+>>>>>>> master
 }

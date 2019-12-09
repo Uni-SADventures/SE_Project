@@ -11,7 +11,8 @@ import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.DirectionType;
 
 /**
- *
+ *This class implements an action command wich moves left and right the character keeping
+ * track of the game camera
  * @author Emilio
  */
 public class MoveCommand extends ActionCommand {
@@ -19,10 +20,16 @@ public class MoveCommand extends ActionCommand {
     public MoveCommand(Game game,BasicCharacter ch) {
         super(game,ch);
     }
-
+    /**
+     * It moves the chatracter a bit on the left
+     */
+     
     public void moveLeft() {
        move(DirectionType.LEFT) ;           
     }
+    /**
+     * It moves the chatracter a bit on the right
+     */
     public void moveRight(){
         move(DirectionType.RIGHT) ; 
     }

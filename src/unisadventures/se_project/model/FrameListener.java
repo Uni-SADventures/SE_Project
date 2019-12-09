@@ -5,24 +5,26 @@
  */
 package unisadventures.se_project.model;
 
+
 /**
- *
+ * USED PATTERN: observer
+ * This class represents a frame observer which has an update method that is called
+ * by frameclock every time passes a new frame
+ * All observers need to be registered in a relative frameclock instance
  * @author Emilio
  */
 public abstract class FrameListener {
-    private long frames ;
-
+    //frame counter
+    private long _frames ;
+    
     public FrameListener() {
-        frames = 0 ;
+        _frames = 0 ;
     }
     
-    public String update() {
-        
-        frames++ ;
-        return doSmthGiveSprite() ;
-        
-    }
-    
-    public abstract String doSmthGiveSprite() ;
+    /**
+     * this method calls all the actions needed to update graphics and object/character
+     * positions each frame
+     */
+    public abstract void update() ;
     
 }

@@ -12,7 +12,10 @@ import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.DirectionType;
 
 /**
- *
+ * This class manages all available actions and their relative dependancies.
+ * It has every possible actions for a character.
+ * It keeps track of which action is being executed with all booleans such as walking
+ * or jumping
  * @author Emilio
  */
 public class ActionManager implements MovementsInterface {
@@ -41,6 +44,11 @@ public class ActionManager implements MovementsInterface {
         _combat = new HitCommand(_game,_ch) ;
     }
     
+    
+    /**
+     * This method interprets user inputs if the character is user's one and if not
+     * it checks what should a character do, for example if there is a floor under their feet
+     */
     public void execute(){
         if(_ch instanceof PlayerCharacter){
             if(_game.getKeyManager().left)
@@ -75,10 +83,18 @@ public class ActionManager implements MovementsInterface {
         //MANAGING MOVEMENTS 
     }
     
+    /**
+     * This method execute basic idle action, useful when user is not giving input and if
+     * its character is in a stable position
+     */
     public void idle() {
         //TODO
     }
     
+    /**
+     * This method moves a character one step on the left according to his speed
+     */
+    @Override
     public void moveLeft(){
         if(!_walking){
             _movement.resetCounter();
@@ -86,6 +102,10 @@ public class ActionManager implements MovementsInterface {
         }
         _movement.moveLeft();
     }
+    /**
+     * This method moves a character one step on the right according to his speed
+     */
+    @Override
     public void moveRight(){
         if(!_walking){
             _movement.resetCounter();
@@ -93,6 +113,11 @@ public class ActionManager implements MovementsInterface {
         }
         _movement.moveRight();
     }
+    
+    /**
+     * This method let a character jump one step up according to his speed
+     */
+    @Override
     public void jump(){
         if(!_jumping){
             _jumpFall.resetCounter();
@@ -103,7 +128,9 @@ public class ActionManager implements MovementsInterface {
  
     }
     
-    
+    /**
+     * This method let the character begin or continue his attack move.
+     */
     @Override
     public void attack(){
         if(!_hitting){
@@ -114,6 +141,10 @@ public class ActionManager implements MovementsInterface {
         _combat.hit();
     }
     
+    
+    /**
+     * This method let a character fall one step down according to his speed
+     */
     @Override
     public void fall(){
         if(!_falling){
@@ -123,17 +154,31 @@ public class ActionManager implements MovementsInterface {
         _jumpFall.fall();
     }
 
-  
+  /**
+   * 
+   * @param damage is the sum to remove from character's actual health
+   */
     @Override
     public void takeDamage(int damage) {
         _ch.takeDamage(damage);
     }
 
+    
+    /**
+     * This method checks if a character has run into some collectible
+     */
     @Override
     public void grab() {
       //TODO once we have some collectibles
     }
 
+    
+    /**
+     * 
+     * @param p is the actual character wich is going to change some of his parameters
+     * and actions because of some powerup
+     * @return decorated player character
+     */
     @Override
     public PlayerCharacter getPowered(PlayerCharacter p) {
         //TODO once we have some powerups or weapons
