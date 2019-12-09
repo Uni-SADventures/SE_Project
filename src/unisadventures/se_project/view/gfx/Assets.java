@@ -9,7 +9,7 @@ public class Assets {
 	
 	private static final int width = 32, height = 32;
 	
-	public static BufferedImage player, scenario, dirt, grass, stone, tree;
+	public static BufferedImage player, scenario;
 
 	public static void init(){
                 player = ImageLoader.loadImage("resources/images/char.png");

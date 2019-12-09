@@ -24,13 +24,25 @@ public class StateGraphics {
     }
 
     /**
-     * This method exists to render two thing: scenario and then the player character on screen
+     * This method exists to render only the scenario
      * @param g graphics that are needed to draw with
      * @param x x position of user
      * @param y y position of user
      */
-    public void render(Graphics g, double x, double y) {
+    public void renderScenario(Graphics g) {
         g.drawImage(Assets.scenario, (int) -_game.getCam().getxOffset(), (int) -_game.getCam().getyOffset(), null);
+      
+
+    }
+    
+    
+    /**
+     * This method exists to render only the main character
+     * @param g graphics that are needed to draw with
+     * @param x x position of user
+     * @param y y position of user
+     */
+    public void renderPlayer(Graphics g, double x, double y) {
         g.drawImage(Assets.player, (int) (x- _game.getCam().getxOffset()), (int) (y-_game.getCam().getyOffset()), null);
 
     }
@@ -45,5 +57,12 @@ public class StateGraphics {
      */
     public void renderStuffMore(Graphics g, double x, double y, BufferedImage sprite){
         g.drawImage( sprite, (int) (x- _game.getCam().getxOffset()), (int) (y-_game.getCam().getyOffset()), null);
+    }
+    
+    
+    public void renderUi(Graphics g, int health, int maxHealth, int cfu, int lives){
+       // for(){
+       // }
+       // g.drawImage(Assets.scenario, (int) -_game.getCam().getxOffset(), (int) -_game.getCam().getyOffset(), null);
     }
 }

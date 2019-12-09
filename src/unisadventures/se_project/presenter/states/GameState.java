@@ -47,10 +47,13 @@ public class GameState extends State {
        
         @Override
         public void displayView(Graphics g) {
-                view.render(g, player.getPosition().getFirstElement(), player.getPosition().getSecondElement());
+                view.renderScenario(g);
+                view.renderPlayer(g, player.getPosition().getFirstElement(), player.getPosition().getSecondElement());
 		/*World.forEach(WorldObject el){
                     view.renderStuffMore(g, el.x, el.y, el.image);
                 } */
+               view.renderUi(g, player.getHealthBar(), player.getMaxHealth(), player.getCfu(), player.getLives());
+                
                  
 	}
 
