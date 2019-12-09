@@ -3,6 +3,7 @@ package unisadventures.se_project.model;
 
 import unisadventures.se_project.util.Pair;
 import unisadventures.se_project.util.LevelStateMessenger;
+import unisadventures.se_project.util.CollisionType;
 
 /**
  * Class to manage the model part of a level
@@ -42,7 +43,7 @@ public class LevelManager {
      * @param newObjectDimensions the moving object's dimensions
      * @return true if there is nothing in the way of the movement, false otherwise
      */
-    public boolean resolveForCollisions(Pair<Double, Double> newObjectPosition, Pair<Double, Double> newObjectDimensions) {return false;}
+    public CollisionType resolveForCollisions(Pair<Double, Double> newObjectPosition, Pair<Double, Double> newObjectDimensions) {return null;}
     
     /**
      * Applies damage to any object in the attack zone

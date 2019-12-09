@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package unisadventures.se_project.util;
 
 /**
- *
- * @author mathieu
+ * Different collision types
  */
-public class CollisionType {
-    
+public enum CollisionType {
+    COLLISION_WITH_CIELING, COLLISION_WITH_GROUND, COLLISION_WITH_WALL_LEFT, COLLISION_WITH_WALL_RIGHT;
 }

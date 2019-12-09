@@ -11,7 +11,7 @@ public class Launcher {
 
 	public static void main(String[] args){
                 
-		Game game = new Game(new LevelManager(640,360,"resources/images/scenario.jpg"),"Tile Game!");
+		Game game = new Game(new LevelManager(640,360,"resources/images/scenario.jpg"),"Tile Game!", 640, 360);
 		game.start();
                 
 	}

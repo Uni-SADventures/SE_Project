@@ -4,6 +4,8 @@ package unisadventures.se_project.presenter.launcher;
 import unisadventures.se_project.view.display.Display;
 import unisadventures.se_project.model.FrameListener;
 import unisadventures.se_project.presenter.camera.GameCamera;
+import unisadventures.se_project.model.LevelManager;
+
 
 import unisadventures.se_project.view.gfx.Assets;
 import unisadventures.se_project.presenter.input.KeyManager;
@@ -25,6 +27,7 @@ public class Game extends FrameListener {
 	private GameCamera cam ;
 	private boolean running = false;
 	private FrameClock thread;
+        private LevelManager levelManager;
 	
 	
 	
@@ -40,7 +43,8 @@ public class Game extends FrameListener {
         return display;
     }
 	
-	public Game(String title, int width, int height){
+	public Game(LevelManager levelManager, String title, int width, int height){
+                this.levelManager = levelManager;
 		this.width = width;
 		this.height = height;
 		this.title = title;
