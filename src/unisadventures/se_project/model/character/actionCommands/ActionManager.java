@@ -26,14 +26,15 @@ public class ActionManager implements MovementsInterface {
     private final HitCommand _combat ;
     private final Handler _handler ;
     private final BasicCharacter _ch ;
-    private float jumpingTime=200;
+    public long jumpingTime=400;
+    public Thread t;
 
     private boolean _walking,_jumping,_falling,_idling,_hitting,_beingDamaged;
             
     public ActionManager(Handler _handler, BasicCharacter _ch) {
         
         _walking = false ;
-        _jumping = false ;
+        _jumping = true ;
         _falling = false ;
         _idling = false ;
         _hitting = false ;
@@ -52,7 +53,7 @@ public class ActionManager implements MovementsInterface {
      * This method interprets user inputs if the character is user's one and if not
      * it checks what should a character do, for example if there is a floor under their feet
      */
-    public void execute(){
+    public void execute() throws InterruptedException{
         if(_ch instanceof PlayerCharacter){
             if(_handler.getKeyManager().left)
                 moveLeft();
@@ -62,11 +63,17 @@ public class ActionManager implements MovementsInterface {
                 _walking = false ;
             
             if(_handler.getKeyManager().up){
-                //moveUp();
-                new Thread(new thread()).start();
-                _jumping=true;
-            }else if(!_handler.getKeyManager().up)
-                _jumping = false;
+                
+                if(_jumping){
+                    moveUp();
+                    t=new Thread(new thread());
+                    t.start();
+                    _jumping=true;
+                }
+                
+                
+            }/*else if(!_handler.getKeyManager().up)
+                _jumping = false;*/
          //   else if(!_game.checkFloor(_ch.getPosition().getFirstElement(),_ch.getPosition().getSecondElement()))
             //    _jumpFall.fall();
             
@@ -204,15 +211,28 @@ public class ActionManager implements MovementsInterface {
     }
 
    
-}
+
 
 public class thread implements Runnable{
     
     @Override
     public void run() {
         
+        try{
+            Thread.sleep(jumpingTime);
+            moveDown();
+            _jumping=true;
+        }catch(Exception e){
+            e.printStackTrace();
+            new Thread(this).start();
+            System.exit(0);
+            
+        }
+        
     }
     
     
     
+}
+
 }
