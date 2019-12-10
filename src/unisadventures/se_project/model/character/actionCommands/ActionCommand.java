@@ -5,6 +5,8 @@
  */
 package unisadventures.se_project.model.character.actionCommands;
 
+import java.awt.Rectangle;
+import unisadventures.se_project.model.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 
@@ -20,12 +22,16 @@ import unisadventures.se_project.presenter.launcher.Game;
  */
 public abstract class ActionCommand {
     protected BasicCharacter _ch ;
-    protected Game _game ;
+    protected Handler _handler ;
     protected int _count ;
-    public ActionCommand(Game game, BasicCharacter ch) {
-        _game = game ;
+    protected Rectangle bounds;
+    
+    public ActionCommand(Handler handler, BasicCharacter ch) {
+        _handler = handler ;
         _ch = ch;
         _count = 0;
+        bounds=new Rectangle(0,0,_ch.getDimensions().getFirstElement(),_ch.getDimensions().getSecondElement());
+        
     }
 
     public int getCount() {

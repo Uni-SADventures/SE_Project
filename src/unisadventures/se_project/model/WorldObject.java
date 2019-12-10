@@ -12,16 +12,14 @@ import unisadventures.se_project.util.Pair;
  */
 public abstract class WorldObject {
 
-    LevelManager _manager;
     protected double _xPosition;  // Because position may vary in some objects
     protected double _yPosition;  // (may not be the cleanest option, refactor?)
-    private final double _height;
-    private final double _width;
+    private final int _height;
+    private final int _width;
     
     
 
-    public WorldObject(LevelManager manager, double x, double y, double height, double width) {
-        _manager = manager;
+    public WorldObject( double x, double y, int height, int width) {
         _xPosition = x;
         _yPosition = y;
         _height = height;
@@ -41,8 +39,8 @@ public abstract class WorldObject {
      * 
      * @return width and heigth as a pair
      */
-    public Pair<Double, Double> getDimensions() {
-        Pair<Double, Double> dimensionPair = new Pair<>(_width, _height);
+    public Pair<Integer, Integer> getDimensions() {
+        Pair<Integer, Integer> dimensionPair = new Pair<>(_width, _height);
         return dimensionPair;
     }
     

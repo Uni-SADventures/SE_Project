@@ -10,5 +10,5 @@ package unisadventures.se_project.util;
  * @author Emilio
  */
 public enum DirectionType {
-    LEFT, RIGHT 
+    LEFT, RIGHT,UP,DOWN;
 }

@@ -6,8 +6,12 @@
 package unisadventures.se_project.view.gfx;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import unisadventures.se_project.model.Handler;
+import unisadventures.se_project.model.character.actionCommands.ActionCommand;
 import unisadventures.se_project.presenter.launcher.Game;
 
 /**
@@ -17,10 +21,11 @@ import unisadventures.se_project.presenter.launcher.Game;
  */
 public class StateGraphics {
 
-    private Game _game;
+    private Handler _handler;
+    protected Rectangle bounds;
 
-    public StateGraphics(Game game/*,World w */) {
-        _game = game;
+    public StateGraphics(Handler handler/*,World w */) {
+        _handler = handler;
     }
 
     /**
@@ -30,7 +35,7 @@ public class StateGraphics {
      * @param y y position of user
      */
     public void renderScenario(Graphics g) {
-        g.drawImage(Assets.scenario, (int) -_game.getCam().getxOffset(), (int) -_game.getCam().getyOffset(), null);
+        g.drawImage(Assets.scenario, (int) -_handler.getCam().getxOffset(), (int) -_handler.getCam().getyOffset(), null);
       
 
     }
@@ -43,9 +48,11 @@ public class StateGraphics {
      * @param y y position of user
      */
     public void renderPlayer(Graphics g, double x, double y) {
-        g.drawImage(Assets.player, (int) (x- _game.getCam().getxOffset()), (int) (y-_game.getCam().getyOffset()), null);
-
+        g.drawImage(Assets.player, (int) (x- _handler.getCam().getxOffset()), (int) (y-_handler.getCam().getyOffset()), null);
+        //g.setColor(Color.red);
+        //g.fillRect((int) (x + bounds.x - _handler.getCam().getxOffset()), (int) (y + bounds.y - _handler.getCam().getyOffset()), bounds.width,bounds.height);
     }
+    
     
     /**
      * This method draws on screen whatever object we want to visualize, only position
@@ -56,7 +63,7 @@ public class StateGraphics {
      * @param sprite image needed to represent our object
      */
     public void renderStuffMore(Graphics g, double x, double y, BufferedImage sprite){
-        g.drawImage( sprite, (int) (x- _game.getCam().getxOffset()), (int) (y-_game.getCam().getyOffset()), null);
+        g.drawImage( sprite, (int) (x- _handler.getCam().getxOffset()), (int) (y-_handler.getCam().getyOffset()), null);
     }
     
     

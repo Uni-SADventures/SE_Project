@@ -2,7 +2,6 @@ package unisadventures.se_project.model.basicObjects;
 
 
 import unisadventures.se_project.model.WorldObject;
-import unisadventures.se_project.model.LevelManager;
 import java.util.ArrayList;
 import unisadventures.se_project.util.CollectibleType;
 
@@ -13,8 +12,8 @@ public class CollectibleItem extends WorldObject{
     private final int _listSize;
     private int _counter;
     
-    public CollectibleItem(LevelManager manager, double xPosition, double yPosition, double height, double width, ArrayList<String> imageFileNameList, CollectibleType type) {
-        super(manager, xPosition, yPosition, height, width);
+    public CollectibleItem(double xPosition, double yPosition, int height, int width, ArrayList<String> imageFileNameList, CollectibleType type) {
+        super(xPosition, yPosition, height, width);
         _imageFileNameList = imageFileNameList;
         _type = type;
         _listSize = _imageFileNameList.size();

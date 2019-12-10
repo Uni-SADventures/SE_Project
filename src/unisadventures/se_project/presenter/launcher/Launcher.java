@@ -1,6 +1,7 @@
 package unisadventures.se_project.presenter.launcher;
 
-import unisadventures.se_project.model.LevelManager;
+import java.io.IOException;
+
 
 
 /**
@@ -9,9 +10,9 @@ import unisadventures.se_project.model.LevelManager;
  */
 public class Launcher {
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
                 
-		Game game = new Game(new LevelManager(640,360,"resources/images/scenario.jpg"),"Tile Game!", 640, 360);
+		Game game = new Game("Tile Game!",1000 , 600);
 		game.start();
                 
 	}

@@ -1,10 +1,11 @@
 package unisadventures.se_project.presenter.launcher;
 
 
+import java.io.IOException;
 import unisadventures.se_project.view.display.Display;
 import unisadventures.se_project.model.FrameListener;
+import unisadventures.se_project.model.Handler;
 import unisadventures.se_project.presenter.camera.GameCamera;
-import unisadventures.se_project.model.LevelManager;
 
 
 import unisadventures.se_project.view.gfx.Assets;
@@ -27,7 +28,6 @@ public class Game extends FrameListener {
 	private GameCamera cam ;
 	private boolean running = false;
 	private FrameClock thread;
-        private LevelManager levelManager;
 	
 	
 	
@@ -38,13 +38,15 @@ public class Game extends FrameListener {
 	
 	//Input
 	private KeyManager keyManager;
+        
+        //Handler
+        private Handler handler;
 
     public Display getDisplay() {
         return display;
     }
 	
-	public Game(LevelManager levelManager, String title, int width, int height){
-                this.levelManager = levelManager;
+	public Game( String title, int width, int height){
 		this.width = width;
 		this.height = height;
 		this.title = title;
@@ -55,14 +57,15 @@ public class Game extends FrameListener {
          * Other than the costructor, this class actually initializes assets, states
          * and display
          */
-	private void init(){
+	private void init() throws IOException{
 		display = new Display(title, width, height);
          
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
-		
-		gameState = new GameState(this);
-		menuState = new MenuState(this);
+		handler = new Handler(this);
+                cam= new GameCamera(handler,0,0);
+		gameState = new GameState(handler);
+		menuState = new MenuState(handler);
 
                 
 		State.setState(gameState);
@@ -88,12 +91,12 @@ public class Game extends FrameListener {
          * This method let main frameclock thread to start and it registers this
          * instance as the observer to be updated
          */
-	public synchronized void start(){
+	public synchronized void start() throws IOException{
 		if(running)
 			return;
 		running = true;
                 FrameClock clock = new FrameClock() ;
-                cam = new GameCamera(this,0,0) ;
+                cam = new GameCamera(handler,0,0) ;
 		thread = clock;
                 thread.registerObserver(this);
                 init();

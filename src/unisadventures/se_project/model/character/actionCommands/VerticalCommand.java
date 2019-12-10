@@ -5,9 +5,11 @@
  */
 package unisadventures.se_project.model.character.actionCommands;
 
+import unisadventures.se_project.model.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
+import unisadventures.se_project.model.basicObjects.Tile;
 
 /**
  *This class does implement all vertical movements, may they be jumping or falling.
@@ -15,11 +17,15 @@ import unisadventures.se_project.presenter.launcher.Game;
  * Init jump has to be used to keep track of initial jump height
  * @author Emilio
  */
-public class VerticalCommand extends ActionCommand {
+public class VerticalCommand extends ActionCommand{
     private double _initJump ;
-    public VerticalCommand(Game game, BasicCharacter ch) {
-        super(game, ch);
+    public VerticalCommand(Handler handler, BasicCharacter ch) {
+        super(handler, ch);
         _initJump = -1;
+        bounds.x=14;
+        bounds.y=10;
+        bounds.width=64;
+        bounds.height=95;
     }
     
     /**
@@ -64,9 +70,37 @@ public class VerticalCommand extends ActionCommand {
             _ch.setyPosition(newPos);
         else{
             resetCounter() ;
-            if(_ch instanceof PlayerCharacter )
-                _game.getCam().centerOnEntityFloor((PlayerCharacter) _ch);
+            /*if(_ch instanceof PlayerCharacter )
+                _handler.getCam().centerOnEntityFloor((PlayerCharacter) _ch);
+        }*/
         }
+    }
+    
+   
+    public void moveUp(){
+         int ty=(int)(_ch.getPosition().getSecondElement()-_ch.getSpeed()+ bounds.y)/Tile.TILEHEIGHT;
+            if(!collisionWithTile((int)(_ch.getPosition().getFirstElement()+bounds.x)/Tile.TILEWIDTH, ty) 
+                && !collisionWithTile((int)(_ch.getPosition().getFirstElement()+bounds.x+bounds.width)/Tile.TILEWIDTH, ty) ){
+                _ch.setyPosition(_ch.getPosition().getSecondElement() -_ch.getSpeed());
+            }else {
+                _ch.setyPosition(ty*Tile.TILEHEIGHT + Tile.TILEHEIGHT -bounds.y);
+            }
+    }
+    
+    public void moveDown(){
+         int ty=(int)(_ch.getPosition().getSecondElement()+_ch.getSpeed()+ bounds.y + bounds.height)/Tile.TILEHEIGHT;
+            if(!collisionWithTile((int)(_ch.getPosition().getFirstElement()+bounds.x)/Tile.TILEWIDTH, ty) 
+                && !collisionWithTile((int)(_ch.getPosition().getFirstElement()+bounds.x+bounds.width)/Tile.TILEWIDTH, ty) ){
+                _ch.setyPosition(_ch.getPosition().getSecondElement() +_ch.getSpeed());
+            }else {
+                _ch.setyPosition(ty*Tile.TILEHEIGHT  - bounds.y -bounds.height -1);
+            }
+    }
+    
+    protected boolean collisionWithTile(int x, int y){
+          
+        return _handler.getWorld().getTile(x, y).isSolid();
+        
     }
     
     @Override
@@ -74,5 +108,6 @@ public class VerticalCommand extends ActionCommand {
         super.resetCounter();
         _initJump = -1;
     }
+    
     
 }

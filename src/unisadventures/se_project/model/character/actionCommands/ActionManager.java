@@ -5,6 +5,8 @@
  */
 package unisadventures.se_project.model.character.actionCommands;
 
+import java.awt.Rectangle;
+import unisadventures.se_project.model.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.MovementsInterface;
 import unisadventures.se_project.model.character.PlayerCharacter;
@@ -22,12 +24,13 @@ public class ActionManager implements MovementsInterface {
     private final MoveCommand _movement ;
     private final VerticalCommand _jumpFall ;
     private final HitCommand _combat ;
-    private final Game _game ;
+    private final Handler _handler ;
     private final BasicCharacter _ch ;
+    private float jumpingTime=200;
 
     private boolean _walking,_jumping,_falling,_idling,_hitting,_beingDamaged;
             
-    public ActionManager(Game _game, BasicCharacter _ch) {
+    public ActionManager(Handler _handler, BasicCharacter _ch) {
         
         _walking = false ;
         _jumping = false ;
@@ -37,11 +40,11 @@ public class ActionManager implements MovementsInterface {
         _beingDamaged = false ;
         
         
-        this._game = _game;
+        this._handler = _handler;
         this._ch = _ch;
-        _movement = new MoveCommand(_game,_ch) ;
-        _jumpFall = new VerticalCommand(_game,_ch) ;
-        _combat = new HitCommand(_game,_ch) ;
+        _movement = new MoveCommand(_handler,_ch) ;
+        _jumpFall = new VerticalCommand(_handler,_ch) ;
+        _combat = new HitCommand(_handler,_ch) ;
     }
     
     
@@ -51,26 +54,30 @@ public class ActionManager implements MovementsInterface {
      */
     public void execute(){
         if(_ch instanceof PlayerCharacter){
-            if(_game.getKeyManager().left)
+            if(_handler.getKeyManager().left)
                 moveLeft();
-            else if(_game.getKeyManager().right)
+            else if(_handler.getKeyManager().right)
                 moveRight();
             else
                 _walking = false ;
             
-            if(_game.getKeyManager().up)
-                jump();
-            else if(!_game.getKeyManager().up)
-                _jumping = false ;
+            if(_handler.getKeyManager().up){
+                //moveUp();
+                new Thread(new thread()).start();
+                _jumping=true;
+            }else if(!_handler.getKeyManager().up)
+                _jumping = false;
          //   else if(!_game.checkFloor(_ch.getPosition().getFirstElement(),_ch.getPosition().getSecondElement()))
             //    _jumpFall.fall();
             
-            if(_game.getKeyManager().hit)
+            if(_handler.getKeyManager().down){
+                moveDown();
+            if(_handler.getKeyManager().hit)
                 attack();
             else
                 _hitting = false ;
             
-            if(!_game.getKeyManager().up && !_game.getKeyManager().left && !_game.getKeyManager().right && !_game.getKeyManager().hit)
+            if(!_handler.getKeyManager().up && !_handler.getKeyManager().left && !_handler.getKeyManager().right && !_handler.getKeyManager().hit)
                 idle() ;
         
         }else{
@@ -81,6 +88,8 @@ public class ActionManager implements MovementsInterface {
             
         
         //MANAGING MOVEMENTS 
+    }
+        
     }
     
     /**
@@ -153,7 +162,15 @@ public class ActionManager implements MovementsInterface {
         }
         _jumpFall.fall();
     }
-
+    
+    
+    public void moveUp(){
+        _jumpFall.moveUp();
+    }
+    
+    public void moveDown(){
+        _jumpFall.moveDown();
+    }
   /**
    * 
    * @param damage is the sum to remove from character's actual health
@@ -187,4 +204,15 @@ public class ActionManager implements MovementsInterface {
     }
 
    
+}
+
+public class thread implements Runnable{
+    
+    @Override
+    public void run() {
+        
+    }
+    
+    
+    
 }

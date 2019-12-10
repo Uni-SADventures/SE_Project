@@ -24,7 +24,7 @@ public class KeyManager implements KeyListener {
          */
 	public void tick(){
 		up = keys[KeyEvent.VK_W];
-		down = keys[KeyEvent.VK_S];
+		down =keys[KeyEvent.VK_S];
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
                 hit = keys[KeyEvent.VK_B];

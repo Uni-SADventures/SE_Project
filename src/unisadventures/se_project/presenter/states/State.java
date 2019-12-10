@@ -1,6 +1,8 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
+import unisadventures.se_project.model.Handler;
+import unisadventures.se_project.model.character.PlayerCharacter;
 
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.view.gfx.StateGraphics;
@@ -28,11 +30,11 @@ public abstract class State {
 	
 	//CLASS
 	
-	protected Game game;
+	protected Handler handler;
 	protected final StateGraphics view ;
-	public State(Game game /*,World world*/){
-		this.game = game;
-                view = new StateGraphics(game /*,world*/) ;
+	public State(Handler handler /*,World world*/){
+		this.handler = handler;
+                view = new StateGraphics(handler /*,world*/) ;
 	}
 	
         /**

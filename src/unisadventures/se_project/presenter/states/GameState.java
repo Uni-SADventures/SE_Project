@@ -1,6 +1,9 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
+import java.io.IOException;
+import unisadventures.se_project.model.Handler;
+import unisadventures.se_project.model.World;
 
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.character.PlayerCharacter;
@@ -19,15 +22,18 @@ import unisadventures.se_project.util.CharacterType;
 public class GameState extends State {
 
 	private PlayerCharacter player;
+        private World world;
 	//private World _world; //TODO
         
         
-	public GameState(Game game /*, World world*/){
-		super(game/*,world*/);
-		player = new PlayerCharacter(game, game.getWidth()/2, 180,100,100,CharacterType.USER,6,1,6,300,"me");
+	public GameState(Handler handler /*, World world*/) throws IOException{
+		super(handler/*,world*/);
+		player = new PlayerCharacter(handler, 100/*handler.getWidth()/2*/,320,100,100,CharacterType.USER,6,1,6,300,"me");
+                world =new World(handler,"resources/images/world1.txt");
+                handler.setWorld(world);
                 //_world = world ;
-                game.getCam().move(100, 0);
-                game.getCam().centerOnEntity(player);
+                handler.getCam().move(100, 0);
+                handler.getCam().centerOnEntity(player);
                 
                 
 	}
@@ -37,6 +43,7 @@ public class GameState extends State {
 	@Override
 	public void tick() {
 		player.tick();
+                
                 /*World.forEach(WorldObject el){
                     el.tick() ;
                 } */
@@ -47,7 +54,8 @@ public class GameState extends State {
        
         @Override
         public void displayView(Graphics g) {
-                view.renderScenario(g);
+                world.render(g);
+                //view.renderScenario(g);
                 view.renderPlayer(g, player.getPosition().getFirstElement(), player.getPosition().getSecondElement());
 		/*World.forEach(WorldObject el){
                     view.renderStuffMore(g, el.x, el.y, el.image);
@@ -56,5 +64,7 @@ public class GameState extends State {
                 
                  
 	}
+        
+       
 
 }

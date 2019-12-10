@@ -2,7 +2,6 @@ package unisadventures.se_project.model.basicObjects;
 
 
 import unisadventures.se_project.model.WorldObject;
-import unisadventures.se_project.model.LevelManager;
 import java.util.ArrayList;
 
 public class DestructibleObject extends WorldObject {
@@ -12,8 +11,8 @@ public class DestructibleObject extends WorldObject {
     private int _nextImageIndex;
     private static final int INTACT_OBJECT_IMAGE_FILE_NAME_INDEX = 0;
     
-    public DestructibleObject(LevelManager manager, double xPosition, double yPosition, double height, double width, ArrayList<String> imageFileNameList) {
-        super(manager, xPosition, yPosition, height, width);
+    public DestructibleObject(double xPosition, double yPosition, int height, int width, ArrayList<String> imageFileNameList) {
+        super(xPosition, yPosition, height, width);
         _imageFileNameList = imageFileNameList;
         _listSizeMinusOne = _imageFileNameList.size() - 1;
         _nextImageIndex = 0;

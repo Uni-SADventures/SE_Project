@@ -1,15 +1,15 @@
 package unisadventures.se_project.model.basicObjects;
 
 import unisadventures.se_project.model.WorldObject;
-import unisadventures.se_project.model.LevelManager;
+
 
 
 public class Platform extends WorldObject {
     
     private final String _imageFile;
     
-    public Platform(LevelManager manager, double xPosition, double yPosition, double height, double width, String imageFile) {
-        super(manager, xPosition, yPosition, height, width);
+    public Platform( double xPosition, double yPosition, int height, int width, String imageFile) {
+        super( xPosition, yPosition, height, width);
         _imageFile = imageFile;
     }
 

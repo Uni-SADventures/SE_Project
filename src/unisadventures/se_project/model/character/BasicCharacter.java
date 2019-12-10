@@ -1,10 +1,11 @@
 package unisadventures.se_project.model.character;
 
 import unisadventures.se_project.model.WorldObject;
-import unisadventures.se_project.model.LevelManager;
 import java.util.*;
+import unisadventures.se_project.model.Handler;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
 import unisadventures.se_project.presenter.launcher.Game;
+import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.Pair;
@@ -29,6 +30,7 @@ public abstract class BasicCharacter extends WorldObject  {
     private double _maxJump;
     private double _speed;
     private DirectionType _facing ;
+    
 
     
     //all the sets of sprites for actions, with left and right versions
@@ -39,11 +41,11 @@ public abstract class BasicCharacter extends WorldObject  {
     private Pair<List<String>, List<String>> _punch;
     private Pair<List<String>, List<String>> _beDamaged;
     
-    private final Game _game ;
+    private final Handler _handler ;
     private final ActionManager _actions ;
 
-    public BasicCharacter(LevelManager manager, Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
-        super(manager, xPosition, yPosition, height, width);
+    public BasicCharacter( Handler handler, double xPosition, double yPosition, int height, int width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
+        super( xPosition, yPosition, height, width);
         _typeOfCharacter = type;
         _healthBar = healthBar;
         _strength = strength;
@@ -51,8 +53,8 @@ public abstract class BasicCharacter extends WorldObject  {
         _maxJump = maxJump;
         _speed = 5;
         _facing = DirectionType.RIGHT ;
-        _game = game;
-        _actions = new ActionManager(_game,this) ;
+        _handler = handler;
+        _actions = new ActionManager(_handler,this) ;
         
     }
     
@@ -261,13 +263,14 @@ public abstract class BasicCharacter extends WorldObject  {
     /**
      * Method called every time it is the moment to update all actions. 
      */
-    @Override
-     public void tick() {
+    public void tick() {
         
        //  _game.start();
+       _handler.getCam().centerOnEntity((PlayerCharacter) this);
        _actions.execute();
   
     }
+     
      
   
 }

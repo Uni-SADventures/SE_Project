@@ -5,6 +5,7 @@
  */
 package unisadventures.se_project.model.character.actionCommands;
 
+import unisadventures.se_project.model.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 
@@ -15,8 +16,8 @@ import unisadventures.se_project.presenter.launcher.Game;
  */
 public class HitCommand extends ActionCommand {
     
-    public HitCommand(Game game, BasicCharacter ch) {
-        super(game, ch);
+    public HitCommand(Handler handler, BasicCharacter ch) {
+        super(handler, ch);
     }
     
     /**
