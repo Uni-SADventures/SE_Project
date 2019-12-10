@@ -26,6 +26,11 @@ public class ZombieEnemy extends EnemyCharacter {
     }
 
     @Override
+    /**
+     * @Author Emanuela Paolo 
+     * @param 
+     * This method implements the movement pattern of the zombie enemy. it moves left and right without stopping
+     */
     public void tick() {
         if (!isMoving) {
             isMoving = true;
@@ -38,7 +43,7 @@ public class ZombieEnemy extends EnemyCharacter {
             } else {
                 move(-this.getSpeed());
             }
-        } else if(isMoving && !movingLeft){
+        } else if (isMoving && !movingLeft) {
             if (this._xPosition + this.getSpeed() < this.getGame().getWidth()) {
                 move(this.getSpeed());
             } else {
@@ -47,8 +52,13 @@ public class ZombieEnemy extends EnemyCharacter {
             }
         }
     }
-    
-    public void move(double speed){
+
+    /**
+     * @Author Emanuela Paolo
+     * @param speed the speed at which the enemy moves* Move the enemy speed
+     * pixels to the right. if speed is less than 0, it moves to the left
+     */
+    public void move(double speed) {
         this._xPosition += speed;
     }
 
