@@ -6,47 +6,43 @@
 package unisadventures.se_project.view.gfx;
 
 import java.awt.image.BufferedImage;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.*;
+import org.testng.annotations.Test;
+import org.testng.Assert;
 
 /**
  *
  * @author Paolo
  */
 public class AssetsTest {
-    
+
+    private BufferedImage img;
+
     public AssetsTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
+        img = ImageLoader.loadImage("resources/images/character_sprite.png").getSubimage(48, 0, 16, 32);
+
     }
 
-    public void testImage(){
-        BufferedImage img = ImageLoader.loadImage("resources/images/char.png");
+    @Test
+    /*This is the only way to do a test to compare two BufferedImage objects. 
+    Run a nested for loop that iterates over every pixel and compare the RGB integer of that pixel*/
+    public void testImage() {
         Assets.init();
-        BufferedImage player = Assets.player;
-        assertEquals(img,player);
+        System.out.println("Testing 1,2,12");
+        try {
+            BufferedImage player = Assets.player;
+            int width = player.getWidth();
+            int height = player.getHeight();
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    Assertions.assertEquals(player.getRGB(x, y), img.getRGB(x, y));
+                }
+            }
+
+        } catch (Exception e) {
+            Assertions.fail("Assertequals failed");
+        }
+
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

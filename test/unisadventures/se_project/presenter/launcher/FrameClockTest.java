@@ -7,9 +7,10 @@ package unisadventures.se_project.presenter.launcher;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import unisadventures.se_project.model.FrameListener;
 
@@ -46,6 +47,8 @@ public class FrameClockTest {
         System.out.println("run");
         FrameClock instance = new FrameClock();
         instance.run();
+        
+        Assertions.assertAll();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
