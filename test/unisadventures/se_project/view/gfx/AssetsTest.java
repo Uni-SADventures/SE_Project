@@ -29,11 +29,12 @@ public class AssetsTest {
     Run a nested for loop that iterates over every pixel and compare the RGB integer of that pixel*/
     public void testImage() {
         Assets.init();
-        System.out.println("Testing 1,2,12");
+
         try {
             BufferedImage player = Assets.player;
             int width = player.getWidth();
             int height = player.getHeight();
+            System.out.println("Testing 1,2,12");
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     Assertions.assertEquals(player.getRGB(x, y), img.getRGB(x, y));

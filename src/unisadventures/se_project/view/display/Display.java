@@ -1,6 +1,7 @@
 package unisadventures.se_project.view.display;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -71,10 +72,11 @@ public class Display {
 		//Clear Screen
 		g.clearRect(0, 0, width, height);
                 
+                
 		//Draw Here!
 		
 		if(State.getState() != null)
-			State.getState().displayView(g);
+                    State.getState().displayView(g);
 		
 		//End Drawing!
 		bs.show();

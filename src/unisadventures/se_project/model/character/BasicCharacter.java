@@ -8,28 +8,26 @@ import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.Pair;
 
-
 /**
- * This class represents the basilar character class needed for both
- * enemy and player
- * It keeps a final CharacterType, to tell which type it is,
- * actual and max character health , its strenght and max jump height as maxjump,
- * its speed and even witch direction (left or right) is actually facing
- * In the end there are a lot of pairs of image paths in strings pair for
- * every sprite needed for every animation in both left and right directions
+ * This class represents the basilar character class needed for both enemy and
+ * player It keeps a final CharacterType, to tell which type it is, actual and
+ * max character health , its strenght and max jump height as maxjump, its speed
+ * and even witch direction (left or right) is actually facing In the end there
+ * are a lot of pairs of image paths in strings pair for every sprite needed for
+ * every animation in both left and right directions
+ *
  * @author Emilio
  */
-public abstract class BasicCharacter extends WorldObject  {
- 
-    private final CharacterType _typeOfCharacter; 
+public abstract class BasicCharacter extends WorldObject {
+
+    private final CharacterType _typeOfCharacter;
     private int _healthBar;
-    private int _strength; 
+    private int _strength;
     private int _maxHealth;
     private double _maxJump;
     private double _speed;
-    private DirectionType _facing ;
+    private DirectionType _facing;
 
-    
     //all the sets of sprites for actions, with left and right versions
     private Pair<List<String>, List<String>> _walk;
     private Pair<List<String>, List<String>> _jump;
@@ -37,11 +35,11 @@ public abstract class BasicCharacter extends WorldObject  {
     private Pair<List<String>, List<String>> _idle;
     private Pair<List<String>, List<String>> _punch;
     private Pair<List<String>, List<String>> _beDamaged;
-    
-    private final Game _game ;
-    private final ActionManager _actions ;
 
-    public BasicCharacter(  Game game,double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
+    private final Game _game;
+    private final ActionManager _actions;
+
+    public BasicCharacter(Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
         super(xPosition, yPosition, height, width);
         _typeOfCharacter = type;
         _healthBar = healthBar;
@@ -49,21 +47,18 @@ public abstract class BasicCharacter extends WorldObject  {
         _maxHealth = maxHealth;
         _maxJump = maxJump;
         _speed = 5;
-        _facing = DirectionType.RIGHT ;
+        _facing = DirectionType.RIGHT;
         _game = game;
-        _actions = new ActionManager(_game,this) ;
-        
+        _actions = new ActionManager(_game, this);
+
     }
-    
+
     // READ THIS COMMENT!!!
     // The following implementation completely ruins the single responsibility principle.
     // https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f
-    
     // All below is a classic example of the State pattern. To refactor.
-    
     //Emilio: I don't know what do you mean, for now all actions movements and states and other similiar fanfares have been moved to different
     //classes. If needed we can refractor of course
-
     public DirectionType getFacing() {
         return _facing;
     }
@@ -99,78 +94,94 @@ public abstract class BasicCharacter extends WorldObject  {
     public List<String> getBeDamagedSprites(DirectionType d) {
         if (null == d) {
             return null;
-        } else switch (d) {
-            case LEFT:
-                return _beDamaged.getFirstElement();
-            case RIGHT:
-                return _beDamaged.getSecondElement();
-            default:
-                return null;
+        } else {
+            switch (d) {
+                case LEFT:
+                    return _beDamaged.getFirstElement();
+                case RIGHT:
+                    return _beDamaged.getSecondElement();
+                default:
+                    return null;
+            }
         }
+    }
+
+    public Game getGame() {
+        return _game;
     }
 
     public List<String> getIdleSprites(DirectionType d) {
         if (null == d) {
             return null;
-        } else switch (d) {
-            case LEFT:
-                return _idle.getFirstElement();
-            case RIGHT:
-                return _idle.getSecondElement();
-            default:
-                return null;
+        } else {
+            switch (d) {
+                case LEFT:
+                    return _idle.getFirstElement();
+                case RIGHT:
+                    return _idle.getSecondElement();
+                default:
+                    return null;
+            }
         }
     }
 
     public List<String> getJumpSprites(DirectionType d) {
         if (null == d) {
             return null;
-        } else switch (d) {
-            case LEFT:
-                return _jump.getFirstElement();
-            case RIGHT:
-                return _jump.getSecondElement();
-            default:
-                return null;
+        } else {
+            switch (d) {
+                case LEFT:
+                    return _jump.getFirstElement();
+                case RIGHT:
+                    return _jump.getSecondElement();
+                default:
+                    return null;
+            }
         }
     }
 
     public List<String> getFallSprites(DirectionType d) {
         if (null == d) {
             return null;
-        } else switch (d) {
-            case LEFT:
-                return _fall.getFirstElement();
-            case RIGHT:
-                return _fall.getSecondElement();
-            default:
-                return null;
+        } else {
+            switch (d) {
+                case LEFT:
+                    return _fall.getFirstElement();
+                case RIGHT:
+                    return _fall.getSecondElement();
+                default:
+                    return null;
+            }
         }
     }
 
     public List<String> getPunchSprites(DirectionType d) {
         if (null == d) {
             return null;
-        } else switch (d) {
-            case LEFT:
-                return _punch.getFirstElement();
-            case RIGHT:
-                return _punch.getSecondElement();
-            default:
-                return null;
+        } else {
+            switch (d) {
+                case LEFT:
+                    return _punch.getFirstElement();
+                case RIGHT:
+                    return _punch.getSecondElement();
+                default:
+                    return null;
+            }
         }
     }
 
     public List<String> getWalkSprites(DirectionType d) {
         if (null == d) {
             return null;
-        } else switch (d) {
-            case LEFT:
-                return _walk.getFirstElement();
-            case RIGHT:
-                return _walk.getSecondElement();
-            default:
-                return null;
+        } else {
+            switch (d) {
+                case LEFT:
+                    return _walk.getFirstElement();
+                case RIGHT:
+                    return _walk.getSecondElement();
+                default:
+                    return null;
+            }
         }
     }
 
@@ -182,8 +193,6 @@ public abstract class BasicCharacter extends WorldObject  {
         this._maxJump = maxJump;
     }
 
-
-
     public double getSpeed() {
         return _speed;
     }
@@ -192,7 +201,7 @@ public abstract class BasicCharacter extends WorldObject  {
         this._speed = speed;
     }
 
-    public CharacterType getCharacterType() {  
+    public CharacterType getCharacterType() {
         return _typeOfCharacter;
     }
 
@@ -219,13 +228,13 @@ public abstract class BasicCharacter extends WorldObject  {
     public void setMaxHealth(int maxHealth) {
         _maxHealth = maxHealth;
     }
-    
-   /**
-    * 
-    * @param dam represent the amount of damage to be taken away from current health
-    * in healthbar. If the damage being dealed is equal or higher than current health
-    * a method called die() is called
-    */
+
+    /**
+     *
+     * @param dam represent the amount of damage to be taken away from current
+     * health in healthbar. If the damage being dealed is equal or higher than
+     * current health a method called die() is called
+     */
     public void takeDamage(int dam) {
         if (_healthBar > dam) {
             _healthBar -= dam;
@@ -235,24 +244,22 @@ public abstract class BasicCharacter extends WorldObject  {
     }
 
     /**
-     * It substracts one life from the character and, if the character is a player and
-     * ther is no any other life present, it brings to game over
+     * It substracts one life from the character and, if the character is a
+     * player and ther is no any other life present, it brings to game over
      */
     public void die() {
         //when health goes to 0 we have to manage how to put away a life when we have a menu
     }
 
-    
     /**
-     * Method called every time it is the moment to update all actions. 
+     * Method called every time it is the moment to update all actions.
      */
     @Override
-     public void tick() {
-        
-       //  _game.start();
-       _actions.execute();
-  
+    public void tick() {
+
+        //  _game.start();
+        _actions.execute();
+
     }
-     
-  
+
 }

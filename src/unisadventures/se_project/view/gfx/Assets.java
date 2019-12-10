@@ -27,7 +27,7 @@ public class Assets {
         tilesheet = ImageLoader.loadImage("resources/images/tilesheet1.png");
         ground = tilesheet.getSubimage(0, 0, width, height);
         ground_1 = tilesheet.getSubimage(64, 0, width, height);
-        grass = tilesheet.getSubimage(0, 176, width, 16);
+        grass = tilesheet.getSubimage(0, 176, width, width/2);
         tree = tilesheet.getSubimage(64, 128, width * 2, height * 2);
 
         //load objects

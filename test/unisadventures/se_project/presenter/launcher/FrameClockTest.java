@@ -46,9 +46,8 @@ public class FrameClockTest {
     public void testRun() {
         System.out.println("run");
         FrameClock instance = new FrameClock();
-        instance.run();
-        
-        Assertions.assertAll();
+        instance.start();
+        Assertions.assertTrue(instance.isAlive());
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

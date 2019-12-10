@@ -8,6 +8,7 @@ package unisadventures.se_project.view.gfx;
 import java.awt.image.BufferedImage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,10 +46,8 @@ public class ImageLoaderTest {
         System.out.println("loadImage");
         String path = "";
         BufferedImage expResult = null;
-        BufferedImage result = ImageLoader.loadImage(path);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        BufferedImage result = ImageLoader.loadImage("resources/images/char.png");
+        Assertions.assertNotEquals(expResult, result);
     }
     
 }
