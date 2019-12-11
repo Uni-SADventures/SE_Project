@@ -12,8 +12,8 @@ public class DestructibleObject extends WorldObject {
     private int _nextImageIndex;
     private static final int INTACT_OBJECT_IMAGE_FILE_NAME_INDEX = 0;
     
-    public DestructibleObject(LevelManager manager, double xPosition, double yPosition, double height, double width, ArrayList<String> imageFileNameList) {
-        super(manager, xPosition, yPosition, height, width);
+    public DestructibleObject(LevelManager manager, double xPosition, double yPosition, double width, double height, ArrayList<String> imageFileNameList) {
+        super(manager, xPosition, yPosition, width, height);
         _imageFileNameList = imageFileNameList;
         _listSizeMinusOne = _imageFileNameList.size() - 1;
         _nextImageIndex = 0;
@@ -34,17 +34,12 @@ public class DestructibleObject extends WorldObject {
     }
 
     @Override
-    public void tick() {
+    public String tick() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void takeDamage(int damage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getCurrentSprite() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

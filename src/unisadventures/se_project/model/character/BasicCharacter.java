@@ -42,8 +42,8 @@ public abstract class BasicCharacter extends WorldObject  {
     private final Game _game ;
     private final ActionManager _actions ;
 
-    public BasicCharacter(LevelManager manager, Game game, double xPosition, double yPosition, double height, double width, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
-        super(manager, xPosition, yPosition, height, width);
+    public BasicCharacter(LevelManager manager, Game game, double xPosition, double yPosition, double width, double height, CharacterType type, int healthBar, int strength, int maxHealth, double maxJump) {
+        super(manager, xPosition, yPosition, width, height);
         _typeOfCharacter = type;
         _healthBar = healthBar;
         _strength = strength;
@@ -56,10 +56,6 @@ public abstract class BasicCharacter extends WorldObject  {
         
     }
     
-    @Override
-    public String getCurrentSprite() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     /**
      * Set the X coordinate of the character (left of the hitbox)
@@ -262,10 +258,12 @@ public abstract class BasicCharacter extends WorldObject  {
      * Method called every time it is the moment to update all actions. 
      */
     @Override
-     public void tick() {
+     public String tick() {
         
        //  _game.start();
        _actions.execute();
+       
+       throw new UnsupportedOperationException("Not supported yet.");
   
     }
      

@@ -3,6 +3,7 @@ package unisadventures.se_project.presenter.states;
 import java.awt.Graphics;
 
 import unisadventures.se_project.presenter.launcher.Game;
+import unisadventures.se_project.model.LevelManager;
 import unisadventures.se_project.model.character.PlayerCharacter;
 
 import unisadventures.se_project.util.CharacterType;
@@ -22,9 +23,9 @@ public class GameState extends State {
 	//private World _world; //TODO
         
         
-	public GameState(Game game /*, World world*/){
+	public GameState(Game game, LevelManager manager /*, World world*/){
 		super(game/*,world*/);
-		player = new PlayerCharacter(game, game.getWidth()/2, 180,100,100,CharacterType.USER,6,1,6,300,"me");
+		player = new PlayerCharacter(manager, game, game.getWidth()/2, 180,100,100,CharacterType.USER,6,1,6,300,"me");
                 //_world = world ;
                 game.getCam().move(100, 0);
                 game.getCam().centerOnEntity(player);

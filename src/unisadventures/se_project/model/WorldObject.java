@@ -20,12 +20,12 @@ public abstract class WorldObject {
     
     
 
-    public WorldObject(LevelManager manager, double x, double y, double height, double width) {
+    public WorldObject(LevelManager manager, double x, double y, double width, double height) {
         _manager = manager;
         _xPosition = x;
         _yPosition = y;
+        _width = width;
         _height = height;
-        _width = width;;
     }
 
     /**
@@ -48,17 +48,16 @@ public abstract class WorldObject {
     
     /**
      * Compute the next frame of the object
+     * @return the name of the file containing the next sprite of the object
      */
-    public abstract void tick();
+    public abstract String tick();
     
     /**
      * Resolve the reception of damage by the object (might have no effect)
      * @param damage 
      */
     public abstract void takeDamage(int damage);
-    
-    
-    public abstract String getCurrentSprite();
+
 
     
 

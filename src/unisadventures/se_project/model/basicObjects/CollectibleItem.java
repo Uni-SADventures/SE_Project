@@ -13,8 +13,8 @@ public class CollectibleItem extends WorldObject{
     private final int _listSize;
     private int _counter;
     
-    public CollectibleItem(LevelManager manager, double xPosition, double yPosition, double height, double width, ArrayList<String> imageFileNameList, CollectibleType type) {
-        super(manager, xPosition, yPosition, height, width);
+    public CollectibleItem(LevelManager manager, double xPosition, double yPosition, double width, double height, ArrayList<String> imageFileNameList, CollectibleType type) {
+        super(manager, xPosition, yPosition, width, height);
         _imageFileNameList = imageFileNameList;
         _type = type;
         _listSize = _imageFileNameList.size();
@@ -37,17 +37,12 @@ public class CollectibleItem extends WorldObject{
     }
 
     @Override
-    public void tick() {
+    public String tick() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void takeDamage(int damage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getCurrentSprite() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

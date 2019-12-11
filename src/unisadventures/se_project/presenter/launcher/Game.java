@@ -61,7 +61,7 @@ public class Game extends FrameListener {
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
-		gameState = new GameState(this);
+		gameState = new GameState(this, levelManager);
 		menuState = new MenuState(this);
 
                 
