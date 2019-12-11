@@ -6,7 +6,7 @@
 package unisadventures.se_project.model.character.actionCommands;
 
 import java.awt.Rectangle;
-import unisadventures.se_project.model.Handler;
+import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 

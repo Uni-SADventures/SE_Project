@@ -7,7 +7,7 @@ package unisadventures.se_project.presenter.world;
 
 import java.awt.Graphics;
 import java.io.IOException;
-import unisadventures.se_project.model.Handler;
+import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.Utils;
 

@@ -8,7 +8,7 @@ package unisadventures.se_project.view.gfx;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import unisadventures.se_project.model.Handler;
+import unisadventures.se_project.presenter.launcher.Handler;
 
 /**
  *Ths class is used as support for states, it puts on screen whatever it's needed to be
@@ -28,7 +28,7 @@ public class StateGraphics {
      * @param g graphics that are needed to draw with
      */
     public void renderScenario(Graphics g) {
-        g.drawImage(Assets.scenario, (int) -_handler.getCam().getxOffset(), (int) -_handler.getCam().getyOffset(), null);
+        g.drawImage(Assets.scenario, (int) -_handler.getCam().getxOffset()/5, (int) -_handler.getCam().getyOffset()/5, null);
       
 
     }

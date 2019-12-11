@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unisadventures.se_project.model;
+package unisadventures.se_project.presenter.launcher;
 
 import unisadventures.se_project.presenter.world.World;
 import unisadventures.se_project.presenter.camera.GameCamera;

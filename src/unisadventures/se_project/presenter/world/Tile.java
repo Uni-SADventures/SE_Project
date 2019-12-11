@@ -24,7 +24,7 @@ public class Tile extends WorldObject{
     public static Tile limitTile= new LimitTile(4,200,200);
     
     //Class
-    public static final int TILEWIDTH = 64, TILEHEIGHT = 64;
+    public static final int TILEWIDTH = 74, TILEHEIGHT = 74;
     protected BufferedImage texture;
     protected final int id;
 

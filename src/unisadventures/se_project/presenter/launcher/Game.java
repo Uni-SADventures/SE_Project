@@ -3,7 +3,6 @@ package unisadventures.se_project.presenter.launcher;
 
 import unisadventures.se_project.view.display.Display;
 import unisadventures.se_project.model.FrameListener;
-import unisadventures.se_project.model.Handler;
 import unisadventures.se_project.presenter.camera.GameCamera;
 
 import unisadventures.se_project.view.gfx.Assets;

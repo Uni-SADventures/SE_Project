@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import unisadventures.se_project.model.Handler;
+import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.presenter.world.World;
 
 import unisadventures.se_project.presenter.launcher.Game;
@@ -29,7 +29,7 @@ public class GameState extends State {
 
     public GameState(Handler handler /*, World world*/) {
         super(handler/*,world*/);
-        player = new PlayerCharacter(handler, 140, 90, 100, 100, CharacterType.USER, 6, 1, 6, 130, "me");
+        player = new PlayerCharacter(handler, 140, 90, 100, 100, CharacterType.USER, 6, 1, 6, 170, "me");
         enemy = new ZombieEnemy(handler, 0, 100, 16, 32, CharacterType.ENEMY, 6, 1, 6, 300);
         
         
@@ -46,6 +46,10 @@ public class GameState extends State {
         handler.getGame().getCam().move(100, 0);
         handler.getCam().centerOnEntity(player);
 
+    }
+
+    public PlayerCharacter getPlayer() {
+        return player;
     }
 
     @Override

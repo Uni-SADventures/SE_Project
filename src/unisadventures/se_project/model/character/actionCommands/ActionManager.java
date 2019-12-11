@@ -5,7 +5,7 @@
  */
 package unisadventures.se_project.model.character.actionCommands;
 
-import unisadventures.se_project.model.Handler;
+import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.MovementsInterface;
 import unisadventures.se_project.model.character.PlayerCharacter;
