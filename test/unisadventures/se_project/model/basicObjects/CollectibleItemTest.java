@@ -55,7 +55,7 @@ public class CollectibleItemTest {
      */
     @Test
     public void testGetNextImageFileName() {
-        System.out.println("getNextImageFileName");
+        //System.out.println("getNextImageFileName");
         CollectibleItem instance = new CollectibleItem(_xPosition, _yPosition, _height, _width, _imageFileNameList, _type);
         String expResult1 = "firstFrame";
         String expResult2 = "secondFrame";
@@ -76,7 +76,7 @@ public class CollectibleItemTest {
      */
     @Test
     public void testGetCollectibleType() {
-        System.out.println("getCollectibleType");
+        //System.out.println("getCollectibleType");
         CollectibleItem instance = new CollectibleItem(_xPosition, _yPosition, _height, _width, _imageFileNameList, _type);
         CollectibleType expResult = CollectibleType.CREDIT;
         CollectibleType result = instance.getCollectibleType();

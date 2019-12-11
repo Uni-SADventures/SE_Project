@@ -42,7 +42,7 @@ public class EnemyCharacterTest {
      */
     @Test
     public void testTick() {
-        System.out.println("enemy tick");
+        //System.out.println("enemy tick");
         EnemyCharacter instance = null;
         instance.tick();
         // TODO review the generated test code and remove the default call to fail.

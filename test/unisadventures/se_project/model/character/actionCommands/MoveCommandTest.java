@@ -42,7 +42,7 @@ public class MoveCommandTest {
      */
     @Test
     public void testMoveLeft() {
-        System.out.println("moveLeft");
+        //System.out.println("moveLeft");
         MoveCommand instance = null;
         instance.moveLeft();
         // TODO review the generated test code and remove the default call to fail.
@@ -54,7 +54,7 @@ public class MoveCommandTest {
      */
     @Test
     public void testMoveRight() {
-        System.out.println("moveRight");
+        //System.out.println("moveRight");
         MoveCommand instance = null;
         instance.moveRight();
         // TODO review the generated test code and remove the default call to fail.

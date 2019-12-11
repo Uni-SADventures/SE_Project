@@ -45,7 +45,7 @@ public class GameTest {
      */
     @Test
     public void testGetDisplay() {
-        System.out.println("getDisplay");
+        //System.out.println("getDisplay");
         Game instance = null;
         Display expResult = null;
         Display result = instance.getDisplay();
@@ -59,7 +59,7 @@ public class GameTest {
      */
     @Test
     public void testGetKeyManager() {
-        System.out.println("getKeyManager");
+        //System.out.println("getKeyManager");
         Game instance = null;
         KeyManager expResult = null;
         KeyManager result = instance.getKeyManager();
@@ -73,7 +73,7 @@ public class GameTest {
      */
     @Test
     public void testStart() {
-        System.out.println("start");
+        //System.out.println("start");
         Game instance = null;
         instance.start();
         // TODO review the generated test code and remove the default call to fail.
@@ -85,7 +85,7 @@ public class GameTest {
      */
     @Test
     public void testGetCam() {
-        System.out.println("getCam");
+        //System.out.println("getCam");
         Game instance = null;
         GameCamera expResult = null;
         GameCamera result = instance.getCam();
@@ -99,7 +99,7 @@ public class GameTest {
      */
     @Test
     public void testStop() {
-        System.out.println("stop");
+        //System.out.println("stop");
         Game instance = null;
         instance.stop();
         // TODO review the generated test code and remove the default call to fail.
@@ -111,7 +111,7 @@ public class GameTest {
      */
     @Test
     public void testWait() {
-        System.out.println("wait");
+        //System.out.println("wait");
         Thread thread = null;
         Game instance = null;
         instance.wait(thread);
@@ -124,7 +124,7 @@ public class GameTest {
      */
     @Test
     public void testUpdate() {
-        System.out.println("update");
+        //System.out.println("update");
         Game instance = null;
         instance.update();
         // TODO review the generated test code and remove the default call to fail.
@@ -136,7 +136,7 @@ public class GameTest {
      */
     @Test
     public void testGetWidth() {
-        System.out.println("getWidth");
+        //System.out.println("getWidth");
         Game instance = null;
         int expResult = 0;
         int result = instance.getWidth();
@@ -150,7 +150,7 @@ public class GameTest {
      */
     @Test
     public void testGetHeight() {
-        System.out.println("getHeight");
+        //System.out.println("getHeight");
         Game instance = null;
         int expResult = 0;
         int result = instance.getHeight();

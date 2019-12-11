@@ -1,14 +1,12 @@
-
 package unisadventures.se_project.model;
 
 import unisadventures.se_project.util.Pair;
 
-
-
 /**
- * This class represents every element present in a world level, may it be
- * a character ora a static/dynamic object
- * It keeps track of its position and its dimension
+ * This class represents every element present in a world level, may it be a
+ * character ora a static/dynamic object It keeps track of its position and its
+ * dimension
+ *
  * @author Emilio
  */
 public abstract class WorldObject {
@@ -34,7 +32,39 @@ public abstract class WorldObject {
     }
 
     /**
-     * 
+     *
+     * @return the current x position of the character
+     */
+    public double getxPosition() {
+        return _xPosition;
+    }
+
+    /**
+     *
+     * @return the current y position of the character
+     */
+    public double getyPosition() {
+        return _yPosition;
+    }
+
+    /**
+     *
+     * @return the height of the character
+     */
+    public double getHeight() {
+        return _height;
+    }
+
+    /**
+     *
+     * @return the width of the character
+     */
+    public double getWidth() {
+        return _width;
+    }
+
+    /**
+     *
      * @return position x and y as a pair
      */
     public Pair<Double, Double> getPosition() {
@@ -43,7 +73,7 @@ public abstract class WorldObject {
     }
 
     /**
-     * 
+     *
      * @return width and heigth as a pair
      */
     public Pair<Double, Double> getDimension() {
@@ -54,13 +84,8 @@ public abstract class WorldObject {
     // Are you SURE this is common to all elements that extend WorldObject?
     // Will a platform really need a tick method?
     // If not, put them in an interface!
-    
     //EMILIO: I dunno, lets see if we may use it with moving platforms or interactive
     //objects, if useless we can delete it and put it when necessary
-    
     public abstract void tick();
 
-    
-
 }
-

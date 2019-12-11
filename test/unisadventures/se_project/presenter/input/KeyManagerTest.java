@@ -43,7 +43,7 @@ public class KeyManagerTest {
      */
     @Test
     public void testTick() {
-        System.out.println("tick");
+        //System.out.println("tick");
         KeyManager instance = new KeyManager();
         instance.tick();
         // TODO review the generated test code and remove the default call to fail.
@@ -55,7 +55,7 @@ public class KeyManagerTest {
      */
     @Test
     public void testKeyPressed() {
-        System.out.println("keyPressed");
+        //System.out.println("keyPressed");
         KeyEvent e = null;
         KeyManager instance = new KeyManager();
         instance.keyPressed(e);
@@ -68,7 +68,7 @@ public class KeyManagerTest {
      */
     @Test
     public void testKeyReleased() {
-        System.out.println("keyReleased");
+        //System.out.println("keyReleased");
         KeyEvent e = null;
         KeyManager instance = new KeyManager();
         instance.keyReleased(e);
@@ -81,7 +81,7 @@ public class KeyManagerTest {
      */
     @Test
     public void testKeyTyped() {
-        System.out.println("keyTyped");
+        //System.out.println("keyTyped");
         KeyEvent e = null;
         KeyManager instance = new KeyManager();
         instance.keyTyped(e);

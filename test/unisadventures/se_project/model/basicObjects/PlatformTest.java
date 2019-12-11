@@ -49,7 +49,7 @@ public class PlatformTest {
 
     @Test
     public void testGetImageFileName() {
-        System.out.println("getImageFileName");
+        //System.out.println("getImageFileName");
         String expResult = "test";
         String result = _instance.getImageFileName();
         assertEquals(expResult, result);

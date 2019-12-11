@@ -19,13 +19,13 @@ import unisadventures.se_project.view.gfx.Assets;
 public class GameState extends State {
 
     private PlayerCharacter player;
-    private ZombieEnemy enemy;
+    private ZombieEnemy zombieEnemy;
     //private World _world; //TODO
 
     public GameState(Game game /*, World world*/) {
         super(game/*,world*/);
         player = new PlayerCharacter(game, game.getWidth() / 2, 180, 100, 100, CharacterType.USER, 6, 1, 6, 300, "me");
-        enemy = new ZombieEnemy(game, 0, 100, 16, 32, CharacterType.ENEMY, 6, 1, 6, 300);
+        zombieEnemy = new ZombieEnemy(game, 100, 180, 32, 16, CharacterType.ENEMY, 6, 1, 6, 300);
         //_world = world ;
         game.getCam().move(100, 0);
         game.getCam().centerOnEntity(player);
@@ -35,25 +35,48 @@ public class GameState extends State {
     @Override
     public void tick() {
         player.tick();
-        enemy.tick();
-        
+        zombieEnemy.tick();
+
         /*World.forEach(WorldObject el){
                     el.tick() ;
                 } */
-
     }
 
     @Override
     public void displayView(Graphics g) {
         view.renderScenario(g);
         view.renderPlayer(g, player.getPosition().getFirstElement(), player.getPosition().getSecondElement());
-  
-        view.renderStuffMore(g, enemy.getPosition().getFirstElement(), enemy.getPosition().getSecondElement(), Assets.ground_1);
+
+        view.renderStuffMore(g, zombieEnemy.getPosition().getFirstElement(), zombieEnemy.getPosition().getSecondElement(), Assets.ground_1);
         /*World.forEach(WorldObject el){
                     view.renderStuffMore(g, el.x, el.y, el.image);
                 } */
         view.renderUi(g, player.getHealthBar(), player.getMaxHealth(), player.getCfu(), player.getLives());
 
+    }
+
+    public PlayerCharacter getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(PlayerCharacter player) {
+        this.player = player;
+    }
+
+    public ZombieEnemy getEnemy() {
+        return zombieEnemy;
+    }
+
+    public void setEnemy(ZombieEnemy enemy) {
+        this.zombieEnemy = enemy;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
 }

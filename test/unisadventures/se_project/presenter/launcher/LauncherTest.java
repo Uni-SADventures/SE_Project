@@ -42,7 +42,7 @@ public class LauncherTest {
      */
     @Test
     public void testMain() {
-        System.out.println("main");
+        //System.out.println("main");
         String[] args = null;
         Launcher.main(args);
         // TODO review the generated test code and remove the default call to fail.

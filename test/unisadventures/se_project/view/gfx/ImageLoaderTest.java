@@ -13,27 +13,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.*;
 import org.testng.annotations.Test;
+
 /**
  *
  * @author Emilio
  */
 public class ImageLoaderTest {
-    
+
     public ImageLoaderTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -43,11 +44,11 @@ public class ImageLoaderTest {
      */
     @Test
     public void testLoadImage() {
-        System.out.println("loadImage");
+
         String path = "";
         BufferedImage expResult = null;
         BufferedImage result = ImageLoader.loadImage("resources/images/char.png");
         Assertions.assertNotEquals(expResult, result);
     }
-    
+
 }

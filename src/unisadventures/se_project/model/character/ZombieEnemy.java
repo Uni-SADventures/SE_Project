@@ -26,12 +26,28 @@ public class ZombieEnemy extends EnemyCharacter {
     }
 
     @Override
-    /**
-     * @Author Emanuela Paolo 
-     * @param 
-     * This method implements the movement pattern of the zombie enemy. it moves left and right without stopping
-     */
+
     public void tick() {
+        attack();
+        getDamage();
+        movement();
+
+    }
+
+    /**
+     *
+     * @param speed the speed at which the enemy moves* Move the enemy speed
+     * pixels to the right. if speed is less than 0, it moves to the left
+     */
+    public void move(double speed) {
+        this._xPosition += speed;
+    }
+
+    /**
+     * This method implements the movement pattern of the zombie enemy. it moves
+     * left and right without stopping
+     */
+    private void movement() {
         if (!isMoving) {
             isMoving = true;
             movingLeft = true;
@@ -54,12 +70,37 @@ public class ZombieEnemy extends EnemyCharacter {
     }
 
     /**
-     * @Author Emanuela Paolo
-     * @param speed the speed at which the enemy moves* Move the enemy speed
-     * pixels to the right. if speed is less than 0, it moves to the left
+     * This method implements the attack of the zombie, when the zombie and the
+     * player meets, the player loses health.
+     *
      */
-    public void move(double speed) {
-        this._xPosition += speed;
+    public void attack() {
+        PlayerCharacter player = this.getGame().getGameState().getPlayer();
+
+        if (this._xPosition + this.getWidth() == player.getxPosition()
+                || this._xPosition == player.getxPosition() + player.getWidth()) {
+            if (this._yPosition < player.getyPosition() + player.getHeight()
+                    && this._yPosition + this.getHeight() >= player.getyPosition() + player.getHeight()) {
+                player.setHealthBar(player.getHealthBar() - 1);
+            }
+        }
     }
 
+    /**
+     * This method implements the attack of the player on a zombie enemy. When
+     * the player jumps over the zombie, it dies.
+     */
+    public void getDamage() {
+        PlayerCharacter player = this.getGame().getGameState().getPlayer();
+        if (this.getHealthBar() == -1) {
+            return;
+        }
+        if ((player.getxPosition() + player.getWidth() >= this.getxPosition() && player.getxPosition() + player.getWidth() <= this.getxPosition() + this.getWidth())
+                || (player.getxPosition() >= this.getxPosition() && player.getxPosition() <= this.getxPosition() + this.getWidth())) {
+            if (player.getyPosition() + player.getHeight() == this.getyPosition()) {
+                this.setHealthBar(-1);
+
+            }
+        }
+    }
 }

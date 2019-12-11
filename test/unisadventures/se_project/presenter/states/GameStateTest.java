@@ -43,7 +43,7 @@ public class GameStateTest {
      */
     @Test
     public void testTick() {
-        System.out.println("tick");
+        //System.out.println("tick");
         GameState instance = null;
         instance.tick();
         // TODO review the generated test code and remove the default call to fail.
@@ -55,7 +55,7 @@ public class GameStateTest {
      */
     @Test
     public void testDisplayView() {
-        System.out.println("displayView");
+        //System.out.println("displayView");
         Graphics g = null;
         GameState instance = null;
         instance.displayView(g);

@@ -43,7 +43,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
+        //System.out.println("execute");
         ActionManager instance = null;
         instance.execute();
         // TODO review the generated test code and remove the default call to fail.
@@ -55,7 +55,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testIdle() {
-        System.out.println("idle");
+        //System.out.println("idle");
         ActionManager instance = null;
         instance.idle();
         // TODO review the generated test code and remove the default call to fail.
@@ -67,7 +67,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testMoveLeft() {
-        System.out.println("moveLeft");
+        //System.out.println("moveLeft");
         ActionManager instance = null;
         instance.moveLeft();
         // TODO review the generated test code and remove the default call to fail.
@@ -79,7 +79,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testMoveRight() {
-        System.out.println("moveRight");
+        //System.out.println("moveRight");
         ActionManager instance = null;
         instance.moveRight();
         // TODO review the generated test code and remove the default call to fail.
@@ -91,7 +91,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testJump() {
-        System.out.println("jump");
+        //System.out.println("jump");
         ActionManager instance = null;
         instance.jump();
         // TODO review the generated test code and remove the default call to fail.
@@ -103,7 +103,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testAttack() {
-        System.out.println("attack");
+        //System.out.println("attack");
         ActionManager instance = null;
         instance.attack();
         // TODO review the generated test code and remove the default call to fail.
@@ -115,7 +115,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testFall() {
-        System.out.println("fall");
+        //System.out.println("fall");
         ActionManager instance = null;
         instance.fall();
         // TODO review the generated test code and remove the default call to fail.
@@ -127,7 +127,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testTakeDamage() {
-        System.out.println("takeDamage");
+        //System.out.println("takeDamage");
         int damage = 0;
         ActionManager instance = null;
         instance.takeDamage(damage);
@@ -140,7 +140,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testGrab() {
-        System.out.println("grab");
+        //System.out.println("grab");
         ActionManager instance = null;
         instance.grab();
         // TODO review the generated test code and remove the default call to fail.
@@ -152,7 +152,7 @@ public class ActionManagerTest {
      */
     @Test
     public void testGetPowered() {
-        System.out.println("getPowered");
+        //System.out.println("getPowered");
         PlayerCharacter p = null;
         ActionManager instance = null;
         PlayerCharacter expResult = null;
