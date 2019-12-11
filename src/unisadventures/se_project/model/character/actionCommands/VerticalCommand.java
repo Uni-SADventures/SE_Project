@@ -19,6 +19,7 @@ import unisadventures.se_project.model.basicObjects.Tile;
  */
 public class VerticalCommand extends ActionCommand{
     private double _initJump ;
+    private int gravity = 3;
     public VerticalCommand(Handler handler, BasicCharacter ch) {
         super(handler, ch);
         _initJump = -1;
@@ -91,7 +92,7 @@ public class VerticalCommand extends ActionCommand{
          int ty=(int)(_ch.getPosition().getSecondElement()+_ch.getSpeed()+ bounds.y + bounds.height)/Tile.TILEHEIGHT;
             if(!collisionWithTile((int)(_ch.getPosition().getFirstElement()+bounds.x)/Tile.TILEWIDTH, ty) 
                 && !collisionWithTile((int)(_ch.getPosition().getFirstElement()+bounds.x+bounds.width)/Tile.TILEWIDTH, ty) ){
-                _ch.setyPosition(_ch.getPosition().getSecondElement() +_ch.getSpeed());
+                _ch.setyPosition(_ch.getPosition().getSecondElement() +_ch.getSpeed() + gravity);
             }else {
                 _ch.setyPosition(ty*Tile.TILEHEIGHT  - bounds.y -bounds.height -1);
             }

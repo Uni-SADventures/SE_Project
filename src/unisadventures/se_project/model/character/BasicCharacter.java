@@ -2,6 +2,8 @@ package unisadventures.se_project.model.character;
 
 import unisadventures.se_project.model.WorldObject;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import unisadventures.se_project.model.Handler;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
 import unisadventures.se_project.presenter.launcher.Game;
@@ -267,7 +269,11 @@ public abstract class BasicCharacter extends WorldObject  {
         
        //  _game.start();
        _handler.getCam().centerOnEntity((PlayerCharacter) this);
-       _actions.execute();
+        try {
+            _actions.execute();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(BasicCharacter.class.getName()).log(Level.SEVERE, null, ex);
+        }
   
     }
      

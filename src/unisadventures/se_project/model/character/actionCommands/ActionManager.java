@@ -104,7 +104,7 @@ public class ActionManager implements MovementsInterface {
      * its character is in a stable position
      */
     public void idle() {
-        //TODO
+        //moveDown();
     }
     
     /**
@@ -220,11 +220,12 @@ public class thread implements Runnable{
         
         try{
             Thread.sleep(jumpingTime);
+            
             moveDown();
             _jumping=true;
         }catch(Exception e){
             e.printStackTrace();
-            new Thread(this).start();
+            //new Thread(this).start();
             System.exit(0);
             
         }
