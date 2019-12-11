@@ -43,7 +43,7 @@ public class MenuStateTest {
      */
     @Test
     public void testTick() {
-        //System.out.println("tick");
+        System.out.println("tick");
         MenuState instance = null;
         instance.tick();
         // TODO review the generated test code and remove the default call to fail.
@@ -55,7 +55,7 @@ public class MenuStateTest {
      */
     @Test
     public void testDisplayView() {
-        //System.out.println("displayView");
+        System.out.println("displayView");
         Graphics g = null;
         MenuState instance = null;
         instance.displayView(g);

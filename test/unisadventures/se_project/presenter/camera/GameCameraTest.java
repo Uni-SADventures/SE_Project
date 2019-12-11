@@ -43,7 +43,7 @@ public class GameCameraTest {
      */
     @Test
     public void testCenterOnEntity() {
-        //System.out.println("centerOnEntity");
+        System.out.println("centerOnEntity");
         PlayerCharacter p = null;
         GameCamera instance = null;
         instance.centerOnEntity(p);
@@ -56,7 +56,7 @@ public class GameCameraTest {
      */
     @Test
     public void testCenterOnEntityFloor() {
-        //System.out.println("centerOnEntityFloor");
+        System.out.println("centerOnEntityFloor");
         PlayerCharacter p = null;
         GameCamera instance = null;
         instance.centerOnEntityFloor(p);
@@ -69,7 +69,7 @@ public class GameCameraTest {
      */
     @Test
     public void testMove() {
-        //System.out.println("move");
+        System.out.println("move");
         float xAmt = 0.0F;
         float yAmt = 0.0F;
         GameCamera instance = null;
@@ -83,7 +83,7 @@ public class GameCameraTest {
      */
     @Test
     public void testGetxOffset() {
-        //System.out.println("getxOffset");
+        System.out.println("getxOffset");
         GameCamera instance = null;
         float expResult = 0.0F;
         float result = instance.getxOffset();
@@ -97,7 +97,7 @@ public class GameCameraTest {
      */
     @Test
     public void testSetxOffset() {
-        //System.out.println("setxOffset");
+        System.out.println("setxOffset");
         float xOffset = 0.0F;
         GameCamera instance = null;
         instance.setxOffset(xOffset);
@@ -110,7 +110,7 @@ public class GameCameraTest {
      */
     @Test
     public void testGetyOffset() {
-        //System.out.println("getyOffset");
+        System.out.println("getyOffset");
         GameCamera instance = null;
         float expResult = 0.0F;
         float result = instance.getyOffset();
@@ -124,7 +124,7 @@ public class GameCameraTest {
      */
     @Test
     public void testSetyOffset() {
-        //System.out.println("setyOffset");
+        System.out.println("setyOffset");
         float yOffset = 0.0F;
         GameCamera instance = null;
         instance.setyOffset(yOffset);

@@ -42,7 +42,7 @@ public class VerticalCommandTest {
      */
     @Test
     public void testJump() {
-        //System.out.println("jump");
+        System.out.println("jump");
         VerticalCommand instance = null;
         boolean expResult = false;
         boolean result = instance.jump();
@@ -56,7 +56,7 @@ public class VerticalCommandTest {
      */
     @Test
     public void testFall() {
-        //System.out.println("fall");
+        System.out.println("fall");
         VerticalCommand instance = null;
         instance.fall();
         // TODO review the generated test code and remove the default call to fail.
@@ -68,7 +68,7 @@ public class VerticalCommandTest {
      */
     @Test
     public void testResetCounter() {
-        //System.out.println("resetCounter");
+        System.out.println("resetCounter");
         VerticalCommand instance = null;
         instance.resetCounter();
         // TODO review the generated test code and remove the default call to fail.

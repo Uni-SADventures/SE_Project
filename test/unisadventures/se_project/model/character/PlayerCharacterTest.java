@@ -40,7 +40,7 @@ public class PlayerCharacterTest {
     @Test
     public void testSomeMethod() {
         
-        //System.out.println("player tick");
+        System.out.println("player tick");
         PlayerCharacter instance = null;
         
         //  I should just check that idle is being executed

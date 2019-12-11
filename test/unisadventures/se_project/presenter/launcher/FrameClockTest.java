@@ -44,7 +44,7 @@ public class FrameClockTest {
      */
     @Test
     public void testRun() {
-        //System.out.println("run");
+        System.out.println("run");
         FrameClock instance = new FrameClock();
         instance.start();
         Assertions.assertTrue(instance.isAlive());
@@ -57,7 +57,7 @@ public class FrameClockTest {
      */
     @Test
     public void testRegisterObserver() {
-        //System.out.println("registerObserver");
+        System.out.println("registerObserver");
         FrameListener o = null;
         FrameClock instance = new FrameClock();
         instance.registerObserver(o);
@@ -70,7 +70,7 @@ public class FrameClockTest {
      */
     @Test
     public void testUnregisterObserver() {
-        //System.out.println("unregisterObserver");
+        System.out.println("unregisterObserver");
         FrameListener o = null;
         FrameClock instance = new FrameClock();
         instance.unregisterObserver(o);
@@ -83,7 +83,7 @@ public class FrameClockTest {
      */
     @Test
     public void testNotifyObservers() {
-        //System.out.println("notifyObservers");
+        System.out.println("notifyObservers");
         FrameClock instance = new FrameClock();
         instance.notifyObservers();
         // TODO review the generated test code and remove the default call to fail.

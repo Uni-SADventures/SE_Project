@@ -42,7 +42,7 @@ public class HitCommandTest {
      */
     @Test
     public void testHit() {
-        //System.out.println("hit");
+        System.out.println("hit");
         HitCommand instance = null;
         instance.hit();
         // TODO review the generated test code and remove the default call to fail.

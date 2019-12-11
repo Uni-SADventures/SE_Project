@@ -52,7 +52,7 @@ public class DestructibleObjectTest {
      */
     @Test
     public void testGetIntactImageFileName() {
-        //System.out.println("getIntactImageFileName");
+        System.out.println("getIntactImageFileName");
         DestructibleObject instance = new DestructibleObject(_xPosition, _yPosition, _height, _width, _imageFileNameList);
         String expResult = "IntactObject";
         String result = instance.getIntactImageFileName();
@@ -66,7 +66,7 @@ public class DestructibleObjectTest {
      */
     @Test
     public void testGetNextDestructionImageFileName() {
-        //System.out.println("getNextDestructionImageFileName");
+        System.out.println("getNextDestructionImageFileName");
         DestructibleObject instance = new DestructibleObject(_xPosition, _yPosition, _height, _width, _imageFileNameList);;
         String expResult1 = "firstFrameDestruction";
         String expResult2 = "secondFrameDestruction";

@@ -43,7 +43,7 @@ public class WpuKnifeTest {
      */
     @Test
     public void testAttack() {
-        //System.out.println("attack");
+        System.out.println("attack");
         WpuKnife instance = null;
         instance.attack();
         // TODO review the generated test code and remove the default call to fail.
@@ -55,7 +55,7 @@ public class WpuKnifeTest {
      */
     @Test
     public void testMoveLeft() {
-        //System.out.println("moveLeft");
+        System.out.println("moveLeft");
         WpuKnife instance = null;
         instance.moveLeft();
         // TODO review the generated test code and remove the default call to fail.
@@ -67,7 +67,7 @@ public class WpuKnifeTest {
      */
     @Test
     public void testJump() {
-        //System.out.println("jump");
+        System.out.println("jump");
         WpuKnife instance = null;
         instance.jump();
         // TODO review the generated test code and remove the default call to fail.
@@ -79,7 +79,7 @@ public class WpuKnifeTest {
      */
     @Test
     public void testFall() {
-        //System.out.println("fall");
+        System.out.println("fall");
         WpuKnife instance = null;
         instance.fall();
         // TODO review the generated test code and remove the default call to fail.
@@ -91,7 +91,7 @@ public class WpuKnifeTest {
      */
     @Test
     public void testTakeDamage() {
-        //System.out.println("takeDamage");
+        System.out.println("takeDamage");
         int damage = 0;
         WpuKnife instance = null;
         instance.takeDamage(damage);
@@ -104,7 +104,7 @@ public class WpuKnifeTest {
      */
     @Test
     public void testGetPowered() {
-        //System.out.println("getPowered");
+        System.out.println("getPowered");
         PlayerCharacter p = null;
         WpuKnife instance = null;
         PlayerCharacter expResult = null;
@@ -119,7 +119,7 @@ public class WpuKnifeTest {
      */
     @Test
     public void testGrab() {
-        //System.out.println("grab");
+        System.out.println("grab");
         WpuKnife instance = null;
         instance.grab();
         // TODO review the generated test code and remove the default call to fail.
@@ -131,7 +131,7 @@ public class WpuKnifeTest {
      */
     @Test
     public void testMoveRight() {
-        //System.out.println("moveRight");
+        System.out.println("moveRight");
         WpuKnife instance = null;
         instance.moveRight();
         // TODO review the generated test code and remove the default call to fail.
