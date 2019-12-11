@@ -7,6 +7,7 @@ package unisadventures.se_project.model.character;
 
 import org.testng.annotations.Test;
 import org.junit.jupiter.api.Assertions;
+import unisadventures.se_project.model.Handler;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.CharacterType;
 
@@ -17,11 +18,11 @@ import unisadventures.se_project.util.CharacterType;
 public class ZombieEnemyTest {
 
     private ZombieEnemy enemy;
-    private Game game;
+    private Handler handler;
 
     public ZombieEnemyTest() {
-        Game game = new Game("test", 300, 300);
-        enemy = new ZombieEnemy(game, 100, 200, 16, 32, CharacterType.ENEMY, 1, 1, 1, 1);
+        handler = new Handler(new Game("test", 300, 300));
+        enemy = new ZombieEnemy(handler, 100, 200, 16, 32, CharacterType.ENEMY, 1, 1, 1, 1);
     }
 
     @Test

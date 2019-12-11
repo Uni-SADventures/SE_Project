@@ -13,6 +13,7 @@ import unisadventures.se_project.model.character.ZombieEnemy;
 
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.view.gfx.Assets;
+import unisadventures.se_project.view.gfx.StateGraphics;
 
 /**
  * This class extends state and implements gamestate, the actual state were the
@@ -71,6 +72,26 @@ public class GameState extends State {
                 } */
         view.renderUi(g, player.getHealthBar(), player.getMaxHealth(), player.getCfu(), player.getLives());
 
+    }
+
+    public PlayerCharacter getPlayer() {
+        return player;
+    }
+
+    public ZombieEnemy getEnemy() {
+        return enemy;
+    }
+
+    public World getWorld() {
+        return _world;
+    }
+
+    public Handler getHandler() {
+        return _handler;
+    }
+
+    public StateGraphics getView() {
+        return view;
     }
 
 }

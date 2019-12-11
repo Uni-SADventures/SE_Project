@@ -127,6 +127,47 @@ public abstract class BasicCharacter extends WorldObject {
         }
     }
 
+    public CharacterType getTypeOfCharacter() {
+        return _typeOfCharacter;
+    }
+
+    public Pair<List<String>, List<String>> getWalk() {
+        return _walk;
+    }
+
+    public Pair<List<String>, List<String>> getJump() {
+        return _jump;
+    }
+
+    public Pair<List<String>, List<String>> getFall() {
+        return _fall;
+    }
+
+    public Pair<List<String>, List<String>> getIdle() {
+        return _idle;
+    }
+
+    public Pair<List<String>, List<String>> getPunch() {
+        return _punch;
+    }
+
+    public Pair<List<String>, List<String>> getBeDamaged() {
+        return _beDamaged;
+    }
+
+    public ActionManager getActions() {
+        return _actions;
+    }
+
+    public int getxPosition() {
+        return _xPosition;
+    }
+
+    public int getyPosition() {
+        return _yPosition;
+    }
+    
+
     public List<String> getJumpSprites(DirectionType d) {
         if (null == d) {
             return null;

@@ -33,6 +33,22 @@ public abstract class WorldObject {
         this._yPosition = _yPosition;
     }
 
+    public int getxPosition() {
+        return _xPosition;
+    }
+
+    public int getyPosition() {
+        return _yPosition;
+    }
+
+    public int getHeight() {
+        return _height;
+    }
+
+    public int getWidth() {
+        return _width;
+    }
+
     /**
      * 
      * @return position x and y as a pair
