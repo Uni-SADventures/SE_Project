@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/SE_Project/src/unisadventures/se_project/model/character/actionCommands/ActionManager.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/SE_Project/src/unisadventures/se_project/presenter/launcher/Game.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/SE_Project/src/unisadventures/se_project/presenter/input/KeyManager.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/SE_Project/src/unisadventures/se_project/model/character/actionCommands/VerticalCommand.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/SE_Project/src/unisadventures/se_project/model/character/BasicCharacter.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/SE_Project/src/unisadventures/se_project/model/character/actionCommands/ActionCommand.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/SE_Project/src/unisadventures/se_project/presenter/states/GameState.java</file>
+            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/view/gfx/Assets.java</file>
+            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/</file>
+            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/view/gfx/StateGraphics.java</file>
         </group>
     </open-files>
 </project-private>
