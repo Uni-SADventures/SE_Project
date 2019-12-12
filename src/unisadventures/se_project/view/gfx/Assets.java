@@ -22,7 +22,7 @@ public class Assets {
         //load player,scenario and enemy
         player = ImageLoader.loadImage("resources/images/char.png");
         //     player = ImageLoader.loadImage("resources/images/character_sprite.png").getSubimage(48, 0, 16, height);
-        scenario = ImageLoader.loadImage("resources/images/scenario.jpg");
+        scenario = ImageLoader.loadImage("resources/images/sfondo_unisa_pixel.jpg");
         enemy = ImageLoader.loadImage("resources/images/enemy_sprite.png").getSubimage(16, 96, 16, height);
 
         //load tiles 

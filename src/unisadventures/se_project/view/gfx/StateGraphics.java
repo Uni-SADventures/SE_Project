@@ -28,7 +28,7 @@ public class StateGraphics {
      * @param g graphics that are needed to draw with
      */
     public void renderScenario(Graphics g) {
-        g.drawImage(Assets.scenario, (int) (-_handler.getCam().getxOffset()/10), (int) (0-_handler.getCam().getyOffset()/10),1200,600, null);
+        g.drawImage(Assets.scenario, (int) (-_handler.getCam().getxOffset()/18), (int) (0-_handler.getCam().getyOffset()/18),1200,600, null);
       
 
     }

@@ -28,21 +28,18 @@ public class GameState extends State {
     private World _world;
 
     public GameState(Handler handler /*, World world*/) {
-        super(handler/*,world*/);
-        player = new PlayerCharacter(handler, 140, 90, 100, 100, CharacterType.USER, 6, 1, 6, 170, "me");
-        enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
-        
-        
+        super(handler);
         try {
             _world =new World(handler,"resources/images/world1.txt");
             System.out.println(_world);
         } catch (Exception ex) {
             System.exit(0);
         }
-        
-        
         handler.setWorld(_world);
 
+        player = new PlayerCharacter(handler, 140, 90, 100, 100, CharacterType.USER, 6, 1, 6, 170, "me");
+        enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
+        
         handler.getGame().getCam().move(100, 0);
         handler.getCam().centerOnEntity(player);
 
@@ -54,6 +51,7 @@ public class GameState extends State {
 
     @Override
     public void tick() {
+        _world.tick();
         player.tick();
         enemy.tick();
         

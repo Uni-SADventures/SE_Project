@@ -35,7 +35,7 @@ public class GameCamera {
          */
 	public void centerOnEntity(PlayerCharacter p){
 		xOffset = (float) (p.getPosition().getFirstElement() - handler.getWidth() / 2 + p.getDimension().getFirstElement() / 2);
-		//yOffset = (float) (p.getPosition().getSecondElement() - game.getHeight() / 2 + p.getDimension().getSecondElement() / 2);
+		//yOffset = (float) (p.getPosition().getSecondElement() - handler.getHeight() / 2 + p.getDimension().getSecondElement() / 2);
                 checkBlankSpace();
         }
         

@@ -52,7 +52,7 @@ public class ActionManager implements MovementsInterface {
      */
     public void execute(){
         
-       
+       //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
         if(_ch instanceof PlayerCharacter){
             if(!_jumping)
                 fall();
