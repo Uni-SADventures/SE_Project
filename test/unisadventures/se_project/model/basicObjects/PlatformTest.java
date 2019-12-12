@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class PlatformTest {
     
-    private final double _xPosition;
-    private final double _yPosition;
-    private final double _height;
-    private final double _width;
+    private final int _xPosition;
+    private final int _yPosition;
+    private final int _height;
+    private final int _width;
     private final String _imageFileName;
     private final Platform _instance;
     

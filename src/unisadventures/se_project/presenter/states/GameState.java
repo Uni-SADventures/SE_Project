@@ -30,7 +30,7 @@ public class GameState extends State {
     public GameState(Handler handler /*, World world*/) {
         super(handler/*,world*/);
         player = new PlayerCharacter(handler, 140, 90, 100, 100, CharacterType.USER, 6, 1, 6, 170, "me");
-        enemy = new ZombieEnemy(handler, 0, 100, 16, 32, CharacterType.ENEMY, 6, 1, 6, 300);
+        enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
         
         
         try {
@@ -69,7 +69,7 @@ public class GameState extends State {
         _world.render(g);
         view.renderPlayer(g, player.getPosition().getFirstElement(), player.getPosition().getSecondElement());
   
-        view.renderStuffMore(g, enemy.getPosition().getFirstElement(), enemy.getPosition().getSecondElement(), Assets.ground_1);
+        view.renderStuffMore(g, enemy.getxPosition(), enemy.getyPosition(),enemy.getDimension().getFirstElement(),enemy.getDimension().getSecondElement(), Assets.enemy);
         /*World.forEach(WorldObject el){
                     view.renderStuffMore(g, el.x, el.y, el.image);
                 } */

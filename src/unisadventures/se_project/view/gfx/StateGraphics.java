@@ -28,7 +28,7 @@ public class StateGraphics {
      * @param g graphics that are needed to draw with
      */
     public void renderScenario(Graphics g) {
-        g.drawImage(Assets.scenario, (int) -_handler.getCam().getxOffset()/5, (int) -_handler.getCam().getyOffset()/5, null);
+        g.drawImage(Assets.scenario, (int) (-_handler.getCam().getxOffset()/10), (int) (0-_handler.getCam().getyOffset()/10),1200,600, null);
       
 
     }
@@ -53,8 +53,8 @@ public class StateGraphics {
      * @param y y position of the object
      * @param sprite image needed to represent our object
      */
-    public void renderStuffMore(Graphics g, double x, double y, BufferedImage sprite){
-        g.drawImage( sprite, (int) (x- _handler.getCam().getxOffset()), (int) (y-_handler.getCam().getyOffset()), null);
+    public void renderStuffMore(Graphics g, double x, double y, int width,int height,BufferedImage sprite){
+        g.drawImage( sprite, (int) (x- _handler.getCam().getxOffset()), (int) (y-_handler.getCam().getyOffset()),width,height, null);
     }
     
     
