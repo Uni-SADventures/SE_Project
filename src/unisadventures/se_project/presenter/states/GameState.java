@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.presenter.world.World;
 
@@ -64,7 +65,17 @@ public class GameState extends State {
     @Override
     public void displayView(Graphics g) {
         view.renderScenario(g);
-        _world.render(g);
+        int xStart=(int)Math.max(0,_handler.getCam().getxOffset()/Tile.TILEWIDTH-1);
+        int xEnd=(int)Math.min(_world.getWidth(),(_handler.getCam().getxOffset() + _handler.getWidth())/Tile.TILEWIDTH+1);
+        int yStart=(int)Math.max(0,_handler.getCam().getyOffset()/Tile.TILEHEIGHT);
+        int yEnd=(int)Math.min(_world.getHeight(),(_handler.getCam().getyOffset() + _handler.getHeight())/Tile.TILEHEIGHT+1);
+        
+        for(int y=yStart;y<yEnd;y++){
+            for(int x=xStart;x<xEnd;x++){
+                
+                view.renderTile(g, _world.getTile(x,y).getTexture() ,(int)(x*Tile.TILEWIDTH - _handler.getCam().getxOffset()), (int)(y*Tile.TILEHEIGHT - _handler.getCam().getyOffset()   ));
+            }
+        }
         view.renderPlayer(g, player.getPosition().getFirstElement(), player.getPosition().getSecondElement());
   
         view.renderStuffMore(g, enemy.getxPosition(), enemy.getyPosition(),enemy.getDimension().getFirstElement(),enemy.getDimension().getSecondElement(), Assets.enemy);

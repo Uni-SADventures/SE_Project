@@ -5,7 +5,6 @@
  */
 package unisadventures.se_project.model.basicObjects;
 
-import unisadventures.se_project.presenter.world.Tile;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**

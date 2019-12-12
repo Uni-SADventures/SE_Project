@@ -9,7 +9,7 @@ import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
-import unisadventures.se_project.presenter.world.Tile;
+import unisadventures.se_project.model.basicObjects.Tile;
 
 /**
  *This class does implement all vertical movements, may they be jumping or falling.

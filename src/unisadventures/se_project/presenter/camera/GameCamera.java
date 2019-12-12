@@ -8,7 +8,7 @@ package unisadventures.se_project.presenter.camera;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
-import unisadventures.se_project.presenter.world.Tile;
+import unisadventures.se_project.model.basicObjects.Tile;
 
 /**
  *This class does create a gamecamera as a support for game display. It does keep

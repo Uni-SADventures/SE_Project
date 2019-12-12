@@ -43,7 +43,7 @@ public class ZombieEnemy extends EnemyCharacter {
      * pixels to the right. if speed is less than 0, it moves to the left
      */
     public void move(double speed) {
-        this._xPosition += speed;
+        this.setxPosition((int) (getxPosition() + speed));
     }
 
     /**
@@ -56,14 +56,14 @@ public class ZombieEnemy extends EnemyCharacter {
             movingLeft = true;
         }
         if (isMoving && movingLeft) {
-            if (this._xPosition - this.getSpeed() < 0) {
+            if (this.getxPosition() - this.getSpeed() < 0) {
                 movingLeft = false;
                 move(this.getSpeed());
             } else {
                 move(-this.getSpeed());
             }
         } else if (isMoving && !movingLeft) {
-            if (this._xPosition + this.getSpeed() < this.getHandler().getGame().getWidth()) {
+            if (this.getxPosition() + this.getSpeed() < this.getHandler().getGame().getWidth()) {
                 move(this.getSpeed());
             } else {
                 movingLeft = true;
@@ -122,12 +122,5 @@ public class ZombieEnemy extends EnemyCharacter {
         }
     }
 
-    public int getxPosition() {
-        return _xPosition;
-    }
-
-    public int getyPosition() {
-        return _yPosition;
-    }
-    
+   
 }

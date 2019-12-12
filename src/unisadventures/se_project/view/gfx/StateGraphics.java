@@ -8,6 +8,8 @@ package unisadventures.se_project.view.gfx;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import static unisadventures.se_project.model.basicObjects.Tile.TILEHEIGHT;
+import static unisadventures.se_project.model.basicObjects.Tile.TILEWIDTH;
 import unisadventures.se_project.presenter.launcher.Handler;
 
 /**
@@ -138,5 +140,7 @@ public class StateGraphics {
         
         
         }
-    
+    public void renderTile(Graphics g,BufferedImage b,int x,int y){
+        g.drawImage(b, x, y, TILEWIDTH, TILEHEIGHT, null);
+    }
 }

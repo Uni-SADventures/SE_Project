@@ -1,10 +1,9 @@
 package unisadventures.se_project.model.character;
 
-import unisadventures.se_project.model.WorldObject;
 import java.util.*;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
-import unisadventures.se_project.presenter.launcher.Game;
+
 import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.Pair;
@@ -19,7 +18,7 @@ import unisadventures.se_project.util.Pair;
  *
  * @author Emilio
  */
-public abstract class BasicCharacter extends WorldObject {
+public abstract class BasicCharacter {
 
     private final CharacterType _typeOfCharacter;
     private int _healthBar;
@@ -28,7 +27,10 @@ public abstract class BasicCharacter extends WorldObject {
     private int _maxJump;
     private int _speed;
     private DirectionType _facing;
-
+    private int _xPosition;
+    private int _yPosition;
+    private int _height;
+    private int _width ;
     //all the sets of sprites for actions, with left and right versions
     private Pair<List<String>, List<String>> _walk;
     private Pair<List<String>, List<String>> _jump;
@@ -42,7 +44,10 @@ public abstract class BasicCharacter extends WorldObject {
     
 
     public BasicCharacter(Handler hand, int xPosition, int yPosition, int height, int width, CharacterType type, int healthBar, int strength, int maxHealth, int maxJump) {
-        super(xPosition, yPosition, height, width);
+        _xPosition = xPosition;
+        _yPosition = yPosition;
+        _height = height;
+        _width = width;
         _typeOfCharacter = type;
         _healthBar = healthBar;
         _strength = strength;
@@ -235,7 +240,7 @@ public abstract class BasicCharacter extends WorldObject {
      *
      * @param dam
      */
-    @Override
+  
     public void takeDamage(int dam) {
         if (_healthBar > dam) {
             _healthBar -= dam;
@@ -255,7 +260,7 @@ public abstract class BasicCharacter extends WorldObject {
     /**
      * Method called every time it is the moment to update all actions.
      */
-    @Override
+
     public void tick() {
 
         //  _game.start();
@@ -263,11 +268,45 @@ public abstract class BasicCharacter extends WorldObject {
 
     }
     
-    
-   @Override
+
     public String getCurrentSprite() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void setxPosition(int _xPosition) {
+        this._xPosition = _xPosition;
+    }
+
+    public void setyPosition(int _yPosition) {
+        this._yPosition = _yPosition;
+    }
+
+    /**
+     * 
+     * @return position x and y as a pair
+     */
+    public Pair<Integer, Integer> getPosition() {
+        Pair<Integer, Integer> positionPair = new Pair<>(_xPosition, _yPosition);
+        return positionPair;
+    }
+
+    /**
+     * 
+     * @return width and heigth as a pair
+     */
+    public Pair<Integer, Integer> getDimension() {
+        Pair<Integer, Integer> dimensionPair = new Pair<>(_width, _height);
+        return dimensionPair;
+    }
+
     
+ public int getxPosition() {
+        return _xPosition;
+    }
+
+    public int getyPosition() {
+        return _yPosition;
+    }
+    
+   
 }

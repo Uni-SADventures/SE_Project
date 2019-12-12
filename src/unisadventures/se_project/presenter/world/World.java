@@ -5,10 +5,13 @@
  */
 package unisadventures.se_project.presenter.world;
 
+import unisadventures.se_project.model.basicObjects.Tile;
 import java.awt.Graphics;
 import java.io.IOException;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.presenter.launcher.Game;
+import unisadventures.se_project.presenter.states.GameState;
+import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.Utils;
 
 /**
@@ -29,22 +32,7 @@ public class World {
     public void tick(){
         
     }
-    
-    public void render(Graphics g){
-        int xStart=(int)Math.max(0,handler.getCam().getxOffset()/Tile.TILEWIDTH-1);
-        int xEnd=(int)Math.min(width,(handler.getCam().getxOffset() + handler.getWidth())/Tile.TILEWIDTH+1);
-        int yStart=(int)Math.max(0,handler.getCam().getyOffset()/Tile.TILEHEIGHT);
-        int yEnd=(int)Math.min(height,(handler.getCam().getyOffset() + handler.getHeight())/Tile.TILEHEIGHT+1);
-        
-        for(int y=yStart;y<yEnd;y++){
-            for(int x=xStart;x<xEnd;x++){
-                getTile(x, y).render(g, (int)(x*Tile.TILEWIDTH - handler.getCam().getxOffset()), (int)(y*Tile.TILEHEIGHT - handler.getCam().getyOffset()
-                        ));
-            }
-        }
-    
-    }
-    
+ 
     public Tile getTile(int x, int y){
       if (x<0 || y<0 || x>= width || y>=height)
           return Tile.rockTile;

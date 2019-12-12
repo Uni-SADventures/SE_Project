@@ -1,20 +1,25 @@
 package unisadventures.se_project.model.basicObjects;
 
 
-import unisadventures.se_project.model.WorldObject;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import unisadventures.se_project.util.CollectibleType;
 
-public class CollectibleItem extends WorldObject implements CollectibleItemInterface {
+public class CollectibleItem  implements CollectibleItemInterface {
     
+    private int _xPosition;  // Because position may vary in some objects
+    private int _yPosition;  // (may not be the cleanest option, refactor?)
+    private final int _height;
+    private final int _width;
     private final ArrayList<String> _imageFileNameList;
     private final CollectibleType _type;
     private final int _listSize;
     private int _counter;
     
     public CollectibleItem(int xPosition, int yPosition, int height, int width, ArrayList<String> imageFileNameList, CollectibleType type) {
-        super(xPosition, yPosition, height, width);
+        _xPosition = xPosition ;
+        _yPosition = yPosition ;
+        _height = height ;
+        _width = width ;
         _imageFileNameList = imageFileNameList;
         _type = type;
         _listSize = _imageFileNameList.size();
@@ -36,20 +41,7 @@ public class CollectibleItem extends WorldObject implements CollectibleItemInter
         return _type;
     }
 
-    @Override
-    public void tick() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void takeDamage(int dam) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getCurrentSprite() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 
     
