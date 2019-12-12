@@ -3,10 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/krist/Desktop/SE_Project/test/unisadventures/se_project/model/character/ZombieEnemyTest.java</file>
-            <file>file:/C:/Users/krist/Desktop/SE_Project/test/unisadventures/se_project/model/basicObjects/CollectibleItemTest.java</file>
-            <file>file:/C:/Users/krist/Desktop/SE_Project/test/unisadventures/se_project/model/basicObjects/PlatformTest.java</file>
-            <file>file:/C:/Users/krist/Desktop/SE_Project/test/unisadventures/se_project/model/basicObjects/DestructibleObjectTest.java</file>
+            <file>file:/Users/danielevalentino/Desktop/SE_Project/src/unisadventures/se_project/presenter/world/Tile.java</file>
         </group>
     </open-files>
 </project-private>

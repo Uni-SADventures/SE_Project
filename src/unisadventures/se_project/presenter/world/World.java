@@ -31,7 +31,7 @@ public class World {
     }
     
     public void render(Graphics g){
-        int xStart=(int)Math.max(0,handler.getCam().getxOffset()/Tile.TILEWIDTH+1);
+        int xStart=(int)Math.max(0,handler.getCam().getxOffset()/Tile.TILEWIDTH-1);
         int xEnd=(int)Math.min(width,(handler.getCam().getxOffset() + handler.getWidth())/Tile.TILEWIDTH+1);
         int yStart=(int)Math.max(0,handler.getCam().getyOffset()/Tile.TILEHEIGHT);
         int yEnd=(int)Math.min(height,(handler.getCam().getyOffset() + handler.getHeight())/Tile.TILEHEIGHT+1);
