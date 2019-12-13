@@ -1,14 +1,12 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
-import java.io.IOException;
+
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Handler;
-import unisadventures.se_project.presenter.world.World;
+import unisadventures.se_project.model.GameLevel;
 
-import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 
@@ -26,17 +24,17 @@ public class GameState extends State {
 
     private PlayerCharacter player;
     private ZombieEnemy enemy;
-    private World _world;
+    private GameLevel _level;
 
     public GameState(Handler handler /*, World world*/) {
         super(handler);
         try {
-            _world =new World(handler,"resources/images/world1.txt");
-            System.out.println(_world);
+            _level =new GameLevel("resources/images/world1.txt");
+            System.out.println(_level);
         } catch (Exception ex) {
             System.exit(0);
         }
-        handler.setWorld(_world);
+        handler.setWorld(_level);
 
         player = new PlayerCharacter(handler, 140, 90, 100, 100, CharacterType.USER, 6, 1, 6, 170, "me");
         enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
@@ -52,7 +50,7 @@ public class GameState extends State {
 
     @Override
     public void tick() {
-        _world.tick();
+        _level.tick();
         player.tick();
         enemy.tick();
         
@@ -66,14 +64,14 @@ public class GameState extends State {
     public void displayView(Graphics g) {
         view.renderScenario(g);
         int xStart=(int)Math.max(0,_handler.getCam().getxOffset()/Tile.TILEWIDTH-1);
-        int xEnd=(int)Math.min(_world.getWidth(),(_handler.getCam().getxOffset() + _handler.getWidth())/Tile.TILEWIDTH+1);
+        int xEnd=(int)Math.min(_level.getWidth(),(_handler.getCam().getxOffset() + _handler.getWidth())/Tile.TILEWIDTH+1);
         int yStart=(int)Math.max(0,_handler.getCam().getyOffset()/Tile.TILEHEIGHT);
-        int yEnd=(int)Math.min(_world.getHeight(),(_handler.getCam().getyOffset() + _handler.getHeight())/Tile.TILEHEIGHT+1);
+        int yEnd=(int)Math.min(_level.getHeight(),(_handler.getCam().getyOffset() + _handler.getHeight())/Tile.TILEHEIGHT+1);
         
         for(int y=yStart;y<yEnd;y++){
             for(int x=xStart;x<xEnd;x++){
                 
-                view.renderTile(g, _world.getTile(x,y).getTexture() ,(int)(x*Tile.TILEWIDTH - _handler.getCam().getxOffset()), (int)(y*Tile.TILEHEIGHT - _handler.getCam().getyOffset()   ));
+                view.renderTile(g, _level.getTile(x,y).getTexture() ,(int)(x*Tile.TILEWIDTH - _handler.getCam().getxOffset()), (int)(y*Tile.TILEHEIGHT - _handler.getCam().getyOffset()   ));
             }
         }
         view.renderPlayer(g, player.getPosition().getFirstElement(), player.getPosition().getSecondElement());

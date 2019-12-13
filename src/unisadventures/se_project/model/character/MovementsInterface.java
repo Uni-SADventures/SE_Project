@@ -5,9 +5,6 @@
  */
 package unisadventures.se_project.model.character;
 
-import unisadventures.se_project.util.DirectionType;
-
-
 
 /**
  *This interface represent all basic movement methods to implement for every type of character

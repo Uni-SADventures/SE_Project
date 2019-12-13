@@ -5,7 +5,7 @@
  */
 package unisadventures.se_project.presenter.launcher;
 
-import unisadventures.se_project.presenter.world.World;
+import unisadventures.se_project.model.GameLevel;
 import unisadventures.se_project.presenter.camera.GameCamera;
 import unisadventures.se_project.presenter.input.KeyManager;
 import unisadventures.se_project.presenter.launcher.Game;
@@ -17,7 +17,7 @@ import unisadventures.se_project.presenter.launcher.Game;
 public class Handler {
      
     private Game game;
-    private World world;
+    private GameLevel world;
     
     public Handler(Game game) {
         this.game=game;
@@ -47,11 +47,11 @@ public class Handler {
         this.game = game;
     }
 
-    public World getWorld() {
+    public GameLevel getWorld() {
         return world;
     }
 
-    public void setWorld(World world) {
+    public void setWorld(GameLevel world) {
         this.world = world;
     }
     

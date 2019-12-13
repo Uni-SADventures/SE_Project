@@ -5,12 +5,8 @@
  */
 package unisadventures.se_project.model.basicObjects;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import unisadventures.se_project.model.basicObjects.LimitTile;
-import unisadventures.se_project.model.basicObjects.RockTile;
-import unisadventures.se_project.model.basicObjects.SkyTile;
 
 /**
  *
