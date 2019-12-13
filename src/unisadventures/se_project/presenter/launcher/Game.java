@@ -34,7 +34,7 @@ public class Game extends FrameListener {
 	private State menuState;
 	
 	//Input
-	private KeyManager keyManager;
+	private final KeyManager keyManager;
 
     public Display getDisplay() {
         return display;

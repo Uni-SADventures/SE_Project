@@ -3,7 +3,6 @@ package unisadventures.se_project.presenter.states;
 import java.awt.Graphics;
 import unisadventures.se_project.presenter.launcher.Handler;
 
-import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.view.gfx.StateGraphics;
 
 /**
