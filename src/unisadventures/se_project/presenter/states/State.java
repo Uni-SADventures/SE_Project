@@ -13,6 +13,9 @@ import unisadventures.se_project.view.gfx.StateGraphics;
  * It statically takes in count in wich class we are
  * @author Emilio
  */
+
+
+
 public abstract class State {
 
 	private static State currentState = null;
@@ -46,6 +49,7 @@ public abstract class State {
          * @param g is the graphical element
          */
         public abstract void displayView(Graphics g);
+        public abstract void loadImages();
 	
         
 }

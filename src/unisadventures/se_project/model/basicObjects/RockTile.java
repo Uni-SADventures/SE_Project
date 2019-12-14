@@ -14,7 +14,7 @@ import unisadventures.se_project.view.gfx.Assets;
 public class RockTile extends Tile {
 
    public RockTile(int id,int x, int y) {
-        super(Assets.rock, id,x,y);
+        super(Tile.getRockIdImage(), id,x,y);
     }
 
     @Override

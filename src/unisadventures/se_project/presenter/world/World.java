@@ -23,6 +23,15 @@ public class World {
     private int spawnX, spawnY;
     private int [][] tiles;
     private Handler handler;
+    private int scenarioImage ;
+
+    public int getScenarioImage() {
+        return scenarioImage;
+    }
+
+    public void setScenarioImage(int scenarioImage) {
+        this.scenarioImage = scenarioImage;
+    }
     
     public World(Handler handler,String path) throws IOException {
         this.handler=handler;

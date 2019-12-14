@@ -74,7 +74,6 @@ public class ZombieEnemy extends EnemyCharacter {
         _jumpCommand = jumpCommand;
     }
 
-    @Override
 
     public void tick() {
         attack();
@@ -156,7 +155,7 @@ public class ZombieEnemy extends EnemyCharacter {
 
             if (checkVerticalCollision()) {
                 this.setHealthBar(-1);
-                player.jump();
+               // player.jump();
             }
 
         }
@@ -175,7 +174,7 @@ public class ZombieEnemy extends EnemyCharacter {
         }
         return false;
     }
-
+/*
     private boolean checkHorizontalCollision() {
         if (State.getState() instanceof GameState) {
             GameState gamestate = (GameState) State.getState();
@@ -191,5 +190,5 @@ public class ZombieEnemy extends EnemyCharacter {
         }
         return false;
     }
-
+*/
 }

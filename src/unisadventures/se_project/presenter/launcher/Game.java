@@ -55,7 +55,7 @@ public class Game extends FrameListener {
 		display = new Display(title, width, height);
          
 		display.getFrame().addKeyListener(keyManager);
-		Assets.init();
+		//Assets.init();
 		
                 
 		gameState = new GameState(hand);

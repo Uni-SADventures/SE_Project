@@ -32,12 +32,12 @@ public abstract class BasicCharacter {
     private int _height;
     private int _width ;
     //all the sets of sprites for actions, with left and right versions
-    private Pair<List<String>, List<String>> _walk;
-    private Pair<List<String>, List<String>> _jump;
-    private Pair<List<String>, List<String>> _fall;
-    private Pair<List<String>, List<String>> _idle;
-    private Pair<List<String>, List<String>> _punch;
-    private Pair<List<String>, List<String>> _beDamaged;
+    private Pair<List<Integer>, List<Integer>> _walk;
+    private Pair<List<Integer>, List<Integer>> _jump;
+    private Pair<List<Integer>, List<Integer>> _fall;
+    private Pair<List<Integer>, List<Integer>> _idle;
+    private Pair<List<Integer>, List<Integer>> _punch;
+    private Pair<List<Integer>, List<Integer>> _beDamaged;
 
     private final Handler _handler;
     private final ActionManager _actions;
@@ -74,31 +74,31 @@ public abstract class BasicCharacter {
         _facing = facing;
     }
 
-    public void setBeDamaged(List<String> left, List<String> right) {
+    public void setBeDamaged(List<Integer> left, List<Integer> right) {
         _beDamaged = new Pair(left, right);
     }
 
-    public void setWalk(List<String> left, List<String> right) {
+    public void setWalk(List<Integer> left, List<Integer> right) {
         _walk = new Pair(left, right);
     }
 
-    public void setIdle(List<String> left, List<String> right) {
+    public void setIdle(List<Integer> left, List<Integer> right) {
         _idle = new Pair(left, right);
     }
 
-    public void setPunch(List<String> left, List<String> right) {
+    public void setPunch(List<Integer> left, List<Integer> right) {
         _punch = new Pair(left, right);
     }
 
-    public void setJump(List<String> left, List<String> right) {
+    public void setJump(List<Integer> left, List<Integer> right) {
         _jump = new Pair(left, right);
     }
 
-    public void setFall(List<String> left, List<String> right) {
+    public void setFall(List<Integer> left, List<Integer> right) {
         _fall = new Pair(left, right);
     }
 
-    public List<String> getBeDamagedSprites(DirectionType d) {
+    public List<Integer> getBeDamagedSprites(DirectionType d) {
         if (null == d) {
             return null;
         } else {
@@ -117,7 +117,7 @@ public abstract class BasicCharacter {
         return _handler;
     }
 
-    public List<String> getIdleSprites(DirectionType d) {
+    public List<Integer> getIdleSprites(DirectionType d) {
         if (null == d) {
             return null;
         } else {
@@ -132,7 +132,7 @@ public abstract class BasicCharacter {
         }
     }
 
-    public List<String> getJumpSprites(DirectionType d) {
+    public List<Integer> getJumpSprites(DirectionType d) {
         if (null == d) {
             return null;
         } else {
@@ -147,7 +147,7 @@ public abstract class BasicCharacter {
         }
     }
 
-    public List<String> getFallSprites(DirectionType d) {
+    public List<Integer> getFallSprites(DirectionType d) {
         if (null == d) {
             return null;
         } else {
@@ -162,7 +162,7 @@ public abstract class BasicCharacter {
         }
     }
 
-    public List<String> getPunchSprites(DirectionType d) {
+    public List<Integer> getPunchSprites(DirectionType d) {
         if (null == d) {
             return null;
         } else {
@@ -177,7 +177,7 @@ public abstract class BasicCharacter {
         }
     }
 
-    public List<String> getWalkSprites(DirectionType d) {
+    public List<Integer> getWalkSprites(DirectionType d) {
         if (null == d) {
             return null;
         } else {
@@ -261,15 +261,10 @@ public abstract class BasicCharacter {
      * Method called every time it is the moment to update all actions.
      */
 
-    public void tick() {
-
-        //  _game.start();
-        _actions.execute();
-
-    }
+   
     
 
-    public String getCurrentSprite() {
+    public int getCurrentSprite() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

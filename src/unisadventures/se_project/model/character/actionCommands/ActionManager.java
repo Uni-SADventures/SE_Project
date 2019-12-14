@@ -50,7 +50,7 @@ public class ActionManager implements MovementsInterface {
      * This method interprets user inputs if the character is user's one and if not
      * it checks what should a character do, for example if there is a floor under their feet
      */
-    public void execute(){
+    public int tick(){
         
        //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
         if(_ch instanceof PlayerCharacter){
@@ -78,17 +78,25 @@ public class ActionManager implements MovementsInterface {
             
             if(!_handler.getKeyManager().up && !_handler.getKeyManager().left && !_handler.getKeyManager().right && !_handler.getKeyManager().hit)
                 idle() ;
-        
+            return 0 ;
         }else{
         if(!_jumping)
             fall();
- 
+        return 1 ;
         
         }
             
         
         //MANAGING MOVEMENTS 
     }
+
+    public BasicCharacter getCh() {
+        return _ch;
+    }
+    
+    
+    
+    
     
     /**
      * This method execute basic idle action, useful when user is not giving input and if

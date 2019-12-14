@@ -21,10 +21,6 @@ public class EnemyCharacter extends BasicCharacter {
     }
  
 
-    @Override
-    public void tick() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     
 
