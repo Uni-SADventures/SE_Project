@@ -139,7 +139,7 @@ public class GameTest {
         System.out.println("getWidth");
         Game instance = null;
         int expResult = 0;
-        int result = instance.getWidth();
+        int result = instance.getDisplayWidth();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -153,7 +153,7 @@ public class GameTest {
         System.out.println("getHeight");
         Game instance = null;
         int expResult = 0;
-        int result = instance.getHeight();
+        int result = instance.getDisplayHeight();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

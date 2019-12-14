@@ -9,8 +9,6 @@ import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.MovementsInterface;
 import unisadventures.se_project.model.character.PlayerCharacter;
-import unisadventures.se_project.presenter.launcher.Game;
-import unisadventures.se_project.util.DirectionType;
 
 /**
  * This class manages all available actions and their relative dependancies.

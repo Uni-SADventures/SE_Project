@@ -8,11 +8,14 @@ import unisadventures.se_project.util.Utils;
  * Class that stores the 
  */
 public class GameLevel {
-    private int _worldWidth, _worldHeight;
+    private int _levelWidth, _levelHeight;
+    private int _displayWidth, _displayHeight;
     private int _spawnX, _spawnY;
     private int [][] tiles;
     
-    public GameLevel(String path) throws IOException {
+    public GameLevel(String path, int displayWidth, int displayHeight) throws IOException {
+        _displayWidth = displayWidth;
+        _displayHeight = displayHeight;
         loadWorld(path);
     }
     
@@ -21,7 +24,7 @@ public class GameLevel {
     }
  
     public Tile getTile(int x, int y){
-      if (x<0 || y<0 || x>= _worldWidth || y>=_worldHeight)
+      if (x<0 || y<0 || x>= _levelWidth || y>=_levelHeight)
           return Tile.rockTile;
       Tile t= Tile.tiles[tiles[x][y]];
       if(t==null)
@@ -32,27 +35,35 @@ public class GameLevel {
     private void loadWorld(String path) {
         String file =Utils.loadFileAsString(path);
         String[] tokens=file.split("\\s+");
-        _worldWidth=Utils.ParseInt(tokens[0]);
-        _worldHeight=Utils.ParseInt(tokens[1]);
+        _levelWidth=Utils.ParseInt(tokens[0]);
+        _levelHeight=Utils.ParseInt(tokens[1]);
         _spawnX=Utils.ParseInt(tokens[2]);
         _spawnY=Utils.ParseInt(tokens[3]);
         
-        tiles= new int[_worldWidth][_worldHeight];
+        tiles= new int[_levelWidth][_levelHeight];
         
-        for (int y=0; y<_worldHeight;y++){
-            for(int x=0; x<_worldWidth;x++){
-                tiles[x][y]=Utils.ParseInt(tokens[(x+y*_worldWidth)+4]);
+        for (int y=0; y<_levelHeight;y++){
+            for(int x=0; x<_levelWidth;x++){
+                tiles[x][y]=Utils.ParseInt(tokens[(x+y*_levelWidth)+4]);
             }
         }
         
      }
 
-    public int getWidth() {
-        return _worldWidth;
+    public int getLevelWidth() {
+        return _levelWidth;
     }
 
-    public int getHeight() {
-        return _worldHeight;
+    public int getLevelHeight() {
+        return _levelHeight;
+    }
+    
+    public int getDisplayWidth() {
+        return _displayWidth;
+    }
+
+    public int getDisplayHeight() {
+        return _displayHeight;
     }
     
 }

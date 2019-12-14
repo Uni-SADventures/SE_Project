@@ -20,9 +20,9 @@ import unisadventures.se_project.presenter.states.*;
 public class Game extends FrameListener {
 
 	private Display display;
-	public int width, height;
+	public int displayWidth, displayHeight;
 	public String title;
-	private GameCamera cam ;
+	private GameCamera cam;
 	private boolean running = false;
 	private FrameClock thread;
 	
@@ -41,8 +41,8 @@ public class Game extends FrameListener {
     }
 	
 	public Game(String title, int width, int height){
-		this.width = width;
-		this.height = height;
+		this.displayWidth = width;
+		this.displayHeight = height;
 		this.title = title;
 		keyManager = new KeyManager();
 	}
@@ -52,7 +52,7 @@ public class Game extends FrameListener {
          * and display
          */
 	private void init(Handler hand){
-		display = new Display(title, width, height);
+		display = new Display(title, displayWidth, displayHeight);
          
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
@@ -136,11 +136,11 @@ public class Game extends FrameListener {
             
     }
     
-    public int getWidth(){
-        return width ;
+    public int getDisplayWidth(){
+        return displayWidth ;
     }
-    public int getHeight(){
-        return height ;
+    public int getDisplayHeight(){
+        return displayHeight ;
     }
 }
 

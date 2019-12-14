@@ -8,7 +8,6 @@ package unisadventures.se_project.presenter.launcher;
 import unisadventures.se_project.model.GameLevel;
 import unisadventures.se_project.presenter.camera.GameCamera;
 import unisadventures.se_project.presenter.input.KeyManager;
-import unisadventures.se_project.presenter.launcher.Game;
 
 /**
  *
@@ -31,12 +30,12 @@ public class Handler {
         return game.getKeyManager();
     }
     
-    public int getWidth(){
-        return game.getWidth();
+    public int getDisplayWidth(){
+        return game.getDisplayWidth();
     }
 
-    public int getHeight(){
-        return game.getHeight();
+    public int getDisplayHeight(){
+        return game.getDisplayHeight();
     }
     
     public Game getGame() {
@@ -47,11 +46,12 @@ public class Handler {
         this.game = game;
     }
 
-    public GameLevel getWorld() {
+    // World -> GameLevel
+    public GameLevel getLevel() {
         return world;
     }
 
-    public void setWorld(GameLevel world) {
+    public void setLevel(GameLevel world) {
         this.world = world;
     }
     

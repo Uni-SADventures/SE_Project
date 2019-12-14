@@ -48,7 +48,7 @@ public abstract class ActionCommand {
     }
     protected boolean collisionWithTile(int x, int y){
           
-        return _handler.getWorld().getTile(x, y).isSolid();
+        return _handler.getLevel().getTile(x, y).isSolid();
         
     }
     

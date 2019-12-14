@@ -6,11 +6,9 @@
 package unisadventures.se_project.model.character;
 
 import unisadventures.se_project.presenter.launcher.Handler;
-import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.CharacterType;
-import unisadventures.se_project.util.DirectionType;
 
 /**
  *
@@ -63,7 +61,7 @@ public class ZombieEnemy extends EnemyCharacter {
                 move(-this.getSpeed());
             }
         } else if (isMoving && !movingLeft) {
-            if (this.getxPosition() + this.getSpeed() < this.getHandler().getGame().getWidth()) {
+            if (this.getxPosition() + this.getSpeed() < this.getHandler().getGame().getDisplayWidth()) {
                 move(this.getSpeed());
             } else {
                 movingLeft = true;
