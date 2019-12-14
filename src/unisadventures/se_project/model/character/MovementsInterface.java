@@ -19,6 +19,7 @@ public interface MovementsInterface {
     void jump();
     void fall() ;
     void attack();
+    void idle();
     void takeDamage(int damage);
     PlayerCharacter getPowered(PlayerCharacter p); 
     void grab();

@@ -21,10 +21,7 @@ public class MoveCommand extends ActionCommand {
 
     public MoveCommand(Handler handler,BasicCharacter ch) {
         super(handler,ch);
-        _bounds.x=14;
-        _bounds.y=10;
-        _bounds.width=50;
-        _bounds.height=95;
+       
       
     }
     /**

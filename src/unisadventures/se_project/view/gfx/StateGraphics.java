@@ -46,11 +46,8 @@ public class StateGraphics {
      * @param x x position of user
      * @param y y position of user
      */
-    public void renderPlayer(Graphics g, double x, double y) {
-        GameState state = (GameState)State.getState() ;
-        
-        //For now i only put idle first frame
-        int playerId =  state.getPlayer().getIdleSprites(DirectionType.LEFT).get(0) ;
+    public void renderPlayer(Graphics g, int playerId ,double x, double y) {
+     
         g.drawImage(Assets.retrieveImage(playerId), (int) (x- _handler.getCam().getxOffset()), (int) (y-_handler.getCam().getyOffset()), null);
 
     }

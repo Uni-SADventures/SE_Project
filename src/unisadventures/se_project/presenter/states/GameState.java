@@ -44,8 +44,11 @@ public class GameState extends State {
         
         
         
-        
-        PlayerCharacter player = new PlayerCharacter(handler, 140, 90, 100, 100, CharacterType.USER, 6, 1, 6, 170, "me");
+        //REMEMBER THAT WHEN YOU CHANGE IMAGES YOU NEED TO PUT HEIGHT AND WIDTH ACCORDING TO 
+        //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
+        //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
+        //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
+        PlayerCharacter player = new PlayerCharacter(handler, 140, 90, 32, 16, CharacterType.USER, 6, 1, 6, 170, "me");
         _player = new ActionManager(handler,player) ;
         
         _enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
@@ -100,7 +103,7 @@ public class GameState extends State {
                 view.renderTile(g, _handler.getWorld().getTile(x,y).getTexture() ,(int)(x*Tile.TILEWIDTH - _handler.getCam().getxOffset()), (int)(y*Tile.TILEHEIGHT - _handler.getCam().getyOffset()   ));
             }
         }
-        view.renderPlayer(g, _player.getCh().getPosition().getFirstElement(), _player.getCh().getPosition().getSecondElement());
+        view.renderPlayer(g, _player.getActualId(),_player.getCh().getPosition().getFirstElement(), _player.getCh().getPosition().getSecondElement());
   
         view.renderStuffMore(g, _enemy.getxPosition(), _enemy.getyPosition(),_enemy.getDimension().getFirstElement(),_enemy.getDimension().getSecondElement(), _enemy.getIdleSprites(DirectionType.LEFT).get(0));
         /*World.forEach(WorldObject el){
@@ -118,17 +121,58 @@ public class GameState extends State {
             Assets.init();
         //PLAYER CHARACTER
             List temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/char.png");
+            Assets.storeImage("resources/images/character_sprite.png",48,0,16,32);
             int nowSeq = Assets.getActualSequenceNumber() ;
            
+            for(int i = 0; i <= 20 ; i++ )
+                temp.add(nowSeq);  
             
-            temp.add(nowSeq);   
+            Assets.storeImage("resources/images/character_sprite.png",16,0,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            
+            for(int i = 0; i <= 20 ; i++ )
+                temp.add(nowSeq);  
+            
+            Assets.storeImage("resources/images/character_sprite.png",16,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            
+            for(int i = 0; i <= 20 ; i++ )
+                temp.add(nowSeq); 
+           
             _player.getCh().setIdle(temp , temp);
-            _player.getCh().setBeDamaged(temp, temp);
-            _player.getCh().setFall(temp, temp);
-            _player.getCh().setJump(temp, temp);
-            _player.getCh().setPunch(temp, temp);
-            _player.getCh().setWalk(temp, temp);
+            
+            temp = new LinkedList<>() ;
+            Assets.storeImage("resources/images/character_sprite.png",48,0,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+           
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq);  
+            
+            Assets.storeImage("resources/images/character_sprite.png",48,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq);  
+            
+            List temp2 = new LinkedList<>() ;
+            Assets.storeImage("resources/images/character_sprite.png",0,0,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+           
+            for(int i = 0; i <= 15 ; i++ )
+                temp2.add(nowSeq);  
+            
+            Assets.storeImage("resources/images/character_sprite.png",0,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            
+            for(int i = 0; i <= 15 ; i++ )
+                temp2.add(nowSeq);  
+            
+            _player.getCh().setWalk(temp2, temp);
+            _player.getCh().setBeDamaged(temp2, temp);
+            _player.getCh().setFall(temp2, temp);
+            _player.getCh().setJump(temp2, temp);
+            _player.getCh().setPunch(temp2, temp);
+            
             
         //ENEMY CHARACTER
             temp = new LinkedList<>() ;

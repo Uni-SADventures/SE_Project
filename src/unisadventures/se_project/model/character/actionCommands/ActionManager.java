@@ -9,7 +9,6 @@ import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.MovementsInterface;
 import unisadventures.se_project.model.character.PlayerCharacter;
-import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.util.DirectionType;
 
 /**
@@ -22,9 +21,11 @@ import unisadventures.se_project.util.DirectionType;
 public class ActionManager implements MovementsInterface {
     private final MoveCommand _movement ;
     private final VerticalCommand _jumpFall ;
+    private final IdleCommand _idle ;
     private final HitCommand _combat ;
     private final Handler _handler ;
     private final BasicCharacter _ch ;
+    private int _actualId ;
 
     private boolean _walking,_jumping,_falling,_idling,_hitting,_beingDamaged;
             
@@ -43,6 +44,8 @@ public class ActionManager implements MovementsInterface {
         _movement = new MoveCommand(_handler,_ch) ;
         _jumpFall = new VerticalCommand(_handler,_ch) ;
         _combat = new HitCommand(_handler,_ch) ;
+        _idle = new IdleCommand(_handler,_ch) ;
+        _actualId = 0 ;
     }
     
     
@@ -50,17 +53,21 @@ public class ActionManager implements MovementsInterface {
      * This method interprets user inputs if the character is user's one and if not
      * it checks what should a character do, for example if there is a floor under their feet
      */
-    public int tick(){
-        
+    public void tick(){
+      
        //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
         if(_ch instanceof PlayerCharacter){
             if(!_jumping)
                 fall();
             _handler.getCam().centerOnEntity((PlayerCharacter)_ch);
-            if(_handler.getKeyManager().left)
+            if(_handler.getKeyManager().left){
                 moveLeft();
-            else if(_handler.getKeyManager().right)
+                _ch.setFacing(DirectionType.LEFT);
+            }
+            else if(_handler.getKeyManager().right){
                 moveRight();
+                _ch.setFacing(DirectionType.RIGHT);
+            }
             else
                 _walking = false ;
             
@@ -76,13 +83,14 @@ public class ActionManager implements MovementsInterface {
             else
                 _hitting = false ;
             
-            if(!_handler.getKeyManager().up && !_handler.getKeyManager().left && !_handler.getKeyManager().right && !_handler.getKeyManager().hit)
+            
+            if( !_walking && !_jumping && !_falling && !_hitting && !_beingDamaged )
                 idle() ;
-            return 0 ;
+     
         }else{
         if(!_jumping)
             fall();
-        return 1 ;
+       
         
         }
             
@@ -102,8 +110,16 @@ public class ActionManager implements MovementsInterface {
      * This method execute basic idle action, useful when user is not giving input and if
      * its character is in a stable position
      */
-    public void idle() {
-        //TODO
+    @Override
+    public void idle(){
+        if(!_idling){
+            _idle.resetCounter();
+            _idling = true ;
+        }
+        _idle.idle();
+        int length = _ch.getIdleSprites(_ch.getFacing()).size() ;
+        _actualId = _ch.getIdleSprites(_ch.getFacing()).get(_idle.getCount()%length) ;
+        
     }
     
     /**
@@ -116,9 +132,12 @@ public class ActionManager implements MovementsInterface {
             _walking = true ;
         }
         _movement.moveLeft();
+        int length = _ch.getWalkSprites(DirectionType.LEFT).size() ;
+        _actualId = _ch.getWalkSprites(DirectionType.LEFT).get(_movement.getCount()%length);
     }
     /**
      * This method moves a character one step on the right according to his speed
+     * @return the image id for the next image to be displayed
      */
     @Override
     public void moveRight(){
@@ -127,6 +146,8 @@ public class ActionManager implements MovementsInterface {
             _walking = true ;
         }
         _movement.moveRight();
+        int length = _ch.getWalkSprites(DirectionType.RIGHT).size() ;
+        _actualId = _ch.getWalkSprites(DirectionType.RIGHT).get(_movement.getCount()%length);
     }
     
     /**
@@ -140,11 +161,13 @@ public class ActionManager implements MovementsInterface {
         }
         
         _jumping = _jumpFall.jump();
- 
+        int length = _ch.getJumpSprites(_ch.getFacing()).size() ;
+        _actualId = _ch.getJumpSprites(_ch.getFacing()).get(_jumpFall.getCount()%length) ;
     }
     
     /**
      * This method let the character begin or continue his attack move.
+     * @return the image id for the next image to be displayed
      */
     @Override
     public void attack(){
@@ -154,11 +177,14 @@ public class ActionManager implements MovementsInterface {
         }
         
         _combat.hit();
+        int length = _ch.getPunchSprites(_ch.getFacing()).size() ;
+        _actualId = _ch.getPunchSprites(_ch.getFacing()).get(_combat.getCount()%length) ;
     }
     
     
     /**
      * This method let a character fall one step down according to his speed
+     * @return the image id for the next image to be displayed
      */
     @Override
     public void fall(){
@@ -172,17 +198,24 @@ public class ActionManager implements MovementsInterface {
             }
             
             _falling = _jumpFall.fall();
-        
+        int length = _ch.getFallSprites(_ch.getFacing()).size() ;
+        _actualId = _ch.getFallSprites(_ch.getFacing()).get(_jumpFall.getCount()%length) ;
         
     }
 
   /**
    * 
    * @param damage is the sum to remove from character's actual health
+   * @return the image id for the next image to be displayed
    */
     @Override
     public void takeDamage(int damage) {
         _ch.takeDamage(damage);
+        int length = _ch.getBeDamagedSprites(_ch.getFacing()).size() ;
+        
+        //TODO
+        
+        _actualId =  _ch.getBeDamagedSprites(_ch.getFacing()).get(0) ; 
     }
 
     
@@ -208,5 +241,10 @@ public class ActionManager implements MovementsInterface {
         return null ; // <- da levare
     }
 
+    public int getActualId() {
+        return _actualId;
+    }
+    
+    
    
 }
