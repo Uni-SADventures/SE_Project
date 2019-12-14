@@ -121,6 +121,7 @@ public class GameState extends State {
             Assets.storeImage("resources/images/char.png");
             int nowSeq = Assets.getActualSequenceNumber() ;
            
+            
             temp.add(nowSeq);   
             _player.getCh().setIdle(temp , temp);
             _player.getCh().setBeDamaged(temp, temp);
