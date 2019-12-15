@@ -24,7 +24,7 @@ public class World {
     private int [][] tiles;
     private Handler handler;
     private int scenarioImage ;
-
+    
     public int getScenarioImage() {
         return scenarioImage;
     }

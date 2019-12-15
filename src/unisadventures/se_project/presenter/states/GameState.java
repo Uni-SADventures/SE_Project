@@ -3,6 +3,7 @@ package unisadventures.se_project.presenter.states;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
+import unisadventures.se_project.model.basicObjects.CollectibleItem;
 import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.presenter.world.World;
@@ -12,6 +13,7 @@ import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
 
 import unisadventures.se_project.util.CharacterType;
+import unisadventures.se_project.util.CollectibleType;
 import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.view.gfx.Assets;
 
@@ -28,7 +30,7 @@ public class GameState extends State {
 
     private ActionManager _player;
     private ZombieEnemy _enemy;
-  
+    private LinkedList<CollectibleItem> _collectibles;
     
     //GAME UI IMAGE IDS
     private int _uiCfu ;
@@ -42,7 +44,7 @@ public class GameState extends State {
     public GameState(Handler handler ) {
         super(handler);
         
-        
+        _collectibles = new LinkedList<>() ;
         
         //REMEMBER THAT WHEN YOU CHANGE IMAGES YOU NEED TO PUT HEIGHT AND WIDTH ACCORDING TO 
         //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
@@ -54,6 +56,7 @@ public class GameState extends State {
         _enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
         
         
+        _collectibles.add(new CollectibleItem(1000,470, 32, 32, CollectibleType.CFU)) ;
         
         World w = null ;
         try {
@@ -81,7 +84,7 @@ public class GameState extends State {
         _handler.getWorld().tick();
         _player.tick();
         _enemy.tick();
-        
+       
         /*World.forEach(WorldObject el){
                     el.tick() ;
                 } */
@@ -106,9 +109,13 @@ public class GameState extends State {
         view.renderPlayer(g, _player.getActualId(),_player.getCh().getPosition().getFirstElement(), _player.getCh().getPosition().getSecondElement());
   
         view.renderStuffMore(g, _enemy.getxPosition(), _enemy.getyPosition(),_enemy.getDimension().getFirstElement(),_enemy.getDimension().getSecondElement(), _enemy.getIdleSprites(DirectionType.LEFT).get(0));
-        /*World.forEach(WorldObject el){
-                    view.renderStuffMore(g, el.x, el.y, el.image);
-                } */
+        
+        for(CollectibleItem coll : _collectibles){
+            view.renderStuffMore(g, coll.getxPosition(), coll.getyPosition(),coll.getWidth(),coll.getHeight(),coll.getNextImageFileName());
+        }
+        
+        
+        
         view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
 
     }
@@ -313,6 +320,20 @@ public class GameState extends State {
             nowSeq = Assets.getActualSequenceNumber() ;
             _uiNumbers[9] = nowSeq ;
            
+            //COLLECTIBLES
+            
+            Assets.storeImage("resources/images/objectstilesheet.png",160,0,32,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            temp = new LinkedList<>();
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq);  
+            Assets.storeImage("resources/images/objectstilesheet.png",96,0,32,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq); 
+            _collectibles.get(0).setImageFileNameList(temp);
+            
+  
             
     }
 
@@ -334,6 +355,10 @@ public class GameState extends State {
 
     public int[] getUiNumbers() {
         return _uiNumbers;
+    }
+
+    public LinkedList<CollectibleItem> getCollectibles() {
+        return _collectibles;
     }
 
     

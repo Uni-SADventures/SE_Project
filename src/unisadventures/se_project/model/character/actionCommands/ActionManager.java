@@ -5,10 +5,14 @@
  */
 package unisadventures.se_project.model.character.actionCommands;
 
+import java.util.List;
+import unisadventures.se_project.model.basicObjects.CollectibleItem;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.MovementsInterface;
 import unisadventures.se_project.model.character.PlayerCharacter;
+import unisadventures.se_project.presenter.states.GameState;
+import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.DirectionType;
 
 /**
@@ -56,70 +60,70 @@ public class ActionManager implements MovementsInterface {
      * This method interprets user inputs if the character is user's one and if not
      * it checks what should a character do, for example if there is a floor under their feet
      */
-    public void tick(){
-      
-       //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
-        if(_ch instanceof PlayerCharacter){
-            if(!_jumping)
+    public void tick() {
+
+        //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
+        if (_ch instanceof PlayerCharacter) {
+            if (!_jumping) {
                 fall();
-            _handler.getCam().centerOnEntity((PlayerCharacter)_ch);
-            if(_handler.getKeyManager().left){
+            }
+            _handler.getCam().centerOnEntity((PlayerCharacter) _ch);
+            if (_handler.getKeyManager().left) {
                 moveLeft();
                 _ch.setFacing(DirectionType.LEFT);
-            }
-            else if(_handler.getKeyManager().right){
+            } else if (_handler.getKeyManager().right) {
                 moveRight();
                 _ch.setFacing(DirectionType.RIGHT);
+            } else {
+                _walking = false;
             }
-            else
-                _walking = false ;
-            
-            if(_handler.getKeyManager().up && !_falling)
+
+            if (_handler.getKeyManager().up && !_falling) {
                 jump();
-            else if(!_handler.getKeyManager().up)
-                _jumping = false ;
-         //   else if(!_hanlder.checkFloor(_ch.getPosition().getFirstElement(),_ch.getPosition().getSecondElement()))
-            //    _jumpFall.fall();
-            
-            if(_handler.getKeyManager().hit)
-                attack();
-            else
-                _hitting = false ;
-            
-            
-            
-    
-     
-        }else{
-        if(!_jumping)
-            fall();
-       
-        
-        }
-        
-                
-            if( !_walking && !_jumping && !_falling && !_hitting && !_beingDamaged )
-                idle() ;
-        
-        if(_beingDamaged){
-                _beingDamaged = _beDamaged.takeDamage(_incomingDamage);
-                if(_beingDamaged)
-                    if(_ch.getFacing().LEFT == DirectionType.LEFT)
-                        _movement.moveRight();
-                    else
-                        _movement.moveLeft();
-                else
-                    _incomingDamage = 0 ;
+            } else if (!_handler.getKeyManager().up) {
+                _jumping = false;
             }
-        
-        //MANAGING MOVEMENTS 
+            //   else if(!_hanlder.checkFloor(_ch.getPosition().getFirstElement(),_ch.getPosition().getSecondElement()))
+            //    _jumpFall.fall();
+
+            if (_handler.getKeyManager().hit) {
+                attack();
+            } else {
+                _hitting = false;
+            }
+             grab();
+        } else {
+            if (!_jumping) {
+                fall();
+            }
+
+        }
+
+        if (!_walking && !_jumping && !_falling && !_hitting && !_beingDamaged) {
+            idle();
+        }
+
+        if (_beingDamaged) {
+            _beingDamaged = _beDamaged.takeDamage(_incomingDamage);
+            if (_beingDamaged) {
+                if (_ch.getFacing().LEFT == DirectionType.LEFT) {
+                    _movement.moveRight();
+                } else {
+                    _movement.moveLeft();
+                }
+            } else {
+                _incomingDamage = 0;
+            }
+        }
+
+        //CHECKING IF THERE IS SOME COLLECTIBLE
+       
     }
     
     
      /**
    * 
-   * @param damage is the sum to remove from character's actual health
-   * @return the image id for the next image to be displayed
+   * @param dam is the sum to remove from character's actual health
    */
    
     @Override
@@ -240,7 +244,21 @@ public class ActionManager implements MovementsInterface {
      */
     @Override
     public void grab() {
-      //TODO once we have some collectibles
+      int chx = _ch.getxPosition(), chy = _ch.getyPosition(), chw = _ch.getDimension().getFirstElement(), chh = _ch.getDimension().getSecondElement() ;
+      State state = State.getState() ;
+      if(!(state instanceof GameState))
+          return ;
+      List<CollectibleItem> collectibles = (List<CollectibleItem>) ((GameState)state).getCollectibles().clone() ;
+      for(CollectibleItem coll : collectibles){
+          int collx = coll.getxPosition() , colly = coll.getyPosition(), collw = coll.getWidth(), collh = coll.getHeight() ;
+         
+          if(collx <= chx && (chx+chw) <= (collx + collw) &&
+                  colly <= chy && (chy+chh) <= (colly + collh)){
+              ((GameState)state).getCollectibles().remove();
+              ((PlayerCharacter)_ch).setCfu(((PlayerCharacter)_ch).getCfu()+1);
+             
+          }
+      }
     }
 
     

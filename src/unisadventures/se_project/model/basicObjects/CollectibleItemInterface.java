@@ -6,7 +6,7 @@ import unisadventures.se_project.util.CollectibleType;
 
 public interface CollectibleItemInterface {
     
-    public String getNextImageFileName();
+    public int getNextImageFileName();
     public CollectibleType getCollectibleType();
    
     
