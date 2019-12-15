@@ -7,13 +7,10 @@ package unisadventures.se_project.model.character;
 
 import java.awt.Rectangle;
 import unisadventures.se_project.model.character.actionCommands.Command;
-import unisadventures.se_project.model.character.actionCommands.*;
 import unisadventures.se_project.presenter.launcher.Handler;
-import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.CharacterType;
-import unisadventures.se_project.util.DirectionType;
 
 /**
  *

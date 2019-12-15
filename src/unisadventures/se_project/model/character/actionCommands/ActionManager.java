@@ -23,11 +23,13 @@ public class ActionManager implements MovementsInterface {
     private final VerticalCommand _jumpFall ;
     private final IdleCommand _idle ;
     private final HitCommand _combat ;
+    private final BeingDamagedCommand _beDamaged ;
     private final Handler _handler ;
     private final BasicCharacter _ch ;
     private int _actualId ;
 
     private boolean _walking,_jumping,_falling,_idling,_hitting,_beingDamaged;
+    private int _incomingDamage ;
             
     public ActionManager(Handler _handler, BasicCharacter _ch) {
         
@@ -37,7 +39,7 @@ public class ActionManager implements MovementsInterface {
         _idling = false ;
         _hitting = false ;
         _beingDamaged = false ;
-        
+        _incomingDamage = 0 ;
         
         this._handler = _handler;
         this._ch = _ch;
@@ -45,6 +47,7 @@ public class ActionManager implements MovementsInterface {
         _jumpFall = new VerticalCommand(_handler,_ch) ;
         _combat = new HitCommand(_handler,_ch) ;
         _idle = new IdleCommand(_handler,_ch) ;
+        _beDamaged = new BeingDamagedCommand(_handler,_ch,70) ;
         _actualId = 0 ;
     }
     
@@ -84,8 +87,8 @@ public class ActionManager implements MovementsInterface {
                 _hitting = false ;
             
             
-            if( !_walking && !_jumping && !_falling && !_hitting && !_beingDamaged )
-                idle() ;
+            
+    
      
         }else{
         if(!_jumping)
@@ -93,9 +96,38 @@ public class ActionManager implements MovementsInterface {
        
         
         }
-            
+        
+                
+            if( !_walking && !_jumping && !_falling && !_hitting && !_beingDamaged )
+                idle() ;
+        
+        if(_beingDamaged){
+                _beingDamaged = _beDamaged.takeDamage(_incomingDamage);
+                if(_beingDamaged)
+                    if(_ch.getFacing().LEFT == DirectionType.LEFT)
+                        _movement.moveRight();
+                    else
+                        _movement.moveLeft();
+                else
+                    _incomingDamage = 0 ;
+            }
         
         //MANAGING MOVEMENTS 
+    }
+    
+    
+     /**
+   * 
+   * @param damage is the sum to remove from character's actual health
+   * @return the image id for the next image to be displayed
+   */
+   
+    @Override
+    public void takeDamage(int dam){
+        if(!_beingDamaged){
+            _incomingDamage = dam ;
+            _jumping = false ;
+        }
     }
 
     public BasicCharacter getCh() {
@@ -137,7 +169,6 @@ public class ActionManager implements MovementsInterface {
     }
     /**
      * This method moves a character one step on the right according to his speed
-     * @return the image id for the next image to be displayed
      */
     @Override
     public void moveRight(){
@@ -184,7 +215,6 @@ public class ActionManager implements MovementsInterface {
     
     /**
      * This method let a character fall one step down according to his speed
-     * @return the image id for the next image to be displayed
      */
     @Override
     public void fall(){
@@ -203,21 +233,7 @@ public class ActionManager implements MovementsInterface {
         
     }
 
-  /**
-   * 
-   * @param damage is the sum to remove from character's actual health
-   * @return the image id for the next image to be displayed
-   */
-    @Override
-    public void takeDamage(int damage) {
-        _ch.takeDamage(damage);
-        int length = _ch.getBeDamagedSprites(_ch.getFacing()).size() ;
-        
-        //TODO
-        
-        _actualId =  _ch.getBeDamagedSprites(_ch.getFacing()).get(0) ; 
-    }
-
+ 
     
     /**
      * This method checks if a character has run into some collectible

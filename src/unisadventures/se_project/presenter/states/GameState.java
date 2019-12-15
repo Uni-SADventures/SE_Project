@@ -172,20 +172,46 @@ public class GameState extends State {
             _player.getCh().setFall(temp2, temp);
             _player.getCh().setJump(temp2, temp);
             _player.getCh().setPunch(temp2, temp);
+            temp = new LinkedList<>() ;
+            Assets.storeImage("resources/images/character_damage_sprite.png",16,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+           
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq);  
+            
+            Assets.storeImage("resources/images/character_damage_sprite.png",32,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq);  
+            
+            temp2 = new LinkedList<>() ;
+            Assets.storeImage("resources/images/character_damage_sprite.png",16,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+           
+            for(int i = 0; i <= 15 ; i++ )
+                temp2.add(nowSeq);  
+            
+            Assets.storeImage("resources/images/character_damage_sprite.png",32,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            
+            for(int i = 0; i <= 15 ; i++ )
+                temp2.add(nowSeq);
+            _player.getCh().setBeDamaged(temp2, temp);
             
             
         //ENEMY CHARACTER
             temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/enemy_sprite.png",16,96,16,32);
+            Assets.storeImage("resources/images/enemy_sprite.png",16,96,16,30);
             nowSeq = Assets.getActualSequenceNumber() ;
            
             temp.add(nowSeq);   
             _enemy.setIdle(temp , temp);
-            _enemy.setBeDamaged(temp, temp);
             _enemy.setFall(temp, temp);
             _enemy.setJump(temp, temp);
             _enemy.setPunch(temp, temp);
             _enemy.setWalk(temp, temp);
+              
             
          
         //SCENARIO (which id is inside world now)

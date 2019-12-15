@@ -7,8 +7,6 @@ package unisadventures.se_project.model.character.actionCommands;
 
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
-import unisadventures.se_project.model.character.PlayerCharacter;
-import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.basicObjects.Tile;
 
 /**
