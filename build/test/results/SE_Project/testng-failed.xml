@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [SE_Project]">
+  <test thread-count="5" name="TestNG tests(failed)">
+    <classes>
+      <class name="unisadventures.se_project.model.character.actionCommands.ActionManagerTest">
+        <methods>
+          <include name="testGetPowered"/>
+        </methods>
+      </class> <!-- unisadventures.se_project.model.character.actionCommands.ActionManagerTest -->
+    </classes>
+  </test> <!-- TestNG tests(failed) -->
+</suite> <!-- Failed suite [SE_Project] -->

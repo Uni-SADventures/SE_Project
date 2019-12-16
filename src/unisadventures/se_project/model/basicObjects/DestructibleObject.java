@@ -1,59 +1,78 @@
 package unisadventures.se_project.model.basicObjects;
 
 
-import java.awt.Graphics;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class DestructibleObject implements DestructibleObjectInterface {
     
-    private final ArrayList<String> _imageFileNameList;
-    private final int _listSizeMinusOne;
+    private LinkedList<Integer> _imageFileNameList;
     private int _nextImageIndex;
     private static final int INTACT_OBJECT_IMAGE_FILE_NAME_INDEX = 0;
-     private int _xPosition ;
+    private int _xPosition ;
     private int _yPosition;
-    private int _height ;
-    private int _width ;
+    private final int _height ;
+    private final int _width ;
     
     
-    public DestructibleObject(int xPosition, int yPosition, int height, int width, ArrayList<String> imageFileNameList) {
+    public DestructibleObject(int xPosition, int yPosition, int height, int width) {
         _xPosition = xPosition ;
         _yPosition = yPosition ;
         _height = height ;
         _width = width ;
-        _imageFileNameList = imageFileNameList;
-        _listSizeMinusOne = _imageFileNameList.size() - 1;
+        _imageFileNameList = new LinkedList<>();
         _nextImageIndex = 0;
     }
     
     @Override
-    public String getIntactImageFileName() {
+    public int getIntactImageFileName() {
         return _imageFileNameList.get(INTACT_OBJECT_IMAGE_FILE_NAME_INDEX);
     }
     
     @Override
-    public String getNextDestructionImageFileName() {
-        if (_nextImageIndex == _listSizeMinusOne) {
-            return null;
-        }
-        _nextImageIndex++;
+    public int getNextDestructionImageFileName() {
+        
         return _imageFileNameList.get(_nextImageIndex);
     }
 
 
-    public void tick() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
     public void takeDamage(int dam) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if ((_nextImageIndex + dam)<= (_imageFileNameList.size()-1) ) {
+             _nextImageIndex+= dam;
+        } else
+            _nextImageIndex = _imageFileNameList.size()-1 ;
+       
     }
 
-    public String getCurrentSprite() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getxPosition() {
+        return _xPosition;
     }
 
+    public void setxPosition(int _xPosition) {
+        this._xPosition = _xPosition;
+    }
+
+    public int getyPosition() {
+        return _yPosition;
+    }
+
+    public void setyPosition(int _yPosition) {
+        this._yPosition = _yPosition;
+    }
+
+    public int getHeight() {
+        return _height;
+    }
+
+    public int getWidth() {
+        return _width;
+    }
+
+    public void setImageFileNameList(LinkedList<Integer> _imageFileNameList) {
+        this._imageFileNameList = _imageFileNameList;
+    }
+    
+    
     
     
 }

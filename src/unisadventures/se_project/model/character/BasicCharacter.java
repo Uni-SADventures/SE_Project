@@ -1,4 +1,4 @@
-package unisadventures.se_project.model.character;
+ package unisadventures.se_project.model.character;
 
 import java.util.*;
 import unisadventures.se_project.presenter.launcher.Handler;

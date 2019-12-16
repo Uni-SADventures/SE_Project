@@ -1,9 +1,5 @@
 package unisadventures.se_project.model.basicObjects;
 
-
-
-import java.awt.Graphics;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import unisadventures.se_project.util.CollectibleType;
@@ -15,8 +11,8 @@ public class CollectibleItem implements CollectibleItemInterface {
     private int _counter;
     private int _xPosition ;
     private int _yPosition;
-    private int _height ;
-    private int _width ;
+    private final int _height ;
+    private final int _width ;
     
     
     public CollectibleItem(int xPosition, int yPosition, int height, int width, CollectibleType type) {
