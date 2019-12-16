@@ -6,7 +6,7 @@
 package unisadventures.se_project.model.character.decorator;
 
 import unisadventures.se_project.util.DirectionType;
-import unisadventures.se_project.model.character.MovementsInterface;
+import unisadventures.se_project.model.character.actionCommands.MovementsInterface;
 
 
 

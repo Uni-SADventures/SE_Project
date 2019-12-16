@@ -89,6 +89,9 @@ public class GameState extends State {
     public PlayerCharacter getPlayer() {
         return (PlayerCharacter) _player.getCh();
     }
+     public ActionManager getPlayerActionManager() {
+        return _player;
+    }
 
     @Override
     public void tick() {
@@ -374,7 +377,9 @@ public class GameState extends State {
     public int[] getUiNumbers() {
         return _uiNumbers;
     }
-
+    
+    
+    
     public LinkedList<CollectibleItem> getCollectibles() {
         return _collectibles;
     }

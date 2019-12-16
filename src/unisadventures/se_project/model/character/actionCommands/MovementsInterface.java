@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unisadventures.se_project.model.character;
+package unisadventures.se_project.model.character.actionCommands;
+
+import unisadventures.se_project.model.character.PlayerCharacter;
 
 
 /**
@@ -20,4 +22,5 @@ public interface MovementsInterface {
     void takeDamage(int damage);
     PlayerCharacter getPowered(PlayerCharacter p); 
     void grab();
+    void tick() ;
 }

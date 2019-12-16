@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="0" total="25" passed="24">
+<testng-results skipped="0" failed="1" ignored="0" total="26" passed="25">
   <reporter-output>
   </reporter-output>
-  <suite name="SE_Project" duration-ms="1412" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:54 CET">
+  <suite name="SE_Project" duration-ms="2967" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:47 CET">
     <groups>
     </groups>
-    <test name="TestNG tests" duration-ms="1412" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:54 CET">
+    <test name="TestNG tests" duration-ms="2967" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:47 CET">
       <class name="unisadventures.se_project.model.basicObjects.CollectibleItemTest">
-        <test-method status="PASS" signature="testGetCollectibleType()[pri:0, instance:unisadventures.se_project.model.basicObjects.CollectibleItemTest@69d9c55]" name="testGetCollectibleType" duration-ms="8" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testGetCollectibleType()[pri:0, instance:unisadventures.se_project.model.basicObjects.CollectibleItemTest@7ca48474]" name="testGetCollectibleType" duration-ms="4" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetCollectibleType -->
-        <test-method status="PASS" signature="testGetNextImageFileName()[pri:0, instance:unisadventures.se_project.model.basicObjects.CollectibleItemTest@69d9c55]" name="testGetNextImageFileName" duration-ms="0" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testGetNextImageFileName()[pri:0, instance:unisadventures.se_project.model.basicObjects.CollectibleItemTest@7ca48474]" name="testGetNextImageFileName" duration-ms="0" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetNextImageFileName -->
       </class> <!-- unisadventures.se_project.model.basicObjects.CollectibleItemTest -->
       <class name="unisadventures.se_project.presenter.launcher.GameTest">
-        <test-method status="PASS" signature="testCreation()[pri:0, instance:unisadventures.se_project.presenter.launcher.GameTest@458ad742]" name="testCreation" duration-ms="1" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testCreation()[pri:0, instance:unisadventures.se_project.presenter.launcher.GameTest@6ea12c19]" name="testCreation" duration-ms="1" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreation -->
       </class> <!-- unisadventures.se_project.presenter.launcher.GameTest -->
       <class name="unisadventures.se_project.presenter.launcher.FrameClockTest">
-        <test-method status="PASS" signature="testRegisterObserver()[pri:0, instance:unisadventures.se_project.presenter.launcher.FrameClockTest@2344fc66]" name="testRegisterObserver" duration-ms="0" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testRegisterObserver -->
-        <test-method status="PASS" signature="testRun()[pri:0, instance:unisadventures.se_project.presenter.launcher.FrameClockTest@2344fc66]" name="testRun" duration-ms="0" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testRun()[pri:0, instance:unisadventures.se_project.presenter.launcher.FrameClockTest@5afa04c]" name="testRun" duration-ms="7" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testRun -->
-        <test-method status="PASS" signature="testUnregisterObserver()[pri:0, instance:unisadventures.se_project.presenter.launcher.FrameClockTest@2344fc66]" name="testUnregisterObserver" duration-ms="0" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testRegisterObserver()[pri:0, instance:unisadventures.se_project.presenter.launcher.FrameClockTest@5afa04c]" name="testRegisterObserver" duration-ms="0" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRegisterObserver -->
+        <test-method status="PASS" signature="testUnregisterObserver()[pri:0, instance:unisadventures.se_project.presenter.launcher.FrameClockTest@5afa04c]" name="testUnregisterObserver" duration-ms="0" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testUnregisterObserver -->
       </class> <!-- unisadventures.se_project.presenter.launcher.FrameClockTest -->
       <class name="unisadventures.se_project.model.basicObjects.TileTest">
-        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.basicObjects.TileTest@61a485d2]" name="testCreaction" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.basicObjects.TileTest@6276ae34]" name="testCreaction" duration-ms="1" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreaction -->
       </class> <!-- unisadventures.se_project.model.basicObjects.TileTest -->
       <class name="unisadventures.se_project.model.character.actionCommands.ActionManagerTest">
-        <test-method status="FAIL" signature="testGetPowered()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.ActionManagerTest@3c09711b]" name="testGetPowered" duration-ms="1" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="FAIL" signature="testGetPowered()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.ActionManagerTest@b97c004]" name="testGetPowered" duration-ms="2" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <exception class="org.opentest4j.AssertionFailedError">
             <message>
               <![CDATA[expected: not <null>]]>
@@ -92,103 +92,109 @@ at org.testng.TestNG.main(TestNG.java:1294)
         </test-method> <!-- testGetPowered -->
       </class> <!-- unisadventures.se_project.model.character.actionCommands.ActionManagerTest -->
       <class name="unisadventures.se_project.model.character.ZombieEnemyTest">
-        <test-method status="PASS" signature="moveTest()[pri:0, instance:unisadventures.se_project.model.character.ZombieEnemyTest@7946e1f4]" name="moveTest" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="moveTest()[pri:0, instance:unisadventures.se_project.model.character.ZombieEnemyTest@5cc7c2a6]" name="moveTest" duration-ms="2" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- moveTest -->
       </class> <!-- unisadventures.se_project.model.character.ZombieEnemyTest -->
       <class name="unisadventures.se_project.model.basicObjects.DestructibleObjectTest">
-        <test-method status="PASS" signature="testGetIntactImageFileName()[pri:0, instance:unisadventures.se_project.model.basicObjects.DestructibleObjectTest@13a57a3b]" name="testGetIntactImageFileName" duration-ms="0" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testGetIntactImageFileName()[pri:0, instance:unisadventures.se_project.model.basicObjects.DestructibleObjectTest@337d0578]" name="testGetIntactImageFileName" duration-ms="3" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetIntactImageFileName -->
-        <test-method status="PASS" signature="testGetNextDestructionImageFileName()[pri:0, instance:unisadventures.se_project.model.basicObjects.DestructibleObjectTest@13a57a3b]" name="testGetNextDestructionImageFileName" duration-ms="0" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testGetNextDestructionImageFileName()[pri:0, instance:unisadventures.se_project.model.basicObjects.DestructibleObjectTest@337d0578]" name="testGetNextDestructionImageFileName" duration-ms="0" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetNextDestructionImageFileName -->
       </class> <!-- unisadventures.se_project.model.basicObjects.DestructibleObjectTest -->
       <class name="unisadventures.se_project.model.basicObjects.SkyTileTest">
-        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.basicObjects.SkyTileTest@59e84876]" name="testCreaction" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.basicObjects.SkyTileTest@39fb3ab6]" name="testCreaction" duration-ms="0" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreaction -->
       </class> <!-- unisadventures.se_project.model.basicObjects.SkyTileTest -->
       <class name="unisadventures.se_project.presenter.camera.GameCameraTest">
-        <test-method status="PASS" signature="testCreation()[pri:0, instance:unisadventures.se_project.presenter.camera.GameCameraTest@6574b225]" name="testCreation" duration-ms="1" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testCreation()[pri:0, instance:unisadventures.se_project.presenter.camera.GameCameraTest@2344fc66]" name="testCreation" duration-ms="5" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreation -->
       </class> <!-- unisadventures.se_project.presenter.camera.GameCameraTest -->
-      <class name="unisadventures.se_project.model.basicObjects.RockTileTest">
-        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.basicObjects.RockTileTest@337d0578]" name="testCreaction" duration-ms="0" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testCreaction -->
-      </class> <!-- unisadventures.se_project.model.basicObjects.RockTileTest -->
       <class name="unisadventures.se_project.model.character.PlayerCharacterTest">
-        <test-method status="PASS" signature="testSomeMethod()[pri:0, instance:unisadventures.se_project.model.character.PlayerCharacterTest@6276ae34]" name="testSomeMethod" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="testSomeMethod()[pri:0, instance:unisadventures.se_project.model.character.PlayerCharacterTest@3c09711b]" name="testSomeMethod" duration-ms="0" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSomeMethod -->
       </class> <!-- unisadventures.se_project.model.character.PlayerCharacterTest -->
+      <class name="unisadventures.se_project.model.basicObjects.RockTileTest">
+        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.basicObjects.RockTileTest@61a485d2]" name="testCreaction" duration-ms="0" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreaction -->
+      </class> <!-- unisadventures.se_project.model.basicObjects.RockTileTest -->
       <class name="unisadventures.se_project.presenter.input.KeyManagerTest">
-        <test-method status="PASS" signature="testCreation()[pri:0, instance:unisadventures.se_project.presenter.input.KeyManagerTest@2669b199]" name="testCreation" duration-ms="1" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testCreation()[pri:0, instance:unisadventures.se_project.presenter.input.KeyManagerTest@458ad742]" name="testCreation" duration-ms="1" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreation -->
-        <test-method status="PASS" signature="testTick()[pri:0, instance:unisadventures.se_project.presenter.input.KeyManagerTest@2669b199]" name="testTick" duration-ms="0" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testTick()[pri:0, instance:unisadventures.se_project.presenter.input.KeyManagerTest@458ad742]" name="testTick" duration-ms="0" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testTick -->
       </class> <!-- unisadventures.se_project.presenter.input.KeyManagerTest -->
       <class name="unisadventures.se_project.model.basicObjects.LimitTileTest">
-        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.basicObjects.LimitTileTest@7ca48474]" name="testCreaction" duration-ms="1" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:52 CET">
+        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.basicObjects.LimitTileTest@59e84876]" name="testCreaction" duration-ms="4" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreaction -->
       </class> <!-- unisadventures.se_project.model.basicObjects.LimitTileTest -->
       <class name="unisadventures.se_project.model.character.actionCommands.HitCommandTest">
-        <test-method status="PASS" signature="testHit()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.HitCommandTest@b97c004]" name="testHit" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="testHit()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.HitCommandTest@32e6e9c3]" name="testHit" duration-ms="0" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHit -->
       </class> <!-- unisadventures.se_project.model.character.actionCommands.HitCommandTest -->
       <class name="unisadventures.se_project.view.gfx.ImageLoaderTest">
-        <test-method status="PASS" signature="testLoadImage()[pri:0, instance:unisadventures.se_project.view.gfx.ImageLoaderTest@5afa04c]" name="testLoadImage" duration-ms="1354" started-at="2019-12-16T15:42:52 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="testLoadImage()[pri:0, instance:unisadventures.se_project.view.gfx.ImageLoaderTest@6a024a67]" name="testLoadImage" duration-ms="2755" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLoadImage -->
       </class> <!-- unisadventures.se_project.view.gfx.ImageLoaderTest -->
       <class name="unisadventures.se_project.model.character.actionCommands.IdleCommandTest">
-        <test-method status="PASS" signature="testIdle()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.IdleCommandTest@4590c9c3]" name="testIdle" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="testIdle()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.IdleCommandTest@5056dfcb]" name="testIdle" duration-ms="0" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testIdle -->
       </class> <!-- unisadventures.se_project.model.character.actionCommands.IdleCommandTest -->
+      <class name="unisadventures.se_project.model.GameLevelTest">
+        <test-method status="PASS" signature="testCreationAndGetTile()[pri:0, instance:unisadventures.se_project.model.GameLevelTest@13a57a3b]" name="testCreationAndGetTile" duration-ms="20" started-at="2019-12-16T17:00:44 CET" finished-at="2019-12-16T17:00:44 CET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreationAndGetTile -->
+      </class> <!-- unisadventures.se_project.model.GameLevelTest -->
       <class name="unisadventures.se_project.model.character.actionCommands.MoveCommandTest">
-        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.MoveCommandTest@32e6e9c3]" name="testCreaction" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.MoveCommandTest@6574b225]" name="testCreaction" duration-ms="0" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreaction -->
       </class> <!-- unisadventures.se_project.model.character.actionCommands.MoveCommandTest -->
+      <class name="unisadventures.se_project.model.character.EnemyCharacterTest">
+        <test-method status="PASS" signature="testSomeMethod()[pri:0, instance:unisadventures.se_project.model.character.EnemyCharacterTest@7946e1f4]" name="testSomeMethod" duration-ms="0" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSomeMethod -->
+      </class> <!-- unisadventures.se_project.model.character.EnemyCharacterTest -->
       <class name="unisadventures.se_project.model.character.actionCommands.VerticalCommandTest">
-        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.VerticalCommandTest@5056dfcb]" name="testCreaction" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="testCreaction()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.VerticalCommandTest@2669b199]" name="testCreaction" duration-ms="0" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreaction -->
       </class> <!-- unisadventures.se_project.model.character.actionCommands.VerticalCommandTest -->
       <class name="unisadventures.se_project.model.character.actionCommands.BeingDamagedCommandTest">
-        <test-method status="PASS" signature="testTakeDamage()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.BeingDamagedCommandTest@5cc7c2a6]" name="testTakeDamage" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
+        <test-method status="PASS" signature="testTakeDamage()[pri:0, instance:unisadventures.se_project.model.character.actionCommands.BeingDamagedCommandTest@4590c9c3]" name="testTakeDamage" duration-ms="0" started-at="2019-12-16T17:00:47 CET" finished-at="2019-12-16T17:00:47 CET">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testTakeDamage -->
       </class> <!-- unisadventures.se_project.model.character.actionCommands.BeingDamagedCommandTest -->
-      <class name="unisadventures.se_project.model.character.EnemyCharacterTest">
-        <test-method status="PASS" signature="testSomeMethod()[pri:0, instance:unisadventures.se_project.model.character.EnemyCharacterTest@39fb3ab6]" name="testSomeMethod" duration-ms="0" started-at="2019-12-16T15:42:54 CET" finished-at="2019-12-16T15:42:54 CET">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSomeMethod -->
-      </class> <!-- unisadventures.se_project.model.character.EnemyCharacterTest -->
     </test> <!-- TestNG tests -->
   </suite> <!-- SE_Project -->
 </testng-results>
