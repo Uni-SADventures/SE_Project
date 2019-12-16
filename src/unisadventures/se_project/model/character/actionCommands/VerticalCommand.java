@@ -7,8 +7,6 @@ package unisadventures.se_project.model.character.actionCommands;
 
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
-import unisadventures.se_project.model.character.PlayerCharacter;
-import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.basicObjects.Tile;
 
 /**
@@ -22,10 +20,7 @@ public class VerticalCommand extends ActionCommand {
     public VerticalCommand(Handler handler, BasicCharacter ch) {
         super(handler, ch);
         _initJump = -1;
-        _bounds.x=14;
-        _bounds.y=10;
-        _bounds.width=50;
-        _bounds.height=95;
+        
     }
     
     /**

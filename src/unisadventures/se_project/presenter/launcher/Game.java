@@ -4,8 +4,6 @@ package unisadventures.se_project.presenter.launcher;
 import unisadventures.se_project.view.display.Display;
 import unisadventures.se_project.model.FrameListener;
 import unisadventures.se_project.presenter.camera.GameCamera;
-
-import unisadventures.se_project.view.gfx.Assets;
 import unisadventures.se_project.presenter.input.KeyManager;
 import unisadventures.se_project.presenter.states.*;
 
@@ -55,7 +53,7 @@ public class Game extends FrameListener {
 		display = new Display(title, displayWidth, displayHeight);
          
 		display.getFrame().addKeyListener(keyManager);
-		Assets.init();
+		//Assets.init();
 		
                 
 		gameState = new GameState(hand);

@@ -7,7 +7,6 @@ package unisadventures.se_project.model.character;
 
 import java.awt.Rectangle;
 import unisadventures.se_project.model.character.actionCommands.Command;
-import unisadventures.se_project.model.character.actionCommands.*;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
@@ -72,7 +71,6 @@ public class ZombieEnemy extends EnemyCharacter {
         _jumpCommand = jumpCommand;
     }
 
-    @Override
 
     public void tick() {
         attack();
@@ -155,7 +153,7 @@ public class ZombieEnemy extends EnemyCharacter {
 
             if (checkVerticalCollision()) {
                 this.setHealthBar(-1);
-                player.jump();
+               // player.jump();
             }
 
         }
@@ -174,7 +172,7 @@ public class ZombieEnemy extends EnemyCharacter {
         }
         return false;
     }
-
+/*
     private boolean checkHorizontalCollision() {
         if (State.getState() instanceof GameState) {
             GameState gamestate = (GameState) State.getState();
@@ -189,5 +187,5 @@ public class ZombieEnemy extends EnemyCharacter {
         }
         return false;
     }
-
+*/
 }

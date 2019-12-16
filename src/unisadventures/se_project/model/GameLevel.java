@@ -11,12 +11,21 @@ public class GameLevel {
     private int _levelWidth, _levelHeight;
     private int _displayWidth, _displayHeight;
     private int _spawnX, _spawnY;
+    private int _scenarioImage;
     private int [][] tiles;
     
     public GameLevel(String path, int displayWidth, int displayHeight) throws IOException {
         _displayWidth = displayWidth;
         _displayHeight = displayHeight;
         loadWorld(path);
+    }
+    
+    public int getScenarioImage() {
+        return _scenarioImage;
+    }
+
+    public void setScenarioImage(int scenarioImage) {
+        _scenarioImage = scenarioImage;
     }
     
     public void tick() {

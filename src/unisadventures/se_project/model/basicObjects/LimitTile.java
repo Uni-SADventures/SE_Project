@@ -14,7 +14,7 @@ import unisadventures.se_project.view.gfx.Assets;
 public class LimitTile extends Tile {
 
     public LimitTile(int id, int x, int y) {
-        super(Assets.limit,id,x,y);
+        super(Tile.getLimitIdImage(),id,x,y);
     }
 
     @Override

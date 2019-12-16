@@ -5,8 +5,6 @@
  */
 package unisadventures.se_project.model.basicObjects;
 
-import java.awt.image.BufferedImage;
-
 
 /**
  *
@@ -15,19 +13,68 @@ import java.awt.image.BufferedImage;
 public class Tile {
     //Static stuff
     public static Tile []tiles = new Tile[256];
+    public static Tile rockTile;
+    public static Tile skyTile;
+    public static Tile limitTile  = new LimitTile(4,200,200);
+    public static int rockIdImage ;
+    public static int skyIdImage ;
+    public static int limitIdImage ;
+   /*
     public static Tile rockTile = new RockTile(2,200,200);
     public static Tile skyTile = new SkyTile(3,200,200);
     public static Tile limitTile= new LimitTile(4,200,200);
-    
+    */
+     //Static stuff
+    /*
+    public static Tile []tiles = new Tile[256];
+    public static Tile rockTile = new RockTile(2,200,200);
+    public static Tile skyTile = new SkyTile(3,200,200);
+    public static Tile limitTile= new LimitTile(4,200,200);
+    */
     //Class
     public static final int TILEWIDTH = 74, TILEHEIGHT = 74;
-    protected BufferedImage texture;
+    protected final int texture;
     protected final int id;
     private int x ;
     private int y ;
     
     
-    public Tile(BufferedImage texture, int id,int x,int y) {
+    
+    public static int getRockIdImage() {
+        return rockIdImage;
+    }
+
+    public static void setRockIdImage(int rockIdImage) {
+        Tile.rockIdImage = rockIdImage;
+        rockTile  = new RockTile(2,200,200);
+        
+    }
+
+    public static int getSkyIdImage() {
+        return skyIdImage;
+    }
+
+    public static void setSkyIdImage(int skyIdImage) {
+        Tile.skyIdImage = skyIdImage;
+        skyTile  = new SkyTile(3,200,200);
+    }
+
+    public static int getLimitIdImage() {
+        return limitIdImage;
+    }
+
+    public static void setLimitIdImage(int limitIdImage) {
+        Tile.limitIdImage = limitIdImage;
+        limitTile  = new LimitTile(4,200,200);
+    }
+    
+    
+    
+    
+    
+    
+    
+    public Tile(int texture, int id,int x,int y) {
         this.x = x ;
         this.y = y ;
       
@@ -40,7 +87,7 @@ public class Tile {
         return id;
     }
 
-    public BufferedImage getTexture() {
+    public int getTexture() {
         return texture;
     }
 

@@ -5,10 +5,15 @@
  */
 package unisadventures.se_project.model.character.actionCommands;
 
+import java.util.List;
+import unisadventures.se_project.model.basicObjects.CollectibleItem;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.MovementsInterface;
 import unisadventures.se_project.model.character.PlayerCharacter;
+import unisadventures.se_project.presenter.states.GameState;
+import unisadventures.se_project.presenter.states.State;
+import unisadventures.se_project.util.DirectionType;
 
 /**
  * This class manages all available actions and their relative dependancies.
@@ -20,11 +25,15 @@ import unisadventures.se_project.model.character.PlayerCharacter;
 public class ActionManager implements MovementsInterface {
     private final MoveCommand _movement ;
     private final VerticalCommand _jumpFall ;
+    private final IdleCommand _idle ;
     private final HitCommand _combat ;
+    private final BeingDamagedCommand _beDamaged ;
     private final Handler _handler ;
     private final BasicCharacter _ch ;
+    private int _actualId ;
 
     private boolean _walking,_jumping,_falling,_idling,_hitting,_beingDamaged;
+    private int _incomingDamage ;
             
     public ActionManager(Handler _handler, BasicCharacter _ch) {
         
@@ -34,13 +43,16 @@ public class ActionManager implements MovementsInterface {
         _idling = false ;
         _hitting = false ;
         _beingDamaged = false ;
-        
+        _incomingDamage = 0 ;
         
         this._handler = _handler;
         this._ch = _ch;
         _movement = new MoveCommand(_handler,_ch) ;
         _jumpFall = new VerticalCommand(_handler,_ch) ;
         _combat = new HitCommand(_handler,_ch) ;
+        _idle = new IdleCommand(_handler,_ch) ;
+        _beDamaged = new BeingDamagedCommand(_handler,_ch,70) ;
+        _actualId = 0 ;
     }
     
     
@@ -48,52 +60,101 @@ public class ActionManager implements MovementsInterface {
      * This method interprets user inputs if the character is user's one and if not
      * it checks what should a character do, for example if there is a floor under their feet
      */
-    public void execute(){
-        
-       //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
-        if(_ch instanceof PlayerCharacter){
-            if(!_jumping)
+    public void tick() {
+
+        //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
+        if (_ch instanceof PlayerCharacter) {
+            if (!_jumping) {
                 fall();
-            _handler.getCam().centerOnEntity((PlayerCharacter)_ch);
-            if(_handler.getKeyManager().left)
+            }
+            _handler.getCam().centerOnEntity((PlayerCharacter) _ch);
+            if (_handler.getKeyManager().left) {
                 moveLeft();
-            else if(_handler.getKeyManager().right)
+                _ch.setFacing(DirectionType.LEFT);
+            } else if (_handler.getKeyManager().right) {
                 moveRight();
-            else
-                _walking = false ;
-            
-            if(_handler.getKeyManager().up && !_falling)
+                _ch.setFacing(DirectionType.RIGHT);
+            } else {
+                _walking = false;
+            }
+
+            if (_handler.getKeyManager().up && !_falling) {
                 jump();
-            else if(!_handler.getKeyManager().up)
-                _jumping = false ;
-         //   else if(!_hanlder.checkFloor(_ch.getPosition().getFirstElement(),_ch.getPosition().getSecondElement()))
+            } else if (!_handler.getKeyManager().up) {
+                _jumping = false;
+            }
+            //   else if(!_hanlder.checkFloor(_ch.getPosition().getFirstElement(),_ch.getPosition().getSecondElement()))
             //    _jumpFall.fall();
-            
-            if(_handler.getKeyManager().hit)
+
+            if (_handler.getKeyManager().hit) {
                 attack();
-            else
-                _hitting = false ;
-            
-            if(!_handler.getKeyManager().up && !_handler.getKeyManager().left && !_handler.getKeyManager().right && !_handler.getKeyManager().hit)
-                idle() ;
-        
-        }else{
-        if(!_jumping)
-            fall();
- 
-        
+            } else {
+                _hitting = false;
+            }
+             grab();
+        } else {
+            if (!_jumping) {
+                fall();
+            }
+
         }
-            
-        
-        //MANAGING MOVEMENTS 
+
+        if (!_walking && !_jumping && !_falling && !_hitting && !_beingDamaged) {
+            idle();
+        }
+
+        if (_beingDamaged) {
+            _beingDamaged = _beDamaged.takeDamage(_incomingDamage);
+            if (_beingDamaged) {
+                if (_ch.getFacing().LEFT == DirectionType.LEFT) {
+                    _movement.moveRight();
+                } else {
+                    _movement.moveLeft();
+                }
+            } else {
+                _incomingDamage = 0;
+            }
+        }
+
+        //CHECKING IF THERE IS SOME COLLECTIBLE
+       
     }
+    
+    
+     /**
+   * 
+   * @param dam is the sum to remove from character's actual health
+   */
+   
+    @Override
+    public void takeDamage(int dam){
+        if(!_beingDamaged){
+            _incomingDamage = dam ;
+            _jumping = false ;
+        }
+    }
+
+    public BasicCharacter getCh() {
+        return _ch;
+    }
+    
+    
+    
+    
     
     /**
      * This method execute basic idle action, useful when user is not giving input and if
      * its character is in a stable position
      */
-    public void idle() {
-        //TODO
+    public void idle(){
+        if(!_idling){
+            _idle.resetCounter();
+            _idling = true ;
+        }
+        _idle.idle();
+        int length = _ch.getIdleSprites(_ch.getFacing()).size() ;
+        _actualId = _ch.getIdleSprites(_ch.getFacing()).get(_idle.getCount()%length) ;
+        
     }
     
     /**
@@ -106,6 +167,8 @@ public class ActionManager implements MovementsInterface {
             _walking = true ;
         }
         _movement.moveLeft();
+        int length = _ch.getWalkSprites(DirectionType.LEFT).size() ;
+        _actualId = _ch.getWalkSprites(DirectionType.LEFT).get(_movement.getCount()%length);
     }
     /**
      * This method moves a character one step on the right according to his speed
@@ -117,6 +180,8 @@ public class ActionManager implements MovementsInterface {
             _walking = true ;
         }
         _movement.moveRight();
+        int length = _ch.getWalkSprites(DirectionType.RIGHT).size() ;
+        _actualId = _ch.getWalkSprites(DirectionType.RIGHT).get(_movement.getCount()%length);
     }
     
     /**
@@ -130,11 +195,13 @@ public class ActionManager implements MovementsInterface {
         }
         
         _jumping = _jumpFall.jump();
- 
+        int length = _ch.getJumpSprites(_ch.getFacing()).size() ;
+        _actualId = _ch.getJumpSprites(_ch.getFacing()).get(_jumpFall.getCount()%length) ;
     }
     
     /**
      * This method let the character begin or continue his attack move.
+     * @return the image id for the next image to be displayed
      */
     @Override
     public void attack(){
@@ -144,6 +211,8 @@ public class ActionManager implements MovementsInterface {
         }
         
         _combat.hit();
+        int length = _ch.getPunchSprites(_ch.getFacing()).size() ;
+        _actualId = _ch.getPunchSprites(_ch.getFacing()).get(_combat.getCount()%length) ;
     }
     
     
@@ -162,26 +231,33 @@ public class ActionManager implements MovementsInterface {
             }
             
             _falling = _jumpFall.fall();
-        
+        int length = _ch.getFallSprites(_ch.getFacing()).size() ;
+        _actualId = _ch.getFallSprites(_ch.getFacing()).get(_jumpFall.getCount()%length) ;
         
     }
 
-  /**
-   * 
-   * @param damage is the sum to remove from character's actual health
-   */
-    @Override
-    public void takeDamage(int damage) {
-        _ch.takeDamage(damage);
-    }
-
+ 
     
     /**
      * This method checks if a character has run into some collectible
      */
     @Override
     public void grab() {
-      //TODO once we have some collectibles
+      int chx = _ch.getxPosition(), chy = _ch.getyPosition(), chw = _ch.getDimension().getFirstElement(), chh = _ch.getDimension().getSecondElement() ;
+      State state = State.getState() ;
+      if(!(state instanceof GameState))
+          return ;
+      List<CollectibleItem> collectibles = (List<CollectibleItem>) ((GameState)state).getCollectibles().clone() ;
+      for(CollectibleItem coll : collectibles){
+          int collx = coll.getxPosition() , colly = coll.getyPosition(), collw = coll.getWidth(), collh = coll.getHeight() ;
+         
+          if(collx <= chx && (chx+chw) <= (collx + collw) &&
+                  colly <= chy && (chy+chh) <= (colly + collh)){
+              ((GameState)state).getCollectibles().remove();
+              ((PlayerCharacter)_ch).setCfu(((PlayerCharacter)_ch).getCfu()+1);
+             
+          }
+      }
     }
 
     
@@ -198,5 +274,10 @@ public class ActionManager implements MovementsInterface {
         return null ; // <- da levare
     }
 
+    public int getActualId() {
+        return _actualId;
+    }
+    
+    
    
 }

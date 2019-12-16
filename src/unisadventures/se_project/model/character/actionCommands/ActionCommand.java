@@ -8,7 +8,6 @@ package unisadventures.se_project.model.character.actionCommands;
 import java.awt.Rectangle;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
-import unisadventures.se_project.presenter.launcher.Game;
 
 /**
  *USED PATTERN: COMMAND PATTERN
@@ -31,7 +30,10 @@ public abstract class ActionCommand {
         _ch = ch;
         _count = 0;
         _bounds=new Rectangle(0,0,_ch.getDimension().getFirstElement(),_ch.getDimension().getSecondElement());
-        
+        _bounds.x=0;
+        _bounds.y=0;
+        _bounds.width=_ch.getDimension().getFirstElement();
+        _bounds.height=_ch.getDimension().getSecondElement();
     }
 
     public int getCount() {

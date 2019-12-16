@@ -14,6 +14,6 @@ import unisadventures.se_project.view.gfx.Assets;
 public class SkyTile extends Tile {
 
    public SkyTile(int id,int x, int y) {
-        super(Assets.sky, id,x,y);
+        super(Tile.getSkyIdImage(), id,x,y);
     }
 }
