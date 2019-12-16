@@ -98,7 +98,7 @@ public class GameState extends State {
 
     @Override
     public void displayView(Graphics g) {
-        view.renderScenario(g);
+        _view.renderScenario(g);
         int xStart=(int)Math.max(0,_handler.getCam().getxOffset()/Tile.TILEWIDTH-1);
 
         int xEnd=(int)Math.min(_handler.getLevel().getLevelWidth(),(_handler.getCam().getxOffset() + _handler.getDisplayWidth())/Tile.TILEWIDTH+1);
@@ -111,21 +111,21 @@ public class GameState extends State {
             for(int x=xStart;x<xEnd;x++){
                 
 
-                view.renderTile(g, _handler.getLevel().getTile(x,y).getTexture() ,(int)(x*Tile.TILEWIDTH - _handler.getCam().getxOffset()), (int)(y*Tile.TILEHEIGHT - _handler.getCam().getyOffset()   ));
+                _view.renderTile(g, _handler.getLevel().getTile(x,y).getTexture() ,(int)(x*Tile.TILEWIDTH - _handler.getCam().getxOffset()), (int)(y*Tile.TILEHEIGHT - _handler.getCam().getyOffset()   ));
 
             }
         }
-        view.renderPlayer(g, _player.getActualId(),_player.getCh().getPosition().getFirstElement(), _player.getCh().getPosition().getSecondElement());
+        _view.renderPlayer(g, _player.getActualId(),_player.getCh().getPosition().getFirstElement(), _player.getCh().getPosition().getSecondElement());
   
-        view.renderStuffMore(g, _enemy.getxPosition(), _enemy.getyPosition(),_enemy.getDimension().getFirstElement(),_enemy.getDimension().getSecondElement(), _enemy.getIdleSprites(DirectionType.LEFT).get(0));
+        _view.renderStuffMore(g, _enemy.getxPosition(), _enemy.getyPosition(),_enemy.getDimension().getFirstElement(),_enemy.getDimension().getSecondElement(), _enemy.getIdleSprites(DirectionType.LEFT).get(0));
         
         for(CollectibleItem coll : _collectibles){
-            view.renderStuffMore(g, coll.getxPosition(), coll.getyPosition(),coll.getWidth(),coll.getHeight(),coll.getNextImageFileName());
+            _view.renderStuffMore(g, coll.getxPosition(), coll.getyPosition(),coll.getWidth(),coll.getHeight(),coll.getNextImageFileName());
         }
         
         
         
-        view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
+        _view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
 
     }
     @Override
@@ -134,7 +134,11 @@ public class GameState extends State {
             
         //loading all sprites for characters
         
-            Assets.init();
+        
+        // DO NOT PUT Assets.init(); HERE!!!!
+        // Put it in Launcher...
+        
+        
         //PLAYER CHARACTER
             List temp = new LinkedList<>() ;
             Assets.storeImage("resources/images/character_sprite.png",48,0,16,32);

@@ -32,10 +32,10 @@ public abstract class State {
 	//CLASS
 	
 	protected Handler _handler;
-	protected final StateGraphics view ;
+	protected final StateGraphics _view ;
 	public State(Handler handler /*,World world*/){
 		_handler = handler;
-                view = new StateGraphics(_handler /*,world*/) ;
+                _view = new StateGraphics(_handler /*,world*/) ;
 	}
 	
         /**

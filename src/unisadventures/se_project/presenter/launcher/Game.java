@@ -30,6 +30,7 @@ public class Game extends FrameListener {
 	//States
 	private State gameState;
 	private State menuState;
+        private boolean stateIsMenu;
 	
 	//Input
 	private final KeyManager keyManager;
@@ -53,14 +54,14 @@ public class Game extends FrameListener {
 		display = new Display(title, displayWidth, displayHeight);
          
 		display.getFrame().addKeyListener(keyManager);
-		//Assets.init();
 		
                 
 		gameState = new GameState(hand);
 		menuState = new MenuState(hand);
 
                 
-		State.setState(gameState);
+		State.setState(menuState);
+                stateIsMenu = true;
 	}
 	
         
@@ -72,6 +73,11 @@ public class Game extends FrameListener {
 		
 		if(State.getState() != null)
 			State.getState().tick();
+                
+                if (keyManager.leaveMenu && stateIsMenu) {
+                    State.setState(gameState);
+                    stateIsMenu = false;
+                }
 	}
 	
 	

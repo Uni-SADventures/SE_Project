@@ -1,4 +1,7 @@
 package unisadventures.se_project.presenter.launcher ;
+
+import unisadventures.se_project.view.gfx.Assets;
+
 /**
  * This is the main class whitch launches the game
  * @author Emilio
@@ -6,6 +9,7 @@ package unisadventures.se_project.presenter.launcher ;
 public class Launcher {
 
 	public static void main(String[] args){
+                Assets.init();
 		Game game = new Game("Tile Game!", 1100, 600);
 		game.start();
                 
