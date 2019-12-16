@@ -7,7 +7,6 @@ package unisadventures.se_project.presenter.camera;
 
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.PlayerCharacter;
-import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.basicObjects.Tile;
 
 /**
@@ -34,7 +33,7 @@ public class GameCamera {
          * @param p is the character passed
          */
 	public void centerOnEntity(PlayerCharacter p){
-		xOffset = (float) (p.getPosition().getFirstElement() - handler.getWidth() / 2 + p.getDimension().getFirstElement() / 2);
+		xOffset = (float) (p.getPosition().getFirstElement() - handler.getDisplayWidth() / 2 + p.getDimension().getFirstElement() / 2);
 		//yOffset = (float) (p.getPosition().getSecondElement() - handler.getHeight() / 2 + p.getDimension().getSecondElement() / 2);
                 checkBlankSpace();
         }
@@ -42,13 +41,13 @@ public class GameCamera {
         public void checkBlankSpace(){
             if(xOffset<0){
                 xOffset=0;
-            }else if(xOffset>handler.getWorld().getWidth()*Tile.TILEWIDTH-handler.getWidth()){
-                xOffset=handler.getWorld().getWidth()*Tile.TILEWIDTH-handler.getWidth();
+            }else if(xOffset>handler.getLevel().getLevelWidth()*Tile.TILEWIDTH-handler.getDisplayWidth()){
+                xOffset=handler.getLevel().getLevelWidth()*Tile.TILEWIDTH-handler.getDisplayWidth();
             }
             if(yOffset<0){
                 yOffset=0;
-            }else if(yOffset>handler.getWorld().getHeight()*Tile.TILEHEIGHT-handler.getHeight()){
-                yOffset=handler.getWorld().getHeight()*Tile.TILEHEIGHT-handler.getHeight();
+            }else if(yOffset>handler.getLevel().getLevelHeight()*Tile.TILEHEIGHT-handler.getDisplayHeight()){
+                yOffset=handler.getLevel().getLevelHeight()*Tile.TILEHEIGHT-handler.getDisplayHeight();
             }
         }
         /**
@@ -59,7 +58,7 @@ public class GameCamera {
          */
         public void centerOnEntityFloor(PlayerCharacter p){
 		//xOffset = (float) (p.getPosition().getFirstElement() - game.getWidth() / 2 + p.getDimension().getFirstElement() / 2);
-		yOffset = (float) (p.getPosition().getSecondElement() - handler.getHeight() / 2 + p.getDimension().getSecondElement() / 2);
+		yOffset = (float) (p.getPosition().getSecondElement() - handler.getDisplayHeight() / 2 + p.getDimension().getSecondElement() / 2);
                 checkBlankSpace();
         }
 	

@@ -52,7 +52,7 @@ public class ActionReceiver {
                 enemy.setxPosition(enemy.getxPosition() - enemy.getSpeed());
             }
         } else if (enemy.isMoving() && !enemy.isMovingLeft()) {
-            if (enemy.getxPosition() + enemy.getSpeed() < enemy.getHandler().getGame().getWidth()) {
+            if (enemy.getxPosition() + enemy.getSpeed() < enemy.getHandler().getGame().getDisplayWidth()) {
                 enemy.setxPosition(enemy.getxPosition() + enemy.getSpeed());
             } else {
                 enemy.setMovingLeft(true);

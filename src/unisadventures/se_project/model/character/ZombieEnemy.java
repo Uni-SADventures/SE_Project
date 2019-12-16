@@ -9,11 +9,9 @@ import java.awt.Rectangle;
 import unisadventures.se_project.model.character.actionCommands.Command;
 import unisadventures.se_project.model.character.actionCommands.*;
 import unisadventures.se_project.presenter.launcher.Handler;
-import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.CharacterType;
-import unisadventures.se_project.util.DirectionType;
 
 /**
  *
@@ -108,8 +106,9 @@ public class ZombieEnemy extends EnemyCharacter {
             } else {
                 move(-this.getSpeed());
             }
+
         } else if (_moving && !_movingLeft) {
-            if (this.getxPosition() + this.getSpeed() < this.getHandler().getGame().getWidth()) {
+            if (this.getxPosition() + this.getSpeed() < this.getHandler().getGame().getDisplayWidth()) {
                 move(this.getSpeed());
             } else {
                 _movingLeft = true;
@@ -182,7 +181,6 @@ public class ZombieEnemy extends EnemyCharacter {
             PlayerCharacter player = gamestate.getPlayer();
             int px = player.getPosition().getFirstElement();
             int pw = player.getDimension().getSecondElement();
-            int ex =
             
             Rectangle rect = new Rectangle(player.getxPosition(), player.getyPosition(), player.getDimension().getFirstElement(), player.getDimension().getSecondElement());
             if (rect.intersects(new Rectangle(this.getxPosition(), this.getyPosition(), this.getDimension().getFirstElement(), this.getDimension().getSecondElement()))) {

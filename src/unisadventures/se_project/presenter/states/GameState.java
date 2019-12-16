@@ -26,15 +26,15 @@ public class GameState extends State {
     private ZombieEnemy enemy;
     private GameLevel _level;
 
-    public GameState(Handler handler /*, World world*/) {
+    public GameState(Handler handler) {
         super(handler);
         try {
-            _level =new GameLevel("resources/images/world1.txt");
+            _level =new GameLevel("resources/images/world1.txt", handler.getDisplayWidth(), handler.getDisplayHeight());
             System.out.println(_level);
         } catch (Exception ex) {
             System.exit(0);
         }
-        handler.setWorld(_level);
+        handler.setLevel(_level);
 
         player = new PlayerCharacter(handler, 140, 90, 100, 100, CharacterType.USER, 6, 1, 6, 170, "me");
         enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
@@ -64,9 +64,9 @@ public class GameState extends State {
     public void displayView(Graphics g) {
         view.renderScenario(g);
         int xStart=(int)Math.max(0,_handler.getCam().getxOffset()/Tile.TILEWIDTH-1);
-        int xEnd=(int)Math.min(_level.getWidth(),(_handler.getCam().getxOffset() + _handler.getWidth())/Tile.TILEWIDTH+1);
+        int xEnd=(int)Math.min(_level.getLevelWidth(),(_handler.getCam().getxOffset() + _handler.getDisplayWidth())/Tile.TILEWIDTH+1);
         int yStart=(int)Math.max(0,_handler.getCam().getyOffset()/Tile.TILEHEIGHT);
-        int yEnd=(int)Math.min(_level.getHeight(),(_handler.getCam().getyOffset() + _handler.getHeight())/Tile.TILEHEIGHT+1);
+        int yEnd=(int)Math.min(_level.getLevelHeight(),(_handler.getCam().getyOffset() + _handler.getDisplayHeight())/Tile.TILEHEIGHT+1);
         
         for(int y=yStart;y<yEnd;y++){
             for(int x=xStart;x<xEnd;x++){
