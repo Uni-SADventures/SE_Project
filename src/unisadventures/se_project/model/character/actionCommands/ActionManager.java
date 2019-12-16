@@ -251,9 +251,9 @@ public class ActionManager implements MovementsInterface {
       for(CollectibleItem coll : collectibles){
           int collx = coll.getxPosition() , colly = coll.getyPosition(), collw = coll.getWidth(), collh = coll.getHeight() ;
          
-          if(collx <= chx && (chx+chw) <= (collx + collw) &&
-                  colly <= chy && (chy+chh) <= (colly + collh)){
-              ((GameState)state).getCollectibles().remove();
+          if(collx >= chx && (chx+chw) >= (collx + collw) &&
+                  colly >= chy && (chy+chh) >= (colly + collh)){
+              ((GameState)state).getCollectibles().remove(coll);
               ((PlayerCharacter)_ch).setCfu(((PlayerCharacter)_ch).getCfu()+1);
              
           }

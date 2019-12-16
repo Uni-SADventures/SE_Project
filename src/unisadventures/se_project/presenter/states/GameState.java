@@ -32,6 +32,7 @@ public class GameState extends State {
     private ActionManager _player;
     private ZombieEnemy _enemy;
     private LinkedList<CollectibleItem> _collectibles;
+    private Handler handler;
     
     //GAME UI IMAGE IDS
     private int _uiCfu ;
@@ -44,30 +45,37 @@ public class GameState extends State {
 
     public GameState(Handler handler ) {
         super(handler);
-        
+        this.handler = handler;
         _collectibles = new LinkedList<>() ;
         
         //REMEMBER THAT WHEN YOU CHANGE IMAGES YOU NEED TO PUT HEIGHT AND WIDTH ACCORDING TO 
         //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
         //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
         //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
-        PlayerCharacter player = new PlayerCharacter(handler, 140, 90, 32, 16, CharacterType.USER, 6, 1, 6, 170, "me");
+        PlayerCharacter player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 1, 6, 170, "me");
         _player = new ActionManager(handler,player) ;
         
         _enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
         
-        
+       /* 
         _collectibles.add(new CollectibleItem(1000,470, 32, 32, CollectibleType.CFU)) ;
+        _collectibles.add(new CollectibleItem(1100,260, 32, 32, CollectibleType.CFU)) ;
+        _collectibles.add(new CollectibleItem(1500,180, 32, 32, CollectibleType.CFU)) ;
+        */
         
         GameLevel level = null ;
         try {
 
-            level =new GameLevel("resources/images/world1.txt", handler.getDisplayWidth(), handler.getDisplayHeight());
+            level =new GameLevel("resources/images/world1.txt","resources/images/world2.txt", handler.getDisplayWidth(), handler.getDisplayHeight());
             System.out.println(level);
         } catch (Exception ex) {
             System.exit(0);
         }
         handler.setLevel(level);
+        
+        for(int i=0;i<=level.getCollectiblePositions().size()-1;i++){
+            _collectibles.add(i,new CollectibleItem(level.getCollectiblePositions().get(i).getFirstElement(),level.getCollectiblePositions().get(i).getSecondElement() , 32, 32, CollectibleType.CFU));
+        }
         
 
         
@@ -137,19 +145,19 @@ public class GameState extends State {
             Assets.init();
         //PLAYER CHARACTER
             List temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_sprite.png",48,0,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",48,4,16,28);
             int nowSeq = Assets.getActualSequenceNumber() ;
            
             for(int i = 0; i <= 20 ; i++ )
                 temp.add(nowSeq);  
             
-            Assets.storeImage("resources/images/character_sprite.png",16,0,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",16,4,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
             
             for(int i = 0; i <= 20 ; i++ )
                 temp.add(nowSeq);  
             
-            Assets.storeImage("resources/images/character_sprite.png",16,32,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",16,36,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
             
             for(int i = 0; i <= 20 ; i++ )
@@ -158,26 +166,26 @@ public class GameState extends State {
             _player.getCh().setIdle(temp , temp);
             
             temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_sprite.png",48,0,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",48,4,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
            
             for(int i = 0; i <= 15 ; i++ )
                 temp.add(nowSeq);  
             
-            Assets.storeImage("resources/images/character_sprite.png",48,32,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",48,36,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
             
             for(int i = 0; i <= 15 ; i++ )
                 temp.add(nowSeq);  
             
             List temp2 = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_sprite.png",0,0,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",0,4,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
            
             for(int i = 0; i <= 15 ; i++ )
                 temp2.add(nowSeq);  
             
-            Assets.storeImage("resources/images/character_sprite.png",0,32,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",0,36,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
             
             for(int i = 0; i <= 15 ; i++ )
@@ -340,8 +348,9 @@ public class GameState extends State {
             nowSeq = Assets.getActualSequenceNumber() ;
             for(int i = 0; i <= 15 ; i++ )
                 temp.add(nowSeq); 
-            _collectibles.get(0).setImageFileNameList(temp);
-            
+            for(int i=0;i<=handler.getLevel().getCollectiblePositions().size()-1;i++){
+                 _collectibles.get(i).setImageFileNameList(temp);
+        }
   
             
     }

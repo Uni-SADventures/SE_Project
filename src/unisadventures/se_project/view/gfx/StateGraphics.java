@@ -46,7 +46,7 @@ public class StateGraphics {
      */
     public void renderPlayer(Graphics g, int playerId ,double x, double y) {
      
-        g.drawImage(Assets.retrieveImage(playerId), (int) (x- _handler.getCam().getxOffset()), (int) (y-_handler.getCam().getyOffset()), null);
+        g.drawImage(Assets.retrieveImage(playerId), (int) (x- _handler.getCam().getxOffset()), (int) (y-_handler.getCam().getyOffset()),64,64,null);
 
     }
     
@@ -69,6 +69,7 @@ public class StateGraphics {
        
        g.drawImage(Assets.retrieveImage(state.getUiCfu()),50,10,null);
        int j=35;
+       
 
         boolean odd = (health %2 == 0) ;
         
@@ -83,7 +84,7 @@ public class StateGraphics {
             health -= 2 ;
             pixelIncrementer++ ;    
         }
-        cfu=20;
+        
         int[] cfuDigits = String.valueOf(cfu).chars().map(Character::getNumericValue).toArray();
         
         pixelIncrementer = 0;
@@ -91,75 +92,75 @@ public class StateGraphics {
            
            switch (cfuDigits[i]) {
                case 0:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[0]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[0]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                case 1:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[1]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[1]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                case 2:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[2]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[2]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                case 3:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[3]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[3]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                case 4:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[4]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[4]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                case 5:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[5]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[5]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                case 6:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[6]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[6]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                case 7:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[7]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[7]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                case 8:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[8]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[8]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                case 9:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[9]), 10+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[9]), 15+pixelIncrementer, 20,16,16, null);
                    break;
                default:
                    break;
            }
-               pixelIncrementer +=7;
+               pixelIncrementer +=15;
         }
-        lives=20;
+        
         pixelIncrementer +=0;
         int[] livesDigits = String.valueOf(lives).chars().map(Character::getNumericValue).toArray();
         for (int i = 0; i < livesDigits.length; i++) {
            
            switch (livesDigits[i]) {
                case 0:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[0]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[0]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                case 1:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[1]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[1]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                case 2:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[2]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[2]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                case 3:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[3]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[3]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                case 4:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[4]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[4]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                case 5:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[5]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[5]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                case 6:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[6]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[6]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                case 7:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[7]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[7]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                case 8:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[8]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[8]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                case 9:
-                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[9]), 200+pixelIncrementer, 10, null);
+                   g.drawImage(Assets.retrieveImage(state.getUiNumbers()[9]), 190+pixelIncrementer, 20,16,16, null);
                    break;
                default:
                    break;

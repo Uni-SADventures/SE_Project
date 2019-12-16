@@ -66,7 +66,7 @@ public class VerticalCommand extends ActionCommand {
        int ty=(int)(_ch.getPosition().getSecondElement()+_ch.getSpeed()+ _bounds.y + _bounds.height)/Tile.TILEHEIGHT;
             if(!collisionWithTile((int)(_ch.getPosition().getFirstElement()+_bounds.x)/Tile.TILEWIDTH, ty) 
                 && !collisionWithTile((int)(_ch.getPosition().getFirstElement()+_bounds.x+_bounds.width)/Tile.TILEWIDTH, ty) ){
-                _ch.setyPosition((int) (_ch.getPosition().getSecondElement() +(int) _ch.getSpeed()*1.5));
+                _ch.setyPosition((int) (_ch.getPosition().getSecondElement() +(int) _ch.getSpeed()*1.17));
                 _count++ ;
                 return true ;
                 
