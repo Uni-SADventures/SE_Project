@@ -34,6 +34,9 @@ public class Game extends FrameListener {
 	
 	//Input
 	private final KeyManager keyManager;
+        
+        //Button management
+        private boolean playButtonPressed;  // True if game launched from the main menu using the "Play" button
 
     public Display getDisplay() {
         return display;
@@ -62,6 +65,8 @@ public class Game extends FrameListener {
                 
 		State.setState(menuState);
                 stateIsMenu = true;
+                
+                playButtonPressed = false;
 	}
 	
         
@@ -74,7 +79,8 @@ public class Game extends FrameListener {
 		if(State.getState() != null)
 			State.getState().tick();
                 
-                if (keyManager.leaveMenu && stateIsMenu) {
+                // gameState may be initialized from menu state by pressing Enter or clicking a button
+                if ( (keyManager.leaveMenu || playButtonPressed) && stateIsMenu) {
                     State.setState(gameState);
                     stateIsMenu = false;
                 }
@@ -103,6 +109,10 @@ public class Game extends FrameListener {
                 init(hand);
 		thread.start();
 	}
+        
+    public void pressPlayButton() {
+        playButtonPressed = true;
+    }
 	
 
     public GameCamera getCam() {

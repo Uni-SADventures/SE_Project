@@ -7,6 +7,7 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 import unisadventures.se_project.presenter.states.State;
+import unisadventures.se_project.view.gfx.ButtonManager;
 
 
 /**
@@ -28,6 +29,9 @@ public class Display {
 		this.height = height;
 		
 		createDisplay();
+                
+                // ButtonManager is static
+                ButtonManager.init(frame);
 	}
 	/**
          * After being initialized first window creation is triggered
