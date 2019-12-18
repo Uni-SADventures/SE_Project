@@ -8,6 +8,7 @@ import unisadventures.se_project.model.basicObjects.CollectibleItem;
 import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.GameLevel;
+import unisadventures.se_project.model.character.EnemyCharacter;
 
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
@@ -33,7 +34,7 @@ public class GameState extends State {
 
 
     private ActionManager _player;
-    private ZombieEnemy _enemy;
+    private LinkedList<EnemyCharacter> _enemy;
     private LinkedList<CollectibleItem> _collectibles;
     private Handler handler;
     private ArrayList<Pair<String,String>> levelManager = new ArrayList();
@@ -64,8 +65,9 @@ public class GameState extends State {
         //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
         PlayerCharacter player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 1, 6, 170, "me");
         _player = new ActionManager(handler,player) ;
+         _enemy = new LinkedList<>();
+        _enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
         
-        _enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
         
         GameLevel level = null ;
         try {
@@ -106,7 +108,12 @@ public class GameState extends State {
         }
         _handler.getLevel().tick();
         _player.tick();
-        _enemy.tick();
+        _enemy.forEach((e)->e.tick());
+        for(EnemyCharacter e: _enemy){
+            if(e.getHealthBar() <= 0){
+                _enemy.remove(e);
+            }
+        }
        
 
         /*World.forEach(WorldObject el){
@@ -136,7 +143,7 @@ public class GameState extends State {
         }
         view.renderPlayer(g, _player.getActualId(),_player.getCh().getPosition().getFirstElement(), _player.getCh().getPosition().getSecondElement());
   
-        view.renderStuffMore(g, _enemy.getxPosition(), _enemy.getyPosition(),_enemy.getDimension().getFirstElement(),_enemy.getDimension().getSecondElement(), _enemy.getIdleSprites(DirectionType.LEFT).get(0));
+        _enemy.forEach((e) -> view.renderStuffMore(g, e.getxPosition(), e.getyPosition(), e.getDimension().getFirstElement(), e.getDimension().getSecondElement(), e.getIdleSprites(DirectionType.LEFT).get(0)));
         
         for(CollectibleItem coll : _collectibles){
             view.renderStuffMore(g, coll.getxPosition(), coll.getyPosition(),coll.getWidth(),coll.getHeight(),coll.getNextImageFileName());
@@ -241,12 +248,13 @@ public class GameState extends State {
             nowSeq = Assets.getActualSequenceNumber() ;
            
             temp.add(nowSeq);   
-            _enemy.setIdle(temp , temp);
-            _enemy.setFall(temp, temp);
-            _enemy.setJump(temp, temp);
-            _enemy.setPunch(temp, temp);
-            _enemy.setWalk(temp, temp);
-              
+            for (EnemyCharacter enemy : _enemy) {
+            enemy.setIdle(temp, temp);
+            enemy.setFall(temp, temp);
+            enemy.setJump(temp, temp);
+            enemy.setPunch(temp, temp);
+            enemy.setWalk(temp, temp);
+            }
             
          
         //SCENARIO (which id is inside world now)
@@ -393,6 +401,10 @@ public class GameState extends State {
     @Override
     public int getCountCFU() {
         return countCFU;
+    }
+
+    public LinkedList<EnemyCharacter> getEnemies() {
+        return _enemy;
     }
 
     
