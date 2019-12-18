@@ -16,9 +16,9 @@ import unisadventures.se_project.view.gfx.ButtonManager;
 
 public class MenuState extends State {
     
-    MainMenu _menu;
-    int _displayWidth;
-    int _displayHeight;
+    private MainMenu _menu;
+    private int _displayWidth;
+    private int _displayHeight;
 
     public MenuState(Handler handler){
             
@@ -38,19 +38,20 @@ public class MenuState extends State {
     @Override
     public void displayView(Graphics g) {
         
-        _view.renderMenuBackground(g, _menu.getBackgroundImageId(), _displayWidth, _displayHeight);
-        _view.renderMenuTitle(g, _menu.getTitleImageId(), _displayWidth - 40, 80, 20, 20);
-        _view.renderText(g, "or press enter", (int) _displayWidth/2 - 25, _displayHeight - 20);
-        
-        ActionListener listener = new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                _handler.getGame().pressPlayButton();
-            }			
-            
-        };
-        ButtonManager.addButton(_displayWidth/2 - 5, _displayHeight/2 - 15, 10, 30, "Play!", listener);
+                _view.renderMenuBackground(g, _menu.getBackgroundImageId(), _displayWidth, _displayHeight);
+                _view.renderMenuTitle(g, _menu.getTitleImageId(), _displayWidth - 40, 80, 20, 20);
+                _view.renderText(g, "or press enter", (int) _displayWidth/2 - 25, _displayHeight - 20);
+
+                ActionListener listener = new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        System.out.println("Debug");
+                        _handler.getGame().pressPlayButton();
+                    }			
+
+                };
+                ButtonManager.addButton(_displayWidth/2 - 50, _displayHeight/2 - 150, 100, 300, "Play!", listener);
         
     }
 
