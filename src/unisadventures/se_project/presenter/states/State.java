@@ -49,6 +49,10 @@ public abstract class State {
          */
         public abstract void displayView(Graphics g);
         public abstract void loadImages();
-	
+        public abstract int getCountCFU();
+        
+
+    
+	 
         
 }

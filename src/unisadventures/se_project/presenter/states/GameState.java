@@ -1,6 +1,7 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import unisadventures.se_project.model.basicObjects.CollectibleItem;
@@ -11,10 +12,12 @@ import unisadventures.se_project.model.GameLevel;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
+import unisadventures.se_project.presenter.launcher.Game;
 
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.CollectibleType;
 import unisadventures.se_project.util.DirectionType;
+import unisadventures.se_project.util.Pair;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -33,6 +36,8 @@ public class GameState extends State {
     private ZombieEnemy _enemy;
     private LinkedList<CollectibleItem> _collectibles;
     private Handler handler;
+    private ArrayList<Pair<String,String>> levelManager = new ArrayList();
+    
     
     //GAME UI IMAGE IDS
     private int _uiCfu ;
@@ -41,13 +46,18 @@ public class GameState extends State {
     private int _uiEmptyHeart ;
     //UI NUMBERS
     private int[] _uiNumbers ;
-    
+    private int countCFU;
+    private int id;
+    public boolean stateIsMenu;
 
-    public GameState(Handler handler ) {
+    public GameState(Handler handler ,int id) {
         super(handler);
         this.handler = handler;
+        this.id=id;
         _collectibles = new LinkedList<>() ;
-        
+        levelManager.add(new Pair("resources/images/level1World.txt","resources/images/level1Items.txt"));
+        levelManager.add(new Pair("resources/images/level2World.txt","resources/images/level2Items.txt"));
+        levelManager.add(new Pair("resources/images/level3World.txt","resources/images/level3Items.txt"));
         //REMEMBER THAT WHEN YOU CHANGE IMAGES YOU NEED TO PUT HEIGHT AND WIDTH ACCORDING TO 
         //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
         //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
@@ -57,17 +67,11 @@ public class GameState extends State {
         
         _enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
         
-       /* 
-        _collectibles.add(new CollectibleItem(1000,470, 32, 32, CollectibleType.CFU)) ;
-        _collectibles.add(new CollectibleItem(1100,260, 32, 32, CollectibleType.CFU)) ;
-        _collectibles.add(new CollectibleItem(1500,180, 32, 32, CollectibleType.CFU)) ;
-        */
-        
         GameLevel level = null ;
         try {
-
-            level =new GameLevel("resources/images/world1.txt","resources/images/world2.txt", handler.getDisplayWidth(), handler.getDisplayHeight());
-            System.out.println(level);
+            String path1=levelManager.get(id).getFirstElement();
+            String path2=levelManager.get(id).getSecondElement();
+            level =new GameLevel(path1,path2, handler.getDisplayWidth(), handler.getDisplayHeight());
         } catch (Exception ex) {
             System.exit(0);
         }
@@ -89,13 +93,17 @@ public class GameState extends State {
     public PlayerCharacter getPlayer() {
         return (PlayerCharacter) _player.getCh();
     }
-     public ActionManager getPlayerActionManager() {
+    
+    public ActionManager getPlayerActionManager() {
         return _player;
     }
 
     @Override
     public void tick() {
-
+        
+        if(getCountCFU()==3){
+            State.setState(new LoadingState(handler,id));
+        }
         _handler.getLevel().tick();
         _player.tick();
         _enemy.tick();
@@ -136,7 +144,7 @@ public class GameState extends State {
         
         
         
-        view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
+        countCFU=view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
 
     }
     @Override
@@ -377,12 +385,19 @@ public class GameState extends State {
     public int[] getUiNumbers() {
         return _uiNumbers;
     }
-    
-    
-    
+
     public LinkedList<CollectibleItem> getCollectibles() {
         return _collectibles;
     }
+
+    @Override
+    public int getCountCFU() {
+        return countCFU;
+    }
+
+    
+    
+    
 
     
     

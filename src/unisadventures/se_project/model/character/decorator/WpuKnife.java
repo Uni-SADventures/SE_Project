@@ -5,7 +5,7 @@
  */
 package unisadventures.se_project.model.character.decorator;
 
-import unisadventures.se_project.model.character.actionCommands.MovementsInterface;
+import unisadventures.se_project.model.character.MovementsInterface;
 import unisadventures.se_project.model.character.PlayerCharacter;
 
 
@@ -65,11 +65,6 @@ public class WpuKnife extends WeaponPowerup {
 
     @Override
     public void idle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void tick() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

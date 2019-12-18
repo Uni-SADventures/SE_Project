@@ -3,6 +3,7 @@ package unisadventures.se_project.presenter.launcher;
 
 import unisadventures.se_project.view.display.Display;
 import unisadventures.se_project.model.FrameListener;
+import unisadventures.se_project.model.Loading;
 import unisadventures.se_project.presenter.camera.GameCamera;
 import unisadventures.se_project.presenter.input.KeyManager;
 import unisadventures.se_project.presenter.states.*;
@@ -23,13 +24,14 @@ public class Game extends FrameListener {
 	private GameCamera cam;
 	private boolean running = false;
 	private FrameClock thread;
+        private int countCFU=0;
 	
 	
 	
 	
 	//States
-	private State gameState;
-	private State menuState;
+	public State gameState;
+	public State menuState;
 	
 	//Input
 	private final KeyManager keyManager;
@@ -53,11 +55,11 @@ public class Game extends FrameListener {
 		display = new Display(title, displayWidth, displayHeight);
          
 		display.getFrame().addKeyListener(keyManager);
-		//Assets.init();
-		
+		//Assets.init()
                 
-		gameState = new GameState(hand);
+		gameState = new GameState(hand,0);
 		menuState = new MenuState(hand);
+                
 
                 
 		State.setState(gameState);
@@ -72,6 +74,7 @@ public class Game extends FrameListener {
 		
 		if(State.getState() != null)
 			State.getState().tick();
+                        
 	}
 	
 	

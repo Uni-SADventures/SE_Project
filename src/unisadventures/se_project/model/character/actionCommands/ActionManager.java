@@ -9,6 +9,7 @@ import java.util.List;
 import unisadventures.se_project.model.basicObjects.CollectibleItem;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
+import unisadventures.se_project.model.character.MovementsInterface;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
@@ -59,7 +60,6 @@ public class ActionManager implements MovementsInterface {
      * This method interprets user inputs if the character is user's one and if not
      * it checks what should a character do, for example if there is a floor under their feet
      */
-    @Override
     public void tick() {
 
         //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
