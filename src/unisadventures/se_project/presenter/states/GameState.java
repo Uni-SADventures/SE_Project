@@ -37,7 +37,8 @@ public class GameState extends State {
     private LinkedList<CollectibleItem> _collectibles;
     private Handler handler;
     private ArrayList<Pair<String,String>> levelManager = new ArrayList();
-    
+    private ArrayList<Pair<Integer,Integer>> enemiesPositions=new ArrayList();
+    private String [] enemiesPathImage={"resources/images/enemy_Wind.png","resources/images/enemy_Shape.png","resources/images/enemy_Refound.png"};
     
     //GAME UI IMAGE IDS
     private int _uiCfu ;
@@ -65,8 +66,7 @@ public class GameState extends State {
         PlayerCharacter player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 1, 6, 170, "me");
         _player = new ActionManager(handler,player) ;
          _enemy = new LinkedList<>();
-        _enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
-        _enemy.add(new ZombieEnemy(handler, 600, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
+
         
         
         GameLevel level = null ;
@@ -78,6 +78,11 @@ public class GameState extends State {
             System.exit(0);
         }
         handler.setLevel(level);
+        
+        enemiesPositions=level.getEnemiesPositions();
+        for(int j=0;j<enemiesPositions.size();j++){
+            _enemy.add(new ZombieEnemy(handler,enemiesPositions.get(j).getFirstElement() , enemiesPositions.get(j).getSecondElement(), 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
+        }
         
         for(int i=0;i<=level.getCollectiblePositions().size()-1;i++){
             _collectibles.add(i,new CollectibleItem(level.getCollectiblePositions().get(i).getFirstElement(),level.getCollectiblePositions().get(i).getSecondElement() , 32, 32, CollectibleType.CFU));
@@ -109,9 +114,9 @@ public class GameState extends State {
         _handler.getLevel().tick();
         _player.tick();
         _enemy.forEach((e)->e.tick());
-        for(EnemyCharacter e: _enemy){
-            if(e.getHealthBar() <= 0){
-                _enemy.remove(e);
+        for(int i=0;i<_enemy.size();i++){
+            if(_enemy.get(i).getHealthBar() <= 0){
+                _enemy.remove(i);
             }
         }
        
@@ -247,22 +252,28 @@ public class GameState extends State {
             
             
         //ENEMY CHARACTER
-            temp = new LinkedList<>() ;
+           /* temp = new LinkedList<>() ;
             Assets.storeImage("resources/images/enemy_Wind.png");//16,96,16,30);
             nowSeq = Assets.getActualSequenceNumber() ;
            
             temp.add(nowSeq);
-            _enemy.get(0).setIdle(temp, temp);
             
-            temp = new LinkedList<>() ;
+            //temp = new LinkedList<>() ;
             Assets.storeImage("resources/images/enemy_Shape.png");//16,96,16,30);
-            nowSeq = Assets.getActualSequenceNumber() ;
+            nowSeq = Assets.getActualSequenceNumber() ;*/
             
-            temp.add(nowSeq);
-            _enemy.get(1).setIdle(temp, temp);
-            
+            //temp.add(nowSeq);
+            //_enemy.get(1).setIdle(temp, temp);
+            int k=0;
             for (int i=0;i<_enemy.size();i++) {
-            //_enemy.get(i).setIdle(temp, temp);
+                if(k<enemiesPathImage.length){    
+                    temp = new LinkedList<>() ;
+                    Assets.storeImage(enemiesPathImage[k++]);//16,96,16,30);
+                    nowSeq = Assets.getActualSequenceNumber() ;
+                    temp.add(nowSeq);
+                }else 
+                    k=0;
+            _enemy.get(i).setIdle(temp, temp);
             _enemy.get(i).setFall(temp, temp);
             _enemy.get(i).setJump(temp, temp);
             _enemy.get(i).setPunch(temp, temp);

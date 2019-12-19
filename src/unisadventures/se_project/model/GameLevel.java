@@ -18,6 +18,7 @@ public class GameLevel {
     private int _scenarioImage;
     private int [][] tiles;
     private ArrayList<Pair<Integer,Integer>> collectiblePositions = new ArrayList();
+    private ArrayList<Pair<Integer,Integer>> enemiesPositions = new ArrayList();
     
     public GameLevel(String path, String path1, int displayWidth, int displayHeight) throws IOException {
         _displayWidth = displayWidth;
@@ -29,6 +30,11 @@ public class GameLevel {
         return _scenarioImage;
     }
 
+    public ArrayList<Pair<Integer, Integer>> getEnemiesPositions() {
+        return enemiesPositions;
+    }
+
+    
     public String getPathScenarioImage() {
         return _pathScenarioImage;
     }
@@ -68,12 +74,18 @@ public class GameLevel {
         _spawnX=Utils.ParseInt(tokens[2]);
         _spawnY=Utils.ParseInt(tokens[3]);
         _pathScenarioImage=tokens[4];
-        int j=0,i=0;
+        int j=0,i=0,k=0;
         
-        while(i<=tokensCollectible.length-1){
-            collectiblePositions.add(j, new Pair(Utils.ParseInt(tokensCollectible[i]),Utils.ParseInt(tokensCollectible[i+1])));
-            i+=2;
-            j+=1;
+       while(i<=tokensCollectible.length-1){
+            if("0".equals(tokensCollectible[i])){
+                enemiesPositions.add(k,new Pair(Utils.ParseInt(tokensCollectible[i+1]),Utils.ParseInt(tokensCollectible[i+2])));
+                k+=1;
+                i+=3;
+            }else {
+                collectiblePositions.add(j, new Pair(Utils.ParseInt(tokensCollectible[i]),Utils.ParseInt(tokensCollectible[i+1])));
+                i+=2;
+                j+=1;
+            }
         }
         tiles= new int[_levelWidth][_levelHeight];
         
