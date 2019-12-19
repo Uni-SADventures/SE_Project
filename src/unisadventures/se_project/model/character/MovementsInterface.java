@@ -20,4 +20,5 @@ public interface MovementsInterface {
     void takeDamage(int damage);
     PlayerCharacter getPowered(PlayerCharacter p); 
     void grab();
+    void tick();
 }

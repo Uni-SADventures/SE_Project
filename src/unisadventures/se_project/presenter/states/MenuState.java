@@ -3,6 +3,7 @@ package unisadventures.se_project.presenter.states;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import unisadventures.se_project.model.MainMenu;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.view.gfx.Assets;
@@ -13,6 +14,7 @@ import unisadventures.se_project.view.gfx.ButtonManager;
  * It has every instance to be updated each frame as parameter
  * @author Emilio
  */
+
 
 public class MenuState extends State {
     
@@ -25,12 +27,14 @@ public class MenuState extends State {
     private boolean _blinkingTextIsVisible;
     private boolean _titleIsMovingDown;
 
+
     public MenuState(Handler handler){
             
         super(handler);
         _menu = new MainMenu();
         _displayWidth = handler.getDisplayWidth();
         _displayHeight = _handler.getDisplayHeight();
+
         
         _framesCounter = 0;
         _blinkingTextIsVisible = true;
@@ -41,6 +45,7 @@ public class MenuState extends State {
 
     @Override
     public void tick() {
+
         
         _framesCounter ++;
         
@@ -49,6 +54,7 @@ public class MenuState extends State {
             _blinkingTextIsVisible = !_blinkingTextIsVisible;  // Blinking text visibility toggled
             _titleIsMovingDown = !_titleIsMovingDown;  // Title direction flipped
         }
+
 	
     }
 
@@ -98,8 +104,18 @@ public class MenuState extends State {
         _menu.setBackgroundImageId(Assets.getActualSequenceNumber());
         Assets.storeImage(MainMenu.TITLE_IMAGE);
         _menu.setTitleImageId(Assets.getActualSequenceNumber());
+
     }
+
+    @Override
+    public int getCountCFU() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 	
 	
 }
+
+	
+	

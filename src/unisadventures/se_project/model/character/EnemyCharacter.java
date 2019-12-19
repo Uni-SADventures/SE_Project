@@ -14,14 +14,16 @@ import unisadventures.se_project.util.CharacterType;
  * the player
  * @author Francesco
  */
-public class EnemyCharacter extends BasicCharacter {
+public abstract class EnemyCharacter extends BasicCharacter {
     
     public EnemyCharacter(Handler hand,int xPosition, int yPosition, int height, int width, CharacterType type, int healthBar, int strength, int maxHealth, int maxJump) {
         super(hand,xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
     }
  
-
-
+    public abstract void tick();
+    /*public void tick(){
+        
+    }*/
     
 
  

@@ -1,12 +1,14 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import unisadventures.se_project.model.basicObjects.CollectibleItem;
 import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.GameLevel;
+import unisadventures.se_project.model.character.EnemyCharacter;
 
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
@@ -15,6 +17,7 @@ import unisadventures.se_project.model.character.actionCommands.ActionManager;
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.CollectibleType;
 import unisadventures.se_project.util.DirectionType;
+import unisadventures.se_project.util.Pair;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -30,8 +33,11 @@ public class GameState extends State {
 
 
     private ActionManager _player;
-    private ZombieEnemy _enemy;
+    private LinkedList<EnemyCharacter> _enemy;
     private LinkedList<CollectibleItem> _collectibles;
+    private Handler handler;
+    private ArrayList<Pair<String,String>> levelManager = new ArrayList();
+    
     
     //GAME UI IMAGE IDS
     private int _uiCfu ;
@@ -40,34 +46,41 @@ public class GameState extends State {
     private int _uiEmptyHeart ;
     //UI NUMBERS
     private int[] _uiNumbers ;
-    
+    private int countCFU;
+    private int id;
+    public boolean stateIsMenu;
 
-    public GameState(Handler handler ) {
+    public GameState(Handler handler ,int id) {
         super(handler);
-        
+        this.handler = handler;
+        this.id=id;
         _collectibles = new LinkedList<>() ;
-        
+        levelManager.add(new Pair("resources/images/level1World.txt","resources/images/level1Items.txt"));
+        levelManager.add(new Pair("resources/images/level2World.txt","resources/images/level2Items.txt"));
+        levelManager.add(new Pair("resources/images/level3World.txt","resources/images/level3Items.txt"));
         //REMEMBER THAT WHEN YOU CHANGE IMAGES YOU NEED TO PUT HEIGHT AND WIDTH ACCORDING TO 
         //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
         //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
         //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
-        PlayerCharacter player = new PlayerCharacter(handler, 140, 90, 32, 16, CharacterType.USER, 6, 1, 6, 170, "me");
+        PlayerCharacter player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 1, 6, 170, "me");
         _player = new ActionManager(handler,player) ;
+         _enemy = new LinkedList<>();
+        _enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
         
-        _enemy = new ZombieEnemy(handler,3000,450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300);
-        
-        
-        _collectibles.add(new CollectibleItem(1000,470, 32, 32, CollectibleType.CFU)) ;
         
         GameLevel level = null ;
         try {
-
-            level =new GameLevel("resources/images/world1.txt", handler.getDisplayWidth(), handler.getDisplayHeight());
-            System.out.println(level);
+            String path1=levelManager.get(id).getFirstElement();
+            String path2=levelManager.get(id).getSecondElement();
+            level = new GameLevel(path1, path2, handler.getDisplayWidth(), handler.getDisplayHeight());
         } catch (Exception ex) {
             System.exit(0);
         }
         handler.setLevel(level);
+        
+        for(int i=0;i<=level.getCollectiblePositions().size()-1;i++){
+            _collectibles.add(i,new CollectibleItem(level.getCollectiblePositions().get(i).getFirstElement(),level.getCollectiblePositions().get(i).getSecondElement() , 32, 32, CollectibleType.CFU));
+        }
         
 
         
@@ -81,13 +94,25 @@ public class GameState extends State {
     public PlayerCharacter getPlayer() {
         return (PlayerCharacter) _player.getCh();
     }
+    
+    public ActionManager getPlayerActionManager() {
+        return _player;
+    }
 
     @Override
     public void tick() {
-
+        
+        if(getCountCFU()==3){
+            State.setState(new LoadingState(handler,id));
+        }
         _handler.getLevel().tick();
         _player.tick();
-        _enemy.tick();
+        _enemy.forEach((e)->e.tick());
+        for(EnemyCharacter e: _enemy){
+            if(e.getHealthBar() <= 0){
+                _enemy.remove(e);
+            }
+        }
        
 
         /*World.forEach(WorldObject el){
@@ -117,7 +142,8 @@ public class GameState extends State {
         }
         _view.renderPlayer(g, _player.getActualId(),_player.getCh().getPosition().getFirstElement(), _player.getCh().getPosition().getSecondElement());
   
-        _view.renderStuffMore(g, _enemy.getxPosition(), _enemy.getyPosition(),_enemy.getDimension().getFirstElement(),_enemy.getDimension().getSecondElement(), _enemy.getIdleSprites(DirectionType.LEFT).get(0));
+        _enemy.forEach((e) -> _view.renderStuffMore(g, e.getxPosition(), e.getyPosition(), e.getDimension().getFirstElement(), e.getDimension().getSecondElement(), e.getIdleSprites(DirectionType.LEFT).get(0)));
+
         
         for(CollectibleItem coll : _collectibles){
             _view.renderStuffMore(g, coll.getxPosition(), coll.getyPosition(),coll.getWidth(),coll.getHeight(),coll.getNextImageFileName());
@@ -125,7 +151,9 @@ public class GameState extends State {
         
         
         
-        _view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
+
+        countCFU=_view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
+
 
     }
     @Override
@@ -141,19 +169,19 @@ public class GameState extends State {
         
         //PLAYER CHARACTER
             List temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_sprite.png",48,0,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",48,4,16,28);
             int nowSeq = Assets.getActualSequenceNumber() ;
            
             for(int i = 0; i <= 20 ; i++ )
                 temp.add(nowSeq);  
             
-            Assets.storeImage("resources/images/character_sprite.png",16,0,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",16,4,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
             
             for(int i = 0; i <= 20 ; i++ )
                 temp.add(nowSeq);  
             
-            Assets.storeImage("resources/images/character_sprite.png",16,32,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",16,36,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
             
             for(int i = 0; i <= 20 ; i++ )
@@ -162,26 +190,26 @@ public class GameState extends State {
             _player.getCh().setIdle(temp , temp);
             
             temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_sprite.png",48,0,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",48,4,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
            
             for(int i = 0; i <= 15 ; i++ )
                 temp.add(nowSeq);  
             
-            Assets.storeImage("resources/images/character_sprite.png",48,32,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",48,36,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
             
             for(int i = 0; i <= 15 ; i++ )
                 temp.add(nowSeq);  
             
             List temp2 = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_sprite.png",0,0,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",0,4,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
            
             for(int i = 0; i <= 15 ; i++ )
                 temp2.add(nowSeq);  
             
-            Assets.storeImage("resources/images/character_sprite.png",0,32,16,32);
+            Assets.storeImage("resources/images/character_sprite.png",0,36,16,28);
             nowSeq = Assets.getActualSequenceNumber() ;
             
             for(int i = 0; i <= 15 ; i++ )
@@ -226,12 +254,13 @@ public class GameState extends State {
             nowSeq = Assets.getActualSequenceNumber() ;
            
             temp.add(nowSeq);   
-            _enemy.setIdle(temp , temp);
-            _enemy.setFall(temp, temp);
-            _enemy.setJump(temp, temp);
-            _enemy.setPunch(temp, temp);
-            _enemy.setWalk(temp, temp);
-              
+            for (EnemyCharacter enemy : _enemy) {
+            enemy.setIdle(temp, temp);
+            enemy.setFall(temp, temp);
+            enemy.setJump(temp, temp);
+            enemy.setPunch(temp, temp);
+            enemy.setWalk(temp, temp);
+            }
             
          
         //SCENARIO (which id is inside world now)
@@ -344,8 +373,9 @@ public class GameState extends State {
             nowSeq = Assets.getActualSequenceNumber() ;
             for(int i = 0; i <= 15 ; i++ )
                 temp.add(nowSeq); 
-            _collectibles.get(0).setImageFileNameList(temp);
-            
+            for(int i=0;i<=handler.getLevel().getCollectiblePositions().size()-1;i++){
+                 _collectibles.get(i).setImageFileNameList(temp);
+        }
   
             
     }
@@ -373,6 +403,19 @@ public class GameState extends State {
     public LinkedList<CollectibleItem> getCollectibles() {
         return _collectibles;
     }
+
+    @Override
+    public int getCountCFU() {
+        return countCFU;
+    }
+
+    public LinkedList<EnemyCharacter> getEnemies() {
+        return _enemy;
+    }
+
+    
+    
+    
 
     
     

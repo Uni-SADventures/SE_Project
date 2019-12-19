@@ -2,6 +2,8 @@ package unisadventures.se_project.model;
 
 import unisadventures.se_project.model.basicObjects.Tile;
 import java.io.IOException;
+import java.util.ArrayList;
+import unisadventures.se_project.util.Pair;
 import unisadventures.se_project.util.Utils;
 
 /**
@@ -13,16 +15,23 @@ public class GameLevel {
     private int _spawnX, _spawnY;
     private int _scenarioImage;
     private int [][] tiles;
+    private ArrayList<Pair<Integer,Integer>> collectiblePositions = new ArrayList();
     
-    public GameLevel(String path, int displayWidth, int displayHeight) throws IOException {
+    public GameLevel(String path, String path1, int displayWidth, int displayHeight) throws IOException {
         _displayWidth = displayWidth;
         _displayHeight = displayHeight;
-        loadWorld(path);
+        loadWorld(path, path1);
     }
     
     public int getScenarioImage() {
         return _scenarioImage;
     }
+
+    public ArrayList<Pair<Integer, Integer>> getCollectiblePositions() {
+        return collectiblePositions;
+    }
+    
+    
 
     public void setScenarioImage(int scenarioImage) {
         _scenarioImage = scenarioImage;
@@ -41,14 +50,23 @@ public class GameLevel {
       return t;
     }
     
-    private void loadWorld(String path) {
+    private void loadWorld(String path,String path1) {
+        
         String file =Utils.loadFileAsString(path);
+        String fileCollectible =Utils.loadFileAsString(path1);
         String[] tokens=file.split("\\s+");
+        String [] tokensCollectible=fileCollectible.split("\\s+");
         _levelWidth=Utils.ParseInt(tokens[0]);
         _levelHeight=Utils.ParseInt(tokens[1]);
         _spawnX=Utils.ParseInt(tokens[2]);
         _spawnY=Utils.ParseInt(tokens[3]);
+        int j=0,i=0;
         
+        while(i<=tokensCollectible.length-1){
+            collectiblePositions.add(j, new Pair(Utils.ParseInt(tokensCollectible[i]),Utils.ParseInt(tokensCollectible[i+1])));
+            i+=2;
+            j+=1;
+        }
         tiles= new int[_levelWidth][_levelHeight];
         
         for (int y=0; y<_levelHeight;y++){

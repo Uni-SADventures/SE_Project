@@ -10,7 +10,7 @@ public class Launcher {
 
 	public static void main(String[] args){
                 Assets.init();
-		Game game = new Game("Tile Game!", 1100, 600);
+		Game game = new Game("Uni-SADventures", 1100, 600);
 		game.start();
                 
 	}

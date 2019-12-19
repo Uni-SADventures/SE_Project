@@ -23,6 +23,7 @@ public class Game extends FrameListener {
 	private GameCamera cam;
 	private boolean running = false;
 	private FrameClock thread;
+        private int countCFU=0;
 	
 	
 	
@@ -31,7 +32,7 @@ public class Game extends FrameListener {
 	private State gameState;
 	private State menuState;
         private boolean stateIsMenu;
-	
+        
 	//Input
 	private final KeyManager keyManager;
         
@@ -57,10 +58,10 @@ public class Game extends FrameListener {
 		display = new Display(title, displayWidth, displayHeight);
          
 		display.getFrame().addKeyListener(keyManager);
-		
                 
-		gameState = new GameState(hand);
+		gameState = new GameState(hand,0);
 		menuState = new MenuState(hand);
+                
 
                 
 		State.setState(menuState);
@@ -78,12 +79,13 @@ public class Game extends FrameListener {
 		
 		if(State.getState() != null)
 			State.getState().tick();
-                
+        
                 // gameState may be initialized from menu state by pressing Enter or clicking a button
-                if ( (keyManager.leaveMenu || playButtonPressed) && stateIsMenu) {
+                if ( (keyManager.enter || playButtonPressed) && stateIsMenu) {
                     State.setState(gameState);
                     stateIsMenu = false;
                 }
+
 	}
 	
 	
