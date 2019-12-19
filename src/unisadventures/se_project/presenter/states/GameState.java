@@ -39,6 +39,7 @@ public class GameState extends State {
     private LinkedList<CollectibleItem> _collectibles;
     private Handler handler;
     private ArrayList<Pair<String,String>> levelManager = new ArrayList();
+    private PlayerCharacter player;
     
     
     //GAME UI IMAGE IDS
@@ -64,7 +65,7 @@ public class GameState extends State {
         //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
         //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
         //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
-        PlayerCharacter player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 300, 6, 170, "me");
+        player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 300, 6, 170, "me");
         _player = new ActionManager(handler,player) ;
          _enemy = new LinkedList<>();
         _enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
@@ -104,6 +105,10 @@ public class GameState extends State {
 
     @Override
     public void tick() {
+        
+        if(player.getHealthBar()<=0 || player.getyPosition() >= handler.getDisplayHeight()){
+            State.setState(new GameOverState(handler, id));
+        }
         
         if(getCountCFU()==8){
             State.setState(new LoadingState(handler,id));
