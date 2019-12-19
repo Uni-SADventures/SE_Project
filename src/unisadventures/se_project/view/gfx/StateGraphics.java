@@ -128,6 +128,8 @@ public class StateGraphics {
         }
         
         pixelIncrementer +=0;
+        
+        /*
         int[] livesDigits = String.valueOf(lives).chars().map(Character::getNumericValue).toArray();
         for (int i = 0; i < livesDigits.length; i++) {
            
@@ -167,12 +169,9 @@ public class StateGraphics {
            }
                pixelIncrementer +=7;
         }
-        
-        g.drawImage(Assets.retrieveImage(state.getUiFullHeart()), 210+pixelIncrementer, 10, null);
-            //g.setColor(Color.red);
-            //g.drawString("10", 15 + (j * 2), 50);
-        
-        
+        */
+      //  g.drawImage(Assets.retrieveImage(state.getUiFullHeart()), 210+pixelIncrementer, 10, null);
+            
          return cfu;
         }
     
