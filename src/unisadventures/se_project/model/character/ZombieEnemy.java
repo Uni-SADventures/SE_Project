@@ -7,8 +7,9 @@ import unisadventures.se_project.presenter.states.*;
 import unisadventures.se_project.util.CharacterType;
 
 /**
- * This is the main class of the enemy of type zombie. it implements the methods for attacking, 
- * receiving attacks from the character and movement
+ * This is the main class of the enemy of type zombie. it implements the methods
+ * for attacking, receiving attacks from the character and movement
+ *
  * @author Paolo Emanuela
  */
 public class ZombieEnemy extends EnemyCharacter {
@@ -40,10 +41,9 @@ public class ZombieEnemy extends EnemyCharacter {
     }
 
     /**
-     * This method updates the enemy at each frame. It checks if the enemy's attacking, 
-     * or there is an attack incoming from the player and it moves
+     * This method updates the enemy at each frame. It checks if the enemy's
+     * attacking, or there is an attack incoming from the player and it moves
      */
-    
     @Override
     public void tick() {
         attack();
@@ -64,7 +64,7 @@ public class ZombieEnemy extends EnemyCharacter {
      * This method implements the movement pattern of the zombie enemy. it moves
      * left and right without stopping
      */
-    private void movement() {
+    public void movement() {
 
         if (!_moving) {
             _moving = true;
@@ -72,7 +72,6 @@ public class ZombieEnemy extends EnemyCharacter {
         }
         //change direction after a collision with the player
         if (horizontalCollision()) {
-            System.out.println(this.getxPosition());
             if (_movingLeft) {
                 _movingLeft = false;
                 move(this.getSpeed());
@@ -108,16 +107,17 @@ public class ZombieEnemy extends EnemyCharacter {
      * player meets, the player loses health.
      *
      */
-    public void attack() {
+    public int attack() {
         if (State.getState() instanceof GameState) {
             GameState gstate = (GameState) State.getState();
             PlayerCharacter player = gstate.getPlayer();
-
             if (horizontalCollision()) {
                 player.setHealthBar(player.getHealthBar() - 1);
-                //unactiveplayer lampeggiaplayer
+                return player.getHealthBar();
             }
+            return 0;
         }
+        return -1;
     }
 
     /**
@@ -127,21 +127,20 @@ public class ZombieEnemy extends EnemyCharacter {
     public void getDamage() {
         if (State.getState() instanceof GameState) {
             GameState gstate = (GameState) State.getState();
-            PlayerCharacter player = gstate.getPlayer();
-
             if (this.getHealthBar() == -1) {
                 return;
             }
-
             if (checkVerticalCollision()) {
                 this.setHealthBar(-1);
             }
-
         }
     }
 
-    /**This method check if there is a right horizontal collision between the character and the enemy.
-     * A left collision is the collision between the right part of the player and the left part of the enemy
+    /**
+     * This method check if there is a right horizontal collision between the
+     * character and the enemy. A left collision is the collision between the
+     * right part of the player and the left part of the enemy
+     *
      * @return true if there is a horizontal collision, false otherwise
      */
     public boolean rightHorizontalCollision() {
@@ -149,12 +148,16 @@ public class ZombieEnemy extends EnemyCharacter {
             GameState gamestate = (GameState) State.getState();
             PlayerCharacter player = gamestate.getPlayer();
             int px = player.getPosition().getFirstElement(); //x position
+            int py = player.getPosition().getSecondElement();
             int pw = player.getDimension().getFirstElement(); //width
-            int ex = this.getPosition().getFirstElement(); //x position
-            int ew = this.getPosition().getFirstElement();
-            Rectangle rect = new Rectangle(px, player.getyPosition(), pw, player.getDimension().getSecondElement());
+            int ph = player.getDimension().getSecondElement();
+            int ex = this.getPosition().getFirstElement(); // x position
+            int ey = this.getPosition().getSecondElement();
+            int ew = this.getDimension().getFirstElement(); //width
+            int eh = this.getDimension().getSecondElement();
+            Rectangle rect = new Rectangle(px + pw - 2, py, 2, pw);
 
-            if (ex == (px + pw) || rect.intersects(new Rectangle(ex, this.getyPosition(), ew, this.getDimension().getSecondElement()))) {
+            if (((ex == px + pw) && ((py + ph <= ey + eh) && (py + ph >= ey))) || rect.intersects(new Rectangle(ex, ey, 2, eh))) {
                 if ((ex + ew - px) > (px - ex)) {
                     return true;
                 }
@@ -164,8 +167,10 @@ public class ZombieEnemy extends EnemyCharacter {
     }
 
     /**
-     * This method check if there is a left horizontal collision between the character and the enemy.
-     * A left collision is the collision between the left part of the player and the right part of the enemy
+     * This method check if there is a left horizontal collision between the
+     * character and the enemy. A left collision is the collision between the
+     * left part of the player and the right part of the enemy
+     *
      * @return true if there is a horizontal collision, false otherwise
      */
     public boolean leftHorizontalCollision() {
@@ -173,12 +178,17 @@ public class ZombieEnemy extends EnemyCharacter {
             GameState gamestate = (GameState) State.getState();
             PlayerCharacter player = gamestate.getPlayer();
             int px = player.getPosition().getFirstElement(); //x position
+            int py = player.getPosition().getSecondElement();
             int pw = player.getDimension().getFirstElement(); //width
+            int ph = player.getDimension().getSecondElement();
             int ex = this.getPosition().getFirstElement(); // x position
+            int ey = this.getPosition().getSecondElement();
             int ew = this.getDimension().getFirstElement(); //width
-            Rectangle rect = new Rectangle(px, player.getyPosition(), pw, player.getDimension().getSecondElement());
-            if ((ex + ew) == px || rect.intersects(new Rectangle(ex, this.getyPosition(), ew, this.getDimension().getSecondElement()))) {
-                if (((px+pw) - (ex+ew)) > (ex + ew - px)) {
+            int eh = this.getDimension().getSecondElement();
+
+            Rectangle rect = new Rectangle(px, py, 2, ph);
+            if (((ex + ew) == px && ((py + ph) <= (ey + eh) && (py + ph) >= ey)) || rect.intersects(new Rectangle(ex + ew - 2, ey, 2, eh))) {
+                if (((px + pw) - (ex + ew)) > (ex + ew - px)) {
                     return true;
                 }
             }
@@ -188,7 +198,9 @@ public class ZombieEnemy extends EnemyCharacter {
     }
 
     /**
-     * This method check if there is a horizontal collision between the character and the enemy.
+     * This method check if there is a horizontal collision between the
+     * character and the enemy.
+     *
      * @return true if there is a horizontal collision, false otherwise
      */
     public boolean horizontalCollision() {
@@ -196,19 +208,25 @@ public class ZombieEnemy extends EnemyCharacter {
     }
 
     /**
-     * This method check if there is a vertical collision between the character and the enemy.
+     * This method check if there is a vertical collision between the character
+     * and the enemy.
+     *
      * @return true if there is a vertical collision, false otherwise
      */
     public boolean checkVerticalCollision() {
         if (State.getState() instanceof GameState) {
             GameState gamestate = (GameState) State.getState();
             PlayerCharacter player = gamestate.getPlayer();
+            int px = player.getPosition().getFirstElement(); //x position
             int py = player.getPosition().getSecondElement();
+            int pw = player.getDimension().getFirstElement(); //width
             int ph = player.getDimension().getSecondElement();
+            int ex = this.getPosition().getFirstElement(); // x position
             int ey = this.getPosition().getSecondElement();
+            int ew = this.getDimension().getFirstElement(); //width
             int eh = this.getDimension().getSecondElement();
             Rectangle rect = new Rectangle(player.getxPosition(), py, player.getDimension().getFirstElement(), ph);
-            if (ey == (py + ph) || rect.intersects(new Rectangle(this.getxPosition(), ey, this.getDimension().getFirstElement(), eh))) {
+            if (ey == (py + ph) && ((px >= ex && px <= ex + ew) || (px + pw >= ex && px + pw <= ex + ew)) || rect.intersects(new Rectangle(ex + 2, ey, ew - 4, 2))) {
                 if ((ey + eh - py - ph) > (py + ph - ey)) {
                     return true;
                 }
