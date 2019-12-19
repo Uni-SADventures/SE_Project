@@ -143,10 +143,10 @@ public class GameState extends State {
         }
         view.renderPlayer(g, _player.getActualId(),_player.getCh().getPosition().getFirstElement(), _player.getCh().getPosition().getSecondElement());
   
-        _enemy.forEach((e) -> view.renderStuffMore(g, e.getxPosition(), e.getyPosition(), e.getDimension().getFirstElement(), e.getDimension().getSecondElement(), e.getIdleSprites(DirectionType.LEFT).get(1)));
+        
         
         for (int i=0;i<_enemy.size();i++) {
-            view.renderStuffMore(g, _enemy.get(i).getxPosition(), _enemy.get(i).getyPosition(), _enemy.get(i).getDimension().getFirstElement(), _enemy.get(i).getDimension().getSecondElement(), _enemy.get(i).getIdleSprites(DirectionType.LEFT).get(i));
+            view.renderStuffMore(g, _enemy.get(i).getxPosition(), _enemy.get(i).getyPosition(), _enemy.get(i).getDimension().getFirstElement(), _enemy.get(i).getDimension().getSecondElement(), _enemy.get(i).getIdleSprites(DirectionType.LEFT).get(0));
             }
         
         for(CollectibleItem coll : _collectibles){
@@ -252,14 +252,17 @@ public class GameState extends State {
             nowSeq = Assets.getActualSequenceNumber() ;
            
             temp.add(nowSeq);
-          
+            _enemy.get(0).setIdle(temp, temp);
+            
+            temp = new LinkedList<>() ;
             Assets.storeImage("resources/images/enemy_Shape.png");//16,96,16,30);
             nowSeq = Assets.getActualSequenceNumber() ;
             
             temp.add(nowSeq);
+            _enemy.get(1).setIdle(temp, temp);
             
             for (int i=0;i<_enemy.size();i++) {
-            _enemy.get(i).setIdle(temp, temp);
+            //_enemy.get(i).setIdle(temp, temp);
             _enemy.get(i).setFall(temp, temp);
             _enemy.get(i).setJump(temp, temp);
             _enemy.get(i).setPunch(temp, temp);
