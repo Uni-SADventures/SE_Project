@@ -19,6 +19,11 @@ public class MenuState extends State {
     private MainMenu _menu;
     private int _displayWidth;
     private int _displayHeight;
+    
+    // Graphical management variables
+    private int _framesCounter;
+    private boolean _blinkingTextIsVisible;
+    private boolean _titleIsMovingDown;
 
     public MenuState(Handler handler){
             
@@ -26,23 +31,55 @@ public class MenuState extends State {
         _menu = new MainMenu();
         _displayWidth = handler.getDisplayWidth();
         _displayHeight = _handler.getDisplayHeight();
+        
+        _framesCounter = 0;
+        _blinkingTextIsVisible = true;
+        _titleIsMovingDown = true;
                 
         loadImages();
     }
 
     @Override
     public void tick() {
+        
+        _framesCounter ++;
+        
+        if (_framesCounter == 60) {
+            _framesCounter = 0;
+            _blinkingTextIsVisible = !_blinkingTextIsVisible;  // Blinking text visibility toggled
+            _titleIsMovingDown = !_titleIsMovingDown;  // Title direction flipped
+        }
 	
     }
 
     @Override
     public void displayView(Graphics g) {
         
+                int titleXPostiton = 20;
+                int titleUpperYPosition = 20;
+                int titleLowerYPosition = 80;
+                int titleActualYPosition;
+                int titleWidth = _displayWidth - 40;
+                int titleHeight = 80;
+                
+                int blinkingTextXPoxition = (int) _displayWidth/2 - 55;
+                int blinkingTextYPoxition = (int) _displayHeight * 2/3;
+        
+                if (_titleIsMovingDown) {
+                    titleActualYPosition = titleUpperYPosition + _framesCounter;
+                } else {
+                    titleActualYPosition = titleLowerYPosition - _framesCounter;
+                }
+        
                 _view.renderMenuBackground(g, _menu.getBackgroundImageId(), _displayWidth, _displayHeight);
-                _view.renderMenuTitle(g, _menu.getTitleImageId(), _displayWidth - 40, 80, 20, 20);
-                _view.renderText(g, "or press enter", (int) _displayWidth/2 - 25, _displayHeight - 20);
+                _view.renderMenuTitle(g, _menu.getTitleImageId(), titleXPostiton, titleActualYPosition, titleWidth, titleHeight);
+                
+                if (_blinkingTextIsVisible) {
+                    _view.renderText(g, "Press Enter to play!", blinkingTextXPoxition, blinkingTextYPoxition);
+                }
 
-                ActionListener listener = new ActionListener() {
+                // Button implementation is bugged
+                /*ActionListener listener = new ActionListener() {
 
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
@@ -51,7 +88,7 @@ public class MenuState extends State {
                     }			
 
                 };
-                ButtonManager.addButton(_displayWidth/2 - 50, _displayHeight/2 - 150, 100, 300, "Play!", listener);
+                ButtonManager.addButton(_displayWidth/2 - 50, _displayHeight/2 - 150, 100, 300, "Play!", listener);*/
         
     }
 

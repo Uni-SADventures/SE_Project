@@ -5,7 +5,7 @@ package unisadventures.se_project.model;
  */
 public class MainMenu {
     
-    public static final String BACKGROUND_IMAGE = "resources/images/menu_background.jpg";
+    public static final String BACKGROUND_IMAGE = "resources/images/menu_background.png";
     public static final String TITLE_IMAGE = "resources/images/menu_title.png";
     
     private int _backgroundImageId;

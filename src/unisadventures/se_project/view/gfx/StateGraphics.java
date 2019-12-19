@@ -183,7 +183,7 @@ public class StateGraphics {
         g.drawImage(Assets.retrieveImage(backgroundId), 0, 0, displayWidth, displayHeight, null);
     }
     
-    public void renderMenuTitle(Graphics g, int titleId, int titleWidth, int titleHeight, int titleXPosition, int titleYPosition) {
+    public void renderMenuTitle(Graphics g, int titleId, int titleXPosition, int titleYPosition, int titleWidth, int titleHeight) {
         g.drawImage(Assets.retrieveImage(titleId), titleXPosition, titleYPosition, titleWidth, titleHeight, null);
     }
     
