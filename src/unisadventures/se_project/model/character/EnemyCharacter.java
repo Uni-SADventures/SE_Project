@@ -7,6 +7,7 @@ package unisadventures.se_project.model.character;
 
 
 import unisadventures.se_project.presenter.launcher.Handler;
+
 import unisadventures.se_project.util.CharacterType;
 
 /**
@@ -25,6 +26,8 @@ public abstract class EnemyCharacter extends BasicCharacter {
         
     }*/
     
-
+    public abstract boolean horizontalCollision() ;
+   
+    public abstract boolean checkVerticalCollision() ;
  
 }

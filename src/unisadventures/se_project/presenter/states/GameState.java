@@ -1,6 +1,7 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,6 +14,7 @@ import unisadventures.se_project.model.character.EnemyCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
+import unisadventures.se_project.model.character.actionCommands.HitCommand;
 
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.CollectibleType;
@@ -62,7 +64,7 @@ public class GameState extends State {
         //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
         //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
         //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
-        PlayerCharacter player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 1, 6, 170, "me");
+        PlayerCharacter player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 300, 6, 170, "me");
         _player = new ActionManager(handler,player) ;
          _enemy = new LinkedList<>();
         _enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
@@ -156,7 +158,9 @@ public class GameState extends State {
         
         
         countCFU=view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
-
+      //  Rectangle r = HitCommand._hitArea ;
+        //g.fill3DRect(r.x, r.y, r.width, r.height,true);
+        
     }
     @Override
     public void loadImages(){
@@ -217,6 +221,32 @@ public class GameState extends State {
             _player.getCh().setBeDamaged(temp2, temp);
             _player.getCh().setFall(temp2, temp);
             _player.getCh().setJump(temp2, temp);
+           temp = new LinkedList<>() ;
+            Assets.storeImage("resources/images/character_damage_sprite.png",16,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+           
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq);  
+            
+            Assets.storeImage("resources/images/character_damage_sprite.png",32,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq);  
+            
+            temp2 = new LinkedList<>() ;
+            Assets.storeImage("resources/images/character_damage_sprite.png",16,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+           
+            for(int i = 0; i <= 15 ; i++ )
+                temp2.add(nowSeq);  
+            
+            Assets.storeImage("resources/images/character_damage_sprite.png",32,32,16,32);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            
+            for(int i = 0; i <= 15 ; i++ )
+                temp2.add(nowSeq);
+ 
             _player.getCh().setPunch(temp2, temp);
             temp = new LinkedList<>() ;
             Assets.storeImage("resources/images/character_damage_sprite.png",16,32,16,32);

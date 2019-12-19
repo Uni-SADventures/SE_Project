@@ -91,10 +91,10 @@ public class ActionManager implements MovementsInterface {
             //   else if(!_hanlder.checkFloor(_ch.getPosition().getFirstElement(),_ch.getPosition().getSecondElement()))
             //    _jumpFall.fall();
 
-            if (_handler.getKeyManager().hit) {
+            if (_handler.getKeyManager().hit && !_hitting) {
                 attack();
-            } else {
-                _hitting = false;
+            } else if(_hitting){
+                attack() ;
             }
             grab();
         } else {
@@ -216,7 +216,7 @@ public class ActionManager implements MovementsInterface {
             _hitting = true;
         }
 
-        _combat.hit();
+        _hitting = _combat.hit();
         int length = _ch.getPunchSprites(_ch.getFacing()).size();
         _actualId = _ch.getPunchSprites(_ch.getFacing()).get(_combat.getCount() % length);
     }

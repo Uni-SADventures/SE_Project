@@ -30,13 +30,9 @@ public class HitCommandTest {
      * Test of hit method, of class HitCommand.
      */
     @Test
-    public void testHit() {
+    public void testCreation() {
         HitCommand hit = new HitCommand(_handler,_p) ;
-        assertEquals(hit.getCount(), 0);
-        hit.hit();
-        assertEquals(hit.getCount(), 1);
-        hit.resetCounter(); 
-        assertEquals(hit.getCount(),0) ;
+        assertNotNull(hit) ;
     }
     
 }
