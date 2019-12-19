@@ -6,7 +6,11 @@
 package unisadventures.se_project.view.gfx;
 
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import static unisadventures.se_project.model.basicObjects.Tile.TILEHEIGHT;
 import static unisadventures.se_project.model.basicObjects.Tile.TILEWIDTH;
 import unisadventures.se_project.presenter.launcher.Handler;
@@ -21,7 +25,6 @@ import unisadventures.se_project.presenter.states.State;
 public class StateGraphics {
 
     private Handler _handler;
-
     public StateGraphics(Handler handler/*,World w */) {
         _handler = handler;
     }
@@ -32,7 +35,7 @@ public class StateGraphics {
      */
     public void renderScenario(Graphics g) {
         int scenarioId = _handler.getLevel().getScenarioImage() ;
-        g.drawImage( Assets.retrieveImage(scenarioId), (int) (-_handler.getCam().getxOffset()/45), (int) (0-_handler.getCam().getyOffset()/45),1200,600, null);
+        g.drawImage( Assets.retrieveImage(scenarioId), (int) (-_handler.getCam().getxOffset()/18), (int) (0-_handler.getCam().getyOffset()/18),1200,600, null);
       
 
     }
@@ -128,8 +131,6 @@ public class StateGraphics {
         }
         
         pixelIncrementer +=0;
-        
-        /*
         int[] livesDigits = String.valueOf(lives).chars().map(Character::getNumericValue).toArray();
         for (int i = 0; i < livesDigits.length; i++) {
            
@@ -169,9 +170,12 @@ public class StateGraphics {
            }
                pixelIncrementer +=7;
         }
-        */
-      //  g.drawImage(Assets.retrieveImage(state.getUiFullHeart()), 210+pixelIncrementer, 10, null);
-            
+        
+        g.drawImage(Assets.retrieveImage(state.getUiFullHeart()), 210+pixelIncrementer, 10, null);
+            //g.setColor(Color.red);
+            //g.drawString("10", 15 + (j * 2), 50);
+        
+        
          return cfu;
         }
     
@@ -179,12 +183,28 @@ public class StateGraphics {
         g.drawImage( Assets.retrieveImage(imageId), x, y, TILEWIDTH, TILEHEIGHT, null);
     }
     
-     public void renderMenuBackground(Graphics g, int backgroundId, int displayWidth, int displayHeight) {
+    public void renderMenuBackground(Graphics g, int backgroundId, int displayWidth, int displayHeight) {
         g.drawImage(Assets.retrieveImage(backgroundId), 0, 0, displayWidth, displayHeight, null);
     }
-     
-        public void renderMenuTitle(Graphics g, int titleId, int titleWidth, int titleHeight, int titleXPosition, int titleYPosition) {
+    
+    public void renderMenuTitle(Graphics g, int titleId, int titleXPosition, int titleYPosition, int titleWidth, int titleHeight) {
         g.drawImage(Assets.retrieveImage(titleId), titleXPosition, titleYPosition, titleWidth, titleHeight, null);
+    }
+    public void renderButtons(Graphics g,int displayWidth, int displayHeight){  
+     Rectangle playButton= new Rectangle(displayWidth/2-80,displayHeight/2,150,75);
+     
+     int precX=displayWidth/2-80;
+     int precY=displayHeight/2;
+     Rectangle quitButton= new Rectangle(precX,precY+80,150,75);
+     Graphics2D g2d=(Graphics2D) g;
+    //Rectangle quitButton= new Rectangle(displayWidth/2 + 120,150,100,50);
+     Font fnt1=new Font("arial",Font.BOLD,30);
+     g.setFont(fnt1);
+     g.setColor(Color.black);
+     g.drawString("Play", playButton.x+40, playButton.y+50);
+     g2d.draw(playButton);
+     g.drawString("Quit", quitButton.x+40, quitButton.y+50);
+     g2d.draw(quitButton);
     }
     
     public void renderText(Graphics g, String text, int textXPosition, int textYPosition) {
@@ -198,4 +218,5 @@ public class StateGraphics {
     public void renderLoadingTitle(Graphics g, int titleId, int titleWidth, int titleHeight, int titleXPosition, int titleYPosition) {
         g.drawImage(Assets.retrieveImage(titleId), titleXPosition, titleYPosition, titleWidth, titleHeight, null);
     }
+
 }

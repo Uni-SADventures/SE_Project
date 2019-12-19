@@ -3,7 +3,6 @@ package unisadventures.se_project.presenter.launcher;
 
 import unisadventures.se_project.view.display.Display;
 import unisadventures.se_project.model.FrameListener;
-import unisadventures.se_project.model.Loading;
 import unisadventures.se_project.presenter.camera.GameCamera;
 import unisadventures.se_project.presenter.input.KeyManager;
 import unisadventures.se_project.presenter.states.*;
@@ -30,11 +29,15 @@ public class Game extends FrameListener {
 	
 	
 	//States
-	public State gameState;
-	public State menuState;
-	
+	private State gameState;
+	private State menuState;
+        private boolean stateIsMenu;
+        
 	//Input
 	private final KeyManager keyManager;
+        
+        //Button management
+        private boolean playButtonPressed;  // True if game launched from the main menu using the "Play" button
 
     public Display getDisplay() {
         return display;
@@ -55,14 +58,16 @@ public class Game extends FrameListener {
 		display = new Display(title, displayWidth, displayHeight);
          
 		display.getFrame().addKeyListener(keyManager);
-		//Assets.init()
                 
 		gameState = new GameState(hand,0);
 		menuState = new MenuState(hand);
                 
 
                 
-		State.setState(gameState);
+		State.setState(menuState);
+                stateIsMenu = true;
+                
+                playButtonPressed = false;
 	}
 	
         
@@ -71,10 +76,51 @@ public class Game extends FrameListener {
          */
 	private void tick(){
 		keyManager.tick();
-		
+                /*MouseListener click=new MouseListener(){
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                
+                }
+		FrameListener f = new FrameListener(){
+                    @Override
+                    public void update() {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                };*/
 		if(State.getState() != null)
 			State.getState().tick();
-                        
+        
+                // gameState may be initialized from menu state by pressing Enter or clicking a button
+                if ( (keyManager.enter || playButtonPressed) && stateIsMenu) {
+                    State.setState(gameState);
+                    stateIsMenu = false;
+                }
+                if ( keyManager.esc  && stateIsMenu) {
+                    System.exit(0);
+                }
+
 	}
 	
 	
@@ -100,6 +146,10 @@ public class Game extends FrameListener {
                 init(hand);
 		thread.start();
 	}
+        
+    public void pressPlayButton() {
+        playButtonPressed = true;
+    }
 	
 
     public GameCamera getCam() {
