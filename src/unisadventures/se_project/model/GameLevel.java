@@ -13,6 +13,8 @@ public class GameLevel {
     private int _levelWidth, _levelHeight;
     private int _displayWidth, _displayHeight;
     private int _spawnX, _spawnY;
+    private String _pathScenarioImage;
+    private String _pathLoadingImage;
     private int _scenarioImage;
     private int [][] tiles;
     private ArrayList<Pair<Integer,Integer>> collectiblePositions = new ArrayList();
@@ -27,6 +29,11 @@ public class GameLevel {
         return _scenarioImage;
     }
 
+    public String getPathScenarioImage() {
+        return _pathScenarioImage;
+    }
+    
+    
     public ArrayList<Pair<Integer, Integer>> getCollectiblePositions() {
         return collectiblePositions;
     }
@@ -60,6 +67,7 @@ public class GameLevel {
         _levelHeight=Utils.ParseInt(tokens[1]);
         _spawnX=Utils.ParseInt(tokens[2]);
         _spawnY=Utils.ParseInt(tokens[3]);
+        _pathScenarioImage=tokens[4];
         int j=0,i=0;
         
         while(i<=tokensCollectible.length-1){
@@ -71,7 +79,7 @@ public class GameLevel {
         
         for (int y=0; y<_levelHeight;y++){
             for(int x=0; x<_levelWidth;x++){
-                tiles[x][y]=Utils.ParseInt(tokens[(x+y*_levelWidth)+4]);
+                tiles[x][y]=Utils.ParseInt(tokens[(x+y*_levelWidth)+5]);
             }
         }
         
@@ -92,5 +100,10 @@ public class GameLevel {
     public int getDisplayHeight() {
         return _displayHeight;
     }
+
+    public String getPathLoadingImage() {
+        return _pathLoadingImage;
+    }
+    
     
 }

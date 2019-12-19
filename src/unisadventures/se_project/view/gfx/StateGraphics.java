@@ -32,7 +32,7 @@ public class StateGraphics {
      */
     public void renderScenario(Graphics g) {
         int scenarioId = _handler.getLevel().getScenarioImage() ;
-        g.drawImage( Assets.retrieveImage(scenarioId), (int) (-_handler.getCam().getxOffset()/18), (int) (0-_handler.getCam().getyOffset()/18),1200,600, null);
+        g.drawImage( Assets.retrieveImage(scenarioId), (int) (-_handler.getCam().getxOffset()/45), (int) (0-_handler.getCam().getyOffset()/45),1200,600, null);
       
 
     }

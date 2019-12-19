@@ -13,7 +13,6 @@ import unisadventures.se_project.model.character.EnemyCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
-import unisadventures.se_project.presenter.launcher.Game;
 
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.CollectibleType;
@@ -67,6 +66,7 @@ public class GameState extends State {
         _player = new ActionManager(handler,player) ;
          _enemy = new LinkedList<>();
         _enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
+        _enemy.add(new ZombieEnemy(handler, 600, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
         
         
         GameLevel level = null ;
@@ -103,7 +103,7 @@ public class GameState extends State {
     @Override
     public void tick() {
         
-        if(getCountCFU()==3){
+        if(getCountCFU()==8){
             State.setState(new LoadingState(handler,id));
         }
         _handler.getLevel().tick();
@@ -143,7 +143,11 @@ public class GameState extends State {
         }
         view.renderPlayer(g, _player.getActualId(),_player.getCh().getPosition().getFirstElement(), _player.getCh().getPosition().getSecondElement());
   
-        _enemy.forEach((e) -> view.renderStuffMore(g, e.getxPosition(), e.getyPosition(), e.getDimension().getFirstElement(), e.getDimension().getSecondElement(), e.getIdleSprites(DirectionType.LEFT).get(0)));
+        _enemy.forEach((e) -> view.renderStuffMore(g, e.getxPosition(), e.getyPosition(), e.getDimension().getFirstElement(), e.getDimension().getSecondElement(), e.getIdleSprites(DirectionType.LEFT).get(1)));
+        
+        for (int i=0;i<_enemy.size();i++) {
+            view.renderStuffMore(g, _enemy.get(i).getxPosition(), _enemy.get(i).getyPosition(), _enemy.get(i).getDimension().getFirstElement(), _enemy.get(i).getDimension().getSecondElement(), _enemy.get(i).getIdleSprites(DirectionType.LEFT).get(i));
+            }
         
         for(CollectibleItem coll : _collectibles){
             view.renderStuffMore(g, coll.getxPosition(), coll.getyPosition(),coll.getWidth(),coll.getHeight(),coll.getNextImageFileName());
@@ -244,21 +248,28 @@ public class GameState extends State {
             
         //ENEMY CHARACTER
             temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/enemy_sprite.png",16,96,16,30);
+            Assets.storeImage("resources/images/enemy_Wind.png");//16,96,16,30);
             nowSeq = Assets.getActualSequenceNumber() ;
            
-            temp.add(nowSeq);   
-            for (EnemyCharacter enemy : _enemy) {
-            enemy.setIdle(temp, temp);
-            enemy.setFall(temp, temp);
-            enemy.setJump(temp, temp);
-            enemy.setPunch(temp, temp);
-            enemy.setWalk(temp, temp);
+            temp.add(nowSeq);
+          
+            Assets.storeImage("resources/images/enemy_Shape.png");//16,96,16,30);
+            nowSeq = Assets.getActualSequenceNumber() ;
+            
+            temp.add(nowSeq);
+            
+            for (int i=0;i<_enemy.size();i++) {
+            _enemy.get(i).setIdle(temp, temp);
+            _enemy.get(i).setFall(temp, temp);
+            _enemy.get(i).setJump(temp, temp);
+            _enemy.get(i).setPunch(temp, temp);
+            _enemy.get(i).setWalk(temp, temp);
             }
+            
             
          
         //SCENARIO (which id is inside world now)
-            Assets.storeImage("resources/images/sfondo_unisa_pixel.jpg");
+            Assets.storeImage(_handler.getLevel().getPathScenarioImage());
             nowSeq = Assets.getActualSequenceNumber() ;
             _handler.getLevel().setScenarioImage(nowSeq);
 
@@ -266,7 +277,7 @@ public class GameState extends State {
             
             //TILES
             //ROCK TILE 
-            Assets.storeImage("resources/images/grass.png",0,0,60,60);
+            Assets.storeImage("resources/images/platforms.jpg");//,0,0,60,60);
             nowSeq = Assets.getActualSequenceNumber() ;
             Tile.setRockIdImage(nowSeq);
        

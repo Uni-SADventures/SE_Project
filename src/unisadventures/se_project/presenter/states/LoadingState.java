@@ -49,8 +49,8 @@ public class LoadingState extends State {
     public void loadImages() {
         Assets.storeImage(Loading.BACKGROUND_IMAGE);
         _loading.setBackgroundImageId(Assets.getActualSequenceNumber());
-        Assets.storeImage(Loading.TITLE_IMAGE);
-        _loading.setTitleImageId(Assets.getActualSequenceNumber());
+        //Assets.storeImage(Loading.TITLE_IMAGE);
+        //_loading.setTitleImageId(Assets.getActualSequenceNumber());
     }
 
     @Override
