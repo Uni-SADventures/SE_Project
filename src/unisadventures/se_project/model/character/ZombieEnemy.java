@@ -112,8 +112,7 @@ public class ZombieEnemy extends EnemyCharacter {
             GameState gstate = (GameState) State.getState();
             PlayerCharacter player = gstate.getPlayer();
             if (horizontalCollision()) {
-                player.setHealthBar(player.getHealthBar() - 1);
-               
+               ((GameState)State.getState()).getPlayerActionManager().takeDamage(-1);
             }
         }
     }

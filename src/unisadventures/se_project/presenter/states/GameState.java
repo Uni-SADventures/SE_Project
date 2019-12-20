@@ -234,7 +234,7 @@ public class GameState extends State {
                 temp2.add(nowSeq);  
             
             _player.getCh().setWalk(temp2, temp);
-            _player.getCh().setBeDamaged(temp2, temp);
+         
             _player.getCh().setFall(temp2, temp);
             _player.getCh().setJump(temp2, temp);
            temp = new LinkedList<>() ;

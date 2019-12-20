@@ -54,7 +54,7 @@ public class ActionManager implements MovementsInterface {
         _jumpFall = new VerticalCommand(_handler, _ch);
         _combat = new HitCommand(_handler, _ch);
         _idle = new IdleCommand(_handler, _ch);
-        _beDamaged = new BeingDamagedCommand(_handler, _ch, 70);
+        _beDamaged = new BeingDamagedCommand(_handler, _ch, 20);
         _actualId = 0;
     }
 
@@ -109,12 +109,20 @@ public class ActionManager implements MovementsInterface {
         }
 
         if (_beingDamaged) {
+   
             _beingDamaged = _beDamaged.takeDamage(_incomingDamage);
+            
+            int length = _ch.getBeDamagedSprites(_ch.getFacing()).size();
+             _actualId = _ch.getBeDamagedSprites(_ch.getFacing()).get(_beDamaged.getCount() % length);
+
+            
             if (_beingDamaged) {
-                if (_ch.getFacing().LEFT == DirectionType.LEFT) {
+                if (_ch.getFacing() == DirectionType.LEFT) {
                     _movement.moveRight();
+                    jump();
                 } else {
                     _movement.moveLeft();
+                    jump() ;
                 }
             } else {
                 _incomingDamage = 0;
@@ -132,8 +140,12 @@ public class ActionManager implements MovementsInterface {
     public void takeDamage(int dam) {
         if (!_beingDamaged) {
             _incomingDamage = dam;
-            _jumping = false;
+         //   _jumping = false;
+            _beingDamaged = true ;
         }
+        
+        
+                
     }
 
     public BasicCharacter getCh() {

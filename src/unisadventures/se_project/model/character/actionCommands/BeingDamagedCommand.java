@@ -31,8 +31,10 @@ public class BeingDamagedCommand extends ActionCommand {
      */
   
     public boolean takeDamage(int dam){
+        
+        System.out.println(_count);
         if(_count == 2){
-            _ch.takeDamage(dam);
+            _ch.setHealthBar(_ch.getHealthBar() - 1);
             _count++ ;
             return true ;
         }
@@ -40,8 +42,9 @@ public class BeingDamagedCommand extends ActionCommand {
             this.resetCounter();
             return false ;
         } else {
-            _count++ ;
+            _count++;
             return true ;
         }
+       
     }
 }
