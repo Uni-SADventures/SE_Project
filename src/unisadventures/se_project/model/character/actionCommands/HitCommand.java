@@ -36,7 +36,8 @@ public class HitCommand extends ActionCommand {
      * be damaged
      */
     public boolean hit(){
-        
+        if(!(State.getState() instanceof GameState))
+            return false ;
         updateHitbox() ;
         if(_count == 5 ){
             LinkedList<EnemyCharacter> enemies = ((GameState) State.getState()).getEnemies() ;
@@ -45,8 +46,8 @@ public class HitCommand extends ActionCommand {
                 int posX = e.getxPosition() + e.getDimension().getFirstElement()/4 ;
                 int posY = e.getyPosition() + e.getDimension().getSecondElement()/2 ;
                 
-                if( e.getxPosition() + e.getDimension().getFirstElement()/2 >= _hitArea.x - _hitArea.width*0.5 &&
-                        e.getxPosition() + e.getDimension().getFirstElement()/2 <= _hitArea.x + _hitArea.width*1.5 &&
+                if( e.getxPosition() + e.getDimension().getFirstElement()/2 >= _hitArea.x + _handler.getCam().getxOffset() - _hitArea.width*0.5 &&
+                        e.getxPosition() + e.getDimension().getFirstElement()/2 <= _hitArea.x + _handler.getCam().getxOffset()+ _hitArea.width*2.5 &&
                       e.getyPosition() + e.getDimension().getSecondElement()/2 >= _hitArea.y  - _hitArea.height  *2 &&
                      e.getyPosition() + e.getDimension().getSecondElement()/2 <= _hitArea.y + _hitArea.height  *2      )
                     
@@ -54,6 +55,7 @@ public class HitCommand extends ActionCommand {
                 if(e.getHealthBar() <= 0 )
                     enemies.remove(e) ;
             }
+          
         }
         //enemy = _handler.getCollision(_ch.getPosition()) ;
         

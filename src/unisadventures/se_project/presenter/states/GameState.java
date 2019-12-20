@@ -39,6 +39,7 @@ public class GameState extends State {
     private LinkedList<CollectibleItem> _collectibles;
     private Handler handler;
     private ArrayList<Pair<String,String>> levelManager = new ArrayList();
+    private String [] enemiesPathImage={"resources/images/enemy_Wind.png","resources/images/enemy_Shape.png","resources/images/enemy_Refound.png"};
     private PlayerCharacter player;
     
     
@@ -68,8 +69,10 @@ public class GameState extends State {
         player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 300, 6, 170, "me");
         _player = new ActionManager(handler,player) ;
          _enemy = new LinkedList<>();
-        _enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
-        _enemy.add(new ZombieEnemy(handler, 600, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
+         
+         
+        /*_enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
+        _enemy.add(new ZombieEnemy(handler, 600, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));*/
         
         
         GameLevel level = null ;
@@ -81,6 +84,10 @@ public class GameState extends State {
             System.exit(0);
         }
         handler.setLevel(level);
+        
+        for(int j=0;j<level.getEnemiesPositions().size();j++){
+            _enemy.add(j,new ZombieEnemy(handler,level.getEnemiesPositions().get(j).getFirstElement() , level.getEnemiesPositions().get(j).getSecondElement(), 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
+        }
         
         for(int i=0;i<=level.getCollectiblePositions().size()-1;i++){
             _collectibles.add(i,new CollectibleItem(level.getCollectiblePositions().get(i).getFirstElement(),level.getCollectiblePositions().get(i).getSecondElement() , 32, 32, CollectibleType.CFU));
@@ -115,16 +122,18 @@ public class GameState extends State {
         }
         _handler.getLevel().tick();
         _player.tick();
-      //  _enemy.forEach((e)->e.tick());
-        for(EnemyCharacter e: _enemy){
+      
+        LinkedList<EnemyCharacter> oldEnemy= (LinkedList<EnemyCharacter>) _enemy.clone();
+        for(int i = 0 ; i < oldEnemy.size() ; i++ ){
+           oldEnemy.get(i).tick();
+        }
+
+        for(EnemyCharacter e: oldEnemy){
             if(e.getHealthBar() <= 0){
                 _enemy.remove(e);
             }
         }
-       for(int i = 0 ; i < _enemy.size() ; i++ ){
-           _enemy.get(i).tick();
-       }
-
+       
         /*World.forEach(WorldObject el){
                     el.tick() ;
                 } */
@@ -154,7 +163,7 @@ public class GameState extends State {
   
         
         
-        for (int i=0;i<_enemy.size();i++) {
+         for (int i=0;i<_enemy.size();i++) {
             view.renderStuffMore(g, _enemy.get(i).getxPosition(), _enemy.get(i).getyPosition(), _enemy.get(i).getDimension().getFirstElement(), _enemy.get(i).getDimension().getSecondElement(), _enemy.get(i).getIdleSprites(DirectionType.LEFT).get(0));
             }
         
@@ -284,22 +293,16 @@ public class GameState extends State {
             
             
         //ENEMY CHARACTER
-            temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/enemy_Wind.png");//16,96,16,30);
-            nowSeq = Assets.getActualSequenceNumber() ;
-           
-            temp.add(nowSeq);
-            _enemy.get(0).setIdle(temp, temp);
-            
-            temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/enemy_Shape.png");//16,96,16,30);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            
-            temp.add(nowSeq);
-            _enemy.get(1).setIdle(temp, temp);
-            
+            int k=0;
             for (int i=0;i<_enemy.size();i++) {
-            //_enemy.get(i).setIdle(temp, temp);
+                if(k<enemiesPathImage.length){    
+                    temp = new LinkedList<>() ;
+                    Assets.storeImage(enemiesPathImage[k++]);//16,96,16,30);
+                    nowSeq = Assets.getActualSequenceNumber() ;
+                    temp.add(nowSeq);
+                }else 
+                    k=0;
+            _enemy.get(i).setIdle(temp, temp);
             _enemy.get(i).setFall(temp, temp);
             _enemy.get(i).setJump(temp, temp);
             _enemy.get(i).setPunch(temp, temp);
