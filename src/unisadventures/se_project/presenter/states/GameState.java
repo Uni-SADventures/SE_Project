@@ -115,13 +115,15 @@ public class GameState extends State {
         }
         _handler.getLevel().tick();
         _player.tick();
-        _enemy.forEach((e)->e.tick());
+      //  _enemy.forEach((e)->e.tick());
         for(EnemyCharacter e: _enemy){
             if(e.getHealthBar() <= 0){
                 _enemy.remove(e);
             }
         }
-       
+       for(int i = 0 ; i < _enemy.size() ; i++ ){
+           _enemy.get(i).tick();
+       }
 
         /*World.forEach(WorldObject el){
                     el.tick() ;
