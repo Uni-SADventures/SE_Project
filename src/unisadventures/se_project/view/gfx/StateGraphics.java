@@ -35,7 +35,7 @@ public class StateGraphics {
      */
     public void renderScenario(Graphics g) {
         int scenarioId = _handler.getLevel().getScenarioImage() ;
-        g.drawImage( Assets.retrieveImage(scenarioId), (int) (-_handler.getCam().getxOffset()/18), (int) (0-_handler.getCam().getyOffset()/18),1200,600, null);
+        g.drawImage( Assets.retrieveImage(scenarioId), (int) (-_handler.getCam().getxOffset()/45), (int) (0-_handler.getCam().getyOffset()/45),1200,600, null);
       
 
     }
@@ -131,6 +131,8 @@ public class StateGraphics {
         }
         
         pixelIncrementer +=0;
+        
+        /*
         int[] livesDigits = String.valueOf(lives).chars().map(Character::getNumericValue).toArray();
         for (int i = 0; i < livesDigits.length; i++) {
            
@@ -171,7 +173,7 @@ public class StateGraphics {
                pixelIncrementer +=7;
         }
         
-        g.drawImage(Assets.retrieveImage(state.getUiFullHeart()), 210+pixelIncrementer, 10, null);
+        g.drawImage(Assets.retrieveImage(state.getUiFullHeart()), 210+pixelIncrementer, 10, null);*/
             //g.setColor(Color.red);
             //g.drawString("10", 15 + (j * 2), 50);
         
