@@ -50,6 +50,7 @@ public abstract class State {
         public abstract void loadImages();
         public abstract int getCountCFU();
         
+        
 
     
 	 

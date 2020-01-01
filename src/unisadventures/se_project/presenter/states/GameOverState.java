@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import unisadventures.se_project.model.GameOver;
 import unisadventures.se_project.model.Loading;
 import unisadventures.se_project.presenter.launcher.Handler;
+import unisadventures.se_project.view.display.AudioManager;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -35,8 +36,10 @@ public class GameOverState extends State{
 
     @Override
     public void tick() {
-        if(_handler.getKeyManager().enter)
+        if(_handler.getKeyManager().enter){
             State.setState(new GameState(_handler,_id));
+            AudioManager.gameLevelLoop();
+        }
 	
     }
 

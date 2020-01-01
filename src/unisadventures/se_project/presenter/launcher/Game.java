@@ -6,6 +6,7 @@ import unisadventures.se_project.model.FrameListener;
 import unisadventures.se_project.presenter.camera.GameCamera;
 import unisadventures.se_project.presenter.input.KeyManager;
 import unisadventures.se_project.presenter.states.*;
+import unisadventures.se_project.view.display.AudioManager;
 
 
 /**
@@ -66,7 +67,7 @@ public class Game extends FrameListener {
                 
 		State.setState(menuState);
                 stateIsMenu = true;
-                
+                AudioManager.gameMenuLoop();
                 playButtonPressed = false;
 	}
 	
@@ -116,6 +117,7 @@ public class Game extends FrameListener {
                 if ( (keyManager.enter || playButtonPressed) && stateIsMenu) {
                     State.setState(gameState);
                     stateIsMenu = false;
+                    AudioManager.gameLevelLoop();
                 }
                 if ( keyManager.esc  && stateIsMenu) {
                     System.exit(0);
