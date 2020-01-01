@@ -5,8 +5,10 @@
  */
 package unisadventures.se_project.model.character.actionCommands;
 
+import java.awt.Rectangle;
 import java.util.List;
 import unisadventures.se_project.model.basicObjects.CollectibleItem;
+import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.EnemyCharacter;
@@ -225,14 +227,26 @@ public class ActionManager implements MovementsInterface {
      */
     @Override
     public void attack() {
-        if (!_hitting) {
-            _combat.resetCounter();
-            _hitting = true;
-        }
+        if (_ch instanceof EnemyCharacter) {
 
-        _hitting = _combat.hit();
-        int length = _ch.getPunchSprites(_ch.getFacing()).size();
-        _actualId = _ch.getPunchSprites(_ch.getFacing()).get(_combat.getCount() % length);
+            if (State.getState() instanceof GameState) {
+                GameState gstate = (GameState) State.getState();
+                PlayerCharacter player = gstate.getPlayer();
+                if (horizontalCollision()) {
+                    ((GameState) State.getState()).getPlayerActionManager().takeDamage(_ch.getStrength());
+                }
+            }
+
+        } else {
+            if (!_hitting) {
+                _combat.resetCounter();
+                _hitting = true;
+            }
+
+            _hitting = _combat.hit();
+            int length = _ch.getPunchSprites(_ch.getFacing()).size();
+            _actualId = _ch.getPunchSprites(_ch.getFacing()).get(_combat.getCount() % length);
+        }
     }
 
     /**
@@ -305,10 +319,9 @@ public class ActionManager implements MovementsInterface {
     private boolean rightCollisionEnemies() {
         if (State.getState() instanceof GameState) {
             GameState state = (GameState) State.getState();
-            for (EnemyCharacter enemy : state.getEnemies()) {
-                if (enemy instanceof ZombieEnemy) {
-                    ZombieEnemy zombie = (ZombieEnemy) enemy;
-                    if (zombie.rightHorizontalCollision()) {
+            for (ActionManager enemy : state.getEnemies()) {
+                if (enemy.getCh() instanceof ZombieEnemy) {
+                    if (enemy.rightHorizontalCollision()) {
                         return true;
                     }
                 }
@@ -325,10 +338,10 @@ public class ActionManager implements MovementsInterface {
     private boolean leftCollisionEnemies() {
         if (State.getState() instanceof GameState) {
             GameState state = (GameState) State.getState();
-            for (EnemyCharacter enemy : state.getEnemies()) {
-                if (enemy instanceof ZombieEnemy) {
-                    ZombieEnemy zombie = (ZombieEnemy) enemy;
-                    if (zombie.leftHorizontalCollision()) {
+            for (ActionManager enemy : state.getEnemies()) {
+                if (enemy.getCh() instanceof ZombieEnemy) {
+               
+                    if (enemy.leftHorizontalCollision()) {
                         return true;
                     }
                 }
@@ -336,5 +349,151 @@ public class ActionManager implements MovementsInterface {
         }
         return false;
     }
+        
+    /**
+     * This method check if there is a right horizontal collision between the
+     * character and the enemy. A left collision is the collision between the
+     * right part of the player and the left part of the enemy
+     *
+     * @return true if there is a horizontal collision, false otherwise
+     */
+    public boolean rightHorizontalCollision() {
+        if (State.getState() instanceof GameState) {
+            GameState gamestate = (GameState) State.getState();
+            PlayerCharacter player = gamestate.getPlayer();
+            int px = player.getPosition().getFirstElement(); //x position
+            int py = player.getPosition().getSecondElement();
+            int pw = player.getDimension().getFirstElement(); //width
+            int ph = player.getDimension().getSecondElement();
+            int ex = _ch.getPosition().getFirstElement(); // x position
+            int ey = _ch.getPosition().getSecondElement();
+            int ew = _ch.getDimension().getFirstElement(); //width
+            int eh = _ch.getDimension().getSecondElement();
+            Rectangle rect = new Rectangle(px + pw - 2, py, 2, pw);
+
+            if (((ex == px + pw) && ((py + ph <= ey + eh) && (py + ph >= ey))) || rect.intersects(new Rectangle(ex, ey, 2, eh))) {
+                if ((ex + ew - px) > (px - ex)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * This method check if there is a left horizontal collision between the
+     * character and the enemy. A left collision is the collision between the
+     * left part of the player and the right part of the enemy
+     *
+     * @return true if there is a horizontal collision, false otherwise
+     */
+    public boolean leftHorizontalCollision() {
+        if (State.getState() instanceof GameState) {
+            GameState gamestate = (GameState) State.getState();
+            PlayerCharacter player = gamestate.getPlayer();
+            int px = player.getPosition().getFirstElement(); //x position
+            int py = player.getPosition().getSecondElement();
+            int pw = player.getDimension().getFirstElement(); //width
+            int ph = player.getDimension().getSecondElement();
+            int ex = _ch.getPosition().getFirstElement(); // x position
+            int ey = _ch.getPosition().getSecondElement();
+            int ew = _ch.getDimension().getFirstElement(); //width
+            int eh = _ch.getDimension().getSecondElement();
+
+            Rectangle rect = new Rectangle(px, py, 2, ph);
+            if (((ex + ew) == px && ((py + ph) <= (ey + eh) && (py + ph) >= ey)) || rect.intersects(new Rectangle(ex + ew - 2, ey, 2, eh))) {
+                if (((px + pw) - (ex + ew)) > (ex + ew - px)) {
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
+    /**
+     * This method check if there is a horizontal collision between the
+     * character and the enemy.
+     *
+     * @return true if there is a horizontal collision, false otherwise
+     */
+    public boolean horizontalCollision() {
+        return leftHorizontalCollision() || rightHorizontalCollision() ;
+    }
+
+    /**
+     * This method check if there is a vertical collision between the character
+     * and the enemy.
+     *
+     * @return true if there is a vertical collision, false otherwise
+     */
+    public boolean checkVerticalCollision() {
+        if (State.getState() instanceof GameState) {
+            GameState gamestate = (GameState) State.getState();
+            PlayerCharacter player = gamestate.getPlayer();
+            int px = player.getPosition().getFirstElement(); //x position
+            int py = player.getPosition().getSecondElement();
+            int pw = player.getDimension().getFirstElement(); //width
+            int ph = player.getDimension().getSecondElement();
+            int ex = _ch.getPosition().getFirstElement(); // x position
+            int ey = _ch.getPosition().getSecondElement();
+            int ew = _ch.getDimension().getFirstElement(); //width
+            int eh = _ch.getDimension().getSecondElement();
+            Rectangle rect = new Rectangle(player.getxPosition(), py, player.getDimension().getFirstElement(), ph);
+            if (ey == (py + ph) && ((px >= ex && px <= ex + ew) || (px + pw >= ex && px + pw <= ex + ew)) || rect.intersects(new Rectangle(ex + 2, ey, ew - 4, 2))) {
+                if ((ey + eh - py - ph) > (py + ph - ey)) {
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+        //private boolean _walking, _jumping, _falling, _idling, _hitting, _beingDamaged;
+    /**
+     * This method implements the movement pattern of the zombie enemy. it moves
+     * left and right without stopping
+     */
+    public void movement() {
+
+        if (!_walking) {
+            _walking = true;
+            _ch.setFacing(DirectionType.LEFT) ;
+        }
+        //change direction after a collision with the player
+        
+        if (horizontalCollision()   ) {//QUI
+            if (_ch.getFacing() == DirectionType.LEFT) {
+                _ch.setFacing(DirectionType.RIGHT) ;
+                moveRight();
+                return;
+            } else {
+                _ch.setFacing(DirectionType.LEFT) ;
+                moveLeft();
+                return;
+            }
+        }
+        //change direction if it touches the edges of the world
+        if (_walking && _ch.getFacing() == DirectionType.LEFT ) {
+            if (_ch.getxPosition() - _ch.getSpeed() < 0 ) {
+                _ch.setFacing(DirectionType.RIGHT) ;
+                moveRight() ;
+            } else {
+                moveLeft() ;
+            }
+
+        } else if (_walking && _ch.getFacing() == DirectionType.RIGHT) {
+            if (_ch.getxPosition() + _ch.getSpeed() < _handler.getGame().getDisplayWidth()) {
+                moveRight() ;
+            } else {
+                _ch.setFacing(DirectionType.LEFT) ;
+                moveLeft() ;
+            }
+        }
+        
+       
+
+    }
+    
 
 }

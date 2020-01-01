@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.EnemyCharacter;
+import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
@@ -41,9 +42,10 @@ public class HitCommand extends ActionCommand {
             return false ;
         updateHitbox() ;
         if(_count == 5 ){
-            LinkedList<EnemyCharacter> enemies = ((GameState) State.getState()).getEnemies() ;
-            LinkedList<EnemyCharacter> oldEnemies = (LinkedList<EnemyCharacter>) enemies.clone() ;
-            for (EnemyCharacter e : oldEnemies){
+            LinkedList<ActionManager> enemies = ((GameState) State.getState()).getEnemies() ;
+            LinkedList<ActionManager> oldEnemies = (LinkedList<ActionManager>) enemies.clone() ;
+            for (ActionManager am : oldEnemies){
+                EnemyCharacter e = (EnemyCharacter) am.getCh() ;
                 int posX = e.getxPosition() + e.getDimension().getFirstElement()/4 ;
                 int posY = e.getyPosition() + e.getDimension().getSecondElement()/2 ;
                 
@@ -56,7 +58,8 @@ public class HitCommand extends ActionCommand {
                 if(e.getHealthBar() <= 0 )
                     enemies.remove(e) ;
             }
-            AudioManager.playPlayerHit();
+            if(_ch instanceof PlayerCharacter)
+                AudioManager.playPlayerHit();
           
         }
         //enemy = _handler.getCollision(_ch.getPosition()) ;
@@ -86,5 +89,7 @@ public class HitCommand extends ActionCommand {
             _ch.getyPosition() + _ch.getDimension().getSecondElement()/3, _ch.getDimension().getFirstElement()/2,
             _ch.getDimension().getSecondElement()/3) ;
     }
+    
+
     
 }
