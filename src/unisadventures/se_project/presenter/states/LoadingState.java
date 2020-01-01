@@ -30,13 +30,16 @@ public class LoadingState extends State {
         _displayHeight = handler.getDisplayHeight();
         
         loadImages();
+         AudioManager.stopMusic();
+        AudioManager.playLevelComplete();
     }
 
     @Override
     public void tick() {
         if(_handler.getKeyManager().enter){
-            State.setState(new GameState(_handler,_id+1));
             AudioManager.gameLevelLoop();
+            State.setState(new GameState(_handler,_id+1));
+            
         }
 	
     }

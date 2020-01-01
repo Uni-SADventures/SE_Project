@@ -32,6 +32,9 @@ public class GameOverState extends State{
         _displayHeight = handler.getDisplayHeight();
         
         loadImages();
+         AudioManager.stopMusic();
+        AudioManager.playGameOver();
+        
     }
 
     @Override

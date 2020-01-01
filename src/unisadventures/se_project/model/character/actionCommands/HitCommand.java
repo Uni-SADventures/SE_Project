@@ -14,6 +14,7 @@ import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.DirectionType;
+import unisadventures.se_project.view.display.AudioManager;
 
 /**
  *This action command implements everything it is necessary for a hit
@@ -55,6 +56,7 @@ public class HitCommand extends ActionCommand {
                 if(e.getHealthBar() <= 0 )
                     enemies.remove(e) ;
             }
+            AudioManager.playPlayerHit();
           
         }
         //enemy = _handler.getCollision(_ch.getPosition()) ;

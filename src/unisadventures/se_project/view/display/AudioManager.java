@@ -8,51 +8,85 @@ package unisadventures.se_project.view.display;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
+
 
 /**
  *
  * @author Emilio
  */
 public class AudioManager {
-    private static final String gameLevel = "resources/music/game.wav" , playerDamage = "resources/music/game.wav", enemyDamage = "resources/music/game.wav",
-            menu = "resources/music/menu.wav" ;
+    private static final String gameLevelName = "resources/music/game.wav" ,
+            playerDamageName = "resources/music/playerDamage.wav", 
+            playerHitName = "resources/music/playerHit.wav",
+            menuName = "resources/music/menu.wav",
+            coinGrabName = "resources/music/coin.wav",
+            gameOverName = "resources/music/gameOver.wav",
+            levelCompleteName = "resources/music/levelComplete.wav" ;
+    
+    
+    private static AudioClip  gameLevel ,playerDamage, playerHit,menu,coinGrab,gameOver,levelComplete ;
+            
+    
     private static AudioClip loop = null ;
+    
+    public static void loadAudio(){
+        try {
+            gameLevel = Applet.newAudioClip(new File(gameLevelName).toURI().toURL()) ;
+            playerDamage = Applet.newAudioClip(new File(playerDamageName).toURI().toURL()) ;
+            playerHit = Applet.newAudioClip(new File(playerHitName).toURI().toURL()) ;
+            menu = Applet.newAudioClip(new File(menuName).toURI().toURL()) ;
+            coinGrab = Applet.newAudioClip(new File(coinGrabName).toURI().toURL()) ;
+            gameOver = Applet.newAudioClip(new File(gameOverName).toURI().toURL()) ;
+            levelComplete = Applet.newAudioClip(new File(levelCompleteName).toURI().toURL()) ;
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(AudioManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public static void gameLevelLoop() {
-        if(loop != null )
-            stopMusic() ;
-        playLoop(gameLevel) ;
+        stopMusic() ;
+        loop = gameLevel ;
+        gameLevel.loop();
 
     }
     public static void gameMenuLoop() {
-        if(loop != null )
-            stopMusic() ;
-        playLoop(menu) ;
+        stopMusic() ;
+        loop = menu ;
+        menu.loop();
 
     }
     public static void stopMusic(){
-        loop.stop();
-        System.out.println("ca");
-        
-    }
-    private static void playLoop(String path){
-        try {
-            // gets the sound file that is passed in the constructor
-            loop = Applet.newAudioClip(new File(path).toURI().toURL());
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(loop != null ){
+            loop.stop();
+            loop = null ;
         }
-        loop.loop();
- 
         
     }
+   
+    
+    
+    public static void playPlayerDamage(){
+        playerDamage.play();
+    }
+    
+    public static void playPlayerHit(){
+        playerHit.play();
+    }
+    
+    public static void playCoinGrab(){
+        coinGrab.play();
+    }
+    
+    public static void playGameOver(){
+        gameOver.play();
+    }
+    
+    public static void playLevelComplete(){
+        levelComplete.play();
+    }
+    
+    
+    
 }

@@ -1,17 +1,9 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 import unisadventures.se_project.model.basicObjects.CollectibleItem;
 import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Handler;
@@ -21,13 +13,10 @@ import unisadventures.se_project.model.character.EnemyCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
-import unisadventures.se_project.model.character.actionCommands.HitCommand;
-
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.CollectibleType;
 import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.util.Pair;
-import unisadventures.se_project.view.display.AudioManager;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -126,6 +115,7 @@ public class GameState extends State {
         
         if(player.getHealthBar()<=0 || player.getyPosition() >= handler.getDisplayHeight()){
             State.setState(new GameOverState(handler, id));
+            
         }
         
         if(getCountCFU()==8){

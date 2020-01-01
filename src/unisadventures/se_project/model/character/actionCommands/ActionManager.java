@@ -16,6 +16,7 @@ import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.DirectionType;
+import unisadventures.se_project.view.display.AudioManager;
 
 /**
  * This class manages all available actions and their relative dependancies. It
@@ -127,6 +128,7 @@ public class ActionManager implements MovementsInterface {
             } else {
                 _incomingDamage = 0;
             }
+             _actualId = _ch.getBeDamagedSprites(_ch.getFacing()).get(_beDamaged.getCount() % length);
         }
 
         //CHECKING IF THERE IS SOME COLLECTIBLE
@@ -272,6 +274,7 @@ public class ActionManager implements MovementsInterface {
                     && colly >= chy && (chy + chh) >= (colly + collh)) {
                 ((GameState) state).getCollectibles().remove(coll);
                 ((PlayerCharacter) _ch).setCfu(((PlayerCharacter) _ch).getCfu() + 1);
+                AudioManager.playCoinGrab();
 
             }
         }

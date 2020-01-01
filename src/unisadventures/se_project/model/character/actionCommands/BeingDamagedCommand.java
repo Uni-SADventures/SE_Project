@@ -11,6 +11,7 @@ import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.util.DirectionType;
+import unisadventures.se_project.view.display.AudioManager;
 
 /**
  *This class implements an action command wich moves left and right the character keeping
@@ -36,6 +37,7 @@ public class BeingDamagedCommand extends ActionCommand {
         if(_count == 2){
             _ch.setHealthBar(_ch.getHealthBar() - 1);
             _count++ ;
+            AudioManager.playPlayerDamage();
             return true ;
         }
         else if(_count == _damageFrames){

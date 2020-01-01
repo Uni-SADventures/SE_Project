@@ -60,6 +60,8 @@ public class Game extends FrameListener {
          
 		display.getFrame().addKeyListener(keyManager);
                 
+                AudioManager.loadAudio();
+                
 		gameState = new GameState(hand,0);
 		menuState = new MenuState(hand);
                 
