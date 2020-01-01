@@ -14,9 +14,11 @@ public class KeyManager implements KeyListener {
 	
 	private boolean[] keys;
 	public boolean up, down, left, right,hit,enter, esc;
-	
+	private boolean togglePause ;
 	public KeyManager(){
 		keys = new boolean[256];
+                togglePause = false ;
+                esc = false ;
 	}
 	
         /**
@@ -29,8 +31,15 @@ public class KeyManager implements KeyListener {
 		right = keys[KeyEvent.VK_D];
                 hit = keys[KeyEvent.VK_B];
                 enter = keys[KeyEvent.VK_ENTER];
-                esc=keys[KeyEvent.VK_ESCAPE];
-           
+                if(keys[KeyEvent.VK_ESCAPE] && !togglePause){
+                     togglePause = true ;
+                     esc = !esc ;
+                }
+                else if (!keys[KeyEvent.VK_ESCAPE] && togglePause)
+                    togglePause = false ;
+               
+                    
+                
 	}
         /**
          * It puts on true an element of key where its index is the same as keycode pressed

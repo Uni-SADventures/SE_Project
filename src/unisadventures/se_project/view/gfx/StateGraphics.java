@@ -220,5 +220,9 @@ public class StateGraphics {
     public void renderLoadingTitle(Graphics g, int titleId, int titleWidth, int titleHeight, int titleXPosition, int titleYPosition) {
         g.drawImage(Assets.retrieveImage(titleId), titleXPosition, titleYPosition, titleWidth, titleHeight, null);
     }
-
+    public void renderPause(Graphics g,int imageId){
+        g.setColor(new Color(92, 90, 90, 90));
+        g.fillRect(0, 0, _handler.getDisplayWidth(), _handler.getDisplayHeight());
+        g.drawImage(Assets.retrieveImage(imageId),_handler.getDisplayWidth()/2 -100,_handler.getDisplayHeight()/2 -100,200, 100,null) ;
+    }
 }

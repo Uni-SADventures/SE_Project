@@ -41,7 +41,7 @@ public class GameState extends State {
     private ArrayList<Pair<String,String>> levelManager = new ArrayList();
     private String [] enemiesPathImage={"resources/images/enemy_Wind.png","resources/images/enemy_Shape.png","resources/images/enemy_Refound.png"};
     private PlayerCharacter player;
-    
+    private int _pauseImageId ;
     
     //GAME UI IMAGE IDS
     private int _uiCfu ;
@@ -99,7 +99,7 @@ public class GameState extends State {
         handler.getCam().centerOnEntity(player);
         
         loadImages();
-
+        _handler.getKeyManager().esc = false ;
     }
 
     public PlayerCharacter getPlayer() {
@@ -112,6 +112,8 @@ public class GameState extends State {
 
     @Override
     public void tick() {
+        if( _handler.getKeyManager().esc)
+            return ;
         
         if(player.getHealthBar()<=0 || player.getyPosition() >= handler.getDisplayHeight()){
             State.setState(new GameOverState(handler, id));
@@ -174,7 +176,9 @@ public class GameState extends State {
         
         
         countCFU=view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
-      //  Rectangle r = HitCommand._hitArea ;
+        if(_handler.getKeyManager().esc)
+            view.renderPause(g, _pauseImageId) ;
+//  Rectangle r = HitCommand._hitArea ;
         //g.fill3DRect(r.x, r.y, r.width, r.height,true);
         
     }
@@ -423,7 +427,11 @@ public class GameState extends State {
                 temp.add(nowSeq); 
             for(int i=0;i<=handler.getLevel().getCollectiblePositions().size()-1;i++){
                  _collectibles.get(i).setImageFileNameList(temp);
-        }
+            }
+            
+            Assets.storeImage("resources/images/pause.gif");
+            nowSeq = Assets.getActualSequenceNumber() ;
+            _pauseImageId = nowSeq ;
   
             
     }
