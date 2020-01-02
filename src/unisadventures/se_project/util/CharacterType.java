@@ -10,5 +10,5 @@ package unisadventures.se_project.util;
  * @author Emilio
  */
 public enum CharacterType {
-        USER, ENEMY //to add new enemies
+        USER, ENEMY, WIND, SHAPE, REFOUND //to add new enemies
 }

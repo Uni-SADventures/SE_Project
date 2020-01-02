@@ -13,6 +13,7 @@ import unisadventures.se_project.model.character.EnemyCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
+import unisadventures.se_project.presenter.factory.CharacterCreator;
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.CollectibleType;
 import unisadventures.se_project.util.DirectionType;
@@ -36,8 +37,8 @@ public class GameState extends State {
     private LinkedList<CollectibleItem> _collectibles;
     private Handler handler;
     private ArrayList<Pair<String,String>> levelManager = new ArrayList();
-    private String [] enemiesPathImage={"resources/images/enemy_Wind.png","resources/images/enemy_Shape.png","resources/images/enemy_Refound.png"};
-    private PlayerCharacter player;
+   // private String [] enemiesPathImage={"resources/images/enemy_Wind.png","resources/images/enemy_Shape.png","resources/images/enemy_Refound.png"};
+    private CharacterCreator _chFactory ;
     private int _pauseImageId ;
     
     //GAME UI IMAGE IDS
@@ -59,12 +60,15 @@ public class GameState extends State {
         levelManager.add(new Pair("resources/images/level1World.txt","resources/images/level1Items.txt"));
         levelManager.add(new Pair("resources/images/level2World.txt","resources/images/level2Items.txt"));
         levelManager.add(new Pair("resources/images/level3World.txt","resources/images/level3Items.txt"));
+        
+        Assets.init();
+        _chFactory = new CharacterCreator(_handler) ;
         //REMEMBER THAT WHEN YOU CHANGE IMAGES YOU NEED TO PUT HEIGHT AND WIDTH ACCORDING TO 
         //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
         //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
         //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
-        player = new PlayerCharacter(handler, 90, 90, 64, 64, CharacterType.USER, 6, 300, 6, 170, "me");
-        _player = new ActionManager(handler,player) ;
+        
+        _player = new ActionManager(handler,_chFactory.createPlayerCharacter(90, 90)) ;
          _enemy = new LinkedList<>();
          
         
@@ -82,10 +86,9 @@ public class GameState extends State {
         }
         handler.setLevel(level);
         
-        for(int j=0;j<level.getEnemiesPositions().size();j++){
-            ZombieEnemy temp = new ZombieEnemy(_handler,level.getEnemiesPositions().get(j).getFirstElement() ,level.getEnemiesPositions().get(j).getSecondElement(), 64, 64, CharacterType.ENEMY, 6, 1, 6, 300) ;
-            _enemy.add(j,new ActionManager(_handler, temp));
-        }
+        for(int j=0;j<level.getEnemiesPositions().size();j++)
+            _enemy.add(j,new ActionManager(_handler, _chFactory.createWindEnemy(level.getEnemiesPositions().get(j).getFirstElement(), level.getEnemiesPositions().get(j).getSecondElement())));
+        
         
         for(int i=0;i<=level.getCollectiblePositions().size()-1;i++){
             _collectibles.add(i,new CollectibleItem(level.getCollectiblePositions().get(i).getFirstElement(),level.getCollectiblePositions().get(i).getSecondElement() , 32, 32, CollectibleType.CFU));
@@ -94,7 +97,7 @@ public class GameState extends State {
 
         
         handler.getGame().getCam().move(100, 0);
-        handler.getCam().centerOnEntity(player);
+        handler.getCam().centerOnEntity((PlayerCharacter) _player.getCh());
         
         loadImages();
         _handler.getKeyManager().esc = false ;
@@ -114,7 +117,7 @@ public class GameState extends State {
         if( _handler.getKeyManager().esc)
             return ;
         
-        if(player.getHealthBar()<=0 || player.getyPosition() >= handler.getDisplayHeight()){
+        if(_player.getCh().getHealthBar()<=0 || _player.getCh().getyPosition() >= handler.getDisplayHeight()){
             State.setState(new GameOverState(handler, id));
             
         }
@@ -194,136 +197,13 @@ public class GameState extends State {
             
         //loading all sprites for characters
         
-            Assets.init();
-        //PLAYER CHARACTER
+      
+            
             List temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_sprite.png",48,4,16,28);
-            int nowSeq = Assets.getActualSequenceNumber() ;
-           
-            for(int i = 0; i <= 20 ; i++ )
-                temp.add(nowSeq);  
-            
-            Assets.storeImage("resources/images/character_sprite.png",16,4,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            
-            for(int i = 0; i <= 20 ; i++ )
-                temp.add(nowSeq);  
-            
-            Assets.storeImage("resources/images/character_sprite.png",16,36,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            
-            for(int i = 0; i <= 20 ; i++ )
-                temp.add(nowSeq); 
-           
-            _player.getCh().setIdle(temp , temp);
-            
-            temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_sprite.png",48,4,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-           
-            for(int i = 0; i <= 15 ; i++ )
-                temp.add(nowSeq);  
-            
-            Assets.storeImage("resources/images/character_sprite.png",48,36,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            
-            for(int i = 0; i <= 15 ; i++ )
-                temp.add(nowSeq);  
-            
-            List temp2 = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_sprite.png",0,4,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-           
-            for(int i = 0; i <= 15 ; i++ )
-                temp2.add(nowSeq);  
-            
-            Assets.storeImage("resources/images/character_sprite.png",0,36,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            
-            for(int i = 0; i <= 15 ; i++ )
-                temp2.add(nowSeq);  
-            
-            _player.getCh().setWalk(temp2, temp);
-         
-            _player.getCh().setFall(temp2, temp);
-            _player.getCh().setJump(temp2, temp);
-           temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/player_punch.png",48,36,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-           
-            for(int i = 0; i <= 15 ; i++ )
-                temp.add(nowSeq);  
-            
-            Assets.storeImage("resources/images/character_sprite.png",48,4,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            
-            for(int i = 0; i <= 40 ; i++ )
-                temp.add(nowSeq);  
-            
-            temp2 = new LinkedList<>() ;
-            Assets.storeImage("resources/images/player_punch.png",0,36,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-           
-            for(int i = 0; i <= 15 ; i++ )
-                temp2.add(nowSeq);  
-            
-            Assets.storeImage("resources/images/character_sprite.png",0,36,16,28);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            
-            for(int i = 0; i <= 40 ; i++ )
-                temp2.add(nowSeq);
- 
-            _player.getCh().setPunch(temp2, temp);
-            temp = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_damage_sprite.png",16,32,16,32);
-            nowSeq = Assets.getActualSequenceNumber() ;
-           
-            for(int i = 0; i <= 15 ; i++ )
-                temp.add(nowSeq);  
-            
-            Assets.storeImage("resources/images/character_damage_sprite.png",32,32,16,32);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            
-            for(int i = 0; i <= 15 ; i++ )
-                temp.add(nowSeq);  
-            
-            temp2 = new LinkedList<>() ;
-            Assets.storeImage("resources/images/character_damage_sprite.png",16,32,16,32);
-            nowSeq = Assets.getActualSequenceNumber() ;
-           
-            for(int i = 0; i <= 15 ; i++ )
-                temp2.add(nowSeq);  
-            
-            Assets.storeImage("resources/images/character_damage_sprite.png",32,32,16,32);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            
-            for(int i = 0; i <= 15 ; i++ )
-                temp2.add(nowSeq);
-            _player.getCh().setBeDamaged(temp2, temp);
-            
-            
-        //ENEMY CHARACTER
-            int k=0;
-            for (int i=0;i<_enemy.size();i++) {
-                if(k<enemiesPathImage.length){    
-                    temp = new LinkedList<>() ;
-                    Assets.storeImage(enemiesPathImage[k++]);//16,96,16,30);
-                    nowSeq = Assets.getActualSequenceNumber() ;
-                    temp.add(nowSeq);
-                }else 
-                    k=0;
-                _enemy.get(i).getCh().setIdle(temp, temp);
-                _enemy.get(i).getCh().setFall(temp, temp);
-                _enemy.get(i).getCh().setJump(temp, temp);
-                _enemy.get(i).getCh().setPunch(temp, temp);
-                _enemy.get(i).getCh().setWalk(temp, temp);
-            }
-            
-            
          
         //SCENARIO (which id is inside world now)
             Assets.storeImage(_handler.getLevel().getPathScenarioImage());
-            nowSeq = Assets.getActualSequenceNumber() ;
+            int nowSeq = Assets.getActualSequenceNumber() ;
             _handler.getLevel().setScenarioImage(nowSeq);
 
              
