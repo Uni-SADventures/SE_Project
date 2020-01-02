@@ -7,6 +7,7 @@ package unisadventures.se_project.presenter.factory;
 
 import java.util.LinkedList;
 import java.util.List;
+import unisadventures.se_project.model.character.EnemyCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.presenter.factory.Creator;
@@ -260,6 +261,18 @@ public class CharacterCreator extends Creator{
     }
     public PlayerCharacter createPlayerCharacter(int x, int y){
         return (PlayerCharacter) createElement(CharacterType.USER.toString(), x, y) ;
+    }
+    
+    public ZombieEnemy createRandomPr(int x, int y){
+        int rand = (int) (Math.random() * 3) ;
+            if(rand == 0)
+                return createWindEnemy(x, y);
+            else if(rand == 1)
+                return createRefoundEnemy(x, y);
+            else if(rand == 2)
+                return createRefoundEnemy(x, y);
+            return null ;
+            
     }
 
     public void setPlayerIdleR(LinkedList<Integer> playerIdleR) {

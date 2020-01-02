@@ -14,6 +14,7 @@ import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
 import unisadventures.se_project.presenter.factory.CharacterCreator;
+import unisadventures.se_project.presenter.factory.CollectiblesCreator;
 import unisadventures.se_project.util.CharacterType;
 import unisadventures.se_project.util.CollectibleType;
 import unisadventures.se_project.util.DirectionType;
@@ -35,10 +36,9 @@ public class GameState extends State {
     private ActionManager _player;
     private LinkedList<ActionManager> _enemy;
     private LinkedList<CollectibleItem> _collectibles;
-    private Handler handler;
     private ArrayList<Pair<String,String>> levelManager = new ArrayList();
-   // private String [] enemiesPathImage={"resources/images/enemy_Wind.png","resources/images/enemy_Shape.png","resources/images/enemy_Refound.png"};
     private CharacterCreator _chFactory ;
+    private CollectiblesCreator _chCollect ;
     private int _pauseImageId ;
     
     //GAME UI IMAGE IDS
@@ -54,21 +54,21 @@ public class GameState extends State {
 
     public GameState(Handler handler ,int id) {
         super(handler);
-        this.handler = handler;
         this.id=id;
         _collectibles = new LinkedList<>() ;
-        levelManager.add(new Pair("resources/images/level1World.txt","resources/images/level1Items.txt"));
-        levelManager.add(new Pair("resources/images/level2World.txt","resources/images/level2Items.txt"));
-        levelManager.add(new Pair("resources/images/level3World.txt","resources/images/level3Items.txt"));
+        levelManager.add(new Pair("resources/levels/level1World.txt","resources/levels/level1Items.txt"));
+        levelManager.add(new Pair("resources/levels/level2World.txt","resources/levels/level2Items.txt"));
+        levelManager.add(new Pair("resources/levels/level3World.txt","resources/levels/level3Items.txt"));
         
         Assets.init();
         _chFactory = new CharacterCreator(_handler) ;
+        _chCollect = new CollectiblesCreator() ;
         //REMEMBER THAT WHEN YOU CHANGE IMAGES YOU NEED TO PUT HEIGHT AND WIDTH ACCORDING TO 
         //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
         //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
         //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
         
-        _player = new ActionManager(handler,_chFactory.createPlayerCharacter(90, 90)) ;
+        _player = new ActionManager(_handler,_chFactory.createPlayerCharacter(90, 90)) ;
          _enemy = new LinkedList<>();
          
         
@@ -80,24 +80,22 @@ public class GameState extends State {
         try {
             String path1=levelManager.get(id).getFirstElement();
             String path2=levelManager.get(id).getSecondElement();
-            level =new GameLevel(path1,path2, handler.getDisplayWidth(), handler.getDisplayHeight());
+            level =new GameLevel(path1,path2, _handler.getDisplayWidth(), _handler.getDisplayHeight());
         } catch (Exception ex) {
             System.exit(0);
         }
-        handler.setLevel(level);
+        _handler.setLevel(level);
         
         for(int j=0;j<level.getEnemiesPositions().size();j++)
-            _enemy.add(j,new ActionManager(_handler, _chFactory.createWindEnemy(level.getEnemiesPositions().get(j).getFirstElement(), level.getEnemiesPositions().get(j).getSecondElement())));
+            _enemy.add(j,new ActionManager(_handler, _chFactory.createRandomPr(level.getEnemiesPositions().get(j).getFirstElement(), level.getEnemiesPositions().get(j).getSecondElement())));
         
         
-        for(int i=0;i<=level.getCollectiblePositions().size()-1;i++){
-            _collectibles.add(i,new CollectibleItem(level.getCollectiblePositions().get(i).getFirstElement(),level.getCollectiblePositions().get(i).getSecondElement() , 32, 32, CollectibleType.CFU));
-        }
-        
+        for(int i=0;i<=level.getCollectiblePositions().size()-1;i++)
+            _collectibles.add(i,_chCollect.createCfuCollectible(level.getCollectiblePositions().get(i).getFirstElement(), level.getCollectiblePositions().get(i).getSecondElement() )) ;
 
         
-        handler.getGame().getCam().move(100, 0);
-        handler.getCam().centerOnEntity((PlayerCharacter) _player.getCh());
+        _handler.getGame().getCam().move(100, 0);
+        _handler.getCam().centerOnEntity((PlayerCharacter) _player.getCh());
         
         loadImages();
         _handler.getKeyManager().esc = false ;
@@ -117,13 +115,13 @@ public class GameState extends State {
         if( _handler.getKeyManager().esc)
             return ;
         
-        if(_player.getCh().getHealthBar()<=0 || _player.getCh().getyPosition() >= handler.getDisplayHeight()){
-            State.setState(new GameOverState(handler, id));
+        if(_player.getCh().getHealthBar()<=0 || _player.getCh().getyPosition() >= _handler.getDisplayHeight()){
+            State.setState(new GameOverState(_handler, id));
             
         }
         
         if(getCountCFU()==8){
-            State.setState(new LoadingState(handler,id));
+            State.setState(new LoadingState(_handler,id));
         }
         _handler.getLevel().tick();
         _player.tick();
@@ -300,20 +298,7 @@ public class GameState extends State {
             nowSeq = Assets.getActualSequenceNumber() ;
             _uiNumbers[9] = nowSeq ;
            
-            //COLLECTIBLES
             
-            Assets.storeImage("resources/images/objectstilesheet.png",160,0,32,32);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            temp = new LinkedList<>();
-            for(int i = 0; i <= 15 ; i++ )
-                temp.add(nowSeq);  
-            Assets.storeImage("resources/images/objectstilesheet.png",96,0,32,32);
-            nowSeq = Assets.getActualSequenceNumber() ;
-            for(int i = 0; i <= 15 ; i++ )
-                temp.add(nowSeq); 
-            for(int i=0;i<=handler.getLevel().getCollectiblePositions().size()-1;i++){
-                 _collectibles.get(i).setImageFileNameList(temp);
-            }
             
             Assets.storeImage("resources/images/pause.gif");
             nowSeq = Assets.getActualSequenceNumber() ;
