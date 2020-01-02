@@ -458,7 +458,6 @@ public class ActionManager implements MovementsInterface {
 
         if (!_walking) {
             _walking = true;
-            _ch.setFacing(DirectionType.LEFT) ;
         }
         //change direction after a collision with the player
         
@@ -474,22 +473,39 @@ public class ActionManager implements MovementsInterface {
             }
         }
         //change direction if it touches the edges of the world
-        if (_walking && _ch.getFacing() == DirectionType.LEFT ) {
-            if (_ch.getxPosition() - _ch.getSpeed() < 0 ) {
+        if (_walking && _ch.getFacing() == DirectionType.LEFT  ) {
+            if (_ch.getxPosition() - _ch.getSpeed() < 0 || _movement.wallOnLeft() ) {
                 _ch.setFacing(DirectionType.RIGHT) ;
                 moveRight() ;
+                moveRight() ;
+                moveRight() ;
+                moveRight() ;
+                System.out.println("ora va a destra");
+                
             } else {
                 moveLeft() ;
+            
+                
             }
 
         } else if (_walking && _ch.getFacing() == DirectionType.RIGHT) {
-            if (_ch.getxPosition() + _ch.getSpeed() < _handler.getGame().getDisplayWidth()) {
-                moveRight() ;
-            } else {
-                _ch.setFacing(DirectionType.LEFT) ;
+            if (_ch.getxPosition() + _ch.getSpeed() >  _handler.getLevel().getLevelWidth() || _movement.wallOnRight()) {
+                   _ch.setFacing(DirectionType.LEFT) ;
                 moveLeft() ;
+                moveLeft() ;
+                moveLeft() ;
+                moveLeft() ;
+                System.out.println("ora va a sinistra");
+            } else {
+             
+                moveRight() ;
+             
+               
             }
         }
+      
+            
+            
         
        
 

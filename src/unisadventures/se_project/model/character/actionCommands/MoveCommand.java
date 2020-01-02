@@ -28,26 +28,41 @@ public class MoveCommand extends ActionCommand {
      * It moves the chatracter a bit on the left
      */
   public void moveLeft() {
-      int tx=(int) (_ch.getPosition().getFirstElement() -_ch.getSpeed() + _bounds.x )/ Tile.TILEWIDTH;
+      if(!wallOnLeft()){
+        move(DirectionType.LEFT) ;
+      }else {
+          _ch.setxPosition(((int)(_ch.getPosition().getFirstElement() -_ch.getSpeed() + _bounds.x )/ Tile.TILEWIDTH)*Tile.TILEWIDTH+Tile.TILEWIDTH-_bounds.x);
+      } 
+    }
+  public boolean wallOnLeft(){
+       int tx=(int) (_ch.getPosition().getFirstElement() -_ch.getSpeed() + _bounds.x )/ Tile.TILEWIDTH;
       if(!collisionWithTile(tx,(int) (_ch.getPosition().getSecondElement()+ _bounds.y)/Tile.TILEHEIGHT ) 
           && !collisionWithTile(tx,(int) (_ch.getPosition().getSecondElement()+ _bounds.y+_bounds.height)/Tile.TILEHEIGHT)){
-              move(DirectionType.LEFT) ;
-      }else {
-          _ch.setxPosition(tx*Tile.TILEWIDTH+Tile.TILEWIDTH-_bounds.x);
+          return false ;
       }
-           
-    }
+      return true ;
+  }
+  
+  
     /**
      * It moves the chatracter a bit on the right
      */
     public void moveRight(){
-         int tx=(int) (_ch.getPosition().getFirstElement() + _ch.getSpeed() + _bounds.x + _bounds.width)/ Tile.TILEWIDTH;
-         if(!collisionWithTile(tx,(int) (_ch.getPosition().getSecondElement()+ _bounds.y)/Tile.TILEHEIGHT  ) && !collisionWithTile(tx,(int) (_ch.getPosition().getSecondElement()+ _bounds.y+_bounds.height)/Tile.TILEHEIGHT)){
-            move(DirectionType.RIGHT) ; 
+         if(!wallOnRight()){ 
+             move(DirectionType.RIGHT) ; 
          }else{
-             _ch.setxPosition(tx*Tile.TILEWIDTH - _bounds.x - _bounds.width -1);
+             _ch.setxPosition(((int) (_ch.getPosition().getFirstElement() + _ch.getSpeed() + _bounds.x + _bounds.width)/ Tile.TILEWIDTH)*Tile.TILEWIDTH - _bounds.x - _bounds.width -1);
          }
      }
+    public boolean wallOnRight() {
+        int tx = (int) (_ch.getPosition().getFirstElement() + _ch.getSpeed() + _bounds.x + _bounds.width) / Tile.TILEWIDTH;
+        
+        if (!collisionWithTile(tx, (int) (_ch.getPosition().getSecondElement() + _bounds.y) / Tile.TILEHEIGHT) && !collisionWithTile(tx, (int) (_ch.getPosition().getSecondElement() + _bounds.y + _bounds.height) / Tile.TILEHEIGHT)) {
+            return false;
+        }
+        return true;
+
+    }
     
        
     
