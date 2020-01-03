@@ -192,24 +192,22 @@ public class StateGraphics {
     public void renderMenuTitle(Graphics g, int titleId, int titleXPosition, int titleYPosition, int titleWidth, int titleHeight) {
         g.drawImage(Assets.retrieveImage(titleId), titleXPosition, titleYPosition, titleWidth, titleHeight, null);
     }
-    public void renderButtons(Graphics g,int displayWidth, int displayHeight){  
-     Rectangle playButton= new Rectangle(displayWidth/2-80,displayHeight/2,150,75);
-     
-     int precX=displayWidth/2-80;
-     int precY=displayHeight/2;
-     Rectangle quitButton= new Rectangle(precX,precY+80,150,75);
+    public void renderButtons(Graphics g, String buttonText, int buttonXPosition, int buttonYPosition, int buttonWidth, int buttonHeight){  
+
      Graphics2D g2d=(Graphics2D) g;
-    //Rectangle quitButton= new Rectangle(displayWidth/2 + 120,150,100,50);
-     Font fnt1=new Font("arial",Font.BOLD,30);
-     g.setFont(fnt1);
+     g2d.setColor(Color.yellow);
+     g2d.fillRect(buttonXPosition, buttonYPosition, buttonWidth, buttonHeight);;
+     
+     Font font=new Font("arial", Font.BOLD, 30);
+     g.setFont(font);
      g.setColor(Color.black);
-     g.drawString("Play", playButton.x+40, playButton.y+50);
-     g2d.draw(playButton);
-     g.drawString("Quit", quitButton.x+40, quitButton.y+50);
-     g2d.draw(quitButton);
+     g.drawString(buttonText, buttonXPosition + 10, buttonYPosition + 30);
+     
     }
     
     public void renderText(Graphics g, String text, int textXPosition, int textYPosition) {
+        g.setFont(new Font("arial", Font.BOLD, 20));
+        g.setColor(Color.gray);
         g.drawString(text, textXPosition, textYPosition);
     }
 

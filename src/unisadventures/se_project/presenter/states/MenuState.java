@@ -1,8 +1,6 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import unisadventures.se_project.model.MainMenu;
 import unisadventures.se_project.presenter.launcher.Handler;
@@ -26,16 +24,63 @@ public class MenuState extends State {
     private int _framesCounter;
     private boolean _blinkingTextIsVisible;
     private boolean _titleIsMovingDown;
+    // Graphical constants
+    
+    private int _titleXPostiton;
+    private int _titleUpperYPosition;
+    private int _titleLowerYPosition;
+    private int _titleActualYPosition;
+    private int _titleWidth;
+    private int _titleHeight;
+    
+    private int _playButtonXPosition;
+    private int _playButtonYPosition;
+    private int _playButtonWidth;
+    private int _playButtonHeight;
+    
+    private int _quitButtonXPosition;
+    private int _quitButtonYPosition;
+    private int _quitButtonWidth;
+    private int _quitButtonHeight;
+                
+    private int _playTextXPosition;
+    private int _playTextYPosition;
+                
+    private int _quitTextXPosition;
+    private int _quitTextYPosition;
 
 
     public MenuState(Handler handler){
             
         super(handler);
-        _menu = new MainMenu();
+        
         _displayWidth = handler.getDisplayWidth();
         _displayHeight = _handler.getDisplayHeight();
-
         
+        _titleXPostiton = 20;
+        _titleUpperYPosition = 20;
+        _titleLowerYPosition = 80;
+        _titleWidth = _displayWidth - 40;
+        _titleHeight = 80;
+        
+        _playButtonXPosition = (int) _displayWidth/2 - 55;
+        _playButtonYPosition = (int) _displayHeight * 1/3;
+        _playButtonWidth = 110;
+        _playButtonHeight = 40;
+        
+        _quitButtonXPosition = (int) _displayWidth/2 - 55;
+        _quitButtonYPosition = (int) _displayHeight * 1/3 + 80;
+        _quitButtonWidth = 110;
+        _quitButtonHeight = 40;
+        
+        _playTextXPosition = (int) _displayWidth/2 - 85;
+        _playTextYPosition = (int) _displayHeight * 1/3 + 60;
+        
+        _quitTextXPosition = (int) _displayWidth/2 - 75;
+        _quitTextYPosition = (int) _displayHeight * 1/3 + 140;
+                
+        _menu = new MainMenu();
+
         _framesCounter = 0;
         _blinkingTextIsVisible = true;
         _titleIsMovingDown = true;
@@ -61,44 +106,24 @@ public class MenuState extends State {
     @Override
     public void displayView(Graphics g) {
         
-                int titleXPostiton = 20;
-                int titleUpperYPosition = 20;
-                int titleLowerYPosition = 80;
-                int titleActualYPosition;
-                int titleWidth = _displayWidth - 40;
-                int titleHeight = 80;
-                
-                int blinkingTextXPoxition = (int) _displayWidth/2 - 55;
-                int blinkingTextYPoxition = (int) _displayHeight * 2/3;
-        
                 if (_titleIsMovingDown) {
-                    titleActualYPosition = titleUpperYPosition + _framesCounter;
+                    _titleActualYPosition = _titleUpperYPosition + _framesCounter;
                 } else {
-                    titleActualYPosition = titleLowerYPosition - _framesCounter;
+                    _titleActualYPosition = _titleLowerYPosition - _framesCounter;
                 }
         
                 view.renderMenuBackground(g, _menu.getBackgroundImageId(), _displayWidth, _displayHeight);
-                view.renderMenuTitle(g, _menu.getTitleImageId(), titleXPostiton, titleActualYPosition, titleWidth, titleHeight);
+                view.renderMenuTitle(g, _menu.getTitleImageId(), _titleXPostiton, _titleActualYPosition, _titleWidth, _titleHeight);
+                
+                view.renderButtons(g, "Play!", _playButtonXPosition, _playButtonYPosition, _playButtonWidth, _playButtonHeight);
+                view.renderButtons(g, "Quit!", _quitButtonXPosition, _quitButtonYPosition, _quitButtonWidth, _quitButtonHeight);
                 
                 if (_blinkingTextIsVisible) {
-                    view.renderText(g, "Press Enter to play!", blinkingTextXPoxition, blinkingTextYPoxition);
+                    view.renderText(g, "or press Enter", _playTextXPosition, _playTextYPosition);
+                    view.renderText(g, "or press Esc", _quitTextXPosition, _quitTextYPosition);
                 }
-                if (_blinkingTextIsVisible) {
-                    view.renderText(g, "Press Esc to Finish!", blinkingTextXPoxition, blinkingTextYPoxition+20);
-                }
-                //_view.renderButtons(g, _displayWidth, _displayHeight);
-                // Button implementation is bugged
-                /*ActionListener listener = new ActionListener() {
-
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        System.out.println("Debug");
-                        _handler.getGame().pressPlayButton();
-                    }			
-
-                };
-                ButtonManager.addButton(_displayWidth/2 - 50, _displayHeight/2 - 150, 100, 300, "Play!", listener);
-                */
+                
+                
     }
 
     @Override
@@ -113,6 +138,24 @@ public class MenuState extends State {
     @Override
     public int getCountCFU() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean playButtonPressed(int mouseXPosition, int mouseYPosition) {
+        if ( (_playButtonXPosition <= mouseXPosition) && (mouseXPosition <= (_playButtonXPosition + _playButtonWidth))) {
+            if ( (_playButtonYPosition <= mouseYPosition) && (mouseYPosition <= (_playButtonYPosition + _playButtonHeight))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean quitButtonPressed(int mouseXPosition, int mouseYPosition) {
+        if ( (_quitButtonXPosition <= mouseXPosition) && (mouseXPosition <= (_quitButtonXPosition + _quitButtonWidth))) {
+            if ( (_quitButtonYPosition <= mouseYPosition) && (mouseYPosition <= (_quitButtonYPosition + _quitButtonHeight))) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

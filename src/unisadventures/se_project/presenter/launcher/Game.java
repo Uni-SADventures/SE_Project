@@ -5,6 +5,7 @@ import unisadventures.se_project.view.display.Display;
 import unisadventures.se_project.model.FrameListener;
 import unisadventures.se_project.presenter.camera.GameCamera;
 import unisadventures.se_project.presenter.input.KeyManager;
+import unisadventures.se_project.presenter.input.MouseManager;
 import unisadventures.se_project.presenter.states.*;
 import unisadventures.se_project.view.display.AudioManager;
 
@@ -31,14 +32,12 @@ public class Game extends FrameListener {
 	
 	//States
 	private State gameState;
-	private State menuState;
+	private MenuState menuState;
         private boolean stateIsMenu;
         
 	//Input
 	private final KeyManager keyManager;
-        
-        //Button management
-        private boolean playButtonPressed;  // True if game launched from the main menu using the "Play" button
+        private final MouseManager mouseManager;
 
     public Display getDisplay() {
         return display;
@@ -49,6 +48,7 @@ public class Game extends FrameListener {
 		this.displayHeight = height;
 		this.title = title;
 		keyManager = new KeyManager();
+                mouseManager = new MouseManager();
 	}
 	
         /**
@@ -59,6 +59,7 @@ public class Game extends FrameListener {
 		display = new Display(title, displayWidth, displayHeight);
          
 		display.getFrame().addKeyListener(keyManager);
+                display.getFrame().addMouseListener(mouseManager);
                 
                 AudioManager.loadAudio();
                 
@@ -70,7 +71,6 @@ public class Game extends FrameListener {
 		State.setState(menuState);
                 stateIsMenu = true;
                 AudioManager.gameMenuLoop();
-                playButtonPressed = false;
 	}
 	
         
@@ -79,59 +79,32 @@ public class Game extends FrameListener {
          */
 	private void tick(){
 		keyManager.tick();
-                /*MouseListener click=new MouseListener(){
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-
-                    @Override
-                    public void mouseReleased(MouseEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
                 
-                }
-		FrameListener f = new FrameListener(){
-                    @Override
-                    public void update() {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-                };*/
 		if(State.getState() != null)
 			State.getState().tick();
         
                 // gameState may be initialized from menu state by pressing Enter or clicking a button
-                if ( (keyManager.enter || playButtonPressed) && stateIsMenu) {
+                if ( (keyManager.enter || playButtonClicked()) && stateIsMenu) {
                     State.setState(gameState);
                     stateIsMenu = false;
                     AudioManager.gameLevelLoop();
                 }
-                if ( keyManager.esc  && stateIsMenu) {
+                if ( (keyManager.esc || quitButtonClicked())  && stateIsMenu) {
                     System.exit(0);
                 }
 
-	}
+        }
 	
 	
 	
 	public KeyManager getKeyManager(){
 		return keyManager;
 	}
+        
+        public MouseManager getMouseManager() {
+            return mouseManager;
+        }
+        
 	/**
          * This method let main frameclock thread to start and it registers this
          * instance as the observer to be updated
@@ -150,10 +123,7 @@ public class Game extends FrameListener {
                 init(hand);
 		thread.start();
 	}
-        
-    public void pressPlayButton() {
-        playButtonPressed = true;
-    }
+  
 	
 
     public GameCamera getCam() {
@@ -196,6 +166,20 @@ public class Game extends FrameListener {
     }
     public int getDisplayHeight(){
         return displayHeight ;
+    }
+    
+    private boolean playButtonClicked() {
+        if (mouseManager.mousePressed) {
+            return menuState.playButtonPressed(mouseManager.mouseXPosition, mouseManager.mouseYPosition);
+        }
+        return false;
+    }
+    
+    private boolean quitButtonClicked() {
+        if (mouseManager.mousePressed) {
+            return menuState.quitButtonPressed(mouseManager.mouseXPosition, mouseManager.mouseYPosition);
+        }
+        return false;
     }
 }
 
