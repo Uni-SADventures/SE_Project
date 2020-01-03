@@ -38,7 +38,7 @@ public class GameState extends State {
     private LinkedList<CollectibleItem> _collectibles;
     private ArrayList<Pair<String,String>> levelManager = new ArrayList();
     private CharacterCreator _chFactory ;
-    private CollectiblesCreator _chCollect ;
+    private CollectiblesCreator _collFactory ;
     private int _pauseImageId ;
     
     //GAME UI IMAGE IDS
@@ -62,7 +62,7 @@ public class GameState extends State {
         
         Assets.init();
         _chFactory = new CharacterCreator(_handler) ;
-        _chCollect = new CollectiblesCreator() ;
+        _collFactory = new CollectiblesCreator() ;
         //REMEMBER THAT WHEN YOU CHANGE IMAGES YOU NEED TO PUT HEIGHT AND WIDTH ACCORDING TO 
         //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
         //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
@@ -91,11 +91,18 @@ public class GameState extends State {
         
         
         for(int i=0;i<=level.getCollectiblePositions().size()-1;i++)
-            _collectibles.add(i,_chCollect.createCfuCollectible(level.getCollectiblePositions().get(i).getFirstElement(), level.getCollectiblePositions().get(i).getSecondElement() )) ;
+            _collectibles.add(i,_collFactory.createCfuCollectible(level.getCollectiblePositions().get(i).getFirstElement(), level.getCollectiblePositions().get(i).getSecondElement() )) ;
         
-         for(int i=0;i<=level.getCoffeePositions().size()-1;i++)
-            _collectibles.add(i,_chCollect.createCoffeeCollectible(level.getCoffeePositions().get(i).getFirstElement(), level.getCoffeePositions().get(i).getSecondElement() )) ;
+        for(int i=0;i<=level.getCoffeePositions().size()-1;i++)
+            _collectibles.add(i,_collFactory.createCoffeeCollectible(level.getCoffeePositions().get(i).getFirstElement(), level.getCoffeePositions().get(i).getSecondElement() )) ;
+        
+        for(int i=0;i<=level.getJetpackPositions().size()-1;i++)
+            _collectibles.add(i,_collFactory.createJetpackCollectible(level.getJetpackPositions().get(i).getFirstElement(), level.getJetpackPositions().get(i).getSecondElement() )) ;
 
+        for(int i=0;i<=level.getHeartPositions().size()-1;i++)
+            _collectibles.add(i,_collFactory.createHeartCollectible(level.getHeartPositions().get(i).getFirstElement(), level.getHeartPositions().get(i).getSecondElement() )) ;
+
+        
         
         
         _handler.getGame().getCam().move(100, 0);

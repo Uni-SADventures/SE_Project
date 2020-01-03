@@ -20,6 +20,8 @@ public class GameLevel {
     private ArrayList<Pair<Integer,Integer>> collectiblePositions = new ArrayList();
     private ArrayList<Pair<Integer,Integer>> enemiesPositions = new ArrayList();
     private ArrayList<Pair<Integer,Integer>> coffeePositions = new ArrayList();
+    private ArrayList<Pair<Integer,Integer>> jetpackPositions = new ArrayList();
+    private ArrayList<Pair<Integer,Integer>> heartPositions = new ArrayList();
     
     public GameLevel(String path, String path1, int displayWidth, int displayHeight) throws IOException {
         _displayWidth = displayWidth;
@@ -75,7 +77,7 @@ public class GameLevel {
         _spawnX=Utils.ParseInt(tokens[2]);
         _spawnY=Utils.ParseInt(tokens[3]);
         _pathScenarioImage=tokens[4];
-        int j=0,i=0,k=0, c = 0;
+        int j=0,i=0,k=0, c = 0,jp = 0,h = 0;
         
        while(i<=tokensCollectible.length-1){
             if("0".equals(tokensCollectible[i])){
@@ -85,6 +87,14 @@ public class GameLevel {
             } else if("COFFEE".equals(tokensCollectible[i])){
                 coffeePositions.add(c,new Pair(Utils.ParseInt(tokensCollectible[i+1]),Utils.ParseInt(tokensCollectible[i+2])));
                 c+=1;
+                i+=3;
+            }else if("JETPACK".equals(tokensCollectible[i])){
+                jetpackPositions.add(jp,new Pair(Utils.ParseInt(tokensCollectible[i+1]),Utils.ParseInt(tokensCollectible[i+2])));
+                jp+=1;
+                i+=3;
+            }else if("HEART".equals(tokensCollectible[i])){
+                heartPositions.add(h,new Pair(Utils.ParseInt(tokensCollectible[i+1]),Utils.ParseInt(tokensCollectible[i+2])));
+                h+=1;
                 i+=3;
             }else {
                 collectiblePositions.add(j, new Pair(Utils.ParseInt(tokensCollectible[i]),Utils.ParseInt(tokensCollectible[i+1])));
@@ -129,24 +139,15 @@ public class GameLevel {
     public String getPathLoadingImage() {
         return _pathLoadingImage;
     }
+
+    public ArrayList<Pair<Integer, Integer>> getJetpackPositions() {
+        return jetpackPositions;
+    }
+
+    public ArrayList<Pair<Integer, Integer>> getHeartPositions() {
+        return heartPositions;
+    }
     
         
-/*
-        //Collected powerup
-        if(dist < pr + r) {
-            int type = p.getType();
-            if(type == 1) {
-                player.gainLife();
-            }
-            if(type == 2) {
-                player.increasePower(1);
-            }
-            if(type == 3) {
-                player.increasePower(2);
-            }
-                    
-            powerups.remove(i);
-            i--;
-        }
-    }*/
+    
 }

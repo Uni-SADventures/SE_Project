@@ -302,14 +302,28 @@ public class ActionManager implements MovementsInterface {
                         if(p.getType() == coll.getType())
                             return ;
                     
-                   if(coll.getType() == CollectibleType.COFFEE){
-                       AudioManager.playCoffeeSip();
-                       PowerupCommand p =new PowerupCommand(_handler,_ch,230,coll.getType());
-                       _powerups.add(p);
-                
-                       p.managePowerup();
-                    
-                   } 
+                    if (coll.getType() == CollectibleType.COFFEE) {
+                        AudioManager.playCoffeeSip();
+                        PowerupCommand p = new PowerupCommand(_handler, _ch, 230, coll.getType());
+                        _powerups.add(p);
+
+                        p.managePowerup();
+                    } else if (coll.getType() == CollectibleType.JETPACK) {
+                        AudioManager.playJetpack();
+                        PowerupCommand p = new PowerupCommand(_handler, _ch, 230, coll.getType());
+                        _powerups.add(p);
+
+                        p.managePowerup();
+                    } else if (coll.getType() == CollectibleType.HEART) {
+                        AudioManager.playHeartTaken();
+                        PowerupCommand p = new PowerupCommand(_handler, _ch, 1, coll.getType());
+                        _powerups.add(p);
+
+                        p.managePowerup();
+                    }
+
+
+
                     
                 }
 

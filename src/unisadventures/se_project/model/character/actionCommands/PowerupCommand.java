@@ -33,17 +33,34 @@ public class PowerupCommand extends ActionCommand{
             if(_type == CollectibleType.COFFEE){
               _origInt = _ch.getSpeed() ;
               _ch.setSpeed(_origInt * 2);
+            } else  if(_type == CollectibleType.JETPACK){
+              _origInt = _ch.getMaxJump() ;
+              _ch.setMaxJump(_origInt * 2);
+          } else  if(_type == CollectibleType.HEART){
+              _origInt = 0 ;
+              _ch.setMaxHealth(_ch.getMaxHealth()+2);
+              _ch.setHealthBar(_ch.getHealthBar()+2);
           }
             return true ; 
         } else if(_count == 1){
           if(_type == CollectibleType.COFFEE){
               _origInt = _ch.getSpeed() ;
               _ch.setSpeed(_origInt * 2);
+          }else  if(_type == CollectibleType.JETPACK){
+              _origInt = _ch.getMaxJump() ;
+              _ch.setMaxJump(_origInt * 2);
+          } else  if(_type == CollectibleType.HEART){
+              _origInt = 0 ;
+              _ch.setMaxHealth(_ch.getMaxHealth()+2);
+              _ch.setHealthBar(_ch.getHealthBar()+2);
           }
           return true ;  
-        } else if(_count == _maxTime){
+        } else if(_count >= _maxTime){
           if(_type == CollectibleType.COFFEE){
               _ch.setSpeed(_origInt);
+          } else  if(_type == CollectibleType.JETPACK){
+          
+              _ch.setMaxJump(_origInt);
           }
           return false ;
         }

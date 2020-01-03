@@ -25,9 +25,11 @@ public class AudioManager {
             coinGrabName = "resources/music/coin.wav",
             gameOverName = "resources/music/gameOver.wav",
             levelCompleteName = "resources/music/levelComplete.wav" ,
-            coffeeSipName = "resources/music/coffee.wav" ;
+            coffeeSipName = "resources/music/coffee.wav" ,
+            jetpackName = "resources/music/jetpack.wav" ,
+            heartTakenName = "resources/music/heart.wav" ;
     
-    private static AudioClip  gameLevel ,playerDamage, playerHit,menu,coinGrab,gameOver,levelComplete, coffeeSip;
+    private static AudioClip  gameLevel ,playerDamage, playerHit,menu,coinGrab,gameOver,levelComplete, coffeeSip, jetpack, heartTaken;
             
     
     private static AudioClip loop = null ;
@@ -42,6 +44,8 @@ public class AudioManager {
             gameOver = Applet.newAudioClip(new File(gameOverName).toURI().toURL()) ;
             levelComplete = Applet.newAudioClip(new File(levelCompleteName).toURI().toURL()) ;
             coffeeSip = Applet.newAudioClip(new File(coffeeSipName).toURI().toURL()) ;
+            jetpack = Applet.newAudioClip(new File(jetpackName).toURI().toURL()) ;
+            heartTaken = Applet.newAudioClip(new File(heartTakenName).toURI().toURL()) ;
         } catch (MalformedURLException ex) {
             Logger.getLogger(AudioManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,5 +96,11 @@ public class AudioManager {
         coffeeSip.play();
     }
     
+    public static void playJetpack(){
+        jetpack.play();
+    }
+    public static void playHeartTaken(){
+        heartTaken.play();
+    }
     
 }
