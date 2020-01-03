@@ -92,7 +92,11 @@ public class GameState extends State {
         
         for(int i=0;i<=level.getCollectiblePositions().size()-1;i++)
             _collectibles.add(i,_chCollect.createCfuCollectible(level.getCollectiblePositions().get(i).getFirstElement(), level.getCollectiblePositions().get(i).getSecondElement() )) ;
+        
+         for(int i=0;i<=level.getCoffeePositions().size()-1;i++)
+            _collectibles.add(i,_chCollect.createCoffeeCollectible(level.getCoffeePositions().get(i).getFirstElement(), level.getCoffeePositions().get(i).getSecondElement() )) ;
 
+        
         
         _handler.getGame().getCam().move(100, 0);
         _handler.getCam().centerOnEntity((PlayerCharacter) _player.getCh());

@@ -18,6 +18,7 @@ import unisadventures.se_project.view.gfx.Assets;
 public class CollectiblesCreator extends Creator{
     
     LinkedList<Integer> cfu ;
+    LinkedList<Integer>coffee ;
     //IT CAN BE EXPANDED IF WE WANT MORE AND MORE COLLECTIBLES
     public CollectiblesCreator() {
         //COLLECTIBLES
@@ -32,7 +33,19 @@ public class CollectiblesCreator extends Creator{
                 temp.add(nowSeq); 
             
             cfu = (LinkedList<Integer>) temp ;
-                // _collectibles.get(i).setImageFileNameList(temp);
+                
+            Assets.storeImage("resources/images/coffee.png");
+            nowSeq = Assets.getActualSequenceNumber() ;
+            temp = new LinkedList<>();
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq);  
+            Assets.storeImage("resources/images/coffee.png");
+            nowSeq = Assets.getActualSequenceNumber() ;
+            for(int i = 0; i <= 15 ; i++ )
+                temp.add(nowSeq); 
+            
+            coffee = (LinkedList<Integer>) temp ;
+               
             
     
     }
@@ -44,11 +57,21 @@ public class CollectiblesCreator extends Creator{
             product.setImageFileNameList(cfu);
             return (Object) product ;
         }
+        if(whichOne.equals(CollectibleType.COFFEE.toString())){
+            CollectibleItem product = new CollectibleItem(x,y, 32, 32, CollectibleType.COFFEE);
+            product.setImageFileNameList(coffee);
+            return (Object) product ;
+        }
         return null ;
     }
     
     public CollectibleItem createCfuCollectible(int x, int y){
         return (CollectibleItem) createElement(CollectibleType.CFU.toString(),x,y) ;
     }
+    
+     public CollectibleItem createCoffeeCollectible(int x, int y){
+        return (CollectibleItem) createElement(CollectibleType.COFFEE.toString(),x,y) ;
+    }
+    
     
 }

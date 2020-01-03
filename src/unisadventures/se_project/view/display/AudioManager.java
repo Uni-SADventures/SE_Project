@@ -24,10 +24,10 @@ public class AudioManager {
             menuName = "resources/music/menu.wav",
             coinGrabName = "resources/music/coin.wav",
             gameOverName = "resources/music/gameOver.wav",
-            levelCompleteName = "resources/music/levelComplete.wav" ;
+            levelCompleteName = "resources/music/levelComplete.wav" ,
+            coffeeSipName = "resources/music/coffee.wav" ;
     
-    
-    private static AudioClip  gameLevel ,playerDamage, playerHit,menu,coinGrab,gameOver,levelComplete ;
+    private static AudioClip  gameLevel ,playerDamage, playerHit,menu,coinGrab,gameOver,levelComplete, coffeeSip;
             
     
     private static AudioClip loop = null ;
@@ -41,6 +41,7 @@ public class AudioManager {
             coinGrab = Applet.newAudioClip(new File(coinGrabName).toURI().toURL()) ;
             gameOver = Applet.newAudioClip(new File(gameOverName).toURI().toURL()) ;
             levelComplete = Applet.newAudioClip(new File(levelCompleteName).toURI().toURL()) ;
+            coffeeSip = Applet.newAudioClip(new File(coffeeSipName).toURI().toURL()) ;
         } catch (MalformedURLException ex) {
             Logger.getLogger(AudioManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -87,6 +88,9 @@ public class AudioManager {
         levelComplete.play();
     }
     
+    public static void playCoffeeSip(){
+        coffeeSip.play();
+    }
     
     
 }
