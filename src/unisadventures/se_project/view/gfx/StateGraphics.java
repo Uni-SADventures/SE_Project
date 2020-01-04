@@ -196,7 +196,7 @@ public class StateGraphics {
 
      Graphics2D g2d=(Graphics2D) g;
      g2d.setColor(Color.yellow);
-     g2d.fillRect(buttonXPosition, buttonYPosition, buttonWidth, buttonHeight);;
+     g2d.fillRect(buttonXPosition, buttonYPosition, buttonWidth, buttonHeight);
      
      Font font=new Font("arial", Font.BOLD, 30);
      g.setFont(font);

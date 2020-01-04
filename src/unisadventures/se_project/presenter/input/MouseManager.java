@@ -16,7 +16,6 @@ public class MouseManager implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("C");
         
     }
 
@@ -26,7 +25,6 @@ public class MouseManager implements MouseListener {
         mousePressed = true;
         mouseXPosition = e.getX();
         mouseYPosition = e.getY();
-        System.out.println("A");
         
     }
 
@@ -34,7 +32,6 @@ public class MouseManager implements MouseListener {
     public void mouseReleased(MouseEvent e) {
         
         mousePressed = false;
-        System.out.println("B");
         
     }
 
@@ -45,7 +42,6 @@ public class MouseManager implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
     }
     
 }

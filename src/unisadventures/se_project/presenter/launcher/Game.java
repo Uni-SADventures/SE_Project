@@ -59,7 +59,7 @@ public class Game extends FrameListener {
 		display = new Display(title, displayWidth, displayHeight);
          
 		display.getFrame().addKeyListener(keyManager);
-                display.getFrame().addMouseListener(mouseManager);
+                display.getCanvas().addMouseListener(mouseManager);
                 
                 AudioManager.loadAudio();
                 
