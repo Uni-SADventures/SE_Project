@@ -19,6 +19,9 @@ public class GameLevel {
     private int [][] tiles;
     private ArrayList<Pair<Integer,Integer>> collectiblePositions = new ArrayList();
     private ArrayList<Pair<Integer,Integer>> enemiesPositions = new ArrayList();
+    private ArrayList<Pair<Integer,Integer>> coffeePositions = new ArrayList();
+    private ArrayList<Pair<Integer,Integer>> jetpackPositions = new ArrayList();
+    private ArrayList<Pair<Integer,Integer>> heartPositions = new ArrayList();
     
     public GameLevel(String path, String path1, int displayWidth, int displayHeight) throws IOException {
         _displayWidth = displayWidth;
@@ -74,12 +77,24 @@ public class GameLevel {
         _spawnX=Utils.ParseInt(tokens[2]);
         _spawnY=Utils.ParseInt(tokens[3]);
         _pathScenarioImage=tokens[4];
-        int j=0,i=0,k=0;
+        int j=0,i=0,k=0, c = 0,jp = 0,h = 0;
         
        while(i<=tokensCollectible.length-1){
             if("0".equals(tokensCollectible[i])){
                 enemiesPositions.add(k,new Pair(Utils.ParseInt(tokensCollectible[i+1]),Utils.ParseInt(tokensCollectible[i+2])));
                 k+=1;
+                i+=3;
+            } else if("COFFEE".equals(tokensCollectible[i])){
+                coffeePositions.add(c,new Pair(Utils.ParseInt(tokensCollectible[i+1]),Utils.ParseInt(tokensCollectible[i+2])));
+                c+=1;
+                i+=3;
+            }else if("JETPACK".equals(tokensCollectible[i])){
+                jetpackPositions.add(jp,new Pair(Utils.ParseInt(tokensCollectible[i+1]),Utils.ParseInt(tokensCollectible[i+2])));
+                jp+=1;
+                i+=3;
+            }else if("HEART".equals(tokensCollectible[i])){
+                heartPositions.add(h,new Pair(Utils.ParseInt(tokensCollectible[i+1]),Utils.ParseInt(tokensCollectible[i+2])));
+                h+=1;
                 i+=3;
             }else {
                 collectiblePositions.add(j, new Pair(Utils.ParseInt(tokensCollectible[i]),Utils.ParseInt(tokensCollectible[i+1])));
@@ -96,6 +111,14 @@ public class GameLevel {
         }
         
      }
+
+    public ArrayList<Pair<Integer, Integer>> getCoffeePositions() {
+        return coffeePositions;
+    }
+
+    public void setCoffeePositions(ArrayList<Pair<Integer, Integer>> coffeePositions) {
+        this.coffeePositions = coffeePositions;
+    }
 
     public int getLevelWidth() {
         return _levelWidth;
@@ -116,6 +139,15 @@ public class GameLevel {
     public String getPathLoadingImage() {
         return _pathLoadingImage;
     }
+
+    public ArrayList<Pair<Integer, Integer>> getJetpackPositions() {
+        return jetpackPositions;
+    }
+
+    public ArrayList<Pair<Integer, Integer>> getHeartPositions() {
+        return heartPositions;
+    }
     
+        
     
 }

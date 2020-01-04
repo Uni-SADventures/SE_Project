@@ -6,6 +6,7 @@
 package unisadventures.se_project.model.character.actionCommands;
 
 import java.awt.Rectangle;
+import java.util.LinkedList;
 import java.util.List;
 import unisadventures.se_project.model.basicObjects.CollectibleItem;
 import unisadventures.se_project.model.basicObjects.Tile;
@@ -17,6 +18,7 @@ import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
+import unisadventures.se_project.util.CollectibleType;
 import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.view.display.AudioManager;
 
@@ -37,6 +39,7 @@ public class ActionManager implements MovementsInterface {
     private final Handler _handler;
     private final BasicCharacter _ch;
     private int _actualId;
+    private final LinkedList <PowerupCommand> _powerups ;
 
     private boolean _walking, _jumping, _falling, _idling, _hitting, _beingDamaged;
     private int _incomingDamage;
@@ -49,6 +52,7 @@ public class ActionManager implements MovementsInterface {
         _idling = false;
         _hitting = false;
         _beingDamaged = false;
+  
         _incomingDamage = 0;
 
         this._handler = _handler;
@@ -59,6 +63,7 @@ public class ActionManager implements MovementsInterface {
         _idle = new IdleCommand(_handler, _ch);
         _beDamaged = new BeingDamagedCommand(_handler, _ch, 20);
         _actualId = 0;
+        _powerups = new LinkedList<>() ;
     }
 
     /**
@@ -71,6 +76,7 @@ public class ActionManager implements MovementsInterface {
 
         //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
         if (_ch instanceof PlayerCharacter) {
+            handlePowerups() ;
             if (!_jumping) {
                 fall();
             }
@@ -104,6 +110,7 @@ public class ActionManager implements MovementsInterface {
             if (!_jumping) {
                 fall();
             }
+            
 
         }
 
@@ -287,8 +294,38 @@ public class ActionManager implements MovementsInterface {
             if (collx >= chx && (chx + chw) >= (collx + collw)
                     && colly >= chy && (chy + chh) >= (colly + collh)) {
                 ((GameState) state).getCollectibles().remove(coll);
-                ((PlayerCharacter) _ch).setCfu(((PlayerCharacter) _ch).getCfu() + 1);
-                AudioManager.playCoinGrab();
+                if(coll.getType() == CollectibleType.CFU){
+                    ((PlayerCharacter) _ch).setCfu(((PlayerCharacter) _ch).getCfu() + 1);
+                    AudioManager.playCoinGrab();
+                } else {
+                    for(PowerupCommand p : _powerups)
+                        if(p.getType() == coll.getType())
+                            return ;
+                    
+                    if (coll.getType() == CollectibleType.COFFEE) {
+                        AudioManager.playCoffeeSip();
+                        PowerupCommand p = new PowerupCommand(_handler, _ch, 230, coll.getType());
+                        _powerups.add(p);
+
+                        p.managePowerup();
+                    } else if (coll.getType() == CollectibleType.JETPACK) {
+                        AudioManager.playJetpack();
+                        PowerupCommand p = new PowerupCommand(_handler, _ch, 230, coll.getType());
+                        _powerups.add(p);
+
+                        p.managePowerup();
+                    } else if (coll.getType() == CollectibleType.HEART) {
+                        AudioManager.playHeartTaken();
+                        PowerupCommand p = new PowerupCommand(_handler, _ch, 1, coll.getType());
+                        _powerups.add(p);
+
+                        p.managePowerup();
+                    }
+
+
+
+                    
+                }
 
             }
         }
@@ -480,7 +517,7 @@ public class ActionManager implements MovementsInterface {
                 moveRight() ;
                 moveRight() ;
                 moveRight() ;
-                System.out.println("ora va a destra");
+                //System.out.println("ora va a destra");
                 
             } else {
                 moveLeft() ;
@@ -495,7 +532,7 @@ public class ActionManager implements MovementsInterface {
                 moveLeft() ;
                 moveLeft() ;
                 moveLeft() ;
-                System.out.println("ora va a sinistra");
+             //   System.out.println("ora va a sinistra");
             } else {
              
                 moveRight() ;
@@ -509,6 +546,23 @@ public class ActionManager implements MovementsInterface {
         
        
 
+    }
+
+    private void handlePowerups() {
+        if(_powerups.isEmpty())
+            return ;
+        boolean active ;
+        LinkedList<PowerupCommand> pu = (LinkedList<PowerupCommand>) _powerups.clone() ;
+       int i = 0 ;
+        for(PowerupCommand p: pu){
+            active = p.managePowerup() ;
+            if(!active)
+                _powerups.remove(i) ;
+            i++ ;
+            
+        }
+        
+     
     }
     
 
