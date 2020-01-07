@@ -10,7 +10,7 @@ package unisadventures.se_project.model.basicObjects;
  *
  * @author krist
  */
-public class Tile {
+public abstract class Tile {
     //Static stuff
     public static Tile []tiles = new Tile[256];
     public static Tile rockTile;
