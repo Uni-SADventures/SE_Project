@@ -60,12 +60,6 @@ public abstract class BasicCharacter {
 
     }
 
-    // READ THIS COMMENT!!!
-    // The following implementation completely ruins the single responsibility principle.
-    // https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f
-    // All below is a classic example of the State pattern. To refactor.
-    //Emilio: I don't know what do you mean, for now all actions movements and states and other similiar fanfares have been moved to different
-    //classes. If needed we can refractor of course
     public DirectionType getFacing() {
         return _facing;
     }
@@ -257,16 +251,6 @@ public abstract class BasicCharacter {
         //when health goes to 0 we have to manage how to put away a life when we have a menu
     }
 
-    /**
-     * Method called every time it is the moment to update all actions.
-     */
-
-   
-    
-
-    public int getCurrentSprite() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public void setxPosition(int _xPosition) {
         this._xPosition = _xPosition;

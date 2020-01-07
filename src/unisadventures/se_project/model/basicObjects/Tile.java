@@ -19,18 +19,7 @@ public abstract class Tile {
     public static int rockIdImage ;
     public static int skyIdImage ;
     public static int limitIdImage ;
-   /*
-    public static Tile rockTile = new RockTile(2,200,200);
-    public static Tile skyTile = new SkyTile(3,200,200);
-    public static Tile limitTile= new LimitTile(4,200,200);
-    */
-     //Static stuff
-    /*
-    public static Tile []tiles = new Tile[256];
-    public static Tile rockTile = new RockTile(2,200,200);
-    public static Tile skyTile = new SkyTile(3,200,200);
-    public static Tile limitTile= new LimitTile(4,200,200);
-    */
+
     //Class
     public static final int TILEWIDTH = 74, TILEHEIGHT = 74;
     protected final int texture;
