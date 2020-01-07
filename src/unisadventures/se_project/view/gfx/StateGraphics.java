@@ -195,19 +195,22 @@ public class StateGraphics {
     public void renderButtons(Graphics g, String buttonText, int buttonXPosition, int buttonYPosition, int buttonWidth, int buttonHeight){  
 
      Graphics2D g2d=(Graphics2D) g;
-     g2d.setColor(Color.yellow);
-     g2d.fillRect(buttonXPosition, buttonYPosition, buttonWidth, buttonHeight);
+     g2d.setColor(Color.BLACK);
+     g2d.drawRect(buttonXPosition, buttonYPosition, buttonWidth, buttonHeight); 
+     //g2d.setColor(Color.LIGHT_GRAY);
+     //g2d.fillRect(buttonXPosition, buttonYPosition, buttonWidth, buttonHeight);
      
      Font font=new Font("arial", Font.BOLD, 30);
      g.setFont(font);
-     g.setColor(Color.black);
+     g.setColor(Color.ORANGE);
      g.drawString(buttonText, buttonXPosition + 10, buttonYPosition + 30);
+     
      
     }
     
     public void renderText(Graphics g, String text, int textXPosition, int textYPosition) {
         g.setFont(new Font("arial", Font.BOLD, 20));
-        g.setColor(Color.gray);
+        g.setColor(Color.ORANGE.darker());
         g.drawString(text, textXPosition, textYPosition);
     }
 
