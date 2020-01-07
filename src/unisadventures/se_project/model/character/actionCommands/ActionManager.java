@@ -20,7 +20,7 @@ import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.CollectibleType;
 import unisadventures.se_project.util.DirectionType;
-import unisadventures.se_project.view.display.AudioManager;
+import unisadventures.se_project.presenter.audio.AudioManager;
 
 /**
  * This class manages all available actions and their relative dependancies. It

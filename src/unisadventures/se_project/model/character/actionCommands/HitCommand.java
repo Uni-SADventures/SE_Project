@@ -15,7 +15,7 @@ import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.DirectionType;
-import unisadventures.se_project.view.display.AudioManager;
+import unisadventures.se_project.presenter.audio.AudioManager;
 
 /**
  *This action command implements everything it is necessary for a hit

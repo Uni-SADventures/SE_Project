@@ -132,7 +132,7 @@ public class GameState extends State {
             
         }
         
-        if(getCountCFU()==8){
+        if(getCountCFU()==9){
             State.setState(new LoadingState(_handler,id));
         }
         _handler.getLevel().tick();

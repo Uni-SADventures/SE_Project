@@ -7,7 +7,7 @@ import unisadventures.se_project.presenter.camera.GameCamera;
 import unisadventures.se_project.presenter.input.KeyManager;
 import unisadventures.se_project.presenter.input.MouseManager;
 import unisadventures.se_project.presenter.states.*;
-import unisadventures.se_project.view.display.AudioManager;
+import unisadventures.se_project.presenter.audio.AudioManager;
 
 
 /**

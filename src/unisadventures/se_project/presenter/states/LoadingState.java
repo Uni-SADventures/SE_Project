@@ -8,7 +8,7 @@ package unisadventures.se_project.presenter.states;
 import java.awt.Graphics;
 import unisadventures.se_project.model.Loading;
 import unisadventures.se_project.presenter.launcher.Handler;
-import unisadventures.se_project.view.display.AudioManager;
+import unisadventures.se_project.presenter.audio.AudioManager;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unisadventures.se_project.view.display;
+package unisadventures.se_project.presenter.audio;
 
 import java.io.File;
 import java.net.MalformedURLException;

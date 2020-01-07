@@ -32,7 +32,7 @@ public class PowerupCommand extends ActionCommand{
         if(_maxTime == 0){
             if(_type == CollectibleType.COFFEE){
               _origInt = _ch.getSpeed() ;
-              _ch.setSpeed(_origInt * 2);
+              _ch.setSpeed((int) (_origInt * 1.5));
             } else  if(_type == CollectibleType.JETPACK){
               _origInt = _ch.getMaxJump() ;
               _ch.setMaxJump(_origInt * 2);
@@ -45,7 +45,7 @@ public class PowerupCommand extends ActionCommand{
         } else if(_count == 1){
           if(_type == CollectibleType.COFFEE){
               _origInt = _ch.getSpeed() ;
-              _ch.setSpeed(_origInt * 2);
+              _ch.setSpeed((int) (_origInt * 1.5));
           }else  if(_type == CollectibleType.JETPACK){
               _origInt = _ch.getMaxJump() ;
               _ch.setMaxJump(_origInt * 2);

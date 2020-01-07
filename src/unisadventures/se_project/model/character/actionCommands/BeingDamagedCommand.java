@@ -11,7 +11,7 @@ import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.util.DirectionType;
-import unisadventures.se_project.view.display.AudioManager;
+import unisadventures.se_project.presenter.audio.AudioManager;
 
 /**
  *This class implements an action command wich moves left and right the character keeping
