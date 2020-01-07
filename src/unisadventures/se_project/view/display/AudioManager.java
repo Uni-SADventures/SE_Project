@@ -5,12 +5,18 @@
  */
 package unisadventures.se_project.view.display;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 
 /**
@@ -29,80 +35,103 @@ public class AudioManager {
             jetpackName = "resources/music/jetpack.wav" ,
             heartTakenName = "resources/music/heart.wav" ;
     
-    private static AudioClip  gameLevel ,playerDamage, playerHit,menu,coinGrab,gameOver,levelComplete, coffeeSip, jetpack, heartTaken;
+    private static AudioInputStream  gameLevel ,playerDamage, playerHit,menu,coinGrab,gameOver,levelComplete, coffeeSip, jetpack, heartTaken;
             
     
-    private static AudioClip loop = null ;
+    private static Clip loop = null ;
     
     public static void loadAudio(){
         try {
-            gameLevel = Applet.newAudioClip(new File(gameLevelName).toURI().toURL()) ;
-            playerDamage = Applet.newAudioClip(new File(playerDamageName).toURI().toURL()) ;
-            playerHit = Applet.newAudioClip(new File(playerHitName).toURI().toURL()) ;
-            menu = Applet.newAudioClip(new File(menuName).toURI().toURL()) ;
-            coinGrab = Applet.newAudioClip(new File(coinGrabName).toURI().toURL()) ;
-            gameOver = Applet.newAudioClip(new File(gameOverName).toURI().toURL()) ;
-            levelComplete = Applet.newAudioClip(new File(levelCompleteName).toURI().toURL()) ;
-            coffeeSip = Applet.newAudioClip(new File(coffeeSipName).toURI().toURL()) ;
-            jetpack = Applet.newAudioClip(new File(jetpackName).toURI().toURL()) ;
-            heartTaken = Applet.newAudioClip(new File(heartTakenName).toURI().toURL()) ;
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(AudioManager.class.getName()).log(Level.SEVERE, null, ex);
+            gameLevel = AudioSystem.getAudioInputStream(new File(gameLevelName).toURI().toURL()) ;
+            playerDamage = AudioSystem.getAudioInputStream(new File(playerDamageName).toURI().toURL()) ;
+            playerHit = AudioSystem.getAudioInputStream(new File(playerHitName).toURI().toURL()) ;
+            menu = AudioSystem.getAudioInputStream(new File(menuName).toURI().toURL()) ;
+            coinGrab = AudioSystem.getAudioInputStream(new File(coinGrabName).toURI().toURL()) ;
+            gameOver = AudioSystem.getAudioInputStream(new File(gameOverName).toURI().toURL()) ;
+            levelComplete = AudioSystem.getAudioInputStream(new File(levelCompleteName).toURI().toURL()) ;
+            coffeeSip = AudioSystem.getAudioInputStream(new File(coffeeSipName).toURI().toURL()) ;
+            jetpack = AudioSystem.getAudioInputStream(new File(jetpackName).toURI().toURL()) ;
+            heartTaken = AudioSystem.getAudioInputStream(new File(heartTakenName).toURI().toURL()) ;
+        } catch (Exception ex) {
+            System.out.println("Audio problem: "+ ex.getMessage());
         }
     }
-    public static void gameLevelLoop() {
-        System.out.println("aaaaaaa");
-        stopMusic();
-        loop = gameLevel ;
-        gameLevel.loop();
+    
+    private static AudioInputStream playAudio(AudioInputStream audioIn, String audio) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+            return AudioSystem.getAudioInputStream(new File(audio).toURI().toURL()) ;
+        } catch (Exception e) {
+            System.out.println("Audio problem: "+ e.getMessage());
+            return null ;
+        }
     }
     
-    public static void gameMenuLoop() {
-        System.out.println("bbbbbbb");
-        stopMusic() ;
-        loop = menu ;
-        menu.loop();
+    private static AudioInputStream loopAudio(AudioInputStream audioIn, String audio) {
+        try {
+            loop = AudioSystem.getClip();
+            loop.open(audioIn);
+            loop.loop(0);
+            return AudioSystem.getAudioInputStream(new File(audio).toURI().toURL()) ;
+        } catch (Exception e) {
+            System.out.println("Audio problem: "+ e.getMessage());
+            return null ;
+        }
     }
     
     public static void stopMusic(){
-        if(loop != null ){
+        if(loop != null){
             loop.stop();
             loop = null ;
         }
-        
+            
+    }   
+    
+    
+    public static void gameLevelLoop() {
+        stopMusic();
+        gameLevel = loopAudio(gameLevel, gameLevelName ) ;
     }
-   
+    
+    public static void gameMenuLoop() {
+        stopMusic() ;
+        menu = loopAudio(menu, menuName ) ;
+    }
+    
+  
     
     
     public static void playPlayerDamage(){
-        playerDamage.play();
+        playerDamage = playAudio(playerDamage,playerDamageName);
     }
     
     public static void playPlayerHit(){
-        playerHit.play();
+        playerHit = playAudio(playerHit,playerHitName);
     }
     
     public static void playCoinGrab(){
-        coinGrab.play();
+        coinGrab = playAudio(coinGrab, coinGrabName);
     }
     
     public static void playGameOver(){
-        gameOver.play();
+        gameOver = playAudio(gameOver, gameOverName);
     }
     
     public static void playLevelComplete(){
-        levelComplete.play();
+        levelComplete = playAudio(levelComplete,levelCompleteName);
     }
     
     public static void playCoffeeSip(){
-        coffeeSip.play();
+        coffeeSip = playAudio(coffeeSip,coffeeSipName );
     }
     
     public static void playJetpack(){
-        jetpack.play();
+        jetpack = playAudio(jetpack, jetpackName);
     }
     public static void playHeartTaken(){
-        heartTaken.play();
+        heartTaken = playAudio(heartTaken, heartTakenName);
     }
     
 }
