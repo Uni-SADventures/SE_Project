@@ -10,6 +10,7 @@ import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.basicObjects.Tile;
+import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.util.DirectionType;
 
 /**
@@ -21,8 +22,6 @@ public class MoveCommand extends ActionCommand {
 
     public MoveCommand(Handler handler,BasicCharacter ch) {
         super(handler,ch);
-       
-      
     }
     /**
      * It moves the chatracter a bit on the left
@@ -35,11 +34,13 @@ public class MoveCommand extends ActionCommand {
       } 
     }
   public boolean wallOnLeft(){
-       int tx=(int) (_ch.getPosition().getFirstElement() -_ch.getSpeed() + _bounds.x )/ Tile.TILEWIDTH;
+      int tx=(int) (_ch.getPosition().getFirstElement() -_ch.getSpeed() + _bounds.x )/ Tile.TILEWIDTH;
       if(!collisionWithTile(tx,(int) (_ch.getPosition().getSecondElement()+ _bounds.y)/Tile.TILEHEIGHT ) 
           && !collisionWithTile(tx,(int) (_ch.getPosition().getSecondElement()+ _bounds.y+_bounds.height)/Tile.TILEHEIGHT)){
           return false ;
       }
+      /*if(_ch instanceof ZombieEnemy)
+          System.out.println("True");*/
       return true ;
   }
   
@@ -55,6 +56,7 @@ public class MoveCommand extends ActionCommand {
          }
      }
     public boolean wallOnRight() {
+        
         int tx = (int) (_ch.getPosition().getFirstElement() + _ch.getSpeed() + _bounds.x + _bounds.width) / Tile.TILEWIDTH;
         
         if (!collisionWithTile(tx, (int) (_ch.getPosition().getSecondElement() + _bounds.y) / Tile.TILEHEIGHT) && !collisionWithTile(tx, (int) (_ch.getPosition().getSecondElement() + _bounds.y + _bounds.height) / Tile.TILEHEIGHT)) {

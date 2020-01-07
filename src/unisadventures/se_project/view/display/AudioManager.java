@@ -51,17 +51,19 @@ public class AudioManager {
         }
     }
     public static void gameLevelLoop() {
-        stopMusic() ;
+        System.out.println("aaaaaaa");
+        stopMusic();
         loop = gameLevel ;
         gameLevel.loop();
-
     }
+    
     public static void gameMenuLoop() {
+        System.out.println("bbbbbbb");
         stopMusic() ;
         loop = menu ;
         menu.loop();
-
     }
+    
     public static void stopMusic(){
         if(loop != null ){
             loop.stop();

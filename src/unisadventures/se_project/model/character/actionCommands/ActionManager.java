@@ -73,7 +73,6 @@ public class ActionManager implements MovementsInterface {
      */
     @Override
     public void tick() {
-
         //_handler.getCam().centerOnEntity((PlayerCharacter)_ch);
         if (_ch instanceof PlayerCharacter) {
             handlePowerups() ;
@@ -498,55 +497,43 @@ public class ActionManager implements MovementsInterface {
         }
         //change direction after a collision with the player
         
-        if (horizontalCollision()   ) {//QUI
+        if (horizontalCollision()) {//QUI
             if (_ch.getFacing() == DirectionType.LEFT) {
-                _ch.setFacing(DirectionType.RIGHT) ;
+                _ch.setFacing(DirectionType.RIGHT);
                 moveRight();
                 return;
             } else {
+                System.out.println(_ch.getFacing());
                 _ch.setFacing(DirectionType.LEFT) ;
                 moveLeft();
                 return;
             }
         }
         //change direction if it touches the edges of the world
-        if (_walking && _ch.getFacing() == DirectionType.LEFT  ) {
-            if (_ch.getxPosition() - _ch.getSpeed() < 0 || _movement.wallOnLeft() ) {
+        if (_walking && _ch.getFacing() == DirectionType.LEFT ) {
+                if(_movement.wallOnLeft()){
                 _ch.setFacing(DirectionType.RIGHT) ;
                 moveRight() ;
-                moveRight() ;
-                moveRight() ;
-                moveRight() ;
-                //System.out.println("ora va a destra");
-                
-            } else {
-                moveLeft() ;
-            
-                
-            }
+                }else{
+                moveLeft() ;  
+        }
 
         } else if (_walking && _ch.getFacing() == DirectionType.RIGHT) {
-            if (_ch.getxPosition() + _ch.getSpeed() >  _handler.getLevel().getLevelWidth() || _movement.wallOnRight()) {
-                   _ch.setFacing(DirectionType.LEFT) ;
-                moveLeft() ;
-                moveLeft() ;
-                moveLeft() ;
-                moveLeft() ;
-             //   System.out.println("ora va a sinistra");
+                if(_movement.wallOnRight()){
+                _ch.setFacing(DirectionType.LEFT) ;
+                moveLeft();
             } else {
-             
-                moveRight() ;
-             
-               
+                moveRight();
             }
         }
-      
+        
+    }  
             
             
         
        
 
-    }
+    
 
     private void handlePowerups() {
         if(_powerups.isEmpty())
@@ -563,6 +550,10 @@ public class ActionManager implements MovementsInterface {
         }
         
      
+    }
+
+    public void setFacing(DirectionType directionType) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 

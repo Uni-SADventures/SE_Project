@@ -86,9 +86,10 @@ public class GameState extends State {
         }
         _handler.setLevel(level);
         
-        for(int j=0;j<level.getEnemiesPositions().size();j++)
+        for(int j=0;j<level.getEnemiesPositions().size();j++){
             _enemy.add(j,new ActionManager(_handler, _chFactory.createRandomPr(level.getEnemiesPositions().get(j).getFirstElement(), level.getEnemiesPositions().get(j).getSecondElement())));
-        
+            //_enemy.get(j).setFacing(DirectionType.LEFT);
+        }
         
         for(int i=0;i<=level.getCollectiblePositions().size()-1;i++)
             _collectibles.add(i,_collFactory.createCfuCollectible(level.getCollectiblePositions().get(i).getFirstElement(), level.getCollectiblePositions().get(i).getSecondElement() )) ;
@@ -140,8 +141,9 @@ public class GameState extends State {
         LinkedList<ActionManager> oldEnemy= (LinkedList<ActionManager>) _enemy.clone();
         for(int i = 0 ; i < oldEnemy.size() ; i++ ){
             oldEnemy.get(i).tick();
-        //    if(oldEnemy.get(i).checkVerticalCollision())
-             //   oldEnemy.get(i).takeDamage(_player.getCh().getStrength()); TO FIX
+         /*if(oldEnemy.get(i).checkVerticalCollision()){
+            oldEnemy.get(i).takeDamage(_player.getCh().getStrength());
+                    }   */     
             oldEnemy.get(i).attack();
             oldEnemy.get(i).movement();
             

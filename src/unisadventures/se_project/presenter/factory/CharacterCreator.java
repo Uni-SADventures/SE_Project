@@ -13,6 +13,7 @@ import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.presenter.factory.Creator;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.util.CharacterType;
+import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -210,7 +211,7 @@ public class CharacterCreator extends Creator{
     @Override
     public Object createElement(String whichOne,int x, int y) {
         if(whichOne.equals(CharacterType.SHAPE.toString())){
-            ZombieEnemy product = new ZombieEnemy(_handler,x ,y, 64, 64, CharacterType.SHAPE, 6, 1, 6, 300) ;
+            ZombieEnemy product = new ZombieEnemy(_handler,x ,y, 64, 64, CharacterType.SHAPE, 6, 1, 6, 300,DirectionType.LEFT) ;
             product.setIdle(shapeIdleL, shapeIdleR);
             product.setFall(shapeFallL, shapeFallR);
             product.setJump(shapeJumpL, shapeJumpR);
@@ -219,7 +220,7 @@ public class CharacterCreator extends Creator{
             product.setBeDamaged(shapeBeDamagedR, shapeBeDamagedR);
             return product ;
         } else if(whichOne.equals(CharacterType.REFOUND.toString())){
-            ZombieEnemy product = new ZombieEnemy(_handler,x ,y, 64, 64, CharacterType.REFOUND, 6, 1, 6, 300) ;
+            ZombieEnemy product = new ZombieEnemy(_handler,x ,y, 64, 64, CharacterType.REFOUND, 6, 1, 6, 300,DirectionType.LEFT) ;
             product.setIdle(refoundIdleL, refoundIdleR);
             product.setFall(refoundFallL, refoundFallR);
             product.setJump(refoundJumpL, refoundJumpR);
@@ -228,7 +229,7 @@ public class CharacterCreator extends Creator{
             product.setBeDamaged(refoundBeDamagedR, refoundBeDamagedR);
             return product ;
         } else if(whichOne.equals(CharacterType.WIND.toString())){
-            ZombieEnemy product = new ZombieEnemy(_handler,x ,y, 64, 64, CharacterType.WIND, 6, 1, 6, 300) ;
+            ZombieEnemy product = new ZombieEnemy(_handler,x ,y, 64, 64, CharacterType.WIND, 6, 1, 6, 300,DirectionType.LEFT) ;
             product.setIdle(windIdleL, windIdleR);
             product.setFall(windFallL, windFallR);
             product.setJump(windJumpL, windJumpR);
