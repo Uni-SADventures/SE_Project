@@ -1,115 +1,74 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package unisadventures.se_project.model.character;
 
-import unisadventures.se_project.model.Handler;
-import unisadventures.se_project.presenter.launcher.Game;
-import unisadventures.se_project.util.CharacterType;
-import unisadventures.se_project.util.DirectionType;
+import java.awt.Rectangle;
+import unisadventures.se_project.presenter.states.*;
 
 /**
+ * This is the main class of the enemy of type zombie. it implements the methods
+ * for attacking, receiving attacks from the character and movement
  *
- * @author Paolo
+ * @author Paolo Emanuela
  */
-public class ZombieEnemy extends EnemyCharacter {
+public class ZombieEnemy extends BasicEnemy {
 
-    private boolean isMoving;
-    private boolean movingLeft;
 
-    public ZombieEnemy(Handler handler, int xPosition, int yPosition, int height, int width, CharacterType type, int healthBar, int strength, int maxHealth, int maxJump) {
-        super(handler, xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
-        isMoving = false;
-        movingLeft = false;
-        this.setSpeed(1);
-    }
 
-    @Override
-
-    public void tick() {
-        attack();
-        getDamage();
-        movement();
-
-    }
-
-    /**
-     *
-     * @param speed the speed at which the enemy moves* Move the enemy speed
-     * pixels to the right. if speed is less than 0, it moves to the left
-     */
-    public void move(double speed) {
-        this._xPosition += speed;
+    public ZombieEnemy(int xPosition, int yPosition, int height, int width) {
+        super(xPosition, yPosition, height, width);
     }
 
     /**
      * This method implements the movement pattern of the zombie enemy. it moves
      * left and right without stopping
      */
-    private void movement() {
-        if (!isMoving) {
-            isMoving = true;
-            movingLeft = true;
+    @Override
+    public void movement() {
+
+        if (!_moving) {
+            _moving = true;
+            _movingLeft = true;
         }
-        if (isMoving && movingLeft) {
-            if (this._xPosition - this.getSpeed() < 0) {
-                movingLeft = false;
+        //change direction after a collision with the player
+        if (rightHorizontalCollision()) {
+            if (_movingLeft) {
+                move(-this.getSpeed());
+                return;
+            } else {
+                _movingLeft = false;
+                move(this.getSpeed());
+                return;
+            }
+        }
+        if (leftHorizontalCollision()) {
+            if (_movingLeft) {
+                _movingLeft = false;
+                move(this.getSpeed());
+                return;
+            } else {
+                move(this.getSpeed());
+                return;
+            }
+        }
+        //change direction if it touches the edges of the world
+        if (_moving && _movingLeft) {
+            if (this.getxPosition() - this.getSpeed() < 0) {
+                _movingLeft = false;
                 move(this.getSpeed());
             } else {
                 move(-this.getSpeed());
             }
-        } else if (isMoving && !movingLeft) {
-            if (this._xPosition + this.getSpeed() < this.getHandler().getGame().getWidth()) {
+
+        } else if (_moving && !_movingLeft) {
+            GameState state = (GameState)State.getState();
+            if (this.getxPosition() + this.getSpeed() < _maxMovement) {
                 move(this.getSpeed());
             } else {
-                movingLeft = true;
+                _movingLeft = true;
                 move(-this.getSpeed());
             }
         }
     }
 
-    /**
-     * This method implements the attack of the zombie, when the zombie and the
-     * player meets, the player loses health.
-     *
-     */
-    public void attack() {
-        PlayerCharacter player = this.getHandler().getGame().getGameState().getPlayer();
-        if (this._xPosition + this.getWidth() == player.getxPosition()
-                || this._xPosition == player.getxPosition() + player.getWidth()) {
-            if (this._yPosition < player.getyPosition() + player.getHeight()
-                    && this._yPosition + this.getHeight() >= player.getyPosition() + player.getHeight()) {
-                player.setHealthBar(player.getHealthBar() - 1);
-            }
-        }
-    }
-
-    /**
-     * This method implements the attack of the player on a zombie enemy. When
-     * the player jumps over the zombie, it dies.
-     */
-    public void getDamage() {
-        PlayerCharacter player = this.getHandler().getGame().getGameState().getPlayer();
-        if (this.getHealthBar() == -1) {
-            return;
-        }
-        if ((player.getxPosition() + player.getWidth() >= this.getxPosition() && player.getxPosition() + player.getWidth() <= this.getxPosition() + this.getWidth())
-                || (player.getxPosition() >= this.getxPosition() && player.getxPosition() <= this.getxPosition() + this.getWidth())) {
-            if (player.getyPosition() + player.getHeight() == this.getyPosition()) {
-                this.setHealthBar(-1);
-
-            }
-        }
-    }
-
-    public int getxPosition() {
-        return _xPosition;
-    }
-
-    public int getyPosition() {
-        return _yPosition;
-    }
+    
     
 }

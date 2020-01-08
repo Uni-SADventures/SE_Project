@@ -5,7 +5,6 @@
  */
 package unisadventures.se_project.model.basicObjects;
 
-import unisadventures.se_project.presenter.world.Tile;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -14,7 +13,9 @@ import unisadventures.se_project.view.gfx.Assets;
  */
 public class SkyTile extends Tile {
 
-   public SkyTile(int id,int x, int y) {
-        super(Assets.sky, id,x,y);
+    public SkyTile(int texture, int id, int x, int y) {
+        super(texture, id, x, y);
+        _skyTile = this;
     }
+
 }

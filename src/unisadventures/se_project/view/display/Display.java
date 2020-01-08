@@ -23,17 +23,17 @@ public class Display {
 	private String title;
 	private int width, height;
 	private Graphics g;
+        
 	public Display(String title, int width, int height){
 		this.title = title;
 		this.width = width;
 		this.height = height;
 		
-		createDisplay();
 	}
 	/**
          * After being initialized first window creation is triggered
          */
-	private void createDisplay(){
+	public void createDisplay(){
 		frame = new JFrame(title);
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,14 +49,6 @@ public class Display {
 		
 		frame.add(canvas);
 		frame.pack();
-	}
-
-	public Canvas getCanvas(){
-		return canvas;
-	}
-	
-	public JFrame getFrame(){
-		return frame;
 	}
         /**
          * This method renders on screen what it's needed to render
@@ -82,6 +74,62 @@ public class Display {
 		bs.show();
 		g.dispose();
 	}
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
+    }
+
+    public BufferStrategy getBs() {
+        return bs;
+    }
+
+    public void setBs(BufferStrategy bs) {
+        this.bs = bs;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public Graphics getG() {
+        return g;
+    }
+
+    public void setG(Graphics g) {
+        this.g = g;
+    }
 	
 	
 }

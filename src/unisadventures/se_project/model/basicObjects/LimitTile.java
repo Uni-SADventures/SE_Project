@@ -5,7 +5,6 @@
  */
 package unisadventures.se_project.model.basicObjects;
 
-import unisadventures.se_project.presenter.world.Tile;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -14,15 +13,16 @@ import unisadventures.se_project.view.gfx.Assets;
  */
 public class LimitTile extends Tile {
 
-    public LimitTile(int id, int x, int y) {
-        super(Assets.limit,id,x,y);
+    public LimitTile(int texture, int id, int x, int y) {
+        super(texture, id, x, y);
+        _limitTile = this;
     }
 
     @Override
     public boolean isSolid() {
-        return true; //To change body of generated methods, choose Tools | Templates.
+        return true; 
     }
     
-    
-    
 }
+
+

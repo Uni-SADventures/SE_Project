@@ -20,11 +20,11 @@ public class Pair<A,B> {
     private final A _a;
     private final B _b;
     
-    public A getFirstElement() {
+    public A getFirst() {
         return _a;
     }
     
-    public B getSecondElement() {
+    public B getSecond() {
         return _b;
     }
 

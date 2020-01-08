@@ -5,10 +5,12 @@
  */
 package unisadventures.se_project.presenter.camera;
 
-import unisadventures.se_project.model.Handler;
-import unisadventures.se_project.model.character.PlayerCharacter;
+import unisadventures.se_project.model.World;
+import unisadventures.se_project.model.character.Player;
+import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Game;
-import unisadventures.se_project.presenter.world.Tile;
+import unisadventures.se_project.presenter.states.GameState;
+import unisadventures.se_project.view.display.Display;
 
 /**
  *This class does create a gamecamera as a support for game display. It does keep
@@ -20,11 +22,11 @@ import unisadventures.se_project.presenter.world.Tile;
 
 public class GameCamera {
 	
-	private Handler handler;
+	private GameState gameState;
 	private float xOffset, yOffset;
 	
-	public GameCamera(Handler handler, float xOffset, float yOffset){
-		this.handler = handler;
+	public GameCamera(GameState gameState, float xOffset, float yOffset){
+                this.gameState = gameState;
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
 	}
@@ -33,22 +35,22 @@ public class GameCamera {
          * Centers a camera on a character setting xOffset on his x position
          * @param p is the character passed
          */
-	public void centerOnEntity(PlayerCharacter p){
-		xOffset = (float) (p.getPosition().getFirstElement() - handler.getWidth() / 2 + p.getDimension().getFirstElement() / 2);
-		//yOffset = (float) (p.getPosition().getSecondElement() - game.getHeight() / 2 + p.getDimension().getSecondElement() / 2);
+	public void centerOnEntity(Player p){
+		xOffset = (float) (p.getxPosition() -  gameState.getGame().getDisplay().getWidth()/ 2 + p.getWidth() / 2);
+		//yOffset = (float) (p.getPosition().getSecondElement() - handler.getHeight() / 2 + p.getDimension().getSecondElement() / 2);
                 checkBlankSpace();
         }
         
         public void checkBlankSpace(){
             if(xOffset<0){
                 xOffset=0;
-            }else if(xOffset>handler.getWorld().getWidth()*Tile.TILEWIDTH-handler.getWidth()){
-                xOffset=handler.getWorld().getWidth()*Tile.TILEWIDTH-handler.getWidth();
+            }else if(xOffset>gameState.getWorld().getWidth()*Tile.TILEWIDTH-gameState.getGame().getDisplay().getWidth()){
+                xOffset=gameState.getWorld().getWidth()*Tile.TILEWIDTH-gameState.getGame().getDisplay().getWidth();
             }
             if(yOffset<0){
                 yOffset=0;
-            }else if(yOffset>handler.getWorld().getHeight()*Tile.TILEHEIGHT-handler.getHeight()){
-                yOffset=handler.getWorld().getHeight()*Tile.TILEHEIGHT-handler.getHeight();
+            }else if(yOffset>gameState.getWorld().getWidth()*Tile.TILEHEIGHT-gameState.getWorld().getHeight()){
+                yOffset=gameState.getWorld().getWidth()*Tile.TILEHEIGHT-gameState.getWorld().getHeight();
             }
         }
         /**
@@ -57,9 +59,9 @@ public class GameCamera {
          * or if while falling has reached an x value lower then its initial jump'
          * @param p is the character passed
          */
-        public void centerOnEntityFloor(PlayerCharacter p){
+        public void centerOnEntityFloor(Player p){
 		//xOffset = (float) (p.getPosition().getFirstElement() - game.getWidth() / 2 + p.getDimension().getFirstElement() / 2);
-		yOffset = (float) (p.getPosition().getSecondElement() - handler.getHeight() / 2 + p.getDimension().getSecondElement() / 2);
+		yOffset = (float) (p.getHeight() - gameState.getGame().getDisplay().getHeight() / 2 + p.getHeight() / 2);
                 checkBlankSpace();
         }
 	

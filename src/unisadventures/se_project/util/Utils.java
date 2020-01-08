@@ -39,14 +39,4 @@ public class Utils {
         return builder.toString();
         }
     
-    public static int ParseInt(String number){
-        try{
-            return Integer.parseInt(number);
-        }catch(NumberFormatException e){
-            e.printStackTrace();
-            return 0;
-    }
-    
-    }
-    
 }

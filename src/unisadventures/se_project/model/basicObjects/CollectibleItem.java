@@ -1,54 +1,96 @@
 package unisadventures.se_project.model.basicObjects;
 
 
-import unisadventures.se_project.model.WorldObject;
+
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import unisadventures.se_project.util.CollectibleType;
 
-public class CollectibleItem extends WorldObject implements CollectibleItemInterface {
+public class CollectibleItem {
     
-    private final ArrayList<String> _imageFileNameList;
+    private LinkedList<Integer> _imageFileNameList;
     private final CollectibleType _type;
-    private final int _listSize;
     private int _counter;
+    private int _xPosition ;
+    private int _yPosition;
+    private int _height ;
+    private int _width ;
     
-    public CollectibleItem(int xPosition, int yPosition, int height, int width, ArrayList<String> imageFileNameList, CollectibleType type) {
-        super(xPosition, yPosition, height, width);
-        _imageFileNameList = imageFileNameList;
+    
+    public CollectibleItem(int xPosition, int yPosition, int height, int width, CollectibleType type) {
+        _xPosition = xPosition ;
+        _yPosition = yPosition ;
+        _height = height ;
+        _width = width ;
         _type = type;
-        _listSize = _imageFileNameList.size();
         _counter = 0;
+        _imageFileNameList = new LinkedList<>() ;
     }
     
-    @Override
-    public String getNextImageFileName() {
-        int nextImageIndex = _counter;
+    public int getNextImageFileName() {
+        if(_imageFileNameList.isEmpty())
+            return 0;
         _counter++;
-        if(_counter == _listSize) {
-            _counter = 0;
-           
-        }
-        return _imageFileNameList.get(nextImageIndex);
+        int temp = _imageFileNameList.get((_counter-1)%_imageFileNameList.size());
+        return temp;
     }
-    @Override
+    
     public CollectibleType getCollectibleType() {
         return _type;
     }
 
-    @Override
-    public void tick() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setImageFileNameList(List<Integer> _imageFileNameList) {
+        this._imageFileNameList = (LinkedList<Integer>) _imageFileNameList;
     }
 
-    @Override
-    public void takeDamage(int dam) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getxPosition() {
+        return _xPosition;
     }
 
-    @Override
-    public String getCurrentSprite() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getyPosition() {
+        return _yPosition;
+    }
+
+    public int getWidth() {
+        return _width;
+    }
+
+    public CollectibleType getType() {
+        return _type;
+    }
+
+    public int getHeight() {
+        return _height;
+    }
+
+    public void setxPosition(int _xPosition) {
+        this._xPosition = _xPosition;
+    }
+
+    public void setyPosition(int _yPosition) {
+        this._yPosition = _yPosition;
+    }
+
+    public LinkedList<Integer> getImageFileNameList() {
+        return _imageFileNameList;
+    }
+
+    public void setImageFileNameList(LinkedList<Integer> _imageFileNameList) {
+        this._imageFileNameList = _imageFileNameList;
+    }
+
+    public int getCounter() {
+        return _counter;
+    }
+
+    public void setCounter(int _counter) {
+        this._counter = _counter;
+    }
+ 
+    public void resetCounter(){
+        _counter = 0 ;
     }
 
 

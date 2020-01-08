@@ -5,7 +5,7 @@
  */
 package unisadventures.se_project.model.basicObjects;
 
-import unisadventures.se_project.presenter.world.Tile;
+import static unisadventures.se_project.model.basicObjects.Tile.tiles;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -14,8 +14,9 @@ import unisadventures.se_project.view.gfx.Assets;
  */
 public class RockTile extends Tile {
 
-   public RockTile(int id,int x, int y) {
-        super(Assets.rock, id,x,y);
+    public RockTile(int texture, int id, int x, int y) {
+        super(texture, id, x, y);
+        _rockTile = this;
     }
 
     @Override

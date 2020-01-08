@@ -6,8 +6,8 @@ package unisadventures.se_project.presenter.launcher ;
 public class Launcher {
 
 	public static void main(String[] args){
-		Game game = new Game("Tile Game!", 1000, 600);
-		game.start();
+		Game game = new Game("Uni-SADventures", 1100, 600);
+		
                 
 	}
 	
