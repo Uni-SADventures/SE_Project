@@ -150,7 +150,7 @@ public class ActionManager implements MovementsInterface {
     public void takeDamage(int dam) {
         if (!_beingDamaged) {
             _incomingDamage = dam;
-         //   _jumping = false;
+            //_jumping = false;
             _beingDamaged = true ;
         }
         
@@ -172,6 +172,10 @@ public class ActionManager implements MovementsInterface {
             _idling = true;
         }
         _idle.idle();
+        if(_ch.getFacing()==DirectionType.RIGHT){
+            _ch.setFacing(DirectionType.LEFT);
+        }else _ch.setFacing(DirectionType.RIGHT); 
+        
         int length = _ch.getIdleSprites(_ch.getFacing()).size();
         _actualId = _ch.getIdleSprites(_ch.getFacing()).get(_idle.getCount() % length);
 
@@ -217,6 +221,7 @@ public class ActionManager implements MovementsInterface {
     @Override
     public void jump() {
         if (!_jumping) {
+            System.out.println("Jumping: False");
             _jumpFall.resetCounter();
             _jumping = true;
         }
@@ -555,6 +560,11 @@ public class ActionManager implements MovementsInterface {
     public void setFacing(DirectionType directionType) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void setJumping(boolean _jumping) {
+        this._jumping = _jumping;
+    }
+    
     
 
 }

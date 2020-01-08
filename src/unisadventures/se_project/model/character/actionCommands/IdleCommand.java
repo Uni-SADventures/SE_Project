@@ -29,7 +29,6 @@ public class IdleCommand extends ActionCommand {
      */
   public void idle(){
     _count++ ;
-
   }
 
     

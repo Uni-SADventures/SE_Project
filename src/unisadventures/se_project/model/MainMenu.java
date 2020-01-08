@@ -26,8 +26,8 @@ public class MainMenu {
     /**
      * @param _backgroundImageId the _backgroundImageId to set
      */
-    public void setBackgroundImageId(int _backgroundImageId) {
-        this._backgroundImageId = _backgroundImageId;
+    public void setBackgroundImageId(int _backgroundImageId) {  
+        this._backgroundImageId = _backgroundImageId; 
     }
 
     /**

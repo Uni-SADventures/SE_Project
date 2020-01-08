@@ -69,12 +69,7 @@ public class GameState extends State {
         //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
         
         _player = new ActionManager(_handler,_chFactory.createPlayerCharacter(90, 90)) ;
-         _enemy = new LinkedList<>();
-         
-        
-        /*_enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
-        _enemy.add(new ZombieEnemy(handler, 600, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));*/
-        
+         _enemy = new LinkedList<>();        
         
         GameLevel level = null ;
         try {
@@ -127,31 +122,35 @@ public class GameState extends State {
         if( _handler.getKeyManager().esc)
             return ;
         
-        if(_player.getCh().getHealthBar()<=0 || _player.getCh().getyPosition() >= _handler.getDisplayHeight()){
-            State.setState(new GameOverState(_handler, id));
-            
+        if(_handler.getKeyManager().enter && _handler.getKeyManager().hit ){
+             State.setState(new GameOverState(_handler, id+1));
         }
         
-        if(getCountCFU()==9){
-            State.setState(new LoadingState(_handler,id));
+        if(_player.getCh().getHealthBar()<=0 || _player.getCh().getyPosition() >= _handler.getDisplayHeight()){
+            State.setState(new GameOverState(_handler, id));
         }
+     
+        if(getCountCFU()==9){
+            State.setState(new LoadingState(_handler,id));    
+        }
+        
         _handler.getLevel().tick();
         _player.tick();
       
         LinkedList<ActionManager> oldEnemy= (LinkedList<ActionManager>) _enemy.clone();
         for(int i = 0 ; i < oldEnemy.size() ; i++ ){
+            
+            
             oldEnemy.get(i).tick();
          /*if(oldEnemy.get(i).checkVerticalCollision()){
             oldEnemy.get(i).takeDamage(_player.getCh().getStrength());
                     }   */     
             oldEnemy.get(i).attack();
             oldEnemy.get(i).movement();
-            
-            
         }
-
-        for(ActionManager e: oldEnemy){
-            if(e.getCh().getHealthBar() <= 0){
+        
+        for(ActionManager e: oldEnemy){     
+            if(e.getCh().getHealthBar() <= 0 || e.checkVerticalCollision()){
                 _enemy.remove(e);
             }
         }
