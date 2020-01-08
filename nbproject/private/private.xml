@@ -3,46 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/actionCommands/BeingDamagedCommand.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/view/gfx/Assets.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/launcher/FrameClock.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/view/display/Display.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/basicObjects/LimitTile.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/basicObjects/CollectibleItemInterface.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/launcher/Game.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/factory/CollectiblesCreator.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/input/KeyManager.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/states/GameState.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/ProfessorEnemy.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/actionCommands/MoveCommand.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/states/MenuState.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/MainMenu.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/launcher/Launcher.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/GameOver.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/actionCommands/HitCommand.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/Story.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/EnemyCharacter.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/input/MouseManager.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/PlayerCharacter.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/actionCommands/ActionCommand.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/MovementsInterface.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/GameLevel.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/actionCommands/PowerupCommand.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/camera/GameCamera.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/states/State.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/factory/Creator.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/actionCommands/ActionManager.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/states/LoadingState.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/states/GameOverState.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/FrameListener.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/actionCommands/IdleCommand.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/factory/CharacterCreator.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/launcher/Handler.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/basicObjects/CollectibleItem.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/Loading.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/actionCommands/VerticalCommand.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/presenter/audio/AudioManager.java</file>
-            <file>file:/C:/Users/Emilio/Documents/NetBeansProjects/SE_Project/src/unisadventures/se_project/model/character/BasicCharacter.java</file>
+            <file>file:/C:/Users/krist/Desktop/SE_Project/src/unisadventures/se_project/presenter/launcher/Game.java</file>
+            <file>file:/C:/Users/krist/Desktop/SE_Project/src/unisadventures/se_project/presenter/states/MainMenu.java</file>
+            <file>file:/C:/Users/krist/Desktop/SE_Project/src/unisadventures/se_project/presenter/states/MenuState.java</file>
+            <file>file:/C:/Users/krist/Desktop/SE_Project/src/unisadventures/se_project/presenter/states/LoadingState.java</file>
+            <file>file:/C:/Users/krist/Desktop/SE_Project/src/unisadventures/se_project/presenter/states/GameState.java</file>
         </group>
     </open-files>
 </project-private>

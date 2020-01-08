@@ -6,9 +6,9 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
-import unisadventures.se_project.model.Loading;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.presenter.audio.AudioManager;
+import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -36,12 +36,15 @@ public class LoadingState extends State {
 
     @Override
     public void tick() {
+        if(_id!=4){
         if(_handler.getKeyManager().enter){
             AudioManager.gameLevelLoop();
             State.setState(new GameState(_handler,_id+1));
         }
-	
+            }else if(_handler.getKeyManager().esc)
+                System.exit(0);
     }
+          
 
     @Override
     public void displayView(Graphics g) {

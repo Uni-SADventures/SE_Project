@@ -2,7 +2,7 @@ package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
 
-import unisadventures.se_project.model.MainMenu;
+
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.view.gfx.Assets;
 
