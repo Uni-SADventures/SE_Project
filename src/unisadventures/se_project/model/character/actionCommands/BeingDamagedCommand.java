@@ -7,6 +7,10 @@ package unisadventures.se_project.model.character.actionCommands;
 
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
+import unisadventures.se_project.model.character.PlayerCharacter;
+import unisadventures.se_project.presenter.launcher.Game;
+import unisadventures.se_project.model.basicObjects.Tile;
+import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.presenter.audio.AudioManager;
 
 /**
@@ -31,7 +35,7 @@ public class BeingDamagedCommand extends ActionCommand {
         
         System.out.println(_count);
         if(_count == 2){
-            _ch.setHealthBar(_ch.getHealthBar() - 1);
+            _ch.setHealthBar(_ch.getHealthBar() - dam);
             _count++ ;
             AudioManager.playPlayerDamage();
             return true ;

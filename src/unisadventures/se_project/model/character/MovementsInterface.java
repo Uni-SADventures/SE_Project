@@ -5,8 +5,6 @@
  */
 package unisadventures.se_project.model.character;
 
-import unisadventures.se_project.model.character.PlayerCharacter;
-
 
 /**
  *This interface represent all basic movement methods to implement for every type of character
@@ -20,6 +18,7 @@ public interface MovementsInterface {
     void attack();
     void idle();
     void takeDamage(int damage);
+    PlayerCharacter getPowered(PlayerCharacter p); 
     void grab();
     void tick();
 }

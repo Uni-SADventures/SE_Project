@@ -34,6 +34,7 @@ public class GameCamera {
          */
 	public void centerOnEntity(PlayerCharacter p){
 		xOffset = (float) (p.getPosition().getFirstElement() - handler.getDisplayWidth() / 2 + p.getDimension().getFirstElement() / 2);
+		//yOffset = (float) (p.getPosition().getSecondElement() - handler.getHeight() / 2 + p.getDimension().getSecondElement() / 2);
                 checkBlankSpace();
         }
         
@@ -56,6 +57,7 @@ public class GameCamera {
          * @param p is the character passed
          */
         public void centerOnEntityFloor(PlayerCharacter p){
+		//xOffset = (float) (p.getPosition().getFirstElement() - game.getWidth() / 2 + p.getDimension().getFirstElement() / 2);
 		yOffset = (float) (p.getPosition().getSecondElement() - handler.getDisplayHeight() / 2 + p.getDimension().getSecondElement() / 2);
                 checkBlankSpace();
         }

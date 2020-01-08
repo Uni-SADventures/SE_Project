@@ -10,7 +10,7 @@ import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.presenter.launcher.Game;
 import unisadventures.se_project.model.basicObjects.Tile;
-import unisadventures.se_project.model.character.ZombieEnemy;
+import unisadventures.se_project.model.character.ProfessorEnemy;
 import unisadventures.se_project.util.DirectionType;
 
 /**
@@ -39,7 +39,7 @@ public class MoveCommand extends ActionCommand {
           && !collisionWithTile(tx,(int) (_ch.getPosition().getSecondElement()+ _bounds.y+_bounds.height)/Tile.TILEHEIGHT)){
           return false ;
       }
-      /*if(_ch instanceof ZombieEnemy)
+      /*if(_ch instanceof ProfessorEnemy)
           System.out.println("True");*/
       return true ;
   }

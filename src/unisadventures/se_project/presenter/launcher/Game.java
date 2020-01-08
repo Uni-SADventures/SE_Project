@@ -1,6 +1,7 @@
 package unisadventures.se_project.presenter.launcher;
 
 
+import java.util.ArrayList;
 import unisadventures.se_project.view.display.Display;
 import unisadventures.se_project.model.FrameListener;
 import unisadventures.se_project.presenter.camera.GameCamera;
@@ -8,6 +9,7 @@ import unisadventures.se_project.presenter.input.KeyManager;
 import unisadventures.se_project.presenter.input.MouseManager;
 import unisadventures.se_project.presenter.states.*;
 import unisadventures.se_project.presenter.audio.AudioManager;
+import unisadventures.se_project.util.Pair;
 
 
 /**
@@ -26,7 +28,7 @@ public class Game extends FrameListener {
 	private boolean running = false;
 	private FrameClock thread;
         private int countCFU=0;
-	
+	private ArrayList<Pair<String,String>> levelManager = new ArrayList();
 	
 	
 	
@@ -51,6 +53,12 @@ public class Game extends FrameListener {
 		this.title = title;
 		keyManager = new KeyManager();
                 mouseManager = new MouseManager();
+                levelManager.add(new Pair("resources/levels/level1World.txt","resources/levels/level1Items.txt"));
+                levelManager.add(new Pair("resources/levels/level2World.txt","resources/levels/level2Items.txt"));
+                levelManager.add(new Pair("resources/levels/level3World.txt","resources/levels/level3Items.txt"));
+                levelManager.add(new Pair("resources/levels/level4World.txt","resources/levels/level4Items.txt"));
+                levelManager.add(new Pair("resources/levels/level5World.txt","resources/levels/level5Items.txt"));
+                 
 	}
 	
         /**
@@ -146,6 +154,11 @@ public class Game extends FrameListener {
 			e.printStackTrace();
 		}
 	}
+
+    public void wait(Thread thread) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
     /**
      * This method makes sure to update both position and graphic sprite for each entity
@@ -164,6 +177,12 @@ public class Game extends FrameListener {
     public int getDisplayHeight(){
         return displayHeight ;
     }
+
+    public ArrayList<Pair<String, String>> getLevelManager() {
+        return levelManager;
+    }
+    
+    
     
     private boolean playButtonClicked() {
         if (mouseManager.mousePressed) {

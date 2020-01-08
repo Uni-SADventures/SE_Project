@@ -13,11 +13,11 @@ import unisadventures.se_project.util.DirectionType;
  *
  * @author Paolo Emanuela
  */
-public class ZombieEnemy extends EnemyCharacter {
+public class ProfessorEnemy extends EnemyCharacter {
     
     private DirectionType _facing;
 
-    public ZombieEnemy(Handler handler, int xPosition, int yPosition, int height, int width, CharacterType type, int healthBar, int strength, int maxHealth, int maxJump,DirectionType facing) {
+    public ProfessorEnemy(Handler handler, int xPosition, int yPosition, int height, int width, CharacterType type, int healthBar, int strength, int maxHealth, int maxJump,DirectionType facing) {
         super(handler, xPosition, yPosition, height, width, type, healthBar, strength, maxHealth, maxJump);
         _facing=facing;
         this.setSpeed(1);

@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import unisadventures.se_project.model.character.EnemyCharacter;
 import unisadventures.se_project.model.character.PlayerCharacter;
-import unisadventures.se_project.model.character.ZombieEnemy;
+import unisadventures.se_project.model.character.ProfessorEnemy;
 import unisadventures.se_project.presenter.factory.Creator;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.util.CharacterType;
@@ -211,7 +211,7 @@ public class CharacterCreator extends Creator{
     @Override
     public Object createElement(String whichOne,int x, int y) {
         if(whichOne.equals(CharacterType.SHAPE.toString())){
-            ZombieEnemy product = new ZombieEnemy(_handler,x ,y, 64, 64, CharacterType.SHAPE, 6, 1, 6, 300,DirectionType.LEFT) ;
+            ProfessorEnemy product = new ProfessorEnemy(_handler,x ,y, 64, 64, CharacterType.SHAPE, 6, 1, 6, 300,DirectionType.LEFT) ;
             product.setIdle(shapeIdleL, shapeIdleR);
             product.setFall(shapeFallL, shapeFallR);
             product.setJump(shapeJumpL, shapeJumpR);
@@ -220,7 +220,7 @@ public class CharacterCreator extends Creator{
             product.setBeDamaged(shapeBeDamagedR, shapeBeDamagedR);
             return product ;
         } else if(whichOne.equals(CharacterType.REFOUND.toString())){
-            ZombieEnemy product = new ZombieEnemy(_handler,x ,y, 64, 64, CharacterType.REFOUND, 6, 1, 6, 300,DirectionType.LEFT) ;
+            ProfessorEnemy product = new ProfessorEnemy(_handler,x ,y, 64, 64, CharacterType.REFOUND, 6, 1, 6, 300,DirectionType.LEFT) ;
             product.setIdle(refoundIdleL, refoundIdleR);
             product.setFall(refoundFallL, refoundFallR);
             product.setJump(refoundJumpL, refoundJumpR);
@@ -229,7 +229,7 @@ public class CharacterCreator extends Creator{
             product.setBeDamaged(refoundBeDamagedR, refoundBeDamagedR);
             return product ;
         } else if(whichOne.equals(CharacterType.WIND.toString())){
-            ZombieEnemy product = new ZombieEnemy(_handler,x ,y, 64, 64, CharacterType.WIND, 6, 1, 6, 300,DirectionType.LEFT) ;
+            ProfessorEnemy product = new ProfessorEnemy(_handler,x ,y, 64, 64, CharacterType.WIND, 6, 1, 6, 300,DirectionType.LEFT) ;
             product.setIdle(windIdleL, windIdleR);
             product.setFall(windFallL, windFallR);
             product.setJump(windJumpL, windJumpR);
@@ -251,25 +251,25 @@ public class CharacterCreator extends Creator{
         return null ;
     }
     
-    public ZombieEnemy createShapeEnemy(int x, int y){
-        return (ZombieEnemy) createElement(CharacterType.SHAPE.toString(), x, y) ;
+    public ProfessorEnemy createShapeEnemy(int x, int y){
+        return (ProfessorEnemy) createElement(CharacterType.SHAPE.toString(), x, y) ;
     }
-    public ZombieEnemy createWindEnemy(int x, int y){
-        return (ZombieEnemy) createElement(CharacterType.WIND.toString(), x, y) ;
+    public ProfessorEnemy createWindEnemy(int x, int y){
+        return (ProfessorEnemy) createElement(CharacterType.WIND.toString(), x, y) ;
     }
-    public ZombieEnemy createRefoundEnemy(int x, int y){
-        return (ZombieEnemy) createElement(CharacterType.REFOUND.toString(), x, y) ;
+    public ProfessorEnemy createRefoundEnemy(int x, int y){
+        return (ProfessorEnemy) createElement(CharacterType.REFOUND.toString(), x, y) ;
     }
     public PlayerCharacter createPlayerCharacter(int x, int y){
         return (PlayerCharacter) createElement(CharacterType.USER.toString(), x, y) ;
     }
     
-    public ZombieEnemy createRandomPr(int x, int y){
+    public ProfessorEnemy createRandomPr(int x, int y){
         int rand = (int) (Math.random() * 3) ;
             if(rand == 0)
                 return createWindEnemy(x, y);
             else if(rand == 1)
-                return createRefoundEnemy(x, y);
+                return createShapeEnemy(x, y);
             else if(rand == 2)
                 return createRefoundEnemy(x, y);
             return null ;

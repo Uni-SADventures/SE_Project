@@ -11,12 +11,7 @@ import java.util.Map;
  * @author Panzuti
  */
 public class Assets {
-
-   // private static final int width = 32, height = 32;
-
-    //public static BufferedImage objects, tilesheet, player, scenario, ground, ground_1, grass, tree, enemy, CFU, full_heart, half_heart, empty_heart;
-    //public static BufferedImage rock, sky, limit;
-   // public static BufferedImage zero, one,two,three,four,five,six,seven,eight,nine;
+    
     private static Map<Integer,BufferedImage>   _images;
     private static int _sequence ;
     private static BufferedImage _temporarySheet ;
