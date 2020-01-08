@@ -8,16 +8,11 @@ import unisadventures.se_project.model.basicObjects.CollectibleItem;
 import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.GameLevel;
-import unisadventures.se_project.model.character.EnemyCharacter;
 
 import unisadventures.se_project.model.character.PlayerCharacter;
-import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.model.character.actionCommands.ActionManager;
 import unisadventures.se_project.presenter.factory.CharacterCreator;
 import unisadventures.se_project.presenter.factory.CollectiblesCreator;
-import unisadventures.se_project.util.CharacterType;
-import unisadventures.se_project.util.CollectibleType;
-import unisadventures.se_project.util.DirectionType;
 import unisadventures.se_project.util.Pair;
 import unisadventures.se_project.view.gfx.Assets;
 
@@ -53,34 +48,28 @@ public class GameState extends State {
     public boolean stateIsMenu;
 
     public GameState(Handler handler ,int id) {
+        
         super(handler);
         this.id=id;
         _collectibles = new LinkedList<>() ;
-        levelManager.add(new Pair("resources/levels/level1World.txt","resources/levels/level1Items.txt"));
-        levelManager.add(new Pair("resources/levels/level2World.txt","resources/levels/level2Items.txt"));
-        levelManager.add(new Pair("resources/levels/level3World.txt","resources/levels/level3Items.txt"));
+        levelManager.add(new Pair("resources/levels/level1World.txt", "resources/levels/level1Items.txt"));
+        levelManager.add(new Pair("resources/levels/level2World.txt", "resources/levels/level2Items.txt"));
+        levelManager.add(new Pair("resources/levels/level3World.txt", "resources/levels/level3Items.txt"));
         
         Assets.init();
         _chFactory = new CharacterCreator(_handler) ;
         _collFactory = new CollectiblesCreator() ;
-        //REMEMBER THAT WHEN YOU CHANGE IMAGES YOU NEED TO PUT HEIGHT AND WIDTH ACCORDING TO 
-        //THAT IMAGES' DIMENSIONS HERE AT THE 4TH AND 5TH ARGUMENT
-        //RICORCA CHE SE VUOI CAMBIARE LE IMMAGINI DEVI METTERE ALTEZZA E LARGHEZZA COME
-        //QUELLE DELLE IMMAGINI CHE VUOI USARE GIA' QUI AL 4o E 5o ARGOMENTO
         
         _player = new ActionManager(_handler,_chFactory.createPlayerCharacter(90, 90)) ;
          _enemy = new LinkedList<>();
-         
-        
-        /*_enemy.add(new ZombieEnemy(handler, 300, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));
-        _enemy.add(new ZombieEnemy(handler, 600, 450, 64, 64, CharacterType.ENEMY, 6, 1, 6, 300));*/
+
         
         
         GameLevel level = null ;
         try {
             String path1=levelManager.get(id).getFirstElement();
             String path2=levelManager.get(id).getSecondElement();
-            level =new GameLevel(path1,path2, _handler.getDisplayWidth(), _handler.getDisplayHeight());
+            level =new GameLevel(path1, path2, _handler.getDisplayWidth(), _handler.getDisplayHeight());
         } catch (Exception ex) {
             System.exit(0);
         }
@@ -140,14 +129,9 @@ public class GameState extends State {
       
         LinkedList<ActionManager> oldEnemy= (LinkedList<ActionManager>) _enemy.clone();
         for(int i = 0 ; i < oldEnemy.size() ; i++ ){
-            oldEnemy.get(i).tick();
-         /*if(oldEnemy.get(i).checkVerticalCollision()){
-            oldEnemy.get(i).takeDamage(_player.getCh().getStrength());
-                    }   */     
+            oldEnemy.get(i).tick(); 
             oldEnemy.get(i).attack();
             oldEnemy.get(i).movement();
-            
-            
         }
 
         for(ActionManager e: oldEnemy){
@@ -155,10 +139,6 @@ public class GameState extends State {
                 _enemy.remove(e);
             }
         }
-       
-        /*World.forEach(WorldObject el){
-                    el.tick() ;
-                } */
 
     }
 
@@ -204,13 +184,8 @@ public class GameState extends State {
     }
     @Override
     public void loadImages(){
-        //TODO, WE LOAD HERE ALL MODELS GIVING PATH NAMES
-            
-        //loading all sprites for characters
-        
-      
-            
-            List temp = new LinkedList<>() ;
+   
+        List temp = new LinkedList<>() ;
          
         //SCENARIO (which id is inside world now)
             Assets.storeImage(_handler.getLevel().getPathScenarioImage());
@@ -353,14 +328,4 @@ public class GameState extends State {
         return _enemy;
     }
 
-    /**
-     *
-     */
-    
-    
-
-
-    
-    
-    
 }

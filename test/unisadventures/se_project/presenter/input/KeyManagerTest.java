@@ -22,16 +22,6 @@ public class KeyManagerTest {
     
     public KeyManagerTest() {
     }
-    
-    /**
-     * Test of constructor, of class KeyManager.
-     */
-    @Test
-    public void testCreation() {
-        KeyManager instance = new KeyManager();
-        assertNotNull(instance) ;
-    }
-
 
     /**
      * Test of tick method, of class KeyManager.

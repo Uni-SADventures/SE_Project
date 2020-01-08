@@ -13,7 +13,6 @@ import unisadventures.se_project.model.basicObjects.Tile;
 import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.model.character.BasicCharacter;
 import unisadventures.se_project.model.character.EnemyCharacter;
-import unisadventures.se_project.model.character.MovementsInterface;
 import unisadventures.se_project.model.character.PlayerCharacter;
 import unisadventures.se_project.model.character.ZombieEnemy;
 import unisadventures.se_project.presenter.states.GameState;
@@ -150,7 +149,6 @@ public class ActionManager implements MovementsInterface {
     public void takeDamage(int dam) {
         if (!_beingDamaged) {
             _incomingDamage = dam;
-         //   _jumping = false;
             _beingDamaged = true ;
         }
         
@@ -328,19 +326,6 @@ public class ActionManager implements MovementsInterface {
 
             }
         }
-    }
-
-    /**
-     *
-     * @param p is the actual character wich is going to change some of his
-     * parameters and actions because of some powerup
-     * @return decorated player character
-     */
-    @Override
-    public PlayerCharacter getPowered(PlayerCharacter p) {
-        //TODO once we have some powerups or weapons
-        //it should return a decorated player character
-        return null; // <- da levare
     }
 
     public int getActualId() {
@@ -552,9 +537,6 @@ public class ActionManager implements MovementsInterface {
      
     }
 
-    public void setFacing(DirectionType directionType) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 
 }

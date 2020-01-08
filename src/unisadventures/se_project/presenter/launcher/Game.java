@@ -144,11 +144,6 @@ public class Game extends FrameListener {
 			e.printStackTrace();
 		}
 	}
-
-    public void wait(Thread thread) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     
     /**
      * This method makes sure to update both position and graphic sprite for each entity
