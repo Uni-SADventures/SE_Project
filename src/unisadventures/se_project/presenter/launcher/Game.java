@@ -7,7 +7,7 @@ import unisadventures.se_project.presenter.camera.GameCamera;
 import unisadventures.se_project.presenter.input.KeyManager;
 import unisadventures.se_project.presenter.input.MouseManager;
 import unisadventures.se_project.presenter.states.*;
-import unisadventures.se_project.view.display.AudioManager;
+import unisadventures.se_project.presenter.audio.AudioManager;
 
 
 /**
@@ -33,7 +33,9 @@ public class Game extends FrameListener {
 	//States
 	private State gameState;
 	private MenuState menuState;
+        private StoryState storyState;
         private boolean stateIsMenu;
+        
         
 	//Input
 	private final KeyManager keyManager;
@@ -65,6 +67,7 @@ public class Game extends FrameListener {
                 
 		gameState = new GameState(hand,0);
 		menuState = new MenuState(hand);
+                storyState= new StoryState(hand,0);
                 
 
                 
@@ -85,9 +88,8 @@ public class Game extends FrameListener {
         
                 // gameState may be initialized from menu state by pressing Enter or clicking a button
                 if ( (keyManager.enter || playButtonClicked()) && stateIsMenu) {
-                    State.setState(gameState);
+                    State.setState(storyState);
                     stateIsMenu = false;
-                    AudioManager.gameLevelLoop();
                 }
                 if ( (keyManager.esc || quitButtonClicked())  && stateIsMenu) {
                     System.exit(0);

@@ -6,58 +6,57 @@
 package unisadventures.se_project.presenter.states;
 
 import java.awt.Graphics;
-import unisadventures.se_project.model.GameOver;
 import unisadventures.se_project.model.Loading;
-import unisadventures.se_project.presenter.launcher.Handler;
+import unisadventures.se_project.model.Story;
 import unisadventures.se_project.presenter.audio.AudioManager;
+import unisadventures.se_project.presenter.launcher.Handler;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
  *
  * @author krist
  */
-public class GameOverState extends State{
-    
-    GameOver _gameOver;
+public class StoryState extends State{
+    Story _story;
     int _displayWidth;
     int _displayHeight;
     private int _id;
 
-    public GameOverState(Handler handler,int id){
+    public StoryState (Handler handler,int id){
             
         super(handler);
         _id=id;
-        _gameOver = new GameOver();
+        _story = new Story();
         _displayWidth = handler.getDisplayWidth();
         _displayHeight = handler.getDisplayHeight();
-        
         loadImages();
         AudioManager.stopMusic();
-        AudioManager.playGameOver();
-        
+        AudioManager.playLevelComplete();
     }
 
     @Override
     public void tick() {
-        if(_handler.getKeyManager().enter){
-            State.setState(new GameState(_handler,_id));
+        if(_handler.getKeyManager().up){
+            AudioManager.stopMusic();
             AudioManager.gameLevelLoop();
+            State.setState(new GameState(_handler,_id));
+            
         }
 	
     }
 
     @Override
     public void displayView(Graphics g) {
-        view.renderLoadingBackground(g, _gameOver.getBackgroundImageId(), _displayWidth, _displayHeight);
-        view.renderText(g, "Press Enter To Restart", (int) _displayWidth/2 - 20, _displayHeight - 20);
+        view.renderStoryBackground(g, _story.getBackgroundImageId(), _displayWidth, _displayHeight);
+        view.renderText(g, "Press W To Start", (int) _displayWidth/2 - 20, _displayHeight - 20);
     }
 
     @Override
     public void loadImages() {
-        Assets.storeImage(GameOver.BACKGROUND_IMAGE);
-        _gameOver.setBackgroundImageId(Assets.getActualSequenceNumber());
+        Assets.storeImage(Story.BACKGROUND_IMAGE);
+        _story.setBackgroundImageId(Assets.getActualSequenceNumber());
         //Assets.storeImage(Loading.TITLE_IMAGE);
-        //_loading.setTitleImageId(Assets.getActualSequenceNumber());
+        //_story.setTitleImageId(Assets.getActualSequenceNumber());
     }
 
     @Override

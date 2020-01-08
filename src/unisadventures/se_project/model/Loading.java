@@ -11,8 +11,9 @@ package unisadventures.se_project.model;
  */
 public class Loading {
     
-     public static final String BACKGROUND_IMAGE = "resources/images/loading_background.png";
-    public static final String TITLE_IMAGE = "resources/images/menu_title.png";
+    public static final String LOADING_IMAGE = "resources/images/loading_background.png";
+    public static final String DEGREE_IMAGE = "resources/images/Degree_image.jpeg";
+    public static final String MASTER_DEGREE_IMAGE = "resources/images/Master_degree_image.png";
     
     private int _backgroundImageId;
     private int _titleImageId;

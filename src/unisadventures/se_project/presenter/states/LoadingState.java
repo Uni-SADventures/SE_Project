@@ -8,7 +8,7 @@ package unisadventures.se_project.presenter.states;
 import java.awt.Graphics;
 import unisadventures.se_project.model.Loading;
 import unisadventures.se_project.presenter.launcher.Handler;
-import unisadventures.se_project.view.display.AudioManager;
+import unisadventures.se_project.presenter.audio.AudioManager;
 import unisadventures.se_project.view.gfx.Assets;
 
 /**
@@ -39,7 +39,6 @@ public class LoadingState extends State {
         if(_handler.getKeyManager().enter){
             AudioManager.gameLevelLoop();
             State.setState(new GameState(_handler,_id+1));
-            
         }
 	
     }
@@ -53,8 +52,16 @@ public class LoadingState extends State {
 
     @Override
     public void loadImages() {
-        Assets.storeImage(Loading.BACKGROUND_IMAGE);
-        _loading.setBackgroundImageId(Assets.getActualSequenceNumber());
+        if(_id!=2 && _id!=4){
+            Assets.storeImage(Loading.LOADING_IMAGE);
+            _loading.setBackgroundImageId(Assets.getActualSequenceNumber());
+        }else if(_id==2){
+            Assets.storeImage(Loading.DEGREE_IMAGE);
+            _loading.setBackgroundImageId(Assets.getActualSequenceNumber());     
+        }else{
+            Assets.storeImage(Loading.MASTER_DEGREE_IMAGE);
+            _loading.setBackgroundImageId(Assets.getActualSequenceNumber());
+        }
         //Assets.storeImage(Loading.TITLE_IMAGE);
         //_loading.setTitleImageId(Assets.getActualSequenceNumber());
     }

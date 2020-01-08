@@ -61,9 +61,8 @@ public class GameState extends State {
         _collFactory = new CollectiblesCreator() ;
         
         _player = new ActionManager(_handler,_chFactory.createPlayerCharacter(90, 90)) ;
-         _enemy = new LinkedList<>();
 
-        
+         _enemy = new LinkedList<>();
         
         GameLevel level = null ;
         try {
@@ -116,26 +115,31 @@ public class GameState extends State {
         if( _handler.getKeyManager().esc)
             return ;
         
-        if(_player.getCh().getHealthBar()<=0 || _player.getCh().getyPosition() >= _handler.getDisplayHeight()){
-            State.setState(new GameOverState(_handler, id));
-            
+        if(_handler.getKeyManager().enter && _handler.getKeyManager().hit ){
+             State.setState(new GameOverState(_handler, id+1));
         }
         
-        if(getCountCFU()==8){
-            State.setState(new LoadingState(_handler,id));
+        if(_player.getCh().getHealthBar()<=0 || _player.getCh().getyPosition() >= _handler.getDisplayHeight()){
+            State.setState(new GameOverState(_handler, id));
         }
+     
+        if(getCountCFU()==9){
+            State.setState(new LoadingState(_handler,id));    
+        }
+        
         _handler.getLevel().tick();
         _player.tick();
       
         LinkedList<ActionManager> oldEnemy= (LinkedList<ActionManager>) _enemy.clone();
         for(int i = 0 ; i < oldEnemy.size() ; i++ ){
-            oldEnemy.get(i).tick(); 
+            
+            oldEnemy.get(i).tick();
             oldEnemy.get(i).attack();
             oldEnemy.get(i).movement();
         }
-
-        for(ActionManager e: oldEnemy){
-            if(e.getCh().getHealthBar() <= 0){
+        
+        for(ActionManager e: oldEnemy){     
+            if(e.getCh().getHealthBar() <= 0 || e.checkVerticalCollision()){
                 _enemy.remove(e);
             }
         }
@@ -178,9 +182,6 @@ public class GameState extends State {
         countCFU=view.renderUi(g, _player.getCh().getHealthBar(), _player.getCh().getMaxHealth(), ((PlayerCharacter)_player.getCh()).getCfu(), ((PlayerCharacter)_player.getCh()).getLives());
         if(_handler.getKeyManager().esc)
             view.renderPause(g, _pauseImageId) ;
-//  Rectangle r = HitCommand._hitArea ;
-        //g.fill3DRect(r.x, r.y, r.width, r.height,true);
-        
     }
     @Override
     public void loadImages(){

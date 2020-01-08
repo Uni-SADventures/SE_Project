@@ -55,7 +55,7 @@ public class CharacterCreator extends Creator{
             
             for(int i = 0; i <= 20 ; i++ )
                 temp.add(nowSeq); 
-           
+            
             playerIdleL = (LinkedList<Integer>) temp;
             playerIdleR = (LinkedList<Integer>) temp;
             

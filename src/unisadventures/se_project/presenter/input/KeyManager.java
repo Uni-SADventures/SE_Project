@@ -29,7 +29,7 @@ public class KeyManager implements KeyListener {
 		down = keys[KeyEvent.VK_S];
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
-                hit = keys[KeyEvent.VK_B];
+                hit = keys[KeyEvent.VK_SPACE];
                 enter = keys[KeyEvent.VK_ENTER];
                 if(keys[KeyEvent.VK_ESCAPE] && !togglePause){
                      togglePause = true ;

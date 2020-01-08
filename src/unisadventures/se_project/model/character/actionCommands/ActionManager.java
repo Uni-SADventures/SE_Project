@@ -5,6 +5,7 @@
  */
 package unisadventures.se_project.model.character.actionCommands;
 
+import unisadventures.se_project.model.character.MovementsInterface;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +20,7 @@ import unisadventures.se_project.presenter.states.GameState;
 import unisadventures.se_project.presenter.states.State;
 import unisadventures.se_project.util.CollectibleType;
 import unisadventures.se_project.util.DirectionType;
-import unisadventures.se_project.view.display.AudioManager;
+import unisadventures.se_project.presenter.audio.AudioManager;
 
 /**
  * This class manages all available actions and their relative dependancies. It
@@ -149,6 +150,7 @@ public class ActionManager implements MovementsInterface {
     public void takeDamage(int dam) {
         if (!_beingDamaged) {
             _incomingDamage = dam;
+
             _beingDamaged = true ;
         }
         
@@ -170,6 +172,10 @@ public class ActionManager implements MovementsInterface {
             _idling = true;
         }
         _idle.idle();
+        if(_ch.getFacing()==DirectionType.RIGHT){
+            _ch.setFacing(DirectionType.LEFT);
+        }else _ch.setFacing(DirectionType.RIGHT); 
+        
         int length = _ch.getIdleSprites(_ch.getFacing()).size();
         _actualId = _ch.getIdleSprites(_ch.getFacing()).get(_idle.getCount() % length);
 
@@ -215,6 +221,7 @@ public class ActionManager implements MovementsInterface {
     @Override
     public void jump() {
         if (!_jumping) {
+            System.out.println("Jumping: False");
             _jumpFall.resetCounter();
             _jumping = true;
         }
@@ -537,6 +544,5 @@ public class ActionManager implements MovementsInterface {
      
     }
 
-    
 
 }

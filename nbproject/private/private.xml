@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/home/mathieu/Bureau/SE_Project/test/unisadventures/se_project/model/character/actionCommands/BeingDamagedCommandTest.java</file>
             <file>file:/home/mathieu/Bureau/SE_Project/src/unisadventures/se_project/model/character/actionCommands/BeingDamagedCommand.java</file>
@@ -11,5 +12,8 @@
             <file>file:/home/mathieu/Bureau/SE_Project/test/unisadventures/se_project/model/character/actionCommands/ActionManagerTest.java</file>
             <file>file:/home/mathieu/Bureau/SE_Project/test/unisadventures/se_project/model/character/BasicCharacterTest.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> 4389c6d15dd218c004e0361d161f5c659f818c32
     </open-files>
 </project-private>
